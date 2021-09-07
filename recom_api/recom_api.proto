@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "Recom.Api";
+
+import "common.proto"; 
+
+service RecomApi {
+  rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
+  rpc PreviewMessage (PreviewMessageRequest) returns (PreviewMessageReply);
+}
+
+message SendMessageRequest {
+  string template_alias = 1;
+  bool send_instant = 2;
+  string context_datanode_id = 5;
+  string context_tenant_id = 6;
+  string context_resource_group_id = 7;
+  ActorContext actor_context = 8;
+  string channel = 9;
+}
+
+message SendMessageReply {
+  string status = 1;
+}
+
+message PreviewMessageRequest {
+  string template_alias = 1;
+  bool send_instant = 2;
+  string context_datanode_id = 5;
+  string context_tenant_id = 6;
+  string context_resource_group_id = 7;
+  ActorContext actor_context = 8;
+  string channel = 9;
+}
+
+message PreviewMessageReply {
+  string content = 1;
+}
+

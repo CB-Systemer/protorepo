@@ -1,0 +1,113 @@
+syntax = "proto3";
+import "common.proto"; 
+
+option csharp_namespace = "Templating.Api";
+
+package templating;
+
+service TemplatingApi {
+  rpc GetTemplate (GetTemplateRequest) returns (GetTemplateReply);
+  rpc DownloadTemplate (DownloadTemplateRequest) returns (DownloadTemplateReply);
+  rpc UploadTemplate (UploadTemplateRequest) returns (UploadTemplateReply);
+  rpc PreviewTemplate (PreviewTemplateRequest) returns (PreviewTemplateReply);
+  rpc Initialize (InitializeRequest) returns (InitializeReply);
+  rpc GetDocument (GetDocumentRequest) returns (GetDocumentReply);
+  rpc BuildTemplate (BuildTemplateRequest) returns (BuildTemplateReply);
+}
+
+message GetDocumentRequest {
+	string templateId = 1;
+    string outputFormat = 4;
+    string contextDataNodeId = 5;
+    string contextTenantId = 6;
+    string contextResourceGroupId = 7;
+    ActorContext actor_context = 8;
+}
+
+message GetDocumentReply {
+	bytes data = 1;
+}
+
+message BuildTemplateRequest {
+	string templateIdOrAlias = 1;
+	bool isAlias = 2;
+    string outputFormat = 5;
+    string contextDataNodeId = 6;
+    string contextTenantId = 7;
+    string contextResourceGroupId = 8;
+    ActorContext actor_context = 9;
+	string format = 13;
+}
+
+message BuildTemplateReply {
+	string templateOutput = 1;
+}
+
+
+message InitializeRequest {
+	string dataNodeId = 1;
+}
+
+message InitializeReply {
+}
+
+message GetTemplateRequest {
+	string templateId = 1;
+    ActorContext actor_context = 2;
+}
+
+message GetTemplateReply {
+  string id = 1;
+  string namespace = 2;
+  repeated string templates = 3;
+  string data = 4;
+  repeated TemplateContext context = 5;
+  repeated TemplatePreview previews = 8;
+  string raw = 6;
+  string displayName = 7;
+}
+
+message TemplateSource {
+	string type = 1;
+	string source = 2;
+}
+
+message TemplateContext {
+	string namespace = 1;
+	string alias = 2;
+}
+
+message TemplatePreview {
+	string sourceFormat = 1;
+	string outputFormat = 2;
+}
+message PreviewTemplateRequest {
+  string templateId = 1;
+  string data = 2;
+  ActorContext actor_context = 3;
+  string type = 5;
+}
+
+message PreviewTemplateReply {
+  string result = 1;
+}
+
+message DownloadTemplateRequest {
+  string templateId = 1;
+  ActorContext actor_context = 2;
+  string type = 5;
+}
+
+message DownloadTemplateReply {
+	bytes data = 1;
+}
+
+message UploadTemplateRequest {
+  string templateId = 1;
+  ActorContext actor_context = 2;
+  string type = 5;
+  bytes data = 6;
+}
+
+message UploadTemplateReply {
+}
