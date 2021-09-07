@@ -2,8 +2,6 @@ syntax = "proto3";
 
 option csharp_namespace = "Recom.Api";
 
-import "common.proto"; 
-
 service RecomApi {
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
   rpc PreviewMessage (PreviewMessageRequest) returns (PreviewMessageReply);
@@ -37,3 +35,11 @@ message PreviewMessageReply {
   string content = 1;
 }
 
+message ActorContext {
+  string access_token = 1;
+  string tenant_id = 2;
+  string actor_id= 3;
+  string actor_namespace= 4;
+  string resource_group_id = 5;
+  repeated string permissions = 6;
+}

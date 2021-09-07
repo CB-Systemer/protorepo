@@ -1,9 +1,17 @@
 syntax = "proto3";
-import "common.proto"; 
 
 option csharp_namespace = "Templating.Api";
 
 package templating;
+
+message ExecutingActorContext {
+  string access_token = 1;
+  string tenant_id = 2;
+  string actor_id= 3;
+  string actor_namespace= 4;
+  string resource_group_id = 5;
+  repeated string permissions = 6;
+}
 
 service TemplatingApi {
   rpc GetTemplate (GetTemplateRequest) returns (GetTemplateReply);
@@ -21,7 +29,7 @@ message GetDocumentRequest {
     string contextDataNodeId = 5;
     string contextTenantId = 6;
     string contextResourceGroupId = 7;
-    ActorContext actor_context = 8;
+    ExecutingActorContext actor_context = 8;
 }
 
 message GetDocumentReply {
@@ -35,7 +43,7 @@ message BuildTemplateRequest {
     string contextDataNodeId = 6;
     string contextTenantId = 7;
     string contextResourceGroupId = 8;
-    ActorContext actor_context = 9;
+    ExecutingActorContext actor_context = 9;
 	string format = 13;
 }
 
@@ -53,7 +61,7 @@ message InitializeReply {
 
 message GetTemplateRequest {
 	string templateId = 1;
-    ActorContext actor_context = 2;
+    ExecutingActorContext actor_context = 2;
 }
 
 message GetTemplateReply {
@@ -84,7 +92,7 @@ message TemplatePreview {
 message PreviewTemplateRequest {
   string templateId = 1;
   string data = 2;
-  ActorContext actor_context = 3;
+  ExecutingActorContext actor_context = 3;
   string type = 5;
 }
 
@@ -94,7 +102,7 @@ message PreviewTemplateReply {
 
 message DownloadTemplateRequest {
   string templateId = 1;
-  ActorContext actor_context = 2;
+  ExecutingActorContext actor_context = 2;
   string type = 5;
 }
 
@@ -104,7 +112,7 @@ message DownloadTemplateReply {
 
 message UploadTemplateRequest {
   string templateId = 1;
-  ActorContext actor_context = 2;
+  ExecutingActorContext actor_context = 2;
   string type = 5;
   bytes data = 6;
 }
