@@ -15,6 +15,7 @@ message SendMessageRequest {
   string context_resource_group_id = 7;
   ActorContext actor_context = 8;
   string channel = 9;
+  string params = 10;
 }
 
 message SendMessageReply {
@@ -29,6 +30,7 @@ message PreviewMessageRequest {
   string context_resource_group_id = 7;
   ActorContext actor_context = 8;
   string channel = 9;
+  string params = 10;
 }
 
 message PreviewMessageReply {
