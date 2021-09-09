@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Recom.Sms.Api";
+
+service RecomSmsApi {
+  rpc SendSms (SendSmsRequest) returns (SendSmsReply);
+}
+
+message SendSmsRequest {
+  string number = 1;
+  string content = 2;
+  string sender = 3;
+}
+
+message SendSmsReply {
+  string status = 1;
+}
