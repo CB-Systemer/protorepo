@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Recom.Sms.Api";
+option csharp_namespace = "Recom.Sms";
 
 service RecomSmsApi {
   rpc SendSms (SendSmsRequest) returns (SendSmsReply);
