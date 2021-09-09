@@ -30,6 +30,7 @@ message GetDocumentRequest {
     string contextTenantId = 6;
     string contextResourceGroupId = 7;
     ExecutingActorContext actor_context = 8;
+    string params = 9;
 }
 
 message GetDocumentReply {
@@ -45,6 +46,7 @@ message BuildTemplateRequest {
     string contextResourceGroupId = 8;
     ExecutingActorContext actor_context = 9;
 	string format = 13;
+	string params = 10;
 }
 
 message BuildTemplateReply {
