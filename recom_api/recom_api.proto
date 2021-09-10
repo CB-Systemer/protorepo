@@ -4,7 +4,6 @@ option csharp_namespace = "Recom.Api";
 
 service RecomApi {
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
-  rpc PreviewMessage (PreviewMessageRequest) returns (PreviewMessageReply);
 }
 
 message SendMessageRequest {
@@ -16,25 +15,14 @@ message SendMessageRequest {
   ActorContext actor_context = 8;
   string channel = 9;
   string params = 10;
+  string recipient_actor_id = 11;
+  string recipient_tenant_id = 12;
+  string recipient_resource_group_id = 13;
+  bool dry_run = 14;
 }
 
 message SendMessageReply {
   string status = 1;
-}
-
-message PreviewMessageRequest {
-  string template_alias = 1;
-  bool send_instant = 2;
-  string context_datanode_id = 5;
-  string context_tenant_id = 6;
-  string context_resource_group_id = 7;
-  ActorContext actor_context = 8;
-  string channel = 9;
-  string params = 10;
-}
-
-message PreviewMessageReply {
-  string content = 1;
 }
 
 message ActorContext {
