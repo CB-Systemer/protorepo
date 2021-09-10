@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "Recom.Email";
+
+service RecomEmailApi {
+  rpc SendEmail (SendEmailRequest) returns (SendEmailReply);
+}
+
+message SendEmailRequest {
+
+}
+
+message SendEmailReply {
+  string status = 1;
+}
