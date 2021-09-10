@@ -7,7 +7,9 @@ service RecomEmailApi {
 }
 
 message SendEmailRequest {
-
+  string email_address = 1;
+  string content = 2;
+  string subject = 3;
 }
 
 message SendEmailReply {
