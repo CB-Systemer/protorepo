@@ -91,6 +91,14 @@ message ActorIdentitySearchModel {
 	string flowType = 6;
 }
 
+message ActorContext {
+ string actorId = 1;
+ string actorNamespace = 2;
+ string email = 3;
+ repeated string permissions = 4;
+ string resourceGroupId = 5;
+}
+
 message PhoneSearchModel {
 	string phoneInformationElementId = 1;
 	string prefix = 2;
