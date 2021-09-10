@@ -1,0 +1,135 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.Actor";
+
+import "google/protobuf/timestamp.proto";
+
+service ActorApi {
+  rpc GetActor (GetActorRequest) returns (ActorReply);
+}
+
+message GetActorRequest {
+  string actorId = 1;
+  string tenantId = 2;
+  string resourceGroupId = 3;
+  ActorContext actorContext = 4;
+}
+
+message ActorReply {
+  Actor actor = 1;
+  int64 total = 2;
+  string debugInformation = 3;
+  string scrollId = 4;
+}
+
+message Actor {
+	string id = 1;
+	string namespace = 2;
+	string displayName = 3;
+	string firstName = 4;
+	string lastName = 5;
+	string parentId = 6;
+	string parentNamespace = 7;
+	string rootId = 8;
+	string rootNamespace = 9;
+	repeated string scopeNamespaces = 10;
+	string scopeId = 11;
+	string scopeNamespace = 12;
+	string imageUrl = 13;
+	string dataStoreId = 14;
+	string resourceGroupId = 15;
+	string permissionInheritanceLevel = 16;
+	google.protobuf.Timestamp createdAt = 17;
+	google.protobuf.Timestamp lastUpdatedAt = 18;
+	google.protobuf.Timestamp executedAt = 19;
+	google.protobuf.Timestamp scopeUpdatedAt = 20;
+	string createdById = 21;
+	string lastUpdatedById = 22;
+	string executedById = 23;
+	string scopeUpdatedById = 24;
+	bool isDeleted = 25;
+	repeated string namespaces = 26;		
+	string createdFromSource = 27;	
+	string externalId = 28;
+	repeated ActorRoleReference actorRoleReferences = 29;
+	repeated ActorIdentitySearchModel actorIdentities = 30;
+	string userRole = 31;
+	string userRoleStatus = 32;
+	repeated PhoneSearchModel phones = 33;
+	repeated EmailSearchModel emails = 34;
+	repeated AddressSearchModel addresses = 35;
+	int32 version = 36;
+	int32 minorVersion = 37;
+	string tenantId = 38;
+	string mergedIntoActorId = 39;
+	bool isPrimary = 40;
+	bool hidden = 41;
+	bool hasActiveWish = 42;
+	bool hasActiveProfile = 43;
+	string primaryResourceGroupId = 44;
+	google.protobuf.Timestamp latestLoginDate = 45;
+	repeated SoMeSearchModel soMes = 46;
+	int64 numberOfWishes = 47;
+	int64 numberOfFavorites = 48;
+	int64 numberOfCases = 49;
+	string resourceGroupDisplayName = 50;
+}
+
+message ActorRoleReference {
+	string roleId = 1;
+	string roleNamespace = 2;
+	string referenceActorId = 3;
+	string scopeId = 4;
+	bool allowToViewInCustomerPortal = 5;
+}
+
+message ActorIdentitySearchModel {
+	string identityId = 1;
+	string createdById = 2;
+	string createdAt = 3;
+	string deletedById = 4;
+	string deletedAt = 5;
+	string flowType = 6;
+}
+
+message PhoneSearchModel {
+	string phoneInformationElementId = 1;
+	string prefix = 2;
+	string number = 3;
+	string internationalNumber = 4;
+	string phoneType = 5;
+	bool primary = 6;
+	bool isVerified = 7;
+}
+
+message EmailSearchModel{
+	string address = 1;
+	string emailInformationElementId = 2;
+	bool primary = 3;
+	bool isVerified = 4;
+}
+
+message AddressSearchModel{
+	string sourceId = 1;
+	string countryCode = 2;
+	string displayName = 3;
+	string streetNumber = 4;
+	string floor = 5;
+	string door = 6;
+	string postalCode = 7;
+	string city = 8;
+	string propertyNumber = 9;
+	string matrikelNumber = 10;
+	string districtCode = 11;
+	string districtName = 12;
+	bool isVerified = 13;
+}
+
+message SoMeSearchModel {
+	string soMeInformationElementId = 1;
+	string namespace = 2;
+	string url = 3;
+	bool primary = 4;
+	bool isVerified = 5;
+}
+
+
