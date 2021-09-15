@@ -4,6 +4,19 @@ option csharp_namespace = "Recom.Api";
 
 service RecomApi {
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
+  rpc SendEmailMessage (SendEmailMessageRequest) returns (SendEmailMessageReply);
+}
+
+message SendEmailMessageRequest {
+  string recipient_email_address = 1;
+  string content = 2;
+  string subject = 3;
+  bool dry_run = 4;
+  bool send_instant = 5;
+}
+
+message SendEmailMessageReply {
+  string status = 1;
 }
 
 message SendMessageRequest {
