@@ -8,11 +8,18 @@ service RecomApi {
 }
 
 message SendEmailMessageRequest {
-  string recipient_email_address = 1;
+  repeated ActorRecipient actor_recipients = 1;
   string content = 2;
   string subject = 3;
   bool dry_run = 4;
   bool send_instant = 5;
+  ActorContext actor_context = 6;
+}
+
+message ActorRecipient {
+  string actor_id = 1;
+  string tenant_id = 2;
+  string resource_group_id = 3;
 }
 
 message SendEmailMessageReply {

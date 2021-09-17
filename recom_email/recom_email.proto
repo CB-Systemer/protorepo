@@ -7,11 +7,16 @@ service RecomEmailApi {
 }
 
 message SendEmailRequest {
-  string email_address = 1;
+  repeated EmailRecipient email_addresses = 1;
   string content = 2;
   string subject = 3;
 }
 
 message SendEmailReply {
   string status = 1;
+}
+
+message EmailRecipient {
+	string displayName = 1;
+	string emailAddress = 2;
 }
