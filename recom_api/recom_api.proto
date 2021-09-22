@@ -14,6 +14,8 @@ message SendEmailMessageRequest {
   bool dry_run = 4;
   bool send_instant = 5;
   ActorContext actor_context = 6;
+  string context_tenant_id = 7;
+  string context_resource_group_id = 8;
 }
 
 message ActorRecipient {
