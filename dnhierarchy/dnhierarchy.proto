@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "DnHierarchy.Api";
+
+service DnHierarchyApi {
+  rpc LoadDnHierarchy (LoadDnHierarchyRequest) returns (LoadDnHierarchyReply);
+}
+
+message LoadDnHierarchyRequest {
+  string dataNodeId = 1;
+  string resourceGroupId = 2;
+  string executingActorId = 3;
+  string namespace = 4;
+}
+
+message LoadDnHierarchyReply {
+  string result = 1;
+}
