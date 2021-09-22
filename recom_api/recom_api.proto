@@ -5,6 +5,25 @@ option csharp_namespace = "Recom.Api";
 service RecomApi {
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
   rpc SendEmailMessage (SendEmailMessageRequest) returns (SendEmailMessageReply);
+  rpc GetRecipientsInfoMessage (GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
+}
+
+message GetRecipientsInfoMessageRequest {
+  repeated ActorRecipient actor_recipients = 1;
+  string context_tenant_id = 7;
+  string context_resource_group_id = 8;
+  ActorContext actor_context = 6;
+}
+
+message GetRecipientsInfoMessageReply {
+  repeated ActorRecipientInfo actors = 1;
+}
+
+message ActorRecipientInfo {
+  string email_address = 1;
+  string display_name = 2;
+  string sms_number = 3;
+  string actor_id = 4;
 }
 
 message SendEmailMessageRequest {
