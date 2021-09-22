@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "Core.Api";
+
+service TenantApi {
+  rpc GetTenant (GetTenantRequest) returns (GetTenantReply);
+}
+
+message GetTenantRequest {
+  string tenantId = 1;
+}
+
+message GetTenantReply {
+  string tenantId = 1;
+  bool isProduction = 2;
+}
+

@@ -7,10 +7,9 @@ service DnHierarchyApi {
 }
 
 message LoadDnHierarchyRequest {
-  string dataNodeId = 1;
-  string resourceGroupId = 2;
-  string executingActorId = 3;
-  string namespace = 4;
+  string resourceGroupId = 1;
+  string actorId = 2;
+  string namespace = 3;
 }
 
 message LoadDnHierarchyReply {
