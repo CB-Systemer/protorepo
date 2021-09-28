@@ -14,6 +14,7 @@ message SendEmailRequest {
 
 message SendEmailReply {
   string status = 1;
+  bool success = 2;
 }
 
 message EmailRecipient {
