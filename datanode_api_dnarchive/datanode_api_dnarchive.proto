@@ -1,0 +1,21 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.Archive";
+
+service DnArchiveApi {
+  rpc ArchiveEmail (ArchiveEmailRequest) returns (ArchiveEmailReply);
+}
+
+message ArchiveEmailRequest{
+ string body = 1;
+ string parent_id = 2;
+ string parent_namespace = 3;
+ string received_at = 4;
+ repeated string recipient_emails = 5;
+ string tenant_id = 6;
+ string sender_email = 7;
+ string subject = 8;
+ string resource_group_id = 9;
+}
+
+message ArchiveEmailReply {
+}
