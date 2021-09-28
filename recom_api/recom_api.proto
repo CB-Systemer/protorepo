@@ -45,6 +45,7 @@ message ActorRecipient {
 
 message SendEmailMessageReply {
   string status = 1;
+  bool success = 2;
 }
 
 message SendMessageRequest {
@@ -64,6 +65,7 @@ message SendMessageRequest {
 
 message SendMessageReply {
   string status = 1;
+  bool success = 2;
 }
 
 message ActorContext {
