@@ -10,6 +10,9 @@ message SendEmailRequest {
   repeated EmailRecipient email_addresses = 1;
   string content = 2;
   string subject = 3;
+  string actor_context_actor_id = 4;
+  string actor_context_resource_group_id = 5;
+  bool use_personal_email = 6;
 }
 
 message SendEmailReply {
@@ -18,6 +21,6 @@ message SendEmailReply {
 }
 
 message EmailRecipient {
-	string displayName = 1;
-	string emailAddress = 2;
+	string displayName = 2;
+	string emailAddress = 3;
 }

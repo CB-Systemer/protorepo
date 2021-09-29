@@ -1,0 +1,16 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.Json";
+
+service JsonApi {
+	rpc GetPrimaryJson(GetPrimaryJsonRequest) returns (GetPrimaryJsonResponse);
+}
+
+message GetPrimaryJsonRequest {
+	string resourceGroupId = 1;
+	string parentId = 2;
+	string namespace = 3;
+}
+
+message GetPrimaryJsonResponse { 
+	string json = 1;
+}
