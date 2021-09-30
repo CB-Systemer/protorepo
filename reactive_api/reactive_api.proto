@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option csharp_namespace = "Reactive.Api";
+
+service ReactiveApi {
+  rpc Validate (ValidateRequest) returns (ValidateReply);
+}
+
+message ValidateRequest {
+  string action_namespace = 1;
+}
+
+message ValidateReply {
+ string status = 1;
+  bool success = 2;
+}
