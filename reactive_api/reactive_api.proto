@@ -7,10 +7,23 @@ service ReactiveApi {
 }
 
 message ValidateRequest {
-  string action_namespace = 1;
+  string namespace = 1;
+  string context_tenant_id= 2;
+  string context_resource_group_id= 3;
+  string context_data_node_id = 4;
+  ActorContext actor_context = 6;
 }
 
 message ValidateReply {
- string status = 1;
   bool success = 2;
+  string results = 1;
+}
+
+message ActorContext {
+  string access_token = 1;
+  string tenant_id = 2;
+  string actor_id= 3;
+  string actor_namespace= 4;
+  string resource_group_id = 5;
+  repeated string permissions = 6;
 }

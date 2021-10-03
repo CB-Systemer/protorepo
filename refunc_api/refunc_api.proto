@@ -1,0 +1,104 @@
+syntax = "proto3";
+
+option csharp_namespace = "Refunc.Api";
+
+service RefuncApi {
+  rpc CreateRefunc (CreateRefuncRequest) returns (CreateRefuncReply);
+  rpc DeleteRefunc (DeleteRefuncRequest) returns (DeleteRefuncReply);
+  rpc GetRefunc (GetRefuncRequest) returns (GetRefuncReply);
+  rpc GetRefuncLogs (GetRefuncLogsRequest) returns (GetRefuncLogsReply);
+  rpc ExecRefunc (ExecRefuncRequest) returns (ExecRefuncReply);
+  rpc PublishRefunc (PublishRefuncRequest) returns (PublishRefuncReply);
+  rpc DownloadRefunc (DownloadRefuncRequest) returns (DownloadRefuncReply);
+  rpc UploadRefunc (UploadRefuncRequest) returns (UploadRefuncReply);
+}
+
+message GetRefuncRequest {
+  string refuncId = 1;
+  string executingActorId = 2;
+  repeated string permissions = 3;
+}
+
+message GetRefuncReply {
+  string stats = 1;
+}
+
+message GetRefuncLogsRequest {
+  string refuncId = 1;
+  string executingActorId = 2;
+  repeated string permissions = 3;
+}
+
+message GetRefuncLogsReply {
+  string Logs = 1;
+}
+
+message DeleteRefuncRequest {
+  string refuncId = 1;
+  string executingActorId = 2;
+  repeated string permissions = 3;
+}
+
+message DeleteRefuncReply { }
+
+message ExecRefuncRequest {
+  string refuncId = 1;
+  string executingActorId = 2;
+  repeated string permissions = 3;
+  string contextTenantId = 4;
+  string contextResourceGroupId = 5;
+  string contextDataNodeId = 6;
+  string userAccessToken = 7;
+  string userTenantId = 8;
+  string userResourceGroupId = 9;
+  string userActorId = 10;
+  string configData = 11;
+  string RuntimeParams = 12;
+}
+
+message ExecRefuncReply {
+  string result = 1;
+}
+
+message PublishRefuncRequest {
+  string refuncId = 1;
+  string namespace = 2;
+  string tenantId = 3;
+  string resourceGroupId = 4;
+  string executingActorId = 5;
+  repeated string permissions = 6;
+}
+
+message PublishRefuncReply {
+}
+
+message CreateRefuncRequest {
+  string dataNodeId = 1;
+  string namespace = 2;
+  string tenantId = 3;
+  string resourceGroupId = 4;
+}
+
+message CreateRefuncReply {
+  string result = 1;
+}
+
+message DownloadRefuncRequest {
+  string refuncId = 1;
+  string executingActorId = 3;
+  repeated string permissions = 4;
+}
+
+message DownloadRefuncReply {
+ 	bytes data = 1;
+}
+
+message UploadRefuncRequest {
+  string refuncId = 1;
+  bytes data = 2;
+  string executingActorId = 3;
+  repeated string permissions = 4;
+}
+
+message UploadRefuncReply {
+}
