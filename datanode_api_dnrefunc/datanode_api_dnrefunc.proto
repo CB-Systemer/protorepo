@@ -1,0 +1,16 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.Refunc";
+
+service DnRefuncApi {
+  rpc HasRefuncAccess (HasRefuncAccessRequest) returns (HasRefuncAccessReply);
+}
+
+message HasRefuncAccessRequest{
+ string executingActorId = 1;
+ repeated string permissions = 2;
+ string refuncId = 3;
+}
+
+message HasRefuncAccessReply {
+	bool hasAccess = 1;
+}

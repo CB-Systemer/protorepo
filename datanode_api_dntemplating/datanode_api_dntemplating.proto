@@ -1,0 +1,63 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.Templating";
+
+service DnTemplatingApi {
+  rpc FindTemplate (FindTemplateRequest) returns (FindTemplateReply);
+  rpc HasTemplateAccess (HasTemplateAccessRequest) returns (HasTemplateAccessReply);
+  rpc GetAliases (GetAliasesRequest) returns (GetAliasesReply);
+  rpc GetDataNode (GetDataNodeRequest) returns (GetDataNodeReply);
+}
+
+message GetDataNodeRequest{
+ string executingActorId = 1;
+ repeated string permissions = 2;
+ string dataNodeId = 3;
+}
+
+message GetDataNodeReply {
+	string json = 1;
+}
+
+
+message GetAliasesRequest{
+ string executingActorId = 1;
+ repeated string permissions = 2;
+ string scopeId = 3;
+}
+
+message GetAliasesReply {
+	repeated AliasEntry aliases = 1;
+}
+
+message AliasEntry {
+	string dataNodeId = 1;
+	string alias = 2;
+}
+
+
+message FindTemplateRequest{
+ string executingActorId = 1;
+ repeated string permissions = 2;
+ string templateId = 3;
+ string type = 4;
+}
+
+message FindTemplateReply {
+	string id = 1;
+	string displayName = 2;
+	string source = 3;
+	string namespace = 4;
+	string scopeId = 5;
+}
+
+
+message HasTemplateAccessRequest{
+ string executingActorId = 1;
+ repeated string permissions = 2;
+ string templateId = 3;
+ string type = 4;
+}
+
+message HasTemplateAccessReply {
+		bool hasAccess = 1;
+}
