@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option csharp_namespace = "Reflow.Api";
+
+service ReflowApi {
+  rpc ResolvePipeline (ResolvePipelineRequest) returns (ResolvePipelineReply);
+}
+
+message ResolvePipelineRequest {
+  string namespace = 1;
+  string action = 2;
+  string context_tenant_id= 3;
+  string context_resource_group_id= 4;
+  ActorContext actor_context = 5;
+}
+
+message ResolvePipelineReply {
+  repeated string actions = 1;
+}
+
+message ActorContext {
+  string access_token = 1;
+  string tenant_id = 2;
+  string actor_id= 3;
+  string actor_namespace= 4;
+  string resource_group_id = 5;
+  repeated string permissions = 6;
+}
