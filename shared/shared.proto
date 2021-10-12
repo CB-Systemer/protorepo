@@ -10,3 +10,10 @@ message ActorContext {
   string resource_group_id = 5;
   repeated string permissions = 6;
 }
+
+message ExecutionContext {
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string data_node_id = 3;
+  string data_node_namespace = 4;
+}
