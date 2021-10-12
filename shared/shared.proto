@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+option csharp_namespace = "Realequity.GrpcApi";
+
 message ActorContext {
   string access_token = 1;
   string tenant_id = 2;
