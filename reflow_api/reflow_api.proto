@@ -14,6 +14,7 @@ service ReflowApi {
 message GetPipelineTargetNamespaceRequest {
   string data_node_id = 1;
   int32 version = 2;
+  string scope_id = 3;
 }
 
 message GetPipelineTargetNamespaceReply {
@@ -26,6 +27,7 @@ message CreatePipelineRequest {
   int32 version = 2;
   string pipeline_definition_json = 3;
   string file_name = 4;
+  string scope_id= 5;
 }
 
 message CreatePipelineReply {
@@ -34,6 +36,7 @@ message CreatePipelineReply {
 message GetPipelineRequest {
   string data_node_id = 1;
   int32 version = 2;
+  string scope_id= 3;
 }
 
 message GetPipelineReply {
