@@ -5,7 +5,40 @@ option csharp_namespace = "Reflow.Api";
 import "shared/shared.proto";
 
 service ReflowApi {
+  rpc CreatePipeline (CreatePipelineRequest) returns (CreatePipelineReply);
+  rpc GetPipeline (GetPipelineRequest) returns (GetPipelineReply);
+  rpc GetPipelineTargetNamespace (GetPipelineTargetNamespaceRequest) returns (GetPipelineTargetNamespaceReply);
   rpc ResolvePipeline (ResolvePipelineRequest) returns (ResolvePipelineReply);
+}
+
+message GetPipelineTargetNamespaceRequest {
+  string data_node_id = 1;
+  int32 version = 2;
+}
+
+message GetPipelineTargetNamespaceReply {
+	string pipeline_target_namespace = 1;
+}
+
+
+message CreatePipelineRequest {
+  string data_node_id = 1;
+  int32 version = 2;
+  string pipeline_definition_json = 3;
+  string file_name = 4;
+}
+
+message CreatePipelineReply {
+}
+
+message GetPipelineRequest {
+  string data_node_id = 1;
+  int32 version = 2;
+}
+
+message GetPipelineReply {
+  string pipeline_definition = 1;
+  string file_name = 2;
 }
 
 message ResolvePipelineRequest {
