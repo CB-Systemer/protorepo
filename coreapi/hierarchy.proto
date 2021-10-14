@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option csharp_namespace = "Core.Api";
+
+service Hierachy {
+  rpc GetHierachy (GetHierachyRequest) returns (GetHierachyReply);
+  rpc GetScopeNamespace (GetScopeNamespaceRequest) returns (GetScopeNamespaceReply);
+}
+
+message GetHierachyRequest {
+  string scopeId = 1;
+}
+
+message GetHierachyReply {
+  string scopeId = 1;
+  string scopeNamespace = 2;
+  string parentId = 5;
+  ResourceGroupDto resourceGroup = 3;
+  ChainMembershipDto primaryChainMembership = 4;
+  string rootOrgId = 6;
+}
+
+message ResourceGroupDto{
+	string id = 1;
+	string displayName = 2;	
+	string tenantId = 3;
+	repeated ApplicationDto applications = 4;
+	repeated ChainMemberDto chainMembers = 5;
+}
+
+message ApplicationDto{
+	string id = 1;
+	string displayName = 2;
+}
+
+message ChainMemberDto{
+	string id = 1;
+	string displayName = 2;
+}
+
+message ChainMembershipDto {
+	string id = 1;
+	string displayName = 2;
+	string tenantId = 3;
+}
+
+message GetScopeNamespaceRequest {
+  string scopeId = 1;
+}
+
+message GetScopeNamespaceReply{
+	string scopeId = 1;
+	string scopeNamespace = 2;
+}
