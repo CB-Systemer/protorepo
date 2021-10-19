@@ -6,7 +6,7 @@ service ReflowApi {
   rpc CreateReflow (CreateReflowRequest) returns (CreateReflowReply);
   rpc UpdateReflow (UpdateReflowRequest) returns (UpdateReflowReply);
   rpc GetReflow (GetReflowRequest) returns (GetReflowReply);
-  rpc ResolvePipeline (ResolvePipelineRequest) returns (ResolvePipelineReply);
+  rpc PipelinePreview (PipelinePreviewRequest) returns (PipelinePreviewReply);
 }
 
 message CreateReflowRequest {
@@ -35,13 +35,13 @@ message GetReflowReply {
 	string reflow_json = 1;
 }
 
-message ResolvePipelineRequest {
+message PipelinePreviewRequest {
   string scope_id = 1;
   string pipeline_name = 2;
   string target_namespace = 3;
 }
 
-message ResolvePipelineReply {
+message PipelinePreviewReply {
   repeated PipelineAction actions = 1;
 }
 
