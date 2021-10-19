@@ -12,7 +12,7 @@ service ReflowApi {
 message CreateReflowRequest {
   string data_node_id = 1;
   string scope_id= 2;
-  string refunc_json = 3;
+  string reflow_json = 3;
 }
 
 message CreateReflowReply {
@@ -20,7 +20,7 @@ message CreateReflowReply {
 
 message UpdateReflowRequest {
   string data_node_id = 1;
-  string refunc_json = 2;
+  string reflow_json = 2;
 }
 
 message UpdateReflowReply {
@@ -32,7 +32,7 @@ message GetReflowRequest {
 }
 
 message GetReflowReply {
-	string refunc_json = 1;
+	string reflow_json = 1;
 }
 
 message ResolvePipelineRequest {
@@ -42,5 +42,15 @@ message ResolvePipelineRequest {
 }
 
 message ResolvePipelineReply {
-  repeated string actions = 1;
+  repeated PipelineAction actions = 1;
+}
+
+message PipelineAction {
+	string origin_scope_id = 1;
+	string origin_reflow_id = 2;
+	string origin_target_namespace = 3;
+	string action_namespace = 4;
+	double priority = 5;
+	bool async = 6;
+	string modifier = 7;
 }
