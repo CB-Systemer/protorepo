@@ -6,7 +6,8 @@ service ReflowApi {
   rpc CreateReflow (CreateReflowRequest) returns (CreateReflowReply);
   rpc UpdateReflow (UpdateReflowRequest) returns (UpdateReflowReply);
   rpc GetReflow (GetReflowRequest) returns (GetReflowReply);
-  rpc PipelinePreview (PipelinePreviewRequest) returns (PipelinePreviewReply);
+  rpc ResolvePipeline (ResolvePipelineRequest) returns (ResolvePipelineReply);
+   rpc PreviewPipeline (PreviewPipelineRequest) returns (PreviewPipelineReply);
 }
 
 message CreateReflowRequest {
@@ -35,22 +36,40 @@ message GetReflowReply {
 	string reflow_json = 1;
 }
 
-message PipelinePreviewRequest {
+message PreviewPipelineRequest {
   string scope_id = 1;
   string pipeline_name = 2;
   string target_namespace = 3;
 }
 
-message PipelinePreviewReply {
-  repeated PipelineAction actions = 1;
+message PreviewPipelineReply {
+  repeated PreviewAction actions = 1;
 }
 
-message PipelineAction {
+message PreviewAction {
 	string origin_scope_id = 1;
 	string origin_reflow_id = 2;
 	string origin_target_namespace = 3;
 	string action_namespace = 4;
 	double priority = 5;
 	bool async = 6;
-	string modifier = 7;
+	bool isRemoved = 7;
+	string modifier = 8;
+}
+
+message ResolvePipelineRequest {
+  string scope_id = 1;
+  string pipeline_name = 2;
+  string target_namespace = 3;
+  string is_preview = 4;
+}
+
+message ResolvePipelineReply {
+  repeated ResolvedAction actions = 1;
+}
+
+message ResolvedAction {
+	string action_namespace = 4;
+	double priority = 5;
+	bool async = 6;
 }
