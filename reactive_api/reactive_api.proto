@@ -5,16 +5,24 @@ option csharp_namespace = "Reactive.Api";
 import "shared/shared.proto";
 
 service ReactiveApi {
-  rpc Validate (ValidateRequest) returns (ValidateReply);
+  rpc RunPipeline (RunPipelineRequest) returns (RunPipelineReply);
 }
 
-message ValidateRequest {
-  string namespace = 1;
-  ExecutionContext execution_context = 2;
-  ActorContext actor_context = 3;
+message RunPipelineRequest {
+  ReactiveContext reactive_context = 1;
+  repeated ReactiveAction actions = 2;
 }
 
-message ValidateReply {
-  bool success = 2;
-  string results = 1;
+message ReactiveContext {
+  ExecutionContext execution_context = 1;
+  ActorContext actor_context = 2;
+}
+
+message ReactiveAction {
+  string action_namespace = 1;
+  bool is_async = 2;
+}
+
+message RunPipelineReply {
+  ReactiveContext reactive_context= 1;
 }
