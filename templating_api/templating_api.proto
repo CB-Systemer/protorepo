@@ -37,6 +37,8 @@ message GetTemplateOptionsReply {
 message TemplateOption {
 	string data_node_id = 1;
 	bool is_default = 2;
+  string display_name = 3;
+  double sort_order = 4;
 }
 
 message MergeDataRequest {
@@ -65,11 +67,11 @@ message GetDocumentReply {
 message BuildTemplateRequest {
 	string templateIdOrAlias = 1;
 	bool isAlias = 2;
-    string outputFormat = 5;
-    string contextDataNodeId = 6;
-    string contextTenantId = 7;
-    string contextResourceGroupId = 8;
-    ExecutingActorContext actor_context = 9;
+  string outputFormat = 5;
+  string contextDataNodeId = 6;
+  string contextTenantId = 7;
+  string contextResourceGroupId = 8;
+  ExecutingActorContext actor_context = 9;
 	string format = 13;
 	string params = 10;
 }
