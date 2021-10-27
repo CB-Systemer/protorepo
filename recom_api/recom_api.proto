@@ -63,6 +63,7 @@ message SendMessageRequest {
   string recipient_resource_group_id = 13;
   bool dry_run = 14;
   bool use_personal = 15;
+  bool isAlias = 16;
 }
 
 message SendMessageReply {
