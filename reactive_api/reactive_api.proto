@@ -16,6 +16,7 @@ message RunPipelineRequest {
 message ReactiveContext {
   ExecutionContext execution_context = 1;
   ActorContext actor_context = 2;
+  string payload = 3;
 }
 
 message ReactiveAction {
