@@ -21,6 +21,7 @@ service TemplatingApi {
   rpc Initialize (InitializeRequest) returns (InitializeReply);
   rpc GetDocument (GetDocumentRequest) returns (GetDocumentReply);
   rpc BuildTemplate (BuildTemplateRequest) returns (BuildTemplateReply);
+  rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
 }
 
@@ -36,6 +37,15 @@ message GetTemplateOptionsReply {
 message TemplateOption {
 	string data_node_id = 1;
 	bool is_default = 2;
+}
+
+message MergeDataRequest {
+  string templateContent = 1;
+  string data = 2;
+}
+
+message MergeDataReply{
+  string result = 1;
 }
 
 message GetDocumentRequest {
