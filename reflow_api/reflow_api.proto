@@ -71,4 +71,5 @@ message ResolvedAction {
 	string action_namespace = 4;
 	double priority = 5;
 	bool async = 6;
+  string params = 7;
 }
