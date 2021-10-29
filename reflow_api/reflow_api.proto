@@ -55,6 +55,8 @@ message PreviewAction {
 	bool async = 6;
 	bool isRemoved = 7;
 	string modifier = 8;
+	map<string, string> params = 9;
+	map<string, string> ui_params = 10;
 }
 
 message ResolvePipelineRequest {
@@ -71,5 +73,6 @@ message ResolvedAction {
 	string action_namespace = 4;
 	double priority = 5;
 	bool async = 6;
-  string params = 7;
+	map<string, string> params = 7;
+	map<string, string> ui_params = 8;
 }
