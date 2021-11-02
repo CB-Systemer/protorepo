@@ -6,9 +6,18 @@ service ReflowApi {
   rpc CreateReflow (CreateReflowRequest) returns (CreateReflowReply);
   rpc UpdateReflow (UpdateReflowRequest) returns (UpdateReflowReply);
   rpc GetReflow (GetReflowRequest) returns (GetReflowReply);
+  rpc DeleteReflow (DeleteReflowRequest) returns (DeleteReflowReply);
   rpc ResolvePipeline (ResolvePipelineRequest) returns (ResolvePipelineReply);
-   rpc PreviewPipeline (PreviewPipelineRequest) returns (PreviewPipelineReply);
+  rpc PreviewPipeline (PreviewPipelineRequest) returns (PreviewPipelineReply);
 }
+
+message DeleteReflowRequest {
+  string data_node_id = 1;
+}
+
+message DeleteReflowReply {
+}
+
 
 message CreateReflowRequest {
   string data_node_id = 1;
