@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option csharp_namespace = "Coco.Api";
+
+import "shared/shared.proto";
+
+service CocoApi {
+  rpc Test (TestRequest) returns (TestReply);
+}
+
+message TestRequest {
+}
+
+message TestReply {
+}
