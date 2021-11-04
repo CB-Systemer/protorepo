@@ -11,6 +11,7 @@ service ReactiveApi {
 message RunPipelineRequest {
   ReactiveContext reactive_context = 1;
   repeated ReactiveAction actions = 2;
+  string pipeline_name = 3;
 }
 
 message ReactiveContext {
