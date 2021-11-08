@@ -2,14 +2,14 @@ syntax = "proto3";
 
 option csharp_namespace = "Coco.Api";
 
-import "shared/shared.proto";
-
 service CocoApi {
-  rpc Test (TestRequest) returns (TestReply);
+  rpc GetPolicy (GetPolicyRequest) returns (GetPolicyReply);
 }
 
-message TestRequest {
+message GetPolicyRequest {
+	string consumer_id = 1;
 }
 
-message TestReply {
+message GetPolicyReply {
+  map<string, string> policies = 1;
 }
