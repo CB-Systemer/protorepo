@@ -6,6 +6,344 @@ import "google/protobuf/wrappers.proto";
 service CocoApi {
   rpc GetPolicy (GetPolicyRequest) returns (GetPolicyReply);
   rpc GetDataNode (GetDataNodeRequest) returns (GetDataNodeReply);
+  rpc GetStateflow (GetStateflowRequest) returns (GetStateflowReply);
+  rpc GetAllDataNodes (GetAllDataNodesRequest) returns (GetAllDataNodesReply);
+  rpc GetManyDataNodes (GetManyDataNodesRequest) returns (GetManyDataNodesReply);
+  rpc GetAllNamespaces(GetAllNamespacesRequest) returns (GetAllNamespacesReply);
+  rpc GetNamespace(GetNamespaceRequest) returns (GetNamespaceReply);
+  rpc GetAllPermissions(GetAllPermissionsRequest) returns (GetAllPermissionsReply);
+  rpc GetPermission(GetPermissionRequest) returns (GetPermissionReply);
+  rpc GetAllTags(GetAllTagsRequest) returns (GetAllTagsReply);
+  rpc GetTag(GetTagRequest) returns (GetTagReply);
+  rpc GetManyTags(GetManyTagsRequest) returns (GetManyTagsReply);
+  rpc GetAllTemplates(GetAllTemplatesRequest) returns (GetAllTemplatesReply);
+  rpc GetTemplate(GetTemplateRequest) returns (GetTemplateReply);
+  rpc GetAllTrackedActivities(GetAllTrackedActivitiesRequest) returns (GetAllTrackedActivitiesReply);
+  rpc GetTrackedActivity(GetTrackedActivityRequest) returns (GetTrackedActivityReply);
+  rpc GetManyEntityfeatures(GetManyEntityfeaturesRequest) returns (GetManyEntityfeaturesReply);
+  rpc GetDistributionChannel(GetDistributionChannelRequest) returns (GetDistributionChannelReply);
+  rpc GetAllDistributionChannels(GetAllDistributionChannelsRequest) returns (GetAllDistributionChannelsReply);
+}
+
+message GetAllDistributionChannelsRequest {
+	string consumer_id = 1;
+}
+
+message GetAllDistributionChannelsReply {
+	repeated DistributionChannelDto configs = 1;
+}
+
+message GetDistributionChannelRequest {
+	string consumer_id = 1;
+	string instance_namespace = 2;
+}
+
+message GetDistributionChannelReply {
+	DistributionChannelDto config = 1;
+}
+
+message DistributionChannelDto {
+    string icon_name = 1;
+    string instance_namespace = 2;
+    string display_name = 3;
+    bool distribute_disabled_cases = 4;
+    bool enable_as_default = 5;
+    bool include_sold_cases = 6;
+    int32 sold_cases_days_period = 7;
+    bool used_for_public_advertisement = 8;
+    bool allow_delay_override = 9;
+    bool include_in_public_profile = 10;
+    bool include_in_match_engine = 11;
+    bool manually_controlled = 12;
+    string description = 13;
+    int32 days_delayed = 14;
+    repeated DistributionChannelCaseTypeDto included_case_types = 15;
+}
+
+message DistributionChannelCaseTypeDto {
+    repeated string distributed_disabled_case_states = 1;
+    string namespace = 2;
+    string sold_state = 3;
+    string sold_reason = 4;
+    bool manually_controlled = 5;
+}
+message GetManyEntityfeaturesRequest {
+	string consumer_id = 1;
+	repeated string instance_namespaces = 2;
+}
+
+message GetManyEntityfeaturesReply {
+	repeated EntityfeatureDto configs = 1;
+}
+
+
+message EntityfeatureDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    bool allowed_comment = 5;
+}
+
+
+message GetAllTemplatesRequest {
+	string consumer_id = 1;
+}
+
+message GetAllTemplatesReply {
+	repeated TemplateDto configs = 1;
+}
+
+message GetTemplateRequest {
+	string consumer_id = 1;
+	string instance_namespace = 2;
+}
+
+message GetTemplateReply {
+	TemplateDto config = 1;
+}
+
+message TemplateDto {
+    string instance_namespace = 1;
+    repeated string allowed_process_namespaces = 2;
+    repeated string allowed_entityfeature_namespaces = 3;
+    repeated TemplateDatanodeDto allowed_datanodes = 4;
+    repeated string allowed_tag_namespaces = 5;
+}
+
+message TemplateDatanodeDto {
+    string instance_namespace = 1;
+    bool allowed = 2;
+    repeated string uis = 3;
+}
+
+message GetAllTrackedActivitiesRequest {
+	string consumer_id = 1;
+}
+
+message GetAllTrackedActivitiesReply {
+	repeated TrackedActivityDto configs = 1;
+}
+
+message GetTrackedActivityRequest {
+	string consumer_id = 1;
+	string instance_namespace = 2;
+}
+
+message GetTrackedActivityReply {
+	TrackedActivityDto config = 1;
+}
+
+
+message TrackedActivityDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    google.protobuf.StringValue title = 5;
+    google.protobuf.StringValue body = 6;
+    bool hidden = 7;
+    bool allow_all_actor_namespaces = 10;
+	repeated string audience_actor_namespaces = 11;
+	bool allow_all_actor_roles = 12;
+	repeated string audience_actor_roles = 13;
+	bool update_latest_enabled = 14;
+	int32 update_latest_time_window = 15;
+	repeated string index_on_datanode_namespaces = 16;
+	bool updateLatest_always = 17;
+}
+
+
+message GetAllTagsRequest {
+	string consumer_id = 1;
+}
+
+message GetAllTagsReply {
+	repeated TagDto configs = 1;
+}
+
+message GetManyTagsRequest {
+	string consumer_id = 1;
+	repeated string instance_namespaces = 2;
+}
+
+message GetManyTagsReply {
+	repeated TagDto configs = 1;
+}
+
+
+message GetTagRequest {
+	string consumer_id = 1;
+	string instance_namespace = 2;
+}
+
+message GetTagReply {
+	TagDto config = 1;
+}
+
+message TagDto {
+string instance_namespace = 1;
+string display_name = 2;
+string description = 3;
+string icon_name = 4;
+}
+
+message GetAllPermissionsRequest {
+	string consumer_id = 1;
+}
+
+message GetAllPermissionsReply {
+	repeated PermissionDto configs = 1;
+}
+
+message GetPermissionRequest {
+	string consumer_id = 1;
+	string instance_namespace = 2;
+}
+
+message GetPermissionReply {
+	PermissionDto config = 1;
+}
+
+message PermissionDto {
+    string instance_namespace = 1;
+    FullAccessPermissionLevelDto full_access_permission_level = 2;
+    ReadAccessPermissionLevelDto read_access_permission_level = 3;
+    InheritanceLevelDto inheritance_level = 4;
+    repeated SharingRuleDto sharing_rules = 5;
+}
+
+message SharingRuleDto {
+    SharingRoleDto role = 1;
+    repeated string roles = 2;
+    DataTreeLevelDto datatree_level = 3;
+    string permissions = 4;
+    bool state_category = 5;
+    repeated string state_categories = 6;
+}
+
+enum SharingRoleDto {
+    SharingRole_any = 0;
+    SharingRole_specific = 1;
+}
+
+enum DataTreeLevelDto {
+    DataTreeLevel_Root = 0;
+    DataTreeLevel_Scope = 1;
+    DataTreeLevel_Parent = 2;
+}
+
+enum FullAccessPermissionLevelDto {
+    FullAccess_Owner = 0;
+    FullAccess_ResourceGroup = 1;
+    FullAccess_Datastore = 2;
+    FullAccess_Tenant = 3;
+    FullAccess_Chain = 4;
+    FullAccess_ChainMembers = 5;
+    FullAccess_KnownUsers = 6;
+    FullAccess_AnonymousUsers = 7;
+}
+
+enum ReadAccessPermissionLevelDto {
+    ReadAccess_None = 0;
+    ReadAccess_ResourceGroup = 1;
+    ReadAccess_Datastore = 2;
+    ReadAccess_Tenant = 3;
+    ReadAccess_Chain = 4;
+    ReadAccess_ChainMembers = 5;
+    ReadAccess_KnownUsers = 6;
+    ReadAccess_AnonymousUsers = 7;
+}
+
+enum InheritanceLevelDto {
+    Inheritance_None = 0;
+    Inheritance_Root = 1;
+    Inheritance_Scope = 2;
+    Inheritance_Parent = 3;
+}
+
+message GetAllNamespacesRequest {
+	string consumer_id = 1;
+}
+
+message GetAllNamespacesReply {
+	repeated NamespaceDto configs = 1;
+}
+
+message GetNamespaceRequest {
+	string consumer_id = 1;
+	string instance_namespace = 2;
+}
+
+message GetNamespaceReply {
+	NamespaceDto config = 1;
+}
+
+message NamespaceDto {
+    string description = 1;
+    string display_name = 2;
+    string instance_namespace= 4;
+    string icon_name= 5;
+    string icon = 6;
+}
+
+message GetStateflowRequest {
+	string consumer_id = 1;
+	string stateflow_namespace = 2;
+}
+
+message StateflowDto {
+    string description = 1;
+    string display_name = 2;
+    string stateflow_coco_version = 4;
+    repeated StateRepresentationDto states = 5;
+}
+
+message StateRepresentationDto {
+    string display_name = 1;
+    string namespace = 2;
+    string category = 3;
+    string description = 4;
+    bool initial = 5;
+    bool transient = 6;
+    repeated StateTriggerDto trigger_behaviours = 8;
+}
+
+
+message StateTriggerDto {
+    string reason =1;
+    string namespace =2;
+    string destination_state =3;
+    string description =4;
+    bool is_reentrant =6;
+    repeated StateTriggerEndResultOutcomeDto  end_result_outcomes = 7;
+}
+
+message StateTriggerEndResultOutcomeDto
+{
+    string end_result_type_namespace = 1;
+    string end_result_outcome_namespace = 2;
+}
+
+message GetStateflowReply {
+    StateflowDto config = 1;
+}
+
+message GetAllDataNodesRequest {
+	string consumer_id = 1;
+}
+
+message GetAllDataNodesReply {
+    repeated DataNodoCocoDto configs = 1;
+}
+
+message GetManyDataNodesRequest {
+	string consumer_id = 1;
+    repeated string instance_namespaces = 2;
+}
+
+message GetManyDataNodesReply {
+    repeated DataNodoCocoDto configs = 1;
 }
 
 message GetDataNodeRequest {
@@ -153,6 +491,7 @@ message DataNodoCocoDto {
     NotificationSettingsDto notification_settings = 13;
     string state_flow_namespace = 14;
     bool suppress_scope_update = 15;
+    map<string, string> additional_properties = 18;
 }
 
 message AllowedSharingLevelsDto {
