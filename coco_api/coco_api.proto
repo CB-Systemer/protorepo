@@ -368,6 +368,7 @@ message GetStateflowRequest {
 message StateflowDto {
     string description = 1;
     string display_name = 2;
+    string namespace = 3;
     string stateflow_coco_version = 4;
     repeated StateRepresentationDto states = 5;
 }
