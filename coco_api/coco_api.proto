@@ -7,6 +7,7 @@ service CocoApi {
   rpc GetPolicy (GetPolicyRequest) returns (GetPolicyReply);
   rpc GetDataNode (GetDataNodeRequest) returns (GetDataNodeReply);
   rpc GetStateflow (GetStateflowRequest) returns (GetStateflowReply);
+  rpc GetAllStateflows (GetAllStateflowsRequest) returns (GetAllStateflowsReply);
   rpc GetAllDataNodes (GetAllDataNodesRequest) returns (GetAllDataNodesReply);
   rpc GetManyDataNodes (GetManyDataNodesRequest) returns (GetManyDataNodesReply);
   rpc GetAllNamespaces(GetAllNamespacesRequest) returns (GetAllNamespacesReply);
@@ -348,6 +349,15 @@ message NamespaceDto {
     string instance_namespace= 4;
     string icon_name= 5;
     string icon = 6;
+}
+
+message GetAllStateflowsRequest {
+	string consumer_id = 1;
+}
+
+message GetAllStateflowsReply{
+	string consumer_id = 1;
+	repeated StateflowDto configs = 2;
 }
 
 message GetStateflowRequest {
