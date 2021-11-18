@@ -558,6 +558,7 @@ message DataNodoCocoDto {
     bool suppress_scope_update = 15;
     map<string, string> additional_properties = 18;
     google.protobuf.StringValue tracked_activity_namespace = 19;
+    bool is_navigable = 20;
 }
 
 message AllowedSharingLevelsDto {
