@@ -23,7 +23,70 @@ service CocoApi {
   rpc GetManyEntityfeatures(GetManyEntityfeaturesRequest) returns (GetManyEntityfeaturesReply);
   rpc GetDistributionChannel(GetDistributionChannelRequest) returns (GetDistributionChannelReply);
   rpc GetAllDistributionChannels(GetAllDistributionChannelsRequest) returns (GetAllDistributionChannelsReply);
+  rpc GetAllVatCodes(GetTypesRequest) returns (GetAllVatCodesReply);
+  rpc GetAllUnitOfMeasures(GetTypesRequest) returns (GetAllUnitOfMeasuresReply);
+  rpc GetAllUnitOfMeasureGroups(GetTypesRequest) returns (GetAllUnitOfMeasureGroupsReply);
+  rpc GetAllLocalizedDisplayNames(GetTypesRequest) returns (GetAllLocalizedDisplayNamesReply);
+  rpc GetAllFieldDataTypes(GetTypesRequest) returns (GetAllFieldDataTypesReply);
+  rpc GetAllfieldCalculatedTypes(GetTypesRequest) returns (GetAllfieldCalculatedTypesReply);
 }
+
+
+message GetTypesRequest {
+
+}
+
+message GetAllUnitOfMeasureGroupsReply {
+    repeated UnitOfMeasureGroupDto configs = 1;
+}
+
+message UnitOfMeasureGroupDto {
+    string namespace = 1;
+    repeated UnitOfMeasureDto unit_of_measures = 2;
+}
+
+
+message GetAllfieldCalculatedTypesReply {
+	repeated FieldCalculatedTypeDto configs = 1;
+}
+
+message GetAllFieldDataTypesReply {
+	repeated FieldDataTypeDto configs = 1;
+}
+
+message GetAllUnitOfMeasuresReply {
+	repeated UnitOfMeasureDto configs = 1;
+}
+
+message GetAllLocalizedDisplayNamesReply {
+	repeated LocalizedDisplayNameDto configs = 1;
+}
+
+
+message LocalizedDisplayNameDto {
+    string namespace = 1;
+    string country_code = 2;
+    string display_name = 3;
+}
+
+message UnitOfMeasureDto {
+    string namespace = 1;
+    string unit_of_measure_group_namespace = 2;
+    repeated string allowed_field_types = 3;
+    repeated string supported_conversion_to_unit_of_measures = 4;
+    repeated LocalizedDisplayNameDto display_names = 5;
+}
+
+message GetAllVatCodesReply {
+	repeated VatCodeDto configs = 1;
+}
+
+message VatCodeDto {
+    string code = 1;
+    string display_name = 2;
+    double vat_percentage = 3;
+}
+
 
 message GetAllDistributionChannelsRequest {
 	string consumer_id = 1;
@@ -420,6 +483,7 @@ message ManagedFieldFragmentDto {
 message FieldCalculatedTypeDto {
     string namespace = 1;
 }
+
 message FieldDataTypeDto {
     string namespace=1;
     FieldValueTypeDto value_type=2;
@@ -428,6 +492,7 @@ message FieldDataTypeDto {
     bool supports_decimals=5;
     bool supports_default_value=6;
     bool is_list_type=7;
+    repeated LocalizedDisplayNameDto display_names = 8;
 }
 
 enum FieldValueTypeDto
@@ -492,6 +557,7 @@ message DataNodoCocoDto {
     string state_flow_namespace = 14;
     bool suppress_scope_update = 15;
     map<string, string> additional_properties = 18;
+    google.protobuf.StringValue tracked_activity_namespace = 19;
 }
 
 message AllowedSharingLevelsDto {
