@@ -30,8 +30,22 @@ service CocoApi {
   rpc GetAllLocalizedDisplayNames(GetTypesRequest) returns (GetAllLocalizedDisplayNamesReply);
   rpc GetAllFieldDataTypes(GetTypesRequest) returns (GetAllFieldDataTypesReply);
   rpc GetAllfieldCalculatedTypes(GetTypesRequest) returns (GetAllfieldCalculatedTypesReply);
+  rpc GetWishConfig(GetConfigRequest) returns (GetWishConfigReply);
+  rpc GetCaseConfig(GetConfigRequest) returns (GetCaseConfigReply);
+  rpc GetActorConfig(GetConfigRequest) returns (GetActorConfigReply);
+  rpc GetActorRoleConfig(GetConfigRequest) returns (GetActorRoleConfigReply);
+  rpc GetAppointmentConfig(GetConfigRequest) returns (GetAppointmentConfigReply);
+  rpc GetCampaignConfig(GetConfigRequest) returns (GetCampaignConfigReply);
+  rpc GetEstateConfig(GetConfigRequest) returns (GetEstateConfigReply);
+  rpc GeIeUrlConfig(GetConfigRequest) returns (GeIeUrlConfigReply);
+  rpc GetLawRegulationConfig(GetConfigRequest) returns (GetLawRegulationConfigReply);
+  rpc GetToDoConfig(GetConfigRequest) returns (GetToDoConfigReply);
 }
 
+message GetConfigRequest {
+    string consumer_id = 1;
+	string instance_namespace = 2;
+}
 
 message GetTypesRequest {
 
@@ -577,4 +591,132 @@ message AllowedSharingLevelsDto {
     bool anyUser = 2;
     bool chain = 3;
     bool chainMember = 4;
+}
+
+message ActorConfigDto {
+    string address_type_namespace = 1;
+    string email_type_namespace = 2;
+    string phone_type_namespace = 3;
+    string so_me_type_namespace = 4;
+}
+
+message ActorRoleConfigDto {
+    bool never_show_contact_info = 1;
+    bool allow_to_view_in_customer_portal = 2;
+    repeated string allowed_actors = 3;
+    bool AutoUpdateCachedActorInformation = 4;
+    repeated string categories = 5;
+    string unknown_actor_display_name = 6;
+}
+
+message AppointmentConfigDto{
+    string AddressTypeNamespace = 1;
+}
+
+message GetActorConfigReply{
+    ActorConfigDto config = 1;
+}
+
+message GetActorRoleConfigReply{
+    ActorRoleConfigDto config = 1;
+}
+
+message GetAppointmentConfigReply{
+    AppointmentConfigDto config = 1;
+}
+
+message GetCampaignConfigReply{
+    CampaignConfigDto config = 1;
+}
+
+message CampaignConfigDto{
+    string campaign_extension_id = 1;
+}
+
+message CaseConfigDto {
+    string project_case_reference_type = 1;
+    bool is_case_collection = 2;
+}
+
+message GetCaseConfigReply {
+    CaseConfigDto config = 1;
+}
+
+message EstateConfigDto {
+    string address_type_namespace = 1;
+}
+
+message IeUrlConfigDto {
+    string url_template= 1;
+    string url_type = 2;
+}
+message LawRegulationConfigDto {
+    repeated LawRegulationItemDto lawregulations = 1;
+}
+
+message LawRegulationItemDto {
+     string namespace = 1;
+    string icon_name = 2;
+    string display_name = 3;
+    bool enabled_by_default= 4;
+    string description = 5;
+}
+
+
+message ToDoConfigDto {
+    string incomplete_reasons= 1;
+    string complete_reasons = 2;
+}
+
+message GetEstateConfigReply {
+    EstateConfigDto config = 1;
+}
+message GeIeUrlConfigReply {
+    IeUrlConfigDto config = 1;
+}
+message GetLawRegulationConfigReply {
+    LawRegulationConfigDto config = 1;
+}
+message GetToDoConfigReply {
+  ToDoConfigDto config = 1;
+}
+message GetWishConfigReply {
+    WishConfigDto config = 1;
+}
+message WishConfigDto {
+    repeated RangeTypeReferenceDto range_type_references = 1;
+    repeated string case_type_references = 2;
+    repeated string estate_type_references = 3;
+    LocationTypeReferenceDto location_type_reference = 4;
+    string basic_reference_id_usage = 5;
+    string basic_description_usage = 6;
+    MatchSettingsDto match_settings = 7;
+}
+
+message RangeTypeReferenceDto {
+    double priority = 1;
+    string instance_namespace = 2;
+}
+
+message LocationTypeReferenceDto {
+    LocationItemTypeReferenceDto city_type_reference = 1;
+    LocationItemTypeReferenceDto street_type_reference = 2;
+    LocationItemTypeReferenceDto address_type_reference = 3;
+    LocationItemTypeReferenceDto municipality_type_reference = 4;
+    LocationItemTypeReferenceDto region_type_reference = 5;
+    LocationItemTypeReferenceDto place_type_reference = 6;
+    LocationItemTypeReferenceDto province_type_reference = 7;
+    LocationItemTypeReferenceDto supplementary_city_type_reference = 8;
+    LocationItemTypeReferenceDto polygon_type_reference = 9;
+}
+message LocationItemTypeReferenceDto {
+    string location_type_namespace = 1;
+    double priority = 2;
+    string usage = 3;
+}
+
+message MatchSettingsDto {
+    bool instant = 1;
+    bool daily = 2;
+    bool weekly = 3;
 }
