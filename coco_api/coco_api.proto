@@ -34,17 +34,23 @@ service CocoApi {
   rpc GetCaseConfig(GetConfigRequest) returns (GetCaseConfigReply);
   rpc GetActorConfig(GetConfigRequest) returns (GetActorConfigReply);
   rpc GetActorRoleConfig(GetConfigRequest) returns (GetActorRoleConfigReply);
+  rpc GetManyActorRolesConfig(GetManyConfigRequest) returns (GetManyActorRolesConfigReply);
   rpc GetAppointmentConfig(GetConfigRequest) returns (GetAppointmentConfigReply);
   rpc GetCampaignConfig(GetConfigRequest) returns (GetCampaignConfigReply);
   rpc GetEstateConfig(GetConfigRequest) returns (GetEstateConfigReply);
   rpc GeIeUrlConfig(GetConfigRequest) returns (GeIeUrlConfigReply);
   rpc GetLawRegulationConfig(GetConfigRequest) returns (GetLawRegulationConfigReply);
   rpc GetToDoConfig(GetConfigRequest) returns (GetToDoConfigReply);
+  rpc GetAdtextConfig(GetConfigRequest) returns (GetAdtextReply);
 }
 
 message GetConfigRequest {
     string consumer_id = 1;
 	string instance_namespace = 2;
+}
+message GetManyConfigRequest {
+    string consumer_id = 1;
+	repeated string instance_namespaces = 2;
 }
 
 message GetTypesRequest {
@@ -607,6 +613,7 @@ message ActorRoleConfigDto {
     bool AutoUpdateCachedActorInformation = 4;
     repeated string categories = 5;
     string unknown_actor_display_name = 6;
+    string instance_namespace = 7;
 }
 
 message AppointmentConfigDto{
@@ -619,6 +626,10 @@ message GetActorConfigReply{
 
 message GetActorRoleConfigReply{
     ActorRoleConfigDto config = 1;
+}
+
+message GetManyActorRolesConfigReply{
+    repeated ActorRoleConfigDto configs = 1;
 }
 
 message GetAppointmentConfigReply{
@@ -680,6 +691,20 @@ message GetLawRegulationConfigReply {
 message GetToDoConfigReply {
   ToDoConfigDto config = 1;
 }
+
+message GetAdtextReply {
+    AdtextConfigDto config = 1;
+}
+
+message AdtextConfigDto {
+    repeated AdtextCategoryDto categories = 1;
+}
+
+message AdtextCategoryDto {
+    string display_name = 1;
+}
+
+
 message GetWishConfigReply {
     WishConfigDto config = 1;
 }
@@ -691,6 +716,8 @@ message WishConfigDto {
     string basic_reference_id_usage = 5;
     string basic_description_usage = 6;
     MatchSettingsDto match_settings = 7;
+    repeated string entityfeature_type_references = 8;
+    
 }
 
 message RangeTypeReferenceDto {
