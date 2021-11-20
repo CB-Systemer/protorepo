@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cbs.Partner.Api.Services";
+import "google/protobuf/wrappers.proto";
+
+service DatanodeApi {
+  rpc GetConfig (GetConfigRequest) returns (GetConfigResponse);
+  
+}
+
+message GetConfigResponse {
+    repeated DatanodeConfigDto ies = 1;
+}
+
+message GetConfigRequest {
+    string scopeId = 1;
+    string actorId = 2;
+}
+
+message DatanodeConfigDto {
+    string id = 1;
+    string description = 2;
+    int32 version = 3;
+    string displayName = 4;
+    string instanceNamespace = 5;
+    string handlerNamespace = 6;
+    repeated TargetConfigDto targets = 7;
+    string icon = 8;
+    google.protobuf.BoolValue autoGenerate = 9;
+    google.protobuf.BoolValue canEdit = 10;
+    string primaryTogglingLevel = 11;
+    google.protobuf.BoolValue allowOnlyOneOfThisType = 12;
+    google.protobuf.BoolValue canRemovePrimary = 13;
+    google.protobuf.BoolValue includeInPublicProfile = 14;
+    google.protobuf.BoolValue canPreparePublicProfile = 15;
+    string stateFlowNamespace = 16;
+    reserved 17;
+    string baseUrl = 18;
+}
+
+message TargetConfigDto {
+    string ui = 1;
+    string targetNamespace = 2;
+}
