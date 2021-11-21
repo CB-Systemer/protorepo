@@ -12,6 +12,8 @@ service CocoApi {
   rpc GetManyDataNodes (GetManyDataNodesRequest) returns (GetManyDataNodesReply);
   rpc GetAllNamespaces(GetAllNamespacesRequest) returns (GetAllNamespacesReply);
   rpc GetNamespace(GetNamespaceRequest) returns (GetNamespaceReply);
+  rpc GetAllNotifications(GetAllRequest) returns (GetAllNotificationsReply);
+  rpc GetNotification(GetSingleRequest) returns (GetNotificationReply);
   rpc GetAllPermissions(GetAllPermissionsRequest) returns (GetAllPermissionsReply);
   rpc GetPermission(GetPermissionRequest) returns (GetPermissionReply);
   rpc GetAllTags(GetAllTagsRequest) returns (GetAllTagsReply);
@@ -44,6 +46,33 @@ service CocoApi {
   rpc GetAdtextConfig(GetConfigRequest) returns (GetAdtextReply);
 }
 
+  rpc GetAllNotifications(GetAllRequest) returns (GetAllNotificationsReply);
+  rpc GetNotification(GetSingleRequest) returns (GetNotificationReply);
+
+message GetSingleRequest {
+    string consumer_id = 1;
+	string instance_namespace = 2;
+}
+message GetAllRequest {
+    string consumer_id = 1;
+}
+
+message GetAllNotificationsReply{
+    repeated NotificationDto configs = 2;
+}
+
+message GetNotificationReply{
+    NotificationDto config = 1;
+}
+
+message NotificationDto{
+ 	string instance_namespace = 1;
+    string body = 2;
+    string title = 3;
+    bool canShowOnCustomerPortal = 4;
+    string display_name = 5;
+    string description = 6;
+}
 message GetConfigRequest {
     string consumer_id = 1;
 	string instance_namespace = 2;
@@ -301,7 +330,7 @@ message SharingRuleDto {
     SharingRoleDto role = 1;
     repeated string roles = 2;
     DataTreeLevelDto datatree_level = 3;
-    string permissions = 4;
+    repeated string permissions = 4;
     bool state_category = 5;
     repeated string state_categories = 6;
 }
@@ -614,6 +643,7 @@ message ActorRoleConfigDto {
     repeated string categories = 5;
     string unknown_actor_display_name = 6;
     string instance_namespace = 7;
+    bool is_selectable = 8;
 }
 
 message AppointmentConfigDto{
