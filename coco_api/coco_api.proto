@@ -46,9 +46,6 @@ service CocoApi {
   rpc GetAdtextConfig(GetConfigRequest) returns (GetAdtextReply);
 }
 
-  rpc GetAllNotifications(GetAllRequest) returns (GetAllNotificationsReply);
-  rpc GetNotification(GetSingleRequest) returns (GetNotificationReply);
-
 message GetSingleRequest {
     string consumer_id = 1;
 	string instance_namespace = 2;
