@@ -54,8 +54,8 @@ message GetAllRequest {
     string consumer_id = 1;
 }
 
-message GetAllNotificationsReply{
-    repeated NotificationDto configs = 2;
+message GetAllNotificationsReply {
+    repeated NotificationDto configs = 1;
 }
 
 message GetNotificationReply{
