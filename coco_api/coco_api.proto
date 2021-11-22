@@ -4,49 +4,49 @@ option csharp_namespace = "Coco.Api";
 import "google/protobuf/wrappers.proto";
 
 service CocoApi {
-  rpc GetPolicy (GetPolicyRequest) returns (GetPolicyReply);
-  rpc GetDataNode (GetDataNodeRequest) returns (GetDataNodeReply);
-  rpc GetStateflow (GetStateflowRequest) returns (GetStateflowReply);
-  rpc GetAllStateflows (GetAllStateflowsRequest) returns (GetAllStateflowsReply);
-  rpc GetAllDataNodes (GetAllDataNodesRequest) returns (GetAllDataNodesReply);
-  rpc GetManyDataNodes (GetManyDataNodesRequest) returns (GetManyDataNodesReply);
-  rpc GetAllNamespaces(GetAllNamespacesRequest) returns (GetAllNamespacesReply);
-  rpc GetNamespace(GetNamespaceRequest) returns (GetNamespaceReply);
-  rpc GetAllNotifications(GetAllRequest) returns (GetAllNotificationsReply);
-  rpc GetNotification(GetSingleRequest) returns (GetNotificationReply);
-  rpc GetAllPermissions(GetAllPermissionsRequest) returns (GetAllPermissionsReply);
-  rpc GetPermission(GetPermissionRequest) returns (GetPermissionReply);
-  rpc GetAllTags(GetAllTagsRequest) returns (GetAllTagsReply);
-  rpc GetTag(GetTagRequest) returns (GetTagReply);
-  rpc GetManyTags(GetManyTagsRequest) returns (GetManyTagsReply);
-  rpc GetAllTemplates(GetAllTemplatesRequest) returns (GetAllTemplatesReply);
-  rpc GetTemplate(GetTemplateRequest) returns (GetTemplateReply);
-  rpc GetAllTrackedActivities(GetAllTrackedActivitiesRequest) returns (GetAllTrackedActivitiesReply);
-  rpc GetTrackedActivity(GetTrackedActivityRequest) returns (GetTrackedActivityReply);
-  rpc GetManyEntityfeatures(GetManyEntityfeaturesRequest) returns (GetManyEntityfeaturesReply);
-  rpc GetDistributionChannel(GetDistributionChannelRequest) returns (GetDistributionChannelReply);
-  rpc GetAllDistributionChannels(GetAllDistributionChannelsRequest) returns (GetAllDistributionChannelsReply);
+  rpc GetPolicy (GetAllConfigRequest) returns (GetPolicyReply);
+  rpc GetDataNode (GetSingleConfigRequest) returns (GetDataNodeReply);
+  rpc GetStateflow (GetSingleConfigRequest) returns (GetStateflowReply);
+  rpc GetAllStateflows (GetAllConfigRequest) returns (GetAllStateflowsReply);
+  rpc GetAllDataNodes (GetAllConfigRequest) returns (GetAllDataNodesReply);
+  rpc GetManyDataNodes (GetManyConfigRequest) returns (GetManyDataNodesReply);
+  rpc GetAllNamespaces(GetAllConfigRequest) returns (GetAllNamespacesReply);
+  rpc GetNamespace(GetSingleConfigRequest) returns (GetNamespaceReply);
+  rpc GetAllNotifications(GetAllConfigRequest) returns (GetAllNotificationsReply);
+  rpc GetNotification(GetSingleConfigRequest) returns (GetNotificationReply);
+  rpc GetAllPermissions(GetAllConfigRequest) returns (GetAllPermissionsReply);
+  rpc GetPermission(GetSingleConfigRequest) returns (GetPermissionReply);
+  rpc GetAllTags(GetAllConfigRequest) returns (GetAllTagsReply);
+  rpc GetTag(GetSingleConfigRequest) returns (GetTagReply);
+  rpc GetManyTags(GetManyConfigRequest) returns (GetManyTagsReply);
+  rpc GetAllTemplates(GetAllConfigRequest) returns (GetAllTemplatesReply);
+  rpc GetTemplate(GetSingleConfigRequest) returns (GetTemplateReply);
+  rpc GetAllTrackedActivities(GetAllConfigRequest) returns (GetAllTrackedActivitiesReply);
+  rpc GetTrackedActivity(GetSingleConfigRequest) returns (GetTrackedActivityReply);
+  rpc GetManyEntityfeatures(GetManyConfigRequest) returns (GetManyEntityfeaturesReply);
+  rpc GetDistributionChannel(GetSingleConfigRequest) returns (GetDistributionChannelReply);
+  rpc GetAllDistributionChannels(GetAllConfigRequest) returns (GetAllDistributionChannelsReply);
   rpc GetAllVatCodes(GetTypesRequest) returns (GetAllVatCodesReply);
   rpc GetAllUnitOfMeasures(GetTypesRequest) returns (GetAllUnitOfMeasuresReply);
   rpc GetAllUnitOfMeasureGroups(GetTypesRequest) returns (GetAllUnitOfMeasureGroupsReply);
   rpc GetAllLocalizedDisplayNames(GetTypesRequest) returns (GetAllLocalizedDisplayNamesReply);
   rpc GetAllFieldDataTypes(GetTypesRequest) returns (GetAllFieldDataTypesReply);
   rpc GetAllfieldCalculatedTypes(GetTypesRequest) returns (GetAllfieldCalculatedTypesReply);
-  rpc GetWishConfig(GetConfigRequest) returns (GetWishConfigReply);
-  rpc GetCaseConfig(GetConfigRequest) returns (GetCaseConfigReply);
-  rpc GetConsentConfig(GetConfigRequest) returns (GetConsentConfigReply);
-  rpc GetActorConfig(GetConfigRequest) returns (GetActorConfigReply);
-  rpc GetActorRoleConfig(GetConfigRequest) returns (GetActorRoleConfigReply);
+  rpc GetWishConfig(GetSingleConfigRequest) returns (GetWishConfigReply);
+  rpc GetCaseConfig(GetSingleConfigRequest) returns (GetCaseConfigReply);
+  rpc GetConsentConfig(GetSingleConfigRequest) returns (GetConsentConfigReply);
+  rpc GetActorConfig(GetSingleConfigRequest) returns (GetActorConfigReply);
+  rpc GetActorRoleConfig(GetSingleConfigRequest) returns (GetActorRoleConfigReply);
   rpc GetManyActorRolesConfig(GetManyConfigRequest) returns (GetManyActorRolesConfigReply);
-  rpc GetAppointmentConfig(GetConfigRequest) returns (GetAppointmentConfigReply);
-  rpc GetCampaignConfig(GetConfigRequest) returns (GetCampaignConfigReply);
-  rpc GetEstateConfig(GetConfigRequest) returns (GetEstateConfigReply);
-  rpc GeIeUrlConfig(GetConfigRequest) returns (GeIeUrlConfigReply);
-  rpc GetLawRegulationConfig(GetConfigRequest) returns (GetLawRegulationConfigReply);
-  rpc GetToDoConfig(GetConfigRequest) returns (GetToDoConfigReply);
-  rpc GetAdtextConfig(GetConfigRequest) returns (GetAdtextReply);
-  rpc GetThemeConfig(GetConfigRequest) returns (GetThemeConfigReply);
-  rpc GetContentConfig(GetConfigRequest) returns (GetContentConfigReply);
+  rpc GetAppointmentConfig(GetSingleConfigRequest) returns (GetAppointmentConfigReply);
+  rpc GetCampaignConfig(GetSingleConfigRequest) returns (GetCampaignConfigReply);
+  rpc GetEstateConfig(GetSingleConfigRequest) returns (GetEstateConfigReply);
+  rpc GeIeUrlConfig(GetSingleConfigRequest) returns (GeIeUrlConfigReply);
+  rpc GetLawRegulationConfig(GetSingleConfigRequest) returns (GetLawRegulationConfigReply);
+  rpc GetToDoConfig(GetSingleConfigRequest) returns (GetToDoConfigReply);
+  rpc GetAdtextConfig(GetSingleConfigRequest) returns (GetAdtextReply);
+  rpc GetThemeConfig(GetSingleConfigRequest) returns (GetThemeConfigReply);
+  rpc GetContentConfig(GetSingleConfigRequest) returns (GetContentConfigReply);
 }
 
 message GetThemeConfigReply {
@@ -57,13 +57,6 @@ message GetContentConfigReply{
     string json = 1;
 }
 
-message GetSingleRequest {
-    string consumer_id = 1;
-	string instance_namespace = 2;
-}
-message GetAllRequest {
-    string consumer_id = 1;
-}
 
 message GetAllNotificationsReply {
     repeated NotificationDto configs = 1;
@@ -82,13 +75,20 @@ message NotificationDto{
     string description = 6;
     string audience_level = 7;
 }
-message GetConfigRequest {
+
+message GetAllConfigRequest {
     string consumer_id = 1;
-	string instance_namespace = 2;
 }
+
+
+message GetSingleConfigRequest {
+    string consumer_id = 1;
+	string namespace = 2;
+}
+
 message GetManyConfigRequest {
     string consumer_id = 1;
-	repeated string instance_namespaces = 2;
+	repeated string namespaces = 2;
 }
 
 message GetTypesRequest {
@@ -146,18 +146,8 @@ message VatCodeDto {
     double vat_percentage = 3;
 }
 
-
-message GetAllDistributionChannelsRequest {
-	string consumer_id = 1;
-}
-
 message GetAllDistributionChannelsReply {
 	repeated DistributionChannelDto configs = 1;
-}
-
-message GetDistributionChannelRequest {
-	string consumer_id = 1;
-	string instance_namespace = 2;
 }
 
 message GetDistributionChannelReply {
@@ -189,15 +179,10 @@ message DistributionChannelCaseTypeDto {
     string sold_reason = 4;
     bool manually_controlled = 5;
 }
-message GetManyEntityfeaturesRequest {
-	string consumer_id = 1;
-	repeated string instance_namespaces = 2;
-}
 
 message GetManyEntityfeaturesReply {
 	repeated EntityfeatureDto configs = 1;
 }
-
 
 message EntityfeatureDto {
     string instance_namespace = 1;
@@ -208,18 +193,10 @@ message EntityfeatureDto {
 }
 
 
-message GetAllTemplatesRequest {
-	string consumer_id = 1;
-}
-
 message GetAllTemplatesReply {
 	repeated TemplateDto configs = 1;
 }
 
-message GetTemplateRequest {
-	string consumer_id = 1;
-	string instance_namespace = 2;
-}
 
 message GetTemplateReply {
 	TemplateDto config = 1;
@@ -239,23 +216,13 @@ message TemplateDatanodeDto {
     repeated string uis = 3;
 }
 
-message GetAllTrackedActivitiesRequest {
-	string consumer_id = 1;
-}
-
 message GetAllTrackedActivitiesReply {
 	repeated TrackedActivityDto configs = 1;
-}
-
-message GetTrackedActivityRequest {
-	string consumer_id = 1;
-	string instance_namespace = 2;
 }
 
 message GetTrackedActivityReply {
 	TrackedActivityDto config = 1;
 }
-
 
 message TrackedActivityDto {
     string instance_namespace = 1;
@@ -275,29 +242,14 @@ message TrackedActivityDto {
 	bool updateLatest_always = 17;
 }
 
-
-message GetAllTagsRequest {
-	string consumer_id = 1;
-}
-
 message GetAllTagsReply {
 	repeated TagDto configs = 1;
-}
-
-message GetManyTagsRequest {
-	string consumer_id = 1;
-	repeated string instance_namespaces = 2;
 }
 
 message GetManyTagsReply {
 	repeated TagDto configs = 1;
 }
 
-
-message GetTagRequest {
-	string consumer_id = 1;
-	string instance_namespace = 2;
-}
 
 message GetTagReply {
 	TagDto config = 1;
@@ -310,18 +262,10 @@ string description = 3;
 string icon_name = 4;
 }
 
-message GetAllPermissionsRequest {
-	string consumer_id = 1;
-}
-
 message GetAllPermissionsReply {
 	repeated PermissionDto configs = 1;
 }
 
-message GetPermissionRequest {
-	string consumer_id = 1;
-	string instance_namespace = 2;
-}
 
 message GetPermissionReply {
 	PermissionDto config = 1;
@@ -384,17 +328,9 @@ enum InheritanceLevelDto {
     Inheritance_Parent = 3;
 }
 
-message GetAllNamespacesRequest {
-	string consumer_id = 1;
-}
 
 message GetAllNamespacesReply {
 	repeated NamespaceDto configs = 1;
-}
-
-message GetNamespaceRequest {
-	string consumer_id = 1;
-	string instance_namespace = 2;
 }
 
 message GetNamespaceReply {
@@ -409,18 +345,9 @@ message NamespaceDto {
     string icon = 6;
 }
 
-message GetAllStateflowsRequest {
-	string consumer_id = 1;
-}
-
 message GetAllStateflowsReply{
 	string consumer_id = 1;
 	repeated StateflowDto configs = 2;
-}
-
-message GetStateflowRequest {
-	string consumer_id = 1;
-	string stateflow_namespace = 2;
 }
 
 message StateflowDto {
@@ -461,34 +388,18 @@ message GetStateflowReply {
     StateflowDto config = 1;
 }
 
-message GetAllDataNodesRequest {
-	string consumer_id = 1;
-}
 
 message GetAllDataNodesReply {
     repeated DatanodeCocoDto configs = 1;
 }
 
-message GetManyDataNodesRequest {
-	string consumer_id = 1;
-    repeated string instance_namespaces = 2;
-}
 
 message GetManyDataNodesReply {
     repeated DatanodeCocoDto configs = 1;
 }
 
-message GetDataNodeRequest {
-	string consumer_id = 1;
-	string data_node_namespace = 2;
-}
-
 message GetDataNodeReply {
     DatanodeCocoDto config = 1;
-}
-
-message GetPolicyRequest {
-	string consumer_id = 1;
 }
 
 message GetPolicyReply {
@@ -726,6 +637,14 @@ message EstateConfigDto {
 message IeUrlConfigDto {
     string url_template= 1;
     string url_type = 2;
+    string default_channel_namespace = 3;
+    repeated IeUrlChannelDto channels = 4;
+}
+
+message IeUrlChannelDto {
+    string channel_namespace = 1;
+    string icon_name = 2;
+    string display_name = 3;
 }
 message LawRegulationConfigDto {
     repeated LawRegulationItemDto lawregulations = 1;
@@ -783,6 +702,8 @@ message WishConfigDto {
     string basic_description_usage = 6;
     MatchSettingsDto match_settings = 7;
     repeated string entityfeature_type_references = 8;
+    string living_area_range_namespace = 9;
+    string price_range_namespace = 10;
     
 }
 
