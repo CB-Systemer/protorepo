@@ -34,6 +34,7 @@ service CocoApi {
   rpc GetAllfieldCalculatedTypes(GetTypesRequest) returns (GetAllfieldCalculatedTypesReply);
   rpc GetWishConfig(GetConfigRequest) returns (GetWishConfigReply);
   rpc GetCaseConfig(GetConfigRequest) returns (GetCaseConfigReply);
+  rpc GetConsentConfig(GetConfigRequest) returns (GetConsentConfigReply);
   rpc GetActorConfig(GetConfigRequest) returns (GetActorConfigReply);
   rpc GetActorRoleConfig(GetConfigRequest) returns (GetActorRoleConfigReply);
   rpc GetManyActorRolesConfig(GetManyConfigRequest) returns (GetManyActorRolesConfigReply);
@@ -44,6 +45,16 @@ service CocoApi {
   rpc GetLawRegulationConfig(GetConfigRequest) returns (GetLawRegulationConfigReply);
   rpc GetToDoConfig(GetConfigRequest) returns (GetToDoConfigReply);
   rpc GetAdtextConfig(GetConfigRequest) returns (GetAdtextReply);
+  rpc GetThemeConfig(GetConfigRequest) returns (GetThemeConfigReply);
+  rpc GetContentConfig(GetConfigRequest) returns (GetContentConfigReply);
+}
+
+message GetThemeConfigReply {
+    string json;
+}
+
+message GetContentConfigReply{
+    string json;
 }
 
 message GetSingleRequest {
@@ -455,7 +466,7 @@ message GetAllDataNodesRequest {
 }
 
 message GetAllDataNodesReply {
-    repeated DataNodoCocoDto configs = 1;
+    repeated DatanodeCocoDto configs = 1;
 }
 
 message GetManyDataNodesRequest {
@@ -464,7 +475,7 @@ message GetManyDataNodesRequest {
 }
 
 message GetManyDataNodesReply {
-    repeated DataNodoCocoDto configs = 1;
+    repeated DatanodeCocoDto configs = 1;
 }
 
 message GetDataNodeRequest {
@@ -473,7 +484,7 @@ message GetDataNodeRequest {
 }
 
 message GetDataNodeReply {
-    DataNodoCocoDto config = 1;
+    DatanodeCocoDto config = 1;
 }
 
 message GetPolicyRequest {
@@ -596,7 +607,7 @@ message NotificationCocoDto {
     bool send_to_primary_tenant_employees = 8;
     repeated string executing_actor_namespace_filters = 9;
 }
-message DataNodoCocoDto {
+message DatanodeCocoDto {
     AllowedSharingLevelsDto allowed_sharing_levels = 1;
     bool can_prepare_public_profile = 2;
     bool create_as_hidden = 3;
@@ -679,6 +690,33 @@ message CaseConfigDto {
 
 message GetCaseConfigReply {
     CaseConfigDto config = 1;
+}
+
+message ConsentConfigDto {
+    string title = 1;
+    string long_description = 2;
+    string short_description = 3;
+    ConsentScopeCocoDto consent_scope = 4;
+    bool is_rejectable = 5;
+    bool is_checked_by_default = 6;
+    repeated ConsentAccessTypeDto consent_access_types = 7; 
+}
+
+message ConsentAccessTypeDto {
+    string instance_namespace = 1;
+    bool is_active = 2;
+    string display_name = 3;
+    string icon_name = 4;
+}
+
+enum ConsentScopeCocoDto {
+    TenantLevel = 0;
+    ResourceGroupLevel = 1;
+    Scoped = 2;
+}
+
+message GetConsentConfigReply {
+    ConsentConfigDto config = 1;
 }
 
 message EstateConfigDto {
