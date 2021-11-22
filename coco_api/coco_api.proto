@@ -610,7 +610,8 @@ message ConsentConfigDto {
     ConsentScopeCocoDto consent_scope = 4;
     bool is_rejectable = 5;
     bool is_checked_by_default = 6;
-    repeated ConsentAccessTypeDto consent_access_types = 7; 
+    repeated ConsentAccessTypeDto consent_access_types = 7;
+    int32 version = 8;
 }
 
 message ConsentAccessTypeDto {
