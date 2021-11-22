@@ -5,11 +5,11 @@ import "google/protobuf/wrappers.proto";
 
 service CocoApi {
   rpc GetPolicy (GetAllConfigRequest) returns (GetPolicyReply);
-  rpc GetDataNode (GetSingleConfigRequest) returns (GetDataNodeReply);
+  rpc GetDataNode (GetSingleDatanodeRequest) returns (GetDataNodeReply);
   rpc GetStateflow (GetSingleConfigRequest) returns (GetStateflowReply);
   rpc GetAllStateflows (GetAllConfigRequest) returns (GetAllStateflowsReply);
-  rpc GetAllDataNodes (GetAllConfigRequest) returns (GetAllDataNodesReply);
-  rpc GetManyDataNodes (GetManyConfigRequest) returns (GetManyDataNodesReply);
+  rpc GetAllDataNodes (GetAllDatanodesRequest) returns (GetAllDataNodesReply);
+  rpc GetManyDataNodes (GetManyDatanodesRequest) returns (GetManyDataNodesReply);
   rpc GetAllNamespaces(GetAllConfigRequest) returns (GetAllNamespacesReply);
   rpc GetNamespace(GetSingleConfigRequest) returns (GetNamespaceReply);
   rpc GetAllNotifications(GetAllConfigRequest) returns (GetAllNotificationsReply);
@@ -47,6 +47,23 @@ service CocoApi {
   rpc GetAdtextConfig(GetSingleConfigRequest) returns (GetAdtextReply);
   rpc GetThemeConfig(GetSingleConfigRequest) returns (GetThemeConfigReply);
   rpc GetContentConfig(GetSingleConfigRequest) returns (GetContentConfigReply);
+}
+
+message GetAllDatanodesRequest {
+    string consumer_id = 1;
+    string actor_id = 2;
+}
+
+message GetManyDatanodesRequest{
+    string consumer_id = 1;
+    repeated string namespaces = 2;
+    string actor_id = 3;
+}
+
+message GetSingleDatanodeRequest{
+    string consumer_id = 1;
+    string namespace = 2;
+    string actor_id = 3;
 }
 
 message GetThemeConfigReply {
