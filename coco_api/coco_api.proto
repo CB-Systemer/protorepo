@@ -50,11 +50,11 @@ service CocoApi {
 }
 
 message GetThemeConfigReply {
-    string json;
+    string json = 1;
 }
 
 message GetContentConfigReply{
-    string json;
+    string json = 1;
 }
 
 message GetSingleRequest {
