@@ -48,6 +48,7 @@ service CocoApi {
   rpc GetAdtextConfig(GetSingleConfigRequest) returns (GetAdtextReply);
   rpc GetThemeConfig(GetSingleConfigRequest) returns (GetThemeConfigReply);
   rpc GetContentConfig(GetSingleConfigRequest) returns (GetContentConfigReply);
+  rpc GetAllIcons(GetAllConfigRequest) returns (GetAllIconsReply);
 }
 
 message GetAllDatanodesRequest {
@@ -351,6 +352,14 @@ enum InheritanceLevelDto {
 }
 
 
+message GetAllIconsReply {
+    repeated IconDto icons = 1;
+}
+
+message IconDto {
+    string icon_name = 1;
+    string icon_html = 2;
+}
 message GetAllNamespacesReply {
 	repeated NamespaceDto configs = 1;
 }
@@ -364,7 +373,6 @@ message NamespaceDto {
     string display_name = 2;
     string instance_namespace= 4;
     string icon_name= 5;
-    string icon = 6;
 }
 
 message GetAllStateflowsReply{
