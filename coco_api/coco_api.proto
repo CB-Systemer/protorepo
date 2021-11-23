@@ -569,7 +569,7 @@ message DatanodeCocoDto {
     map<string, string> additional_properties = 18;
     google.protobuf.StringValue tracked_activity_namespace = 19;
     bool is_navigable = 20;
-    string specifics_json = 21;
+    google.protobuf.StringValue specifics_json = 21;
 }
 
 message AllowedSharingLevelsDto {
