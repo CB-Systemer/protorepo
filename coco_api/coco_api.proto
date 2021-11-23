@@ -24,6 +24,7 @@ service CocoApi {
   rpc GetAllTrackedActivities(GetAllConfigRequest) returns (GetAllTrackedActivitiesReply);
   rpc GetTrackedActivity(GetSingleConfigRequest) returns (GetTrackedActivityReply);
   rpc GetManyEntityfeatures(GetManyConfigRequest) returns (GetManyEntityfeaturesReply);
+  rpc GetAllEntityfeatures(GetAllConfigRequest) returns (GetAllEntityfeaturesReply);
   rpc GetDistributionChannel(GetSingleConfigRequest) returns (GetDistributionChannelReply);
   rpc GetAllDistributionChannels(GetAllConfigRequest) returns (GetAllDistributionChannelsReply);
   rpc GetAllVatCodes(GetTypesRequest) returns (GetAllVatCodesReply);
@@ -198,6 +199,10 @@ message DistributionChannelCaseTypeDto {
 }
 
 message GetManyEntityfeaturesReply {
+	repeated EntityfeatureDto configs = 1;
+}
+
+message GetAllEntityfeaturesReply {
 	repeated EntityfeatureDto configs = 1;
 }
 
