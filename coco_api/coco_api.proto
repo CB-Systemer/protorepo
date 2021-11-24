@@ -70,11 +70,15 @@ message GetSingleDatanodeRequest{
 }
 
 message GetAllAccessReply {
-    string json = 1;
+    repeated AccessDto configs = 1;
 }
 
 message AccessDto {
-    
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 2;
+    double priority = 3;
 }
 
 message GetThemeConfigReply {
