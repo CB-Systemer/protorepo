@@ -28,6 +28,8 @@ message ActorRecipientInfo {
 
 message SendEmailMessageRequest {
   repeated ActorRecipient actor_recipients = 1;
+  repeated ActorRecipient actor_cc = 10;
+  repeated ActorRecipient actor_bcc = 11;
   string content = 2;
   string subject = 3;
   bool dry_run = 4;

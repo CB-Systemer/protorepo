@@ -7,7 +7,9 @@ service RecomEmailApi {
 }
 
 message SendEmailRequest {
-  repeated EmailRecipient email_addresses = 1;
+  repeated EmailRecipient to_email_addresses = 1;
+  repeated EmailRecipient cc_email_addresses = 7;
+  repeated EmailRecipient bcc_email_addresses = 8;
   string content = 2;
   string subject = 3;
   string actor_context_actor_id = 4;
