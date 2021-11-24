@@ -8,6 +8,7 @@ service CocoApi {
   rpc GetDataNode (GetSingleDatanodeRequest) returns (GetDataNodeReply);
   rpc GetStateflow (GetSingleConfigRequest) returns (GetStateflowReply);
   rpc GetAllStateflows (GetAllConfigRequest) returns (GetAllStateflowsReply);
+  rpc GetAllAccess (GetAllConfigRequest) returns (GetAllAccessReply);
   rpc GetAllDataNodes (GetAllDatanodesRequest) returns (GetAllDataNodesReply);
   rpc GetManyDataNodes (GetManyDatanodesRequest) returns (GetManyDataNodesReply);
   rpc GetAllNamespaces(GetAllConfigRequest) returns (GetAllNamespacesReply);
@@ -66,6 +67,14 @@ message GetSingleDatanodeRequest{
     string consumer_id = 1;
     string namespace = 2;
     string actor_id = 3;
+}
+
+message GetAllAccessReply {
+    string json = 1;
+}
+
+message AccessDto {
+    
 }
 
 message GetThemeConfigReply {
