@@ -73,12 +73,12 @@ message GetAllAccessReply {
     repeated AccessDto configs = 1;
 }
 
-message AccessDto {
+message AccessConfigDto {
     string instance_namespace = 1;
     string display_name = 2;
     string description = 3;
-    string icon_name = 2;
-    double priority = 3;
+    string icon_name = 4;
+    double priority = 5;
 }
 
 message GetThemeConfigReply {
