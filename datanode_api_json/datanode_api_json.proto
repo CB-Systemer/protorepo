@@ -3,6 +3,7 @@ option csharp_namespace = "Cbs.DataNodes.Api.Json";
 
 service JsonApi {
 	rpc GetPrimaryJson(GetPrimaryJsonRequest) returns (GetPrimaryJsonResponse);
+	rpc GetPersonalSettings(GetPersonalSettingsRequest) returns (GetPersonalSettingsResponse);
 }
 
 message GetPrimaryJsonRequest {
@@ -13,4 +14,17 @@ message GetPrimaryJsonRequest {
 
 message GetPrimaryJsonResponse { 
 	string json = 1;
+}
+
+message GetPersonalSettingsRequest{
+	string actorId = 1;
+}
+
+message GetPersonalSettingsResponse{
+	EmailAccountSettingsDto emailAccountSettings = 1;
+}
+
+message EmailAccountSettingsDto{
+	string extensionId = 1;
+    string primaryEmailAccountId = 2;
 }
