@@ -50,6 +50,14 @@ service CocoApi {
   rpc GetThemeConfig(GetSingleConfigRequest) returns (GetThemeConfigReply);
   rpc GetContentConfig(GetSingleConfigRequest) returns (GetContentConfigReply);
   rpc GetAllIcons(GetAllConfigRequest) returns (GetAllIconsReply);
+  rpc GetImageTag(GetImageTagRequest) returns (GetImageTagReply);
+}
+
+message GetImageTagRequest {
+}
+
+message GetImageTagReply {
+    string image = 1;
 }
 
 message GetAllDatanodesRequest {
