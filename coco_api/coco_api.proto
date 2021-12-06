@@ -575,7 +575,7 @@ message DatanodeCocoDto {
     bool create_as_hidden = 3;
     string description = 4;
     string display_name = 5;
-    string handler_namespace = 6;
+    google.protobuf.StringValue handler_namespace = 6;
     string icon_name = 17;
     bool include_in_match_engine = 7;
     bool include_in_public_profile = 8;
