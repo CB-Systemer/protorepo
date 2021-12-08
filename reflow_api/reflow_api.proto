@@ -79,6 +79,7 @@ message ResolvePipelineReply {
 }
 
 message ResolvedAction {
+  string id = 1;
 	string action_namespace = 4;
 	double priority = 5;
 	bool async = 6;
