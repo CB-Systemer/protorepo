@@ -51,6 +51,31 @@ service CocoApi {
   rpc GetContentConfig(GetSingleConfigRequest) returns (GetContentConfigReply);
   rpc GetAllIcons(GetAllConfigRequest) returns (GetAllIconsReply);
   rpc GetImageTag(GetImageTagRequest) returns (GetImageTagReply);
+  rpc GetReflowConfig(GetSingleConfigRequest) returns (GetReflowConfigReply);
+}
+
+message GetReflowConfigReply {
+    repeated ReflowDto reflows = 1;
+}
+
+message ReflowDto {
+    string target_namespace = 1;
+    repeated ReflowPipelineDto pipelines = 2;
+}
+
+message ReflowPipelineDto {
+    string name = 1;
+    repeated ReflowActionDto actions = 2;
+}
+
+message ReflowActionDto {
+  string id = 1;
+  string actionNamespace = 2;
+  double priority = 3;
+  string modifier = 4;
+  bool async = 5;
+  map<string, string> params = 6;
+  map<string, string> ui_params = 7;
 }
 
 message GetImageTagRequest {
