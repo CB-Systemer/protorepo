@@ -52,6 +52,10 @@ service CocoApi {
   rpc GetAllIcons(GetAllConfigRequest) returns (GetAllIconsReply);
   rpc GetImageTag(GetImageTagRequest) returns (GetImageTagReply);
   rpc GetReflowConfig(GetSingleConfigRequest) returns (GetReflowConfigReply);
+
+  rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
+  rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
+  rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
 }
 
 message GetReflowConfigReply {
@@ -338,6 +342,33 @@ message GetAllPermissionsReply {
 
 message GetPermissionReply {
 	PermissionDto config = 1;
+}
+
+message GetConfigNamesRequest {
+
+}
+
+message GetConfigNamesReply {
+    repeated string configName = 1;
+}
+
+
+message GetConsumerConfigNameRequest {
+    string id = 1;
+}
+
+message GetConsumerConfigNameReply {
+    string configName = 1;
+}
+ 
+message SetConsumerConfigNameRequest {
+    string id = 1;
+    string configName = 2;
+}
+
+message SetConsumerConfigNameReply {
+    bool success = 1;
+    string message = 2;
 }
 
 message PermissionDto {
