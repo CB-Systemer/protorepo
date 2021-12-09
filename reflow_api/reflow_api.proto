@@ -66,6 +66,7 @@ message PreviewAction {
 	string modifier = 8;
 	map<string, string> params = 9;
 	map<string, string> ui_params = 10;
+	string id = 11;
 }
 
 message ResolvePipelineRequest {
@@ -79,7 +80,7 @@ message ResolvePipelineReply {
 }
 
 message ResolvedAction {
-  string id = 1;
+    string id = 1;
 	string action_namespace = 4;
 	double priority = 5;
 	bool async = 6;
