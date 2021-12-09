@@ -20,13 +20,15 @@ message GetHierachyReply {
   string rootOrgId = 6;
 }
 
+
 message ResourceGroupDto{
 	string id = 1;
 	string displayName = 2;
 	string namespace = 3;	
 	string tenantId = 4;
-	repeated ApplicationDto applications = 5;
-	repeated ChainMemberDto chainMembers = 6;
+	string configuration = 5;
+	repeated ApplicationDto applications = 6;
+	repeated ChainMemberDto chainMembers = 7;
 }
 
 message ApplicationDto{
