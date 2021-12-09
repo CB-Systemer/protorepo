@@ -313,6 +313,7 @@ message TrackedActivityDto {
 	int32 update_latest_time_window = 15;
 	repeated string index_on_datanode_namespaces = 16;
 	bool updateLatest_always = 17;
+    NotificationEventsDto notification_settings = 18;
 }
 
 message GetAllTagsReply {
@@ -607,14 +608,14 @@ enum FieldValueTypeDto
     }
 
 
-message NotificationSettingsDto {
-    NotificationCocoDto commit = 1;
-    NotificationCocoDto view = 2;
-    NotificationCocoDto update = 3;
-    NotificationCocoDto delete = 4;
+message NotificationEventsDto {
+    NotificationEventSettingsDto commit = 1;
+    NotificationEventSettingsDto view = 2;
+    NotificationEventSettingsDto update = 3;
+    NotificationEventSettingsDto delete = 4;
 }
 
-message NotificationCocoDto {
+message NotificationEventSettingsDto {
     bool first_only = 1;
     string namespace = 2;
     bool send_to_executing_actor = 3;
@@ -640,7 +641,7 @@ message DatanodeCocoDto {
     bool is_defining_scope = 16;
     LevelHandlingDto level_handling = 11;
     repeated ManagedFieldDto managed_fields = 12;
-    NotificationSettingsDto notification_settings = 13;
+    NotificationEventsDto notification_settings = 13;
     string state_flow_namespace = 14;
     bool suppress_scope_update = 15;
     map<string, string> additional_properties = 18;
