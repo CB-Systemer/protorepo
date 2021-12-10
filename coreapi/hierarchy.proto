@@ -21,23 +21,25 @@ message GetHierachyReply {
 }
 
 
-message ResourceGroupDto{
+message ResourceGroupDto {
 	string id = 1;
 	string displayName = 2;
-	string namespace = 3;	
-	string tenantId = 4;
-	string configuration = 5;
-	repeated ApplicationDto applications = 6;
-	repeated ChainMemberDto chainMembers = 7;
+	string externalId = 3;
+	string namespace = 4;	
+	string tenantId = 5;
+	string configuration = 6;
+	int32 applicationCount = 7;
+	repeated ApplicationDto applications = 8;
+	repeated ChainMemberDto chainMembers = 9;
 }
 
-message ApplicationDto{
+message ApplicationDto {
 	string id = 1;
 	string displayName = 2;
 	string namespace = 3;
 }
 
-message ChainMemberDto{
+message ChainMemberDto {
 	string id = 1;
 	string displayName = 2;
 }
@@ -52,7 +54,7 @@ message GetScopeNamespaceRequest {
   string scopeId = 1;
 }
 
-message GetScopeNamespaceReply{
+message GetScopeNamespaceReply {
 	string scopeId = 1;
 	string scopeNamespace = 2;
 }
