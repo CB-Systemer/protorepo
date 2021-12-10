@@ -20,7 +20,6 @@ message GetHierachyReply {
   string rootOrgId = 6;
 }
 
-
 message ResourceGroupDto {
 	string id = 1;
 	string displayName = 2;
@@ -33,13 +32,17 @@ message ResourceGroupDto {
 	repeated ChainMemberDto chainMembers = 9;
 }
 
-message ApplicationDto {
+message ApplicationDto{
 	string id = 1;
 	string displayName = 2;
-	string namespace = 3;
+	google.protobuf.StringValue namespace = 3;
+	google.protobuf.StringValue tenant_id = 4;
+	google.protobuf.StringValue tenant_display_name = 5;
+	google.protobuf.StringValue resource_group_id = 6;
+	google.protobuf.StringValue resource_group_display_name = 7;
 }
 
-message ChainMemberDto {
+message ChainMemberDto{
 	string id = 1;
 	string displayName = 2;
 }
