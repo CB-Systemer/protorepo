@@ -625,7 +625,7 @@ message NotificationEventSettingsDto {
     bool send_to_tenant_employees = 7;
     bool send_to_primary_tenant_employees = 8;
     repeated string executing_actor_namespace_filters = 9;
-    string navigation_namespace = 10;
+    google.protobuf.StringValue navigation_namespace = 10;
 }
 message DatanodeCocoDto {
     AllowedSharingLevelsDto allowed_sharing_levels = 1;
