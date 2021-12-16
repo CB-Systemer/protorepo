@@ -15,6 +15,8 @@ service CocoApi {
   rpc GetNamespace(GetSingleConfigRequest) returns (GetNamespaceReply);
   rpc GetAllNotifications(GetAllConfigRequest) returns (GetAllNotificationsReply);
   rpc GetNotification(GetSingleConfigRequest) returns (GetNotificationReply);
+  rpc GetAllCountries(GetAllConfigRequest) returns (GetAllCountriesReply);
+  rpc GetCountry(GetSingleConfigRequest) returns (GetCountryReply);
   rpc GetAllPermissions(GetAllConfigRequest) returns (GetAllPermissionsReply);
   rpc GetPermission(GetSingleConfigRequest) returns (GetPermissionReply);
   rpc GetAllTags(GetAllConfigRequest) returns (GetAllTagsReply);
@@ -136,6 +138,24 @@ message GetNotificationReply{
 }
 
 message NotificationDto{
+ 	string instance_namespace = 1;
+    string body = 2;
+    string title = 3;
+    bool canShowOnCustomerPortal = 4;
+    string display_name = 5;
+    string description = 6;
+    string audience_level = 7;
+}
+
+message GetAllCountriesReply {
+    repeated CountryDto configs = 1;
+}
+
+message GetCountryReply{
+    CountryDto config = 1;
+}
+
+message CountryDto{
  	string instance_namespace = 1;
     string body = 2;
     string title = 3;
