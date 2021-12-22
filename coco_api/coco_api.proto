@@ -10,6 +10,7 @@ service CocoApi {
   rpc GetAllStateflows (GetAllConfigRequest) returns (GetAllStateflowsReply);
   rpc GetAllAccess (GetAllConfigRequest) returns (GetAllAccessReply);
   rpc GetAllDataNodes (GetAllDatanodesRequest) returns (GetAllDataNodesReply);
+  rpc GetAllDataNodesByConfigName (GetAllDatanodesByConfigNameRequest) returns (GetAllDataNodesReply);
   rpc GetManyDataNodes (GetManyDatanodesRequest) returns (GetManyDataNodesReply);
   rpc GetAllNamespaces(GetAllConfigRequest) returns (GetAllNamespacesReply);
   rpc GetNamespace(GetSingleConfigRequest) returns (GetNamespaceReply);
@@ -89,6 +90,10 @@ message GetImageTagRequest {
 
 message GetImageTagReply {
     string image = 1;
+}
+
+message GetAllDatanodesByConfigNameRequest {
+    string config_name = 1;
 }
 
 message GetAllDatanodesRequest {
