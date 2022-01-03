@@ -497,7 +497,6 @@ message StateflowDto {
     string stateflow_coco_version = 4;
     repeated StateRepresentationDto states = 5;
     bool automatic_state_reasoning = 6;
-    string pipeline_identifier = 7;
 }
 
 message StateRepresentationDto {
@@ -517,6 +516,7 @@ message StateTriggerDto {
     string description =4;
     bool is_reentrant =6;
     repeated StateTriggerEndResultOutcomeDto  end_result_outcomes = 7;
+    string pipeline_identifier = 8;
 }
 
 message StateTriggerEndResultOutcomeDto
