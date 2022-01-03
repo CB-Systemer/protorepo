@@ -67,6 +67,7 @@ message PreviewAction {
 	map<string, string> params = 9;
 	map<string, string> ui_params = 10;
 	string id = 11;
+  bool continue_on_error = 12;
 }
 
 message ResolvePipelineRequest {
@@ -80,10 +81,11 @@ message ResolvePipelineReply {
 }
 
 message ResolvedAction {
-    string id = 1;
+  string id = 1;
 	string action_namespace = 4;
 	double priority = 5;
 	bool async = 6;
 	map<string, string> params = 7;
 	map<string, string> ui_params = 8;
+  bool continue_on_error = 9;
 }
