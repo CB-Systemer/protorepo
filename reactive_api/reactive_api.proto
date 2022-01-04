@@ -25,6 +25,7 @@ message ReactiveAction {
   bool is_async = 2;
   string id = 3;
   bool continue_on_error = 4;
+  map<string, string> messages = 5;
 }
 
 message RunPipelineReply {

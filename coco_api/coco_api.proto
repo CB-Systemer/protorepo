@@ -84,6 +84,7 @@ message ReflowActionDto {
   string params = 6;
   string ui_params = 7;
   bool continue_on_error = 8;
+  string messages = 9;
 }
 
 message GetImageTagRequest {
