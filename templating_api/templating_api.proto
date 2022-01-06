@@ -127,6 +127,8 @@ message PreviewTemplateRequest {
 
 message PreviewTemplateReply {
   string result = 1;
+  string errorMessage = 2;
+  int32 errorCode = 3;
 }
 
 message DownloadTemplateRequest {
