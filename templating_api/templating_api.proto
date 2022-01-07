@@ -105,6 +105,8 @@ message GetTemplateReply {
   repeated TemplatePreview previews = 8;
   string raw = 6;
   string displayName = 7;
+  string errorMessage = 8;
+  int32 errorCode = 9;
 }
 
 message TemplateSource {
