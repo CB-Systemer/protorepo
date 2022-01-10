@@ -937,7 +937,7 @@ message VatRateCocoDto {
     bool active = 3;
     int32 priority = 4;
     bool default = 5;
-    VatDefinition vatDefinition = 6;
+    VatDefinitionCocoDto vatDefinition = 6;
 }
 
 message VatDefinitionCocoDto {
