@@ -55,6 +55,7 @@ service CocoApi {
   rpc GetAllIcons(GetAllConfigRequest) returns (GetAllIconsReply);
   rpc GetImageTag(GetImageTagRequest) returns (GetImageTagReply);
   rpc GetReflowConfig(GetSingleConfigRequest) returns (GetReflowConfigReply);
+  rpc GetAllPriceUnits(GetAllConfigRequest) returns (GetAllPriceUnitsReply);
 
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
@@ -536,13 +537,16 @@ message GetAllDataNodesReply {
     repeated DatanodeCocoDto configs = 1;
 }
 
-
 message GetManyDataNodesReply {
     repeated DatanodeCocoDto configs = 1;
 }
 
 message GetDataNodeReply {
     DatanodeCocoDto config = 1;
+}
+
+message GetAllPriceUnitsReply {
+    repeated PriceUnitCocoDto priceUnits = 1;
 }
 
 message GetPolicyReply {
@@ -881,4 +885,10 @@ message MatchSettingsDto {
     bool instant = 1;
     bool daily = 2;
     bool weekly = 3;
+}
+
+message PriceUnitCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    int32 priority = 3;
 }
