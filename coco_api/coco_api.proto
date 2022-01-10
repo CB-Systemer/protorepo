@@ -56,6 +56,7 @@ service CocoApi {
   rpc GetImageTag(GetImageTagRequest) returns (GetImageTagReply);
   rpc GetReflowConfig(GetSingleConfigRequest) returns (GetReflowConfigReply);
   rpc GetAllPriceUnits(GetAllConfigRequest) returns (GetAllPriceUnitsReply);
+  rpc GetAllProductTypes(GetAllConfigRequest) returns (GetAllProductTypesReply);
 
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
@@ -549,6 +550,10 @@ message GetAllPriceUnitsReply {
     repeated PriceUnitCocoDto priceUnits = 1;
 }
 
+message GetAllProductTypesReply {
+    repeated ProductTypeCocoDto productTypes = 1;
+}
+
 message GetPolicyReply {
   map<string, string> policies = 1;
 }
@@ -891,4 +896,19 @@ message PriceUnitCocoDto {
     string namespace = 1;
     string displayName = 2;
     int32 priority = 3;
+}
+
+message ProductTypeCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    bool active = 3;
+    int32 priority = 4;
+    repeated ProductCategoryCocoDto categories = 5;
+}
+
+message ProductCategoryCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    bool active = 3;
+    int32 priority = 4;
 }
