@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 option csharp_namespace = "Refunc.Api";
+import "google/protobuf/wrappers.proto";
 
 service RefuncApi {
   rpc CreateRefunc (CreateRefuncRequest) returns (CreateRefuncReply);
@@ -58,6 +59,8 @@ message ExecRefuncRequest {
 
 message ExecRefuncReply {
   string result = 1;
+  int32 statusCode = 2;
+  google.protobuf.StringValue errorMessage = 3;
 }
 
 message PublishRefuncRequest {
