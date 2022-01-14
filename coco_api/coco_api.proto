@@ -949,6 +949,7 @@ message UiOptionListCocoDto {
     string label = 1;
     string description = 2;
     string options = 3;
+    string namespace = 4;
 }
 
 message GetAllUiOptionListsReply { 
