@@ -59,7 +59,7 @@ service CocoApi {
   rpc GetAllProductTypes(GetAllConfigRequest) returns (GetAllProductTypesReply);
   rpc GetAllProductChannels(GetAllConfigRequest) returns (GetAllProductChannelsReply);
   rpc GetAllVatRates(GetAllConfigRequest) returns (GetAllVatRatesReply);
-
+  rpc GetAllUiOptionLists(GetAllConfigRequest) returns (GetAllUiOptionListsReply);
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
@@ -943,4 +943,19 @@ message VatRateCocoDto {
 message VatDefinitionCocoDto {
     bool undefined = 1;
     double percent = 2;
+}
+
+message UiOptionListCocoDto {
+    string label = 1;
+    string description = 2;
+    repeated UiOptionListItemCocoDto options = 3;
+}
+
+message UiOptionListItemCocoDto {
+    string label = 1;
+    string value = 2;
+}
+
+message GetAllUiOptionListsReply { 
+    repeated UiOptionListCocoDto lists = 1;
 }
