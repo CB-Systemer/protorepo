@@ -948,7 +948,7 @@ message VatDefinitionCocoDto {
 message UiOptionListCocoDto {
     string label = 1;
     string description = 2;
-    repeated string options = 3;
+    string options = 3;
 }
 
 message GetAllUiOptionListsReply { 
