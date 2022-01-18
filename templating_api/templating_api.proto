@@ -26,7 +26,7 @@ service TemplatingApi {
 }
 
 message GetTemplateOptionsRequest {
-    string resource_group_id = 1;
+  string resource_group_id = 1;
 	string template_option_namespace = 2;
 }
 
@@ -52,16 +52,18 @@ message MergeDataReply{
 
 message GetDocumentRequest {
 	string templateId = 1;
-    string outputFormat = 4;
-    string contextDataNodeId = 5;
-    string contextTenantId = 6;
-    string contextResourceGroupId = 7;
-    ExecutingActorContext actor_context = 8;
-    string params = 9;
+  string outputFormat = 4;
+  string contextDataNodeId = 5;
+  string contextTenantId = 6;
+  string contextResourceGroupId = 7;
+  ExecutingActorContext actor_context = 8;
+  string params = 9;
 }
 
 message GetDocumentReply {
 	bytes data = 1;
+  string errorMessage = 2;
+  int32 errorCode = 3;
 }
 
 message BuildTemplateRequest {
@@ -78,8 +80,9 @@ message BuildTemplateRequest {
 
 message BuildTemplateReply {
 	string templateOutput = 1;
+  string errorMessage = 2;
+  int32 errorCode = 3;
 }
-
 
 message InitializeRequest {
 	string dataNodeId = 1;
@@ -90,7 +93,7 @@ message InitializeReply {
 
 message GetTemplateRequest {
 	string templateId = 1;
-    ExecutingActorContext actor_context = 2;
+  ExecutingActorContext actor_context = 2;
 }
 
 message GetTemplateReply {
@@ -102,6 +105,8 @@ message GetTemplateReply {
   repeated TemplatePreview previews = 8;
   string raw = 6;
   string displayName = 7;
+  string errorMessage = 10;
+  int32 errorCode = 9;
 }
 
 message TemplateSource {
@@ -118,6 +123,7 @@ message TemplatePreview {
 	string sourceFormat = 1;
 	string outputFormat = 2;
 }
+
 message PreviewTemplateRequest {
   string templateId = 1;
   string data = 2;
@@ -127,6 +133,8 @@ message PreviewTemplateRequest {
 
 message PreviewTemplateReply {
   string result = 1;
+  string errorMessage = 2;
+  int32 errorCode = 3;
 }
 
 message DownloadTemplateRequest {
@@ -137,6 +145,8 @@ message DownloadTemplateRequest {
 
 message DownloadTemplateReply {
 	bytes data = 1;
+  string errorMessage = 2;
+  int32 errorCode = 3;
 }
 
 message UploadTemplateRequest {

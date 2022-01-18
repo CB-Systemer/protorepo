@@ -36,6 +36,8 @@ message DatanodeConfigDto {
     string stateFlowNamespace = 16;
     reserved 17;
     string baseUrl = 18;
+    bool state_flow_disabled = 19;
+    string state_flow_picker_type = 22;
 }
 
 message TargetConfigDto {

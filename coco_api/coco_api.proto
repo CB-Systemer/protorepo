@@ -10,11 +10,14 @@ service CocoApi {
   rpc GetAllStateflows (GetAllConfigRequest) returns (GetAllStateflowsReply);
   rpc GetAllAccess (GetAllConfigRequest) returns (GetAllAccessReply);
   rpc GetAllDataNodes (GetAllDatanodesRequest) returns (GetAllDataNodesReply);
+  rpc GetAllDataNodesByConfigName (GetAllDatanodesByConfigNameRequest) returns (GetAllDataNodesReply);
   rpc GetManyDataNodes (GetManyDatanodesRequest) returns (GetManyDataNodesReply);
   rpc GetAllNamespaces(GetAllConfigRequest) returns (GetAllNamespacesReply);
   rpc GetNamespace(GetSingleConfigRequest) returns (GetNamespaceReply);
   rpc GetAllNotifications(GetAllConfigRequest) returns (GetAllNotificationsReply);
   rpc GetNotification(GetSingleConfigRequest) returns (GetNotificationReply);
+  rpc GetAllCountries(GetAllConfigRequest) returns (GetAllCountriesReply);
+  rpc GetCountry(GetSingleConfigRequest) returns (GetCountryReply);
   rpc GetAllPermissions(GetAllConfigRequest) returns (GetAllPermissionsReply);
   rpc GetPermission(GetSingleConfigRequest) returns (GetPermissionReply);
   rpc GetAllTags(GetAllConfigRequest) returns (GetAllTagsReply);
@@ -52,7 +55,11 @@ service CocoApi {
   rpc GetAllIcons(GetAllConfigRequest) returns (GetAllIconsReply);
   rpc GetImageTag(GetImageTagRequest) returns (GetImageTagReply);
   rpc GetReflowConfig(GetSingleConfigRequest) returns (GetReflowConfigReply);
-
+  rpc GetAllPriceUnits(GetAllConfigRequest) returns (GetAllPriceUnitsReply);
+  rpc GetAllProductTypes(GetAllConfigRequest) returns (GetAllProductTypesReply);
+  rpc GetAllProductChannels(GetAllConfigRequest) returns (GetAllProductChannelsReply);
+  rpc GetAllVatRates(GetAllConfigRequest) returns (GetAllVatRatesReply);
+  rpc GetAllUiOptionLists(GetAllConfigRequest) returns (GetAllUiOptionListsReply);
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
@@ -80,6 +87,8 @@ message ReflowActionDto {
   bool async = 5;
   string params = 6;
   string ui_params = 7;
+  bool continue_on_error = 8;
+  string messages = 9;
 }
 
 message GetImageTagRequest {
@@ -87,6 +96,10 @@ message GetImageTagRequest {
 
 message GetImageTagReply {
     string image = 1;
+}
+
+message GetAllDatanodesByConfigNameRequest {
+    string config_name = 1;
 }
 
 message GetAllDatanodesRequest {
@@ -143,6 +156,31 @@ message NotificationDto{
     string display_name = 5;
     string description = 6;
     string audience_level = 7;
+}
+
+message GetAllCountriesReply {
+    repeated CountryDto configs = 1;
+}
+
+message GetCountryReply{
+    CountryDto config = 1;
+}
+
+message CountryDto{
+    string display_name = 1;
+    string icon_name = 2;
+    double priority = 3;
+    string iso3166_alpha2 = 4;
+    string iso3166_alpha3 = 5;
+    string iso3166_numeric = 6;
+    string iso4217_currency = 7;
+    string ccTLD = 8;
+    string nato2_country_code = 9;
+    string nato3_country_code = 10;
+    string phone_prefix = 11;
+    int32 phone_min_length = 12;
+    int32 phone_max_length = 13;
+    bool default = 14;
 }
 
 message GetAllConfigRequest {
@@ -464,6 +502,7 @@ message StateflowDto {
     string namespace = 3;
     string stateflow_coco_version = 4;
     repeated StateRepresentationDto states = 5;
+    bool automatic_state_reasoning = 6;
 }
 
 message StateRepresentationDto {
@@ -476,7 +515,6 @@ message StateRepresentationDto {
     repeated StateTriggerDto trigger_behaviours = 8;
 }
 
-
 message StateTriggerDto {
     string reason =1;
     string namespace =2;
@@ -484,6 +522,7 @@ message StateTriggerDto {
     string description =4;
     bool is_reentrant =6;
     repeated StateTriggerEndResultOutcomeDto  end_result_outcomes = 7;
+    string pipeline_identifier = 8;
 }
 
 message StateTriggerEndResultOutcomeDto
@@ -501,7 +540,6 @@ message GetAllDataNodesReply {
     repeated DatanodeCocoDto configs = 1;
 }
 
-
 message GetManyDataNodesReply {
     repeated DatanodeCocoDto configs = 1;
 }
@@ -509,6 +547,22 @@ message GetManyDataNodesReply {
 message GetDataNodeReply {
     DatanodeCocoDto config = 1;
     bool configExists = 2;
+}
+
+message GetAllPriceUnitsReply {
+    repeated PriceUnitCocoDto priceUnits = 1;
+}
+
+message GetAllProductTypesReply {
+    repeated ProductTypeCocoDto productTypes = 1;
+}
+
+message GetAllProductChannelsReply {
+    repeated ProductChannelCocoDto productChannels = 1;
+}
+
+message GetAllVatRatesReply { 
+    repeated VatRateCocoDto vatRates = 1;
 }
 
 message GetPolicyReply {
@@ -626,6 +680,7 @@ message NotificationEventSettingsDto {
     bool send_to_tenant_employees = 7;
     bool send_to_primary_tenant_employees = 8;
     repeated string executing_actor_namespace_filters = 9;
+    google.protobuf.StringValue navigation_namespace = 10;
 }
 message DatanodeCocoDto {
     AllowedSharingLevelsDto allowed_sharing_levels = 1;
@@ -649,6 +704,8 @@ message DatanodeCocoDto {
     google.protobuf.StringValue tracked_activity_namespace = 19;
     bool is_navigable = 20;
     string specifics_json = 21;
+    bool state_flow_disabled = 22;
+    string state_flow_picker_type = 23;
 }
 
 message AllowedSharingLevelsDto {
@@ -844,4 +901,58 @@ message MatchSettingsDto {
     bool instant = 1;
     bool daily = 2;
     bool weekly = 3;
+}
+
+message PriceUnitCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    int32 priority = 3;
+}
+
+message ProductTypeCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    bool active = 3;
+    int32 priority = 4;
+    repeated ProductCategoryCocoDto categories = 5;
+}
+
+message ProductCategoryCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    bool active = 3;
+    int32 priority = 4;
+}
+
+message ProductChannelCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    bool active = 3;
+    int32 priority = 4;
+    repeated string allowedProductCategories = 5; 
+}
+
+message VatRateCocoDto {
+    string namespace = 1;
+    string displayName = 2;
+    bool active = 3;
+    int32 priority = 4;
+    bool default = 5;
+    VatDefinitionCocoDto vatDefinition = 6;
+}
+
+message VatDefinitionCocoDto {
+    bool undefined = 1;
+    double percent = 2;
+}
+
+message UiOptionListCocoDto {
+    string label = 1;
+    string description = 2;
+    string options = 3;
+    string namespace = 4;
+}
+
+message GetAllUiOptionListsReply { 
+    repeated UiOptionListCocoDto lists = 1;
 }
