@@ -546,7 +546,7 @@ message GetManyDataNodesReply {
 
 message GetDataNodeReply {
     DatanodeCocoDto config = 1;
-    bool configExists = 2;
+    bool configMissing = 2;
 }
 
 message GetAllPriceUnitsReply {
@@ -561,7 +561,7 @@ message GetAllProductChannelsReply {
     repeated ProductChannelCocoDto productChannels = 1;
 }
 
-message GetAllVatRatesReply { 
+message GetAllVatRatesReply {
     repeated VatRateCocoDto vatRates = 1;
 }
 
@@ -929,7 +929,7 @@ message ProductChannelCocoDto {
     string displayName = 2;
     bool active = 3;
     int32 priority = 4;
-    repeated string allowedProductCategories = 5; 
+    repeated string allowedProductCategories = 5;
 }
 
 message VatRateCocoDto {
@@ -953,6 +953,6 @@ message UiOptionListCocoDto {
     string namespace = 4;
 }
 
-message GetAllUiOptionListsReply { 
+message GetAllUiOptionListsReply {
     repeated UiOptionListCocoDto lists = 1;
 }
