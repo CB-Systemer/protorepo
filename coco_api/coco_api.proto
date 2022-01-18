@@ -361,7 +361,7 @@ message GetConsumerConfigNameRequest {
 message GetConsumerConfigNameReply {
     string configName = 1;
 }
- 
+
 message SetConsumerConfigNameRequest {
     string id = 1;
     string configName = 2;
@@ -508,6 +508,7 @@ message GetManyDataNodesReply {
 
 message GetDataNodeReply {
     DatanodeCocoDto config = 1;
+    bool configExists = 2;
 }
 
 message GetPolicyReply {
@@ -814,7 +815,7 @@ message WishConfigDto {
     repeated string entityfeature_type_references = 8;
     string living_area_range_namespace = 9;
     string price_range_namespace = 10;
-    
+
 }
 
 message RangeTypeReferenceDto {
