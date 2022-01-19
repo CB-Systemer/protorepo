@@ -60,6 +60,7 @@ service CocoApi {
   rpc GetAllProductChannels(GetAllConfigRequest) returns (GetAllProductChannelsReply);
   rpc GetAllVatRates(GetAllConfigRequest) returns (GetAllVatRatesReply);
   rpc GetAllUiOptionLists(GetAllConfigRequest) returns (GetAllUiOptionListsReply);
+  rpc GetAllGroups(GetAllConfigRequest) returns (GetAllGroupsReply);
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
@@ -955,4 +956,20 @@ message UiOptionListCocoDto {
 
 message GetAllUiOptionListsReply {
     repeated UiOptionListCocoDto lists = 1;
+}
+
+message GetAllGroupsReply {
+    repeated GroupCocoDto lists = 1;
+}
+
+message GroupCocoDto {
+    string label = 1;
+    string description = 2;
+    repeated GroupItemCocoDto items = 3;
+    string group_namespace = 4;
+}
+
+message GroupItemCocoDto {
+    string item_namespace = 1;
+    double priority = 2;
 }
