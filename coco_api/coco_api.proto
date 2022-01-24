@@ -707,6 +707,7 @@ message DatanodeCocoDto {
     string specifics_json = 21;
     bool state_flow_disabled = 22;
     string state_flow_picker_type = 23;
+    google.protobuf.StringValue short_display_name = 24;
 }
 
 message AllowedSharingLevelsDto {
