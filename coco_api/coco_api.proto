@@ -967,8 +967,8 @@ message GetAllActorPickerFiltersReply{
 
 message ActorPickerFiltersCocoDto{
     string context_namespace = 1;
-    repeated ActorPickerFilterCoco create = 2;
-    repeated ActorPickerFilterCoco view = 3;
+    repeated ActorPickerFilterCocoDto create = 2;
+    repeated ActorPickerFilterCocoDto view = 3;
 }
 
 message ActorPickerFilterCocoDto{
