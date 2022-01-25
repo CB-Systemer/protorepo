@@ -61,6 +61,7 @@ service CocoApi {
   rpc GetAllVatRates(GetAllConfigRequest) returns (GetAllVatRatesReply);
   rpc GetAllUiOptionLists(GetAllConfigRequest) returns (GetAllUiOptionListsReply);
   rpc GetAllGroups(GetAllConfigRequest) returns (GetAllGroupsReply);
+  rpc GetAllActorPickerFilters(GetAllConfigRequest) returns (GetAllActorPickerFiltersReply);
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
@@ -956,6 +957,21 @@ message UiOptionListCocoDto {
 
 message GetAllUiOptionListsReply {
     repeated UiOptionListCocoDto lists = 1;
+}
+
+message GetAllActorPickerFiltersReply{
+    repeated ActorPickerFiltersCocoDto lists = 1;
+}
+
+message ActorPickerFiltersCocoDto{
+    string context_namespace = 1;
+    repeated ActorPickerFilterCoco create = 2;
+    repeated ActorPickerFilterCoco view = 3;
+}
+
+message ActorPickerFilterCocoDto{
+    string listNamespace = 1;
+    repeated string allowed_actor_types = 2;
 }
 
 message GetAllGroupsReply {
