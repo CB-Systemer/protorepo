@@ -490,6 +490,7 @@ message NamespaceDto {
     string display_name = 2;
     string instance_namespace= 4;
     string icon_name= 5;
+    google.protobuf.StringValue short_display_name = 6;
 }
 
 message GetAllStateflowsReply{
