@@ -27,6 +27,8 @@ service CocoApi {
   rpc GetTemplate(GetSingleConfigRequest) returns (GetTemplateReply);
   rpc GetAllTrackedActivities(GetAllConfigRequest) returns (GetAllTrackedActivitiesReply);
   rpc GetTrackedActivity(GetSingleConfigRequest) returns (GetTrackedActivityReply);
+  rpc GetAllReminders(GetAllConfigRequest) returns (GetAllRemindersReply);
+  rpc GetReminder(GetSingleConfigRequest) returns (GetReminderReply);
   rpc GetManyEntityfeatures(GetManyConfigRequest) returns (GetManyEntityfeaturesReply);
   rpc GetAllEntityfeatures(GetAllConfigRequest) returns (GetAllEntityfeaturesReply);
   rpc GetDistributionChannel(GetSingleConfigRequest) returns (GetDistributionChannelReply);
