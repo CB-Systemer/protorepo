@@ -356,6 +356,22 @@ message TrackedActivityDto {
     NotificationEventsDto notification_settings = 18;
 }
 
+message GetAllRemindersReply {
+	repeated ReminderDto configs = 1;
+}
+
+message GetReminderReply {
+	ReminderDto config = 1;
+}
+
+message ReminderDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    string template_id = 5;
+}
+
 message GetAllTagsReply {
 	repeated TagDto configs = 1;
 }
