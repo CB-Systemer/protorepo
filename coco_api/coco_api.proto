@@ -372,6 +372,7 @@ message ReminderDto {
     string description = 3;
     string icon_name = 4;
     string template_id = 5;
+    string template_target_namespace = 6;
 }
 
 message GetAllTagsReply {
