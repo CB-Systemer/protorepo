@@ -1,11 +1,14 @@
 syntax = "proto3";
 
-option csharp_namespace = "MatrixService.Api";
+option csharp_namespace = "Matrix.Api";
 
 service MatrixApi {
 	rpc GetMatrix (GetMatrixRequest) returns (GetMatrixReply);
+	rpc GetCountByDatastore (GetDataStoreCountRequest) returns (GetDataStoreCountReply);
 	rpc UpsertMatrix (UpsertMatrixRequest) returns (UpsertMatrixReply);
+	rpc UpsertMatrixBatch (UpsertMatrixBatchRequest) returns (UpsertMatrixBatchReply);
 	rpc RemoveMatrix (RemoveMatrixRequest) returns (RemoveMatrixReply);
+	rpc RemoveMatricesByDatastore (RemoveMatricesByDatastoreRequest) returns (RemoveMatricesByDatastoreReply);
 }
 
 message GetMatrixRequest {
@@ -21,7 +24,15 @@ message UpsertMatrixRequest {
 	string dataStoreId = 2;
 }
 
+message UpsertMatrixBatchRequest {
+	repeated UpsertMatrixRequest batch = 1;
+}
+
 message UpsertMatrixReply {
+	bool success = 1;
+}
+
+message UpsertMatrixBatchReply {
 	bool success = 1;
 }
 
@@ -33,4 +44,19 @@ message RemoveMatrixReply {
 	bool success = 1;
 }
 
+message RemoveMatricesByDatastoreRequest {
+	string dataStoreId = 1;
+}
 
+message RemoveMatricesByDatastoreReply {
+	int64 count = 1;
+	bool success = 2;
+}
+
+message GetDataStoreCountRequest {
+	string dataStoreId = 1;
+}
+
+message GetDataStoreCountReply {
+	int64 count = 1;
+}
