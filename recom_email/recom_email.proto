@@ -15,6 +15,9 @@ message SendEmailRequest {
   string actor_context_actor_id = 4;
   string actor_context_resource_group_id = 5;
   bool use_personal_email = 6;
+  
+  string context_resource_group_id = 9;
+  string context_tenant_id = 10;
 }
 
 message SendEmailReply {

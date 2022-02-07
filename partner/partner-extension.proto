@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cbs.Partner.Api.Services";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service ExtensionApi {
+  //extensions
+  rpc GetExtension (GetExtensionRequest) returns (ExtensionDto);
+  rpc InstallExtension (InstallExtensionRequest) returns (google.protobuf.Empty);
+  rpc UnInstallExtension (UnInstallExtensionRequest) returns (google.protobuf.Empty);
+  
+  rpc ListInstallations (ListInstallationsRequest) returns (ListInstallationsResponse);
+  rpc GetApiConfigByInstallation (GetApiConfigByInstallationRequest) returns (GetApiConfigByInstallationReply);
+
+  rpc ListPublishedExtensions (ListPublishedExtensionsRequest) returns (ListExtensionResponse);
+  rpc UpdateIsPublished (UpdateIsPublishedRequest) returns (google.protobuf.Empty);
+  rpc GetExtensionConfig (GetExtensionConfigRequest) returns (GetExtensionConfigResponse);
+}
+
+message GetExtensionConfigRequest {
+	string id = 1;
+}
+
+message GetExtensionConfigResponse {
+  string projectId = 2;
+  string slug = 3;
+  string name = 4;
+  repeated DevDto debugs = 8;
+}
+
+message GetExtensionRequest {
+	string extensionId = 1;
+}
+
+message ListExtensionResponse {
+  repeated ExtensionDto extensions = 1;
+}
+
+message ExtensionDto {
+	string id = 1;
+	string PartnerName = 2;
+	google.protobuf.Timestamp createdAt = 3;
+	string name = 4;
+	string slug = 5;
+	string description = 6;
+	string logoUrl = 7;
+	string namespace = 8;
+	repeated string installationScopes = 9;
+	google.protobuf.BoolValue isPrivate = 10;
+	google.protobuf.BoolValue PrivateInstallationAllowed = 11;
+	int32 version = 12;
+	int32 latestVersion = 13;
+}
+
+message DevDto {
+	string actorId = 1;
+	string url = 2;
+}
+
+message InstallationDto {
+	ExtensionDto Extension = 1;
+	repeated InstallationScope Scopes = 2;
+	google.protobuf.BoolValue inheritanceEnabled = 3;
+}
+
+message InstallationScope {
+	string ReferenceNamespace = 1;
+	string referenceId = 2;
+}
+
+message InstallExtensionRequest {
+	string ExtensionId = 1;
+	string ReferenceId = 2;
+	string ReferenceNamespace = 3;
+	google.protobuf.BoolValue inheritanceEnabled = 4;	
+}
+
+message UnInstallExtensionRequest {
+	string ExtensionId = 1;
+	string ReferenceId = 2;
+}
+
+message ListInstallationsRequest{
+	string actorId = 1;
+	string scopeId = 2;
+	string filter = 3;
+}
+
+message GetApiConfigByInstallationReply{
+	ApiConfigDto config = 1;
+}
+
+message GetApiConfigByInstallationRequest{	
+	string actorId = 1;
+	string scopeId = 2;
+	string projectId = 4;
+	string realEquityClientId = 3;
+}
+
+message ApiConfigDto{
+	google.protobuf.BoolValue hasApiAccss = 1;
+	string apiAccessLevel = 2;
+
+	google.protobuf.BoolValue actorImpersonationAllowed = 3;
+	string actorImpersonationLevel = 4;
+
+	string scopeNamespace = 5;
+	string partnerId = 6;
+	string extensionId = 7;	
+}
+
+message ListPublishedExtensionsRequest{
+	string scopeId = 1;
+}
+
+message UpdateIsPublishedRequest{
+	google.protobuf.BoolValue isPublished = 1;
+	string extensionId = 2;
+}
+
+message ListInstallationsResponse {
+	repeated InstallationDto Installations = 1;
+}
+
