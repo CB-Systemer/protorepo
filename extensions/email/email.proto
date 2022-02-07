@@ -4,32 +4,32 @@ import "google/protobuf/wrappers.proto";
 
 service Email {
   // Attachments
-  rpc GetAttachments(GetAttachmentsRequest) returns (GetAttachmentsReply); // needs parentIds
-  rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadAttachmentReply); // needs parentIds
+  rpc GetAttachments(GetAttachmentsRequest) returns (GetAttachmentsReply);
+  rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadAttachmentReply);
 
   // Configs
   rpc GetConfigs(GetConfigRequest) returns (EmailConfigs);
   rpc UpsertConfigs(EmailConfigs) returns (EmailConfigs);
 
   // Emails
-  rpc GetEmails(GetEmailsRequest) returns (EmailsReply); // needs parentIds
-  rpc GetEmail(GetEmailRequest) returns (EmailDto); // needs parentIds
-  rpc SendEmail(SendEmailRequest) returns (SendEmailReply); // needs parentIds
+  rpc GetEmails(GetEmailsRequest) returns (EmailsReply);
+  rpc GetEmail(GetEmailRequest) returns (EmailDto); 
+  rpc SendEmail(SendEmailRequest) returns (SendEmailReply); 
 
   // Misc
   rpc GetDomainsForTenant(GetDomainsForTenantRequest) returns (DomainsReply);
   rpc GetDomainsRaw(GetDomainsRawRequest) returns (DomainsReply);
 
   rpc MarkAsRead(MarkAsReadRequest) returns (EmptyReply);
-  rpc ResolveMenu(ResolveMenuRequest) returns (ContextMenuReply); // needs parentIds
+  rpc ResolveMenu(ResolveMenuRequest) returns (ContextMenuReply);
 
   // Accounts
-  rpc GetAccounts(GetAccountsRequest) returns (EmailAccounts); // needs parentIds
-  rpc CreateAccount(CreateAccountRequest) returns (EmailAccount); // needs parentIds
+  rpc GetAccounts(GetAccountsRequest) returns (EmailAccounts); 
+  rpc CreateAccount(CreateAccountRequest) returns (EmailAccount); 
   rpc DeleteAccount(DeleteAccountRequest) returns (EmptyReply);
-  rpc VerifyAccount(VerifyAccountRequest) returns (VerifyAccountReply); // needs parentIds
+  rpc VerifyAccount(VerifyAccountRequest) returns (VerifyAccountReply); 
   rpc GetVerifyLink(GetVerifyLinkRequest) returns (GetVerifyLinkReply);
-  rpc ResendVerificationEmail(ResendVerificationEmailRequest) returns (EmptyReply); // delete
+  rpc ResendVerificationEmail(ResendVerificationEmailRequest) returns (EmptyReply);
   rpc UpsertSelectedFolders(UpsertFoldersRequest) returns (EmailAccount);
 }
 
