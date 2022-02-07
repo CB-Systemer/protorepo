@@ -190,9 +190,9 @@ message GetAttachmentsRequest{
   string emailId = 1;
   string accountId = 2;
 
-  repeated string parentInstallationIds = 4;
-  string actorId = 5;
-  string resourceGroupId = 6;
+  repeated string parentInstallationIds = 3;
+  string actorId = 4;
+  string resourceGroupId = 5;
 }
 
 message GetAttachmentsReply{
@@ -210,8 +210,8 @@ message AttachmentDto{
 // Accounts (could be refactored to own service)
 message GetAccountsRequest{
   string actorId = 1;
-  string resourceGroupId = 3;
-  repeated string parentInstallationIds = 2;  
+  string resourceGroupId = 2;
+  repeated string parentInstallationIds = 3;  
 }
 
 message CreateAccountRequest{
@@ -256,7 +256,7 @@ message CalendarDto{
 
 message DeleteAccountRequest{
   string accountId = 1;
-  string actorId = 3;  
+  string actorId = 2;  
 }
 
 message VerifyAccountRequest{
