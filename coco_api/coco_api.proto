@@ -64,7 +64,6 @@ service CocoApi {
   rpc GetAllUiOptionLists(GetAllConfigRequest) returns (GetAllUiOptionListsReply);
   rpc GetAllGroups(GetAllConfigRequest) returns (GetAllGroupsReply);
   rpc GetAllActorPickerFilters(GetAllConfigRequest) returns (GetAllActorPickerFiltersReply);
-  rpc GetListDefinition(GetSingleConfigRequest) returns (GetListDefinitionReply);
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
@@ -754,6 +753,7 @@ message ActorRoleConfigDto {
     string unknown_actor_display_name = 6;
     string instance_namespace = 7;
     bool is_selectable = 8;
+    repeated string allowed_primary_contact_actor_types = 9;
 }
 
 message AppointmentConfigDto{
@@ -1009,14 +1009,4 @@ message GroupCocoDto {
 message GroupItemCocoDto {
     string item_namespace = 1;
     double priority = 2;
-}
-
-message GetListDefinitionReply {
-    ListDefinitionCocoDto listDefinition = 1; 
-}
-
-message ListDefinitionCocoDto {
-    string namespace = 1;
-    string displayName = 2;
-    repeated string listContent = 3;
 }
