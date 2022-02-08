@@ -742,6 +742,7 @@ message ActorConfigDto {
     string email_type_namespace = 2;
     string phone_type_namespace = 3;
     string so_me_type_namespace = 4;
+    repeated string allowed_primary_contact_actor_types = 5;
 }
 
 message ActorRoleConfigDto {
@@ -752,8 +753,7 @@ message ActorRoleConfigDto {
     repeated string categories = 5;
     string unknown_actor_display_name = 6;
     string instance_namespace = 7;
-    bool is_selectable = 8;
-    repeated string allowed_primary_contact_actor_types = 9;
+    bool is_selectable = 8;    
 }
 
 message AppointmentConfigDto{
