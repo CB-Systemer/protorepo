@@ -27,6 +27,8 @@ service CocoApi {
   rpc GetTemplate(GetSingleConfigRequest) returns (GetTemplateReply);
   rpc GetAllTrackedActivities(GetAllConfigRequest) returns (GetAllTrackedActivitiesReply);
   rpc GetTrackedActivity(GetSingleConfigRequest) returns (GetTrackedActivityReply);
+  rpc GetAllReminders(GetAllConfigRequest) returns (GetAllRemindersReply);
+  rpc GetReminder(GetSingleConfigRequest) returns (GetReminderReply);
   rpc GetManyEntityfeatures(GetManyConfigRequest) returns (GetManyEntityfeaturesReply);
   rpc GetAllEntityfeatures(GetAllConfigRequest) returns (GetAllEntityfeaturesReply);
   rpc GetDistributionChannel(GetSingleConfigRequest) returns (GetDistributionChannelReply);
@@ -354,6 +356,22 @@ message TrackedActivityDto {
 	repeated string index_on_datanode_namespaces = 16;
 	bool updateLatest_always = 17;
     NotificationEventsDto notification_settings = 18;
+}
+
+message GetAllRemindersReply {
+	repeated ReminderDto configs = 1;
+}
+
+message GetReminderReply {
+	ReminderDto config = 1;
+}
+
+message ReminderDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    string template_target_namespace = 6;
 }
 
 message GetAllTagsReply {
@@ -735,7 +753,7 @@ message ActorRoleConfigDto {
     repeated string categories = 5;
     string unknown_actor_display_name = 6;
     string instance_namespace = 7;
-    bool is_selectable = 8;
+    bool is_selectable = 8;    
 }
 
 message AppointmentConfigDto{
@@ -968,8 +986,8 @@ message GetAllActorPickerFiltersReply{
 
 message ActorPickerFiltersCocoDto{
     string context_namespace = 1;
-    repeated ActorPickerFilterCoco create = 2;
-    repeated ActorPickerFilterCoco view = 3;
+    repeated ActorPickerFilterCocoDto create = 2;
+    repeated ActorPickerFilterCocoDto view = 3;
 }
 
 message ActorPickerFilterCocoDto{

@@ -1,31 +1,33 @@
 syntax = "proto3";
 option csharp_namespace = "Cbs.Communication.Email";
+import "google/protobuf/wrappers.proto";
 
 service Email {
   // Attachments
   rpc GetAttachments(GetAttachmentsRequest) returns (GetAttachmentsReply);
   rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadAttachmentReply);
- 
+
   // Configs
   rpc GetConfigs(GetConfigRequest) returns (EmailConfigs);
-  rpc CreateConfigs(EmailConfigs) returns (EmailConfigs);  
-  rpc DeleteConfig(DeleteConfigRequest) returns (EmptyReply); // Not needed? 
-  
+  rpc UpsertConfigs(EmailConfigs) returns (EmailConfigs);
+
   // Emails
   rpc GetEmails(GetEmailsRequest) returns (EmailsReply);
-  rpc GetEmail(GetEmailRequest) returns (EmailDto);
-  rpc SendEmail(SendEmailRequest) returns (SendEmailReply);
-    
+  rpc GetEmail(GetEmailRequest) returns (EmailDto); 
+  rpc SendEmail(SendEmailRequest) returns (SendEmailReply); 
+
   // Misc
-  rpc GetDomains(GetDomainsRequest) returns (DomainsReply);  
+  rpc GetDomainsForTenant(GetDomainsForTenantRequest) returns (DomainsReply);
+  rpc GetDomainsRaw(GetDomainsRawRequest) returns (DomainsReply);
+
   rpc MarkAsRead(MarkAsReadRequest) returns (EmptyReply);
   rpc ResolveMenu(ResolveMenuRequest) returns (ContextMenuReply);
-  
+
   // Accounts
-  rpc GetAccounts(GetAccountsRequest) returns (EmailAccounts);
-  rpc CreateAccount(CreateAccountRequest) returns (EmailAccount);
+  rpc GetAccounts(GetAccountsRequest) returns (EmailAccounts); 
+  rpc CreateAccount(CreateAccountRequest) returns (EmailAccount); 
   rpc DeleteAccount(DeleteAccountRequest) returns (EmptyReply);
-  rpc VerifyAccount(VerifyAccountRequest) returns (VerifyAccountReply);
+  rpc VerifyAccount(VerifyAccountRequest) returns (VerifyAccountReply); 
   rpc GetVerifyLink(GetVerifyLinkRequest) returns (GetVerifyLinkReply);
   rpc ResendVerificationEmail(ResendVerificationEmailRequest) returns (EmptyReply);
   rpc UpsertSelectedFolders(UpsertFoldersRequest) returns (EmailAccount);
@@ -36,6 +38,10 @@ message DownloadAttachmentRequest {
   string accountId = 1;
   string emailId = 2;
   string attachmentId = 3;
+
+  repeated string parentInstallationIds = 4;
+  string actorId = 5;
+  string resourceGroupId = 6;
 }
 
 message DownloadAttachmentReply {
@@ -45,33 +51,40 @@ message DownloadAttachmentReply {
 
 // Configs
 message GetConfigRequest{
-}
-
-message DeleteConfigRequest{
+  string resourceGroupId = 1;  
+  repeated string parentInstallationIds = 2;
 }
 
 message EmailConfig{
-	string directoryId = 1;
-	string clientId = 2;
-	string clientSecret =3;
-	string id = 4;
-	string domainName = 5;
+  string directoryId = 1;
+  string clientId = 2;
+  string clientSecret = 3;
+  string id = 4;
+  string domainName = 5;
+  string resourceGroupId = 6;
+  string displayName = 7;
 }
 
 message EmailConfigs{
-	repeated EmailConfig configs = 1;
+  repeated EmailConfig configs = 1;
+  string actorId = 2;
+  string resourceGroupId = 3;
 }
 
 message EmptyReply{}
 
 message SendEmailRequest {
-    string accountId = 1;
-	string subject = 2;
-    string body = 3;
-    bool IsHtml = 4;
-    repeated EmailAddressDto to = 5;
-	repeated EmailAddressDto toCC = 6;
-	repeated EmailAddressDto toBCC = 7;
+  string accountId = 1;
+  string subject = 2;
+  string body = 3;
+  bool IsHtml = 4;
+  repeated EmailAddressDto to = 5;
+  repeated EmailAddressDto toCC = 6;
+  repeated EmailAddressDto toBCC = 7;
+  
+  repeated string parentInstallationIds = 8;
+  string actorId = 9;
+  string resourceGroupId = 10;
 }
 
 message SendEmailReply {
@@ -79,163 +92,207 @@ message SendEmailReply {
 
 // Emails
 message GetEmailsRequest{
-	string accountId = 1;
-	string mailFolderId = 2;
-	int32 skip = 3;
+  string accountId = 1;
+  string mailFolderId = 2;
+  int32 skip = 3;
+
+  repeated string parentInstallationIds = 4;
+  string actorId = 5;
+  string resourceGroupId = 6;
 }
 
 message EmailsReply{
-	repeated EmailDto emails = 1;
+  repeated EmailDto emails = 1;
 }
 
 message EmailDto{
-	string subject = 1;
-	string body = 2;
-	string sentAt = 3;
-	string receivedAt = 9;
-	bool hasAttachments = 4;
-	EmailAddressDto sender = 5;
-	repeated EmailAddressDto recipients = 6;
-	repeated EmailAddressDto ccRecipients = 7;
-	repeated EmailAddressDto bccRecipients = 8;
-	string id = 10;
-	bool isRead = 11;
-	string bodyPreview = 12;
+  string subject = 1;
+  string body = 2;
+  string sentAt = 3;
+  string receivedAt = 9;
+  bool hasAttachments = 4;
+  EmailAddressDto sender = 5;
+  repeated EmailAddressDto recipients = 6;
+  repeated EmailAddressDto ccRecipients = 7;
+  repeated EmailAddressDto bccRecipients = 8;
+  string id = 10;
+  bool isRead = 11;
+  string bodyPreview = 12;
 }
 
 message EmailAddressDto{
-	string displayName = 1;
-	string email = 2;
+  string displayName = 1;
+  string email = 2;
 }
 
 message GetEmailRequest{
-	string emailId = 1;
-	string accountId = 2;
+  string emailId = 1;
+  string accountId = 2;
+
+  repeated string parentInstallationIds = 3;
+  string actorId = 4;
+  string resourceGroupId = 5;
 }
 
 //Misc
 message MarkAsReadRequest{
-	string emailId = 1;
-	string accountId = 2;
-	bool MarkAsRead = 3;
+  string emailId = 1;
+  string accountId = 2;
+  bool MarkAsRead = 3;
+
+  repeated string parentInstallationIds = 4;
+  string actorId = 5;
+  string resourceGroupId = 6;
 }
 
-message GetDomainsRequest {
-	string directoryId = 1;
-	string clientId = 2;
-	string clientSecret =3;
-	string id = 4;
+message GetDomainsForTenantRequest {
+  string tenantId = 1;
+}
+
+message GetDomainsRawRequest {
+  string directoryId = 1;
+  string clientId = 2;
+  string clientSecret = 3;
 }
 
 message DomainsReply {
-	repeated Domain DomainList = 1;
+  repeated Domain DomainList = 1;
 }
 
 message Domain {
-	string name = 1;
-	bool isDefault = 2;
+  string name = 1;
+  bool isDefault = 2;
+  google.protobuf.StringValue tenantId = 3; // nullable
 }
 
-message ResolveMenuRequest{	
+message ResolveMenuRequest{
+  string actorId  = 1;
+  string resourceGroupId = 2;
+  repeated string parentInstallationIds = 3;
 }
 
 message ContextMenuReply {
-	repeated ContextMenu ContextMenues = 1;
+  repeated ContextMenu ContextMenues = 1;
 }
 
 message ContextMenu{
-	string type = 5;  // link or expandable
-    string title = 4;
-    string path = 3;  //ex. some/id
-    int32 priority = 2;
-    repeated ContextMenu submenues = 1;
-	bool disabled = 6;
-	string id = 7;
+  string type = 5;  // link or expandable
+  string title = 4;
+  string path = 3;  //ex 'some/id'
+  int32 priority = 2;
+  repeated ContextMenu submenues = 1;
+  bool disabled = 6;
+  string id = 7;
 }
 
 // Attachment
 message GetAttachmentsRequest{
-	string emailId = 1;
-	string accountId = 2;
+  string emailId = 1;
+  string accountId = 2;
+
+  repeated string parentInstallationIds = 3;
+  string actorId = 4;
+  string resourceGroupId = 5;
 }
 
 message GetAttachmentsReply{
-	repeated AttachmentDto attachments = 1;
+  repeated AttachmentDto attachments = 1;
 }
 
 message AttachmentDto{
-	string id = 1;
-	string contentType = 2;
-	string name = 3;
-	int32 size = 4;
-	bool inLine = 5;
+  string id = 1;
+  string contentType = 2;
+  string name = 3;
+  int32 size = 4;
+  bool inLine = 5;
 }
 
 // Accounts (could be refactored to own service)
 message GetAccountsRequest{
-	string actorId = 1;
-}
-
-message EmailAccounts{
-	repeated EmailAccount Accounts = 1;
-}
-
-message EmailAccount{
-	string id = 1;
-	string actorId = 2; 
-	repeated EmailFolder EmailFolders = 3;
-	string email = 4;
-	bool verified = 5;
-	bool connectionError = 6;
-	CalendarDto Calendar = 7;
-}
-
-message EmailFolder {
-	bool selected = 1;
-	bool removedFromSource = 2;
-	string name = 3;
-	string id = 4;
-	int32 unreadCount = 5;
-}
-
-message CalendarDto{
-	string id = 1;
-	string name = 2;
-	string accountName = 5;
+  string actorId = 1;
+  string resourceGroupId = 2;
+  repeated string parentInstallationIds = 3;  
 }
 
 message CreateAccountRequest{
-	string emailLocalPart = 1;
-	string tenantId = 2;
+  string emailLocalPart = 1;
+  string tenantId = 2;
+
+  string actorId = 3;
+  string resourceGroupId = 4;
+  repeated string parentInstallationIds = 5;
+}
+
+message EmailAccounts{
+  repeated EmailAccount Accounts = 1;
+}
+
+message EmailAccount{
+  string id = 1;
+  string actorId = 2;
+  repeated EmailFolder EmailFolders = 3;
+  string email = 4;
+  bool verified = 5;
+  bool connectionError = 6;
+  CalendarDto Calendar = 7;
+  google.protobuf.StringValue tenantDisplayName = 8;
+}
+
+message EmailFolder {
+  bool selected = 1;
+  bool removedFromSource = 2;
+  string name = 3;
+  string id = 4;
+  int32 unreadCount = 5;
+  int32 order = 6;
+  string parentFolders = 7;
+}
+
+message CalendarDto{
+  string id = 1;
+  string name = 2;
+  string accountName = 5;
 }
 
 message DeleteAccountRequest{
-	string accountId =  1;
+  string accountId = 1;
+  string actorId = 2;  
 }
 
 message VerifyAccountRequest{
-	string accountId = 1;
-	string verificationCode = 2;
+  string accountId = 1;
+  string verificationCode = 2;
 }
 
 message GetVerifyLinkRequest{
-	string accountId = 1;
-	string extensionId = 2;
+  string accountId = 1;
+  string extensionId = 2;
+  string actorId = 3;
 }
 
 message GetVerifyLinkReply{
-	string link = 1;
+  string link = 1;
 }
 
 message VerifyAccountReply{
-	bool verified = 1;
+  bool verified = 1;
+  string actorId = 2;
 }
 
 message ResendVerificationEmailRequest{
-	string accountId = 1;
+  string accountId = 1;
 }
 
 message UpsertFoldersRequest{
-	string accountId = 1;
-	repeated string selectedFolders = 2;
+  string accountId = 1;
+  repeated Folder selectedFolders = 2;
+  
+  string actorId = 3;
+  string resourceGroupId = 4;
+  repeated string parentInstallationIds = 5;
+}
+
+message Folder{
+  string id = 1;
+  int32 order = 2;
 }
