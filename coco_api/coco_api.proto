@@ -724,6 +724,7 @@ message ActorConfigDto {
     string email_type_namespace = 2;
     string phone_type_namespace = 3;
     string so_me_type_namespace = 4;
+    repeated string allowed_primary_contact_actor_types = 5;
 }
 
 message ActorRoleConfigDto {
