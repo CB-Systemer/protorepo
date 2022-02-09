@@ -1011,7 +1011,6 @@ message GroupItemCocoDto {
     string item_namespace = 1;
     double priority = 2;
 }
-}
 
 message GetListDefinitionReply {
     ListDefinitionCocoDto listDefinition = 1;
