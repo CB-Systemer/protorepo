@@ -608,6 +608,7 @@ message LevelHandlingDto {
     bool AllowOnlyOneOfThisType = 1;
     bool CanRemovePrimary = 2;
     HandlingLevelDto Level = 3;
+    string OverrideTypeKey = 4;
 }
 
 message ManagedFieldDto {
