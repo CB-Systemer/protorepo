@@ -40,4 +40,5 @@ message InstallPackageRequest{
 message UnInstallPackageRequest{
   string scopeId = 1;
   string packageId = 2;
+  string test = 3;
 }
