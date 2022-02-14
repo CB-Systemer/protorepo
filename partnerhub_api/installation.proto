@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option csharp_namespace = "PartnerHub.Api.Protos";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service InstallationService {
+  rpc GetActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
+  rpc GetInActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
+
+
+  rpc InstallPackage (InstallPackageRequest) returns (google.protobuf.Empty);
+  rpc UnInstallPackage (UnInstallPackageRequest) returns (google.protobuf.Empty);
+}
+
+message GetInstallationsRequest {
+  string scopeId = 1;
+}
+
+message InstallationResponse {
+  repeated InstallationDto installations = 1;  
+}
+
+message InstallationDto {
+  string scopeId = 1;
+  string packageId = 2;
+  google.protobuf.Timestamp installedAt = 3;
+  google.protobuf.Timestamp unInstalledAt = 4;
+  bool inheritanceEnabled = 5;
+  bool isActive = 6;
+}
+
+message InstallPackageRequest{
+  string scopeId = 1;
+  string scopeNamespace = 2;
+  string packageId = 3;
+  bool inheritanceEnabled = 4;
+}
+
+message UnInstallPackageRequest{
+  string scopeId = 1;
+  string packageId = 2;
+}
