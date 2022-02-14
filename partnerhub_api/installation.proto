@@ -32,13 +32,12 @@ message InstallationDto {
 
 message InstallPackageRequest{
   string scopeId = 1;
-  string scopeNamespace = 2;
+  string scope_namespace = 2;
   string packageId = 3;
   bool inheritanceEnabled = 4;
 }
 
 message UnInstallPackageRequest{
   string scopeId = 1;
-  string packageId = 2;
-  string test = 3;
+  string packageId = 2;  
 }
