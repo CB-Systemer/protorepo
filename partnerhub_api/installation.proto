@@ -14,7 +14,8 @@ service InstallationService {
 }
 
 message GetInstallationsRequest {
-  string scopeId = 1;
+  string resourceGroupId = 1;
+  string chainId = 2;
 }
 
 message InstallationResponse {
