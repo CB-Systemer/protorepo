@@ -23,6 +23,7 @@ message InstallationResponse {
 
 message InstallationDto {
   string scope_id = 1;
+  string scope_namespace = 8;
   string product_package_id = 2;
   int32 product_package_version = 7;
   google.protobuf.Timestamp installed_at = 3;
