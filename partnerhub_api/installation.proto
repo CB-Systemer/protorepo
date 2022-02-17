@@ -14,8 +14,7 @@ service InstallationService {
 }
 
 message GetInstallationsRequest {
-  string resourceGroupId = 1;
-  string chainId = 2;
+  string resource_group_id = 1; 
 }
 
 message InstallationResponse {
@@ -23,22 +22,23 @@ message InstallationResponse {
 }
 
 message InstallationDto {
-  string scopeId = 1;
-  string packageId = 2;
-  google.protobuf.Timestamp installedAt = 3;
-  google.protobuf.Timestamp unInstalledAt = 4;
-  bool inheritanceEnabled = 5;
-  bool isActive = 6;
+  string scope_id = 1;
+  string product_package_id = 2;
+  int32 product_package_version = 7;
+  google.protobuf.Timestamp installed_at = 3;
+  google.protobuf.Timestamp unInstalled_at = 4;
+  bool inheritance_enabled = 5;
+  bool is_active = 6;
 }
 
 message InstallPackageRequest{
-  string scopeId = 1;
-  string scope_namespace = 2;
-  string packageId = 3;
-  bool inheritanceEnabled = 4;
+  string scope_id = 1;  
+  int32 product_package_version = 2;
+  string product_package_id = 3;
+  bool inheritance_enabled = 4;
 }
 
 message UnInstallPackageRequest{
-  string scopeId = 1;
-  string packageId = 2;
+  string scope_id = 1;
+  string product_package_id = 2;
 }
