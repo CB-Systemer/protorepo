@@ -7,8 +7,8 @@ if($IsLinux){
 if($IsWindows){
     $dir = Get-Location;
     $protoRepoPath = Split-Path -Path $dir.Path -Parent;
-    [Environment]::SetEnvironmentVariable("PROTOREPO", $protoRepoPath.Path, "Machine")
-    
-    $path = $protoRepoPath.Path;
+    [Environment]::SetEnvironmentVariable("PROTOREPO", $protoRepoPath, "Machine")
+
+    $path = $protoRepoPath;
     Write-Host "'$path' added to your environment variables" -ForegroundColor Green
 }
