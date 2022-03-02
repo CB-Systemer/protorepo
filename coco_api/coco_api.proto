@@ -29,6 +29,8 @@ service CocoApi {
   rpc GetTrackedActivity(GetSingleConfigRequest) returns (GetTrackedActivityReply);
   rpc GetAllReminders(GetAllConfigRequest) returns (GetAllRemindersReply);
   rpc GetReminder(GetSingleConfigRequest) returns (GetReminderReply);
+  rpc GetAllConfirmations(GetAllConfigRequest) returns (GetAllConfirmationsReply);
+  rpc GetConfirmation(GetSingleConfigRequest) returns (GetConfirmationReply);
   rpc GetManyEntityfeatures(GetManyConfigRequest) returns (GetManyEntityfeaturesReply);
   rpc GetAllEntityfeatures(GetAllConfigRequest) returns (GetAllEntityfeaturesReply);
   rpc GetDistributionChannel(GetSingleConfigRequest) returns (GetDistributionChannelReply);
@@ -368,6 +370,23 @@ message GetReminderReply {
 }
 
 message ReminderDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    string template_target_namespace = 6;
+}
+
+
+message GetAllConfirmationsReply {
+	repeated ConfirmationDto configs = 1;
+}
+
+message GetConfirmationReply {
+	ConfirmationDto config = 1;
+}
+
+message ConfirmationDto {
     string instance_namespace = 1;
     string display_name = 2;
     string description = 3;
