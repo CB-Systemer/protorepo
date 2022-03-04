@@ -20,7 +20,7 @@ message LoginReply {
 
 message JoinChatRequest {
   string datanode_id = 1;
-  string actor_id = 1;
+  string actor_id = 2;
 }
 
 message JoinChatReply {
