@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option csharp_namespace = "Chat.Api";
+
+service ChatApi {
+  rpc Login (LoginRequest) returns (LoginReply);
+  rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
+  rpc GetChat (GetChatRequest) returns (GetChatReply);
+}
+
+message LoginRequest {
+  string actor_id = 1;
+}
+
+message LoginReply {
+  string password = 1;
+  string actor_id = 2;
+  string server_url = 3;
+}
+
+message JoinChatRequest {
+  string datanode_id = 1;
+  string actor_id = 1;
+}
+
+message JoinChatReply {
+}
+
+message GetChatRequest {
+  string datanode_id = 1;
+}
+
+message GetChatReply {
+  string datanode_id = 1;
+  string chat_id = 2;
+  string chat_name = 3;
+  repeated string actor_ids = 4;
+}
