@@ -662,7 +662,12 @@ message ManagedFieldFragmentDto {
     string vat_code = 23;
     FieldDataTypeDto field_data_type = 24;
     FieldCalculatedTypeDto field_calculated_type = 25;
+    repeated FieldOptionListItemDto option_list = 26;
+}
 
+message FieldOptionListItemDto {
+    string displayName = 1;
+    string value = 2;
 }
 
 message FieldCalculatedTypeDto {
