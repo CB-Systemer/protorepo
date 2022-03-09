@@ -707,6 +707,7 @@ enum FieldValueTypeDto
         CalculateMean = 17;
         CalculateNewest = 18;
         CalculateOldest = 19;
+        OptionList = 20;
     }
 
 
