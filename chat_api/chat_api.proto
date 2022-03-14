@@ -30,7 +30,7 @@ message JoinChatReply {
 
 message CreateChatRequest {
   string datanode_id = 1;
-  string actor_id = 2;
+  repeated string actor_ids = 2;
 }
 
 message CreateChatReply {
