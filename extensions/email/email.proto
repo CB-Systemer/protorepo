@@ -88,6 +88,7 @@ message SendEmailRequest {
 }
 
 message SendEmailReply {
+  string sentFromEmail = 1;
 }
 
 // Emails

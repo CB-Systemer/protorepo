@@ -34,8 +34,8 @@ message SendSmsMessageRequest {
 	string sender = 4;
 	bool dryRun = 5;
 	ActorContext actorContext = 6;
-    string contextTenantId = 7;
-    string contextResourceGroupId = 8;
+  string contextTenantId = 7;
+  string contextResourceGroupId = 8;
 }
 
 message SendSmsMessageReply {
@@ -55,10 +55,17 @@ message SendEmailMessageRequest {
   string context_tenant_id = 7;
   string context_resource_group_id = 8;
   bool use_personal = 9;
+  repeated ArchiveOn archive_on = 12;
 }
 
 message ActorRecipient {
   string actor_id = 1;
+  string tenant_id = 2;
+  string resource_group_id = 3;
+}
+
+message ArchiveOn {
+  string parent_id = 1;
   string tenant_id = 2;
   string resource_group_id = 3;
 }
@@ -83,6 +90,7 @@ message SendMessageRequest {
   bool dry_run = 14;
   bool use_personal = 15;
   bool isAlias = 16;
+  repeated ArchiveOn archive_on = 17;
 }
 
 message SendMessageReply {
