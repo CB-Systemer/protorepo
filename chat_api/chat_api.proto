@@ -6,6 +6,7 @@ service ChatApi {
   rpc Login (LoginRequest) returns (LoginReply);
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
   rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
+  rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
 }
@@ -26,6 +27,14 @@ message JoinChatRequest {
 }
 
 message JoinChatReply {
+}
+
+message LeaveChatRequest {
+  string datanode_id = 1;
+  string actor_id = 2;
+}
+
+message LeaveChatReply {
 }
 
 message CreateChatRequest {
