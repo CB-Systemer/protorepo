@@ -13,11 +13,13 @@ message SendEmailRequest {
   string content = 2;
   string subject = 3;
   string actor_context_actor_id = 4;
+  string actor_context_actor_display_name = 11;
   string actor_context_resource_group_id = 5;
   bool use_personal_email = 6;
   
   string context_resource_group_id = 9;
   string context_tenant_id = 10;
+  bool send_many = 12;
 }
 
 message SendEmailReply {
