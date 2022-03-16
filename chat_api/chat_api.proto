@@ -12,6 +12,7 @@ service ChatApi {
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
+  rpc GetChatV2 (GetChatRequest) returns (GetChatReplyV2);
 }
 
 message LoginRequest {
@@ -89,4 +90,11 @@ message GetChatReply {
   string chat_id = 2;
   string chat_name = 3;
   repeated string actor_ids = 4;
+}
+
+message GetChatReplyV2 {
+  string datanode_id = 1;
+  string chat_id = 2;
+  string chat_name = 3;
+  repeated ChatMember members = 4;
 }
