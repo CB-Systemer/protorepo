@@ -1,0 +1,64 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.ActorRole";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "common/common.proto";
+
+service ActorRoleApi {
+	rpc GetActorRolesForScope (ActorRolesRequest) returns (ActorRolesReply);
+	rpc GetActorRolesForRoot (ActorRolesRequest) returns (ActorRolesReply);
+}
+
+message ActorRolesRequest {
+	ActorContext actorContext = 1;
+	repeated string roles = 2;
+	bool includeRolesInFilter = 3;
+	int32 top = 4;
+	int32 skip = 5;
+	string query = 6;
+	string sortBy = 7;
+	string id = 8;
+	string alternativeId = 9;
+	SearchFilter filter = 10;
+}
+
+message ActorRolesReply {
+	repeated ActorRole actorRoles = 1;
+	int64 hits = 2;
+}
+
+message ActorRole {
+	string id = 1;
+	string namespace = 2;
+	string actorId = 3;
+	string rootId = 4;
+	string rootNamespace = 5;
+	string scopeId = 6;
+	string scopeNamespace = 7;
+	bool showInContactLists = 8;
+	google.protobuf.Timestamp  createdAt = 9;
+	string stateFlowNamespace = 10;
+	string stateNamespace = 11;
+	string stateReasonNamespace = 12;
+	NullableInt priority = 13;
+	repeated string tags = 14;
+	string cachedActorDatanodeNamespace = 15;
+	int32 cachedActorDatanodeVersion = 16;
+	string actorDisplayName = 17;
+	string actorNamespace = 18;
+	int32 actorReferencedVersion = 19;
+	string roleDisplayName = 20;
+	string parentId = 21;
+	string parentNamespace = 22;
+	string displayName = 23;
+	string typeDisplayName = 24;
+}
+
+message NullableInt {
+	oneof kind {
+		google.protobuf.NullValue null = 1;
+		int32 value = 2;
+	}
+}

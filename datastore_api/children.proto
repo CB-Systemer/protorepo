@@ -1,0 +1,110 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.DataNodeChildren";
+
+import "common/common.proto";
+
+service DataNodeChildrenApi {
+	rpc GetChildDataNodes (ChildDataNodesRequest) returns (ChildDataNodesReply);	
+	rpc GetChildrenCount (ChildrenCountRequest) returns (ChildrenCountReply);
+	rpc GetDescendantDataNodes (DescendantDataNodesRequest) returns (ChildDataNodesReply);
+}
+
+message ChildDataNodesRequest {
+	string rootId = 1;
+	string contextId = 2;
+	repeated string namespaces = 3;
+	ActorContext actorContext = 4;
+	int32 skip = 5;
+	int32 top = 6;
+	SearchFilter searchFilter = 7;
+	string queryString = 8;
+	repeated string additionalScopeIds = 9;
+}
+
+message DescendantDataNodesRequest {
+	string rootId = 1;
+	repeated string namespaces = 2;
+	ActorContext actorContext = 3;
+}
+
+message ChildDataNodesReply {
+	repeated DataNode dataNodes = 1;
+	int64 hits = 2;
+}
+
+message ChildrenCountRequest{
+	string rootId = 1;
+	repeated string executingActorPermissions = 2;
+    repeated string additionalScopeIds = 3;
+	repeated ContextListCountRequest contextLists = 4;
+	repeated string campaignNamespaces = 5;
+	repeated string templatingNamespaces = 6;
+	repeated string archiveNamespaces = 7;
+	repeated string chatNamespaces = 8;
+	repeated string advertisementNamespaces = 9;
+	repeated string mediaPlanNamespaces = 10;
+	repeated string mediaNamespaces = 11;
+	repeated string marketingMaterialNamespaces = 12;
+}
+
+
+message ChildrenCountReply{
+	repeated ContextListCountReply contextLists = 1;
+	int64 marketingMaterialCount = 2;
+	int64 campaignCount = 3;
+	int64 templatingCount = 4;
+	int64 archiveCount = 5;
+	int64 chatCount = 6;
+	int64 advertisementCount = 7;
+	int64 mediaPlanCount = 8;
+	int64 mediaCount = 9;
+}
+
+message ContextListCountRequest {
+	string listNamespace = 1;
+	repeated string allowedNamespaces = 2;
+	SearchFilter searchFilter = 3;
+}
+
+message ContextListCountReply {
+	string listNamespace = 1;
+	int32 count = 2;
+}
+
+
+service DataNodeSearchApi {
+	rpc SearchDataNodes (SearchDataNodesRequest) returns (SearchDataNodesReply);	
+	rpc SearchCount (SearchCountRequest) returns (SearchCountReply);
+}
+
+message SearchDataNodesRequest {
+	string rootId = 1;
+	string contextId = 2;
+	repeated string namespaces = 3;
+	ActorContext actorContext = 4;
+	int32 skip = 5;
+	int32 top = 6;
+	SearchFilter searchFilter = 7;
+	string queryString = 8;
+}
+
+message SearchDataNodesReply {
+	repeated DataNode dataNodes = 1;
+	int64 hits = 2;
+}
+
+message SearchCountRequest{
+	string rootId = 1;
+	string contextId = 2;
+	repeated string namespaces = 3;
+	ActorContext actorContext = 4;
+	SearchFilter searchFilter = 5;
+	string queryString = 6;
+}
+
+
+message SearchCountReply {
+	int64 hits = 1;
+	
+}

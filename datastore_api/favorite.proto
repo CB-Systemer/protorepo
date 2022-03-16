@@ -1,0 +1,117 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Cbs.DataNodes.Api.Favorite";
+
+import "common/common.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+service FavoriteApi {
+	rpc GetFavoritesForActor (GetFavoritesForActorRequest) returns (FavoritesReply);
+	rpc GetFavoritesForCase (GetFavoritesForCaseRequest) returns (FavoritesReply);
+	rpc GetFavorite (GetFavoriteRequest) returns (GetFavoriteReply);
+}
+
+message GetFavoriteRequest {
+	string favoriteId = 1;
+	ActorContext actorContext = 2;
+}
+
+message GetFavoriteReply {
+	Favorite favorite = 1;
+}
+
+message GetFavoritesForActorRequest {
+	string actorId = 1;
+	ActorContext actorContext = 2;
+	bool includeInactive = 3;
+	int32 skip = 4;
+	int32 top = 5;
+}
+
+message GetFavoritesForCaseRequest {
+	string query = 1;
+	string caseId = 2;
+	ActorContext actorContext = 3;
+	bool includeInactive = 4;
+	int32 skip = 5;
+	int32 top = 6;
+}
+
+message FavoritesReply{
+	repeated Favorite favorites = 1;
+	int64 totalFavorites = 2;
+}
+
+message Favorite {
+	string id = 1;
+    google.protobuf.Timestamp createdAt = 2;
+	string favoriteUserTags = 3;
+	string stateNamespace = 4;
+	string stateReasonNamespace = 5;
+	string caseId = 6;
+	string caseName = 7;
+	string caseNamespace = 8;
+	string casePrice = 9;
+	string casePriceCurrency = 10;
+	string caseStateNamespace = 11;
+	string caseStateReasonNamespace = 12;
+	string caseResourceGroupId = 13;
+	string caseEstateNamespace = 14;
+	string status = 15;
+	string parentId = 16;
+	string parentNamespace = 17;
+	double rating = 18;
+	string namespace = 19;
+	string dataStoreId = 20;
+	string resourceGroupId = 21;
+	string tenantId = 22;
+	CaseData caseData = 23;
+}
+message CaseData 
+{
+	string caseId = 1;
+	string casePublicProfileId = 2;
+	string caseNumber = 3;
+	string caseDisplayName = 4;
+	string caseImageUrl = 5;
+	string caseAgentDisplayName = 6;
+	string caseAgentImageUrl = 7;
+	string caseAgentPhoneNumber = 8;
+	string caseAgentEmailAddress = 9;
+	repeated SomeReferenceModel caseAgentSoMes = 10;
+	string caseResourceGroupDisplayName = 11;
+	string caseResourceGroupAddress = 12;
+	string caseResourceGroupEmail = 13;
+	string caseResourceGroupPhone = 14;
+	repeated SomeReferenceModel caseResourceGroupSoMes = 15;
+	NullableInt casePrice = 16;
+	string casePriceCurrency = 17;
+	string caseEstateTypeDisplayName = 18;
+	NullableInt caseNumberOfRooms = 19;
+	NullableInt caseNumberOfBaths = 20;
+	NullableInt caseHouseAreaInM2 = 21;
+	NullableInt caseFieldAreaInM2 = 22;
+	string caseBuildYear = 23;
+	string caseLatestRenovationYear = 24;
+	NullableDateTimeOffset caseFirstPublicDistributionDate = 25;
+	NullableDateTimeOffset caseTotalPublicPeriodCalculationOffset = 26;
+	bool casePublicDistributionActive = 27;
+	string caseStateNamespace = 28;
+	string caseStateReasonNamespace = 29;
+	string caseTypeDisplayName = 30;
+	string caseStateCategoryNamespace = 31;
+}
+message SomeReferenceModel
+{
+	string namespace = 1;
+	string url = 2;
+}
+
+message NullableInt {
+	oneof kind {
+		google.protobuf.NullValue null = 1;
+		int32 value = 2;
+	}
+}

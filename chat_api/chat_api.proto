@@ -1,3 +1,4 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
 syntax = "proto3";
 
 option csharp_namespace = "Chat.Api";

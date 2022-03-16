@@ -1,17 +1,121 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+
 syntax = "proto3";
 option csharp_namespace = "Cbs.DataNodes.Api.Actor";
 
 import "google/protobuf/timestamp.proto";
+import "common/common.proto";
 
 service ActorApi {
   rpc GetActor (GetActorRequest) returns (ActorReply);
+  rpc GetActorExists (GetActorExistsRequest) returns (GetActorExistsResponse);
+  rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
+  rpc UpdateActor (UpdateActorRequest) returns (ActorReply);
+  rpc GetActors (GetActorsRequest) returns (GetActorsReply);
+  rpc CreateIndex (CreateIndexRequest) returns (CreateIndexReply);
+  rpc Index (IndexActorsRequest) returns (IndexActorsReply);
+  rpc FindActors (FindActorsRequest) returns (FindActorsReply);
+  rpc FindRelatedActors (FindRelatedActorsRequest) returns (FindActorsReply);
+}
+
+message CreateIndexRequest{
+
+}
+
+message GetActorExistsRequest {
+  string actorId = 1;
+  string tenantId = 2;
+  string resourceGroupId = 3;
+}
+
+message GetActorExistsResponse{
+ bool exists = 1;
+}
+
+message FindRelatedActorsRequest{
+  string applicationId = 1;
+  string identityId = 2;
+  repeated string emails = 3;
+  repeated string phones = 4; 
+  int32 top = 5;
+  int32 skip = 6; 
+}
+
+message FindActorsRequest{
+ repeated string phones = 1;
+ repeated string emails = 2;
+ int32 top = 3;
+ int32 skip = 4;
+ repeated string actorPermissions = 5;
+}
+
+message FindActorsReply {
+ repeated Actor actors = 1;
+ int64 total = 2;
+ string debugInformation = 3;
+ string scrollId = 4;
+}
+
+message CreateIndexReply{
+ bool indexCreated = 1;
+ string error = 2;
+}
+
+message IndexActorsRequest {
+ string namespace = 1;
+ string datastoreId = 2;
+ string tenantId = 3;
+}
+
+message IndexActorsReply {
+ bool reIndexed = 1;
+ string error = 2;
 }
 
 message GetActorRequest {
   string actorId = 1;
+  repeated string permissions = 6;
+}
+
+message GetDbActorRequest {
+  string actorId = 1;
   string tenantId = 2;
   string resourceGroupId = 3;
-  ActorContext actorContext = 4;
+}
+
+message GetDbActorReply {
+	string id = 1;
+	string resourceGroupId = 2;
+	string displayName = 3;
+	string timezoneId = 4;
+	string role = 5;
+	string roleStatus = 6;
+	string namespace = 7;
+	string imageUrl = 8;
+	repeated EmailSearchModel emails = 9;
+	repeated ActorIdentitySearchModel identities = 10;
+	repeated PhoneSearchModel phones = 11;
+	string dataStoreId = 12;
+}
+
+message UpdateActorRequest {
+  string actorId = 1;
+  string displayName = 2;
+}
+
+message GetActorsRequest{
+  string tenantId = 1;
+  string resourceGroupId = 2;
+  int32 top = 3;
+  int32 skip = 4;
+  repeated string actorPermissions = 5;
+  string query = 6;
+  string actorNamespace = 7;
+  bool onlyLeads = 8;
+}
+
+message GetActorsReply {
+  repeated ActorReply actors = 1;
 }
 
 message ActorReply {
@@ -74,13 +178,6 @@ message Actor {
 	string resourceGroupDisplayName = 50;
 }
 
-message ActorRoleReference {
-	string roleId = 1;
-	string roleNamespace = 2;
-	string referenceActorId = 3;
-	string scopeId = 4;
-	bool allowToViewInCustomerPortal = 5;
-}
 
 message ActorIdentitySearchModel {
 	string identityId = 1;
@@ -90,15 +187,6 @@ message ActorIdentitySearchModel {
 	string deletedAt = 5;
 	string flowType = 6;
 }
-
-message ActorContext {
- string actorId = 1;
- string actorNamespace = 2;
- string email = 3;
- repeated string permissions = 4;
- string resourceGroupId = 5;
-}
-
 message PhoneSearchModel {
 	string phoneInformationElementId = 1;
 	string prefix = 2;
@@ -107,13 +195,14 @@ message PhoneSearchModel {
 	string phoneType = 5;
 	bool primary = 6;
 	bool isVerified = 7;
+	string phoneInformationElementNamespace = 8;
 }
-
 message EmailSearchModel{
 	string address = 1;
 	string emailInformationElementId = 2;
 	bool primary = 3;
 	bool isVerified = 4;
+	string emailInformationElementNamespace = 5;
 }
 
 message AddressSearchModel{
@@ -131,7 +220,6 @@ message AddressSearchModel{
 	string districtName = 12;
 	bool isVerified = 13;
 }
-
 message SoMeSearchModel {
 	string soMeInformationElementId = 1;
 	string namespace = 2;
@@ -139,5 +227,3 @@ message SoMeSearchModel {
 	bool primary = 4;
 	bool isVerified = 5;
 }
-
-

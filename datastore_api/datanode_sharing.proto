@@ -1,0 +1,40 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.DataNodeSharing";
+
+import "common/common.proto";
+
+service DataNodeSharingApi {
+	rpc GetSharedDataNodes (SharedDataNodeRequest) returns (SharedDataNodeReply);
+	rpc GetSharedDataNodesCount (SharedDataNodeRequest) returns (SharedDataNodeCountReply);
+}
+
+message SharedDataNodeRequest {
+	string caseId = 1;
+	repeated string permissions = 2;	
+	ActorContext actorContext = 3;
+	int32 skip = 4;
+	int32 top = 5;
+	string namespacePrefix = 6;
+}
+
+
+message SharedDataNodeCountRequest {
+	string caseId = 1;
+	repeated string permissions = 2;	
+	ActorContext actorContext = 3;
+	string namespacePrefix = 4;
+}
+
+
+message SharedDataNodeReply {
+	repeated DataNode dataNodes = 1;
+	int64 hits = 2;
+}
+
+message SharedDataNodeCountReply {
+	int64 totalDatanodeCount = 1;
+	int64 hiddenCount = 2;
+}
+
+

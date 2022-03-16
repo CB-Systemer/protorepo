@@ -1,0 +1,368 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.SharedProtos";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+message ActorContext {
+ string actorId = 1;
+ string actorNamespace = 2;
+ string email = 3;
+ repeated string permissions = 4;
+ string resourceGroupId = 5;
+}
+
+message DataNode {
+	string id = 1;
+	string namespace = 2;
+	string displayName = 3;
+	string firstName = 4;
+	string lastName = 5;
+	string parentId = 6;
+	string parentNamespace = 7;
+	string rootId = 8;
+	string rootNamespace = 9;
+	repeated string scopeNamespaces = 10;
+	string scopeId = 11;
+	string scopeNamespace = 12;
+	string description = 13;
+	string caseId = 14;
+	string imageUrl = 15;
+	string dataStoreId = 16;
+	string resourceGroupId = 17;
+	string permissionInheritanceLevel = 18;
+	google.protobuf.Timestamp createdAt = 19;
+	google.protobuf.Timestamp lastUpdatedAt = 20;
+	google.protobuf.Timestamp executedAt = 21;
+	google.protobuf.Timestamp scopeUpdatedAt = 22;
+	string createdById = 23;
+	string lastUpdatedById = 24;
+	string executedById = 25;
+	string scopeUpdatedById = 26;
+	bool isDeleted = 27;
+	repeated string namespaces = 28;
+	string stateFlowNamespace = 29;
+	string stateNamespace = 30;
+	string stateCategoryNamespace = 31;
+	string createdFromSource = 32;
+	string caseNumber = 33;
+	bool isExternal = 34;
+	repeated DataNodeExternalReferenceModel externalReferences = 35;
+	string caseExternalId = 36;
+	repeated string permissionSet = 37;
+	string externalId = 38;
+	repeated DataNodeSharingRuleModel sharingRules = 39;
+	repeated DataNodeStateHistoryModel stateHistory = 40;
+	repeated ActorRoleReference actorRoleReferences = 41;
+	repeated ActorIdentityModel actorIdentities = 42;
+	string userRole = 43;
+	string userRoleStatus = 44;
+	repeated PhoneModel phones = 45;
+	repeated EmailModel emails = 46;
+	repeated AddressModel addresses = 47;
+	string estateNamespace = 48;
+	string status = 49;
+	string agentId = 50;
+	string agentDataStoreId = 51;
+	string favoriteUserTags = 52;
+	string rating = 53;
+	string rooms = 54;
+	string livingArea = 55;
+	string propertyArea = 56;
+	string priceNamespace = 57;
+	int32 price = 58;
+	string priceCurrency = 59;
+	int32 version = 60;
+	int32 minorVersion = 61;
+	string tenantId = 62;
+	string mergedIntoActorId = 63;
+	bool isPrimary = 64;
+	bool hidden = 65;
+	bool showInContactLists = 66;
+	string referenceActorId = 67;
+	double leadScore = 68;
+	string rextId = 69;
+	google.protobuf.Timestamp startDate = 70;
+	google.protobuf.Timestamp endDate = 71;
+	bool hasActiveWish = 72;
+	bool hasActiveProfile = 73;
+	google.protobuf.Timestamp latestLogin = 74;
+	WishModel wishCriterias = 75;
+	string verificationStateNamespace = 76;
+	google.protobuf.Timestamp verificationExecutedAt = 77;
+	bool isVerified = 78;
+	string primaryResourceGroupId = 79;
+	repeated string tags = 80;
+	repeated EntityRefModel entityReferences = 81;
+	repeated ActorConsentModel actorConsents = 82;
+	repeated ConsentPermissionModel consentPermissions = 83;
+	string fileRefUrl = 84;
+	google.protobuf.Timestamp activeFrom = 85;
+	google.protobuf.Timestamp activeTo = 86;
+	bool isEvent = 87;
+	google.protobuf.Timestamp eventFrom = 88;
+	google.protobuf.Timestamp eventTo = 89;
+	bool setSpecificContent = 90;
+	string title = 91;
+	string subTitle = 92;
+	string notificationFrequency = 93;
+	bool personalContact = 94;
+	google.protobuf.Timestamp transferTime = 95;
+	google.protobuf.Timestamp dateTime = 96;
+	string stateReasonNamespace = 97;
+	bool includeInPublicProfile = 98;
+	bool canPreparePublicProfile = 99;
+	repeated KeyValueModel keyValues = 100;
+	repeated PricingValueModel pricingValues = 101;
+	repeated AdTextModel adTextValues = 102;
+	EnergyLabelModel energyLabel = 103;
+	string externalPresentationUrl = 104;
+	bool concealedListing = 105;
+	bool underConstruction = 106;
+	google.protobuf.Timestamp constructionReadyDate = 107;
+    string externalContentUrl = 108;
+	repeated string supplementalLegalEstateTypes = 109;
+	repeated string alternativeEstateTypes = 110;
+	string handlerNamespace = 111;
+	repeated SoMeModel soMes = 112;
+	repeated LawRegulation lawRegulations = 113;
+	bool includeInMatchEngine = 114;		
+	repeated DataNodeComment comments = 115;
+	NullableDateTimeOffset dueDate = 116;
+	NullableGuid relatedActorId = 117;
+	NullableGuid relatedCaseId = 118;
+	NullableGuid relatedAppointmentId = 119;
+	NullableGuid responsibleActorId = 120;
+	string messageSubject = 121;
+}
+
+message DataNodeComment {
+	string id = 1;
+	string createdById = 2;
+	google.protobuf.Timestamp createdAt = 3;
+	string comment = 4;
+	string dataNodeId = 5;
+}
+
+message LawRegulation {
+	string id = 1;
+	string namespace = 2;
+	repeated string activeLawRegulations = 3;
+}
+
+message DataNodeExternalReferenceModel {
+	string externalId = 1;
+	string externalSystemNamespace = 2;
+}
+
+message DataNodeSharingRuleModel {
+	string id = 1;
+	repeated string permissions = 2;
+	string sharingRoles = 3;
+	repeated string roles = 4;
+	string level = 5;
+	google.protobuf.Timestamp start = 6;
+	google.protobuf.Timestamp end = 7;
+	bool isTemporal = 8;
+	bool activated = 9;
+	bool terminated = 10;
+}
+
+message DataNodeStateHistoryModel {
+	string id = 1;
+	string stateNamespace = 2;
+	string stateReasonNamespace = 3;
+	string stateFlowNamespace = 4;
+	string stateCategoryNamespace = 5;
+	google.protobuf.Timestamp createdAt = 6;
+	google.protobuf.Timestamp executedAt = 7;
+	bool isCurrent = 8;
+}
+
+message ActorRoleReference {
+	string roleId = 1;
+	string roleNamespace = 2;
+	string referenceActorId = 3;
+	string scopeId = 4;
+	bool allowToViewInCustomerPortal = 5;
+}
+
+message ActorIdentityModel {
+	string identityId = 1;
+	string createdById = 2;
+	string createdAt = 3;
+	string deletedById = 4;
+	string deletedAt = 5;
+	string flowType = 6;
+}
+message PhoneModel {
+	string phoneInformationElementId = 1;
+	string prefix = 2;
+	string number = 3;
+	string internationalNumber = 4;
+	string phoneType = 5;
+	bool primary = 6;
+	bool isVerified = 7;
+	string phoneInformationElementNamespace = 8;
+}
+message EmailModel{
+	string address = 1;
+	string emailInformationElementId = 2;
+	bool primary = 3;
+	bool isVerified = 4;
+	string emailInformationElementNamespace = 5;
+}
+message SoMeModel {
+	string soMeInformationElementId = 1;
+	string namespace = 2;
+	string url = 3;
+	bool primary = 4;
+	bool isVerified = 5;
+	string soMeInformationElementNamespace = 6;
+}
+
+message EstateModel{
+	string displayName = 1;
+	string namespace = 2;
+	string rootId = 3;
+	bool isPrimary = 4;
+}
+message AddressModel{
+	string sourceId = 1;
+	string countryCode = 2;
+	string displayName = 3;
+	string streetNumber = 4;
+	string floor = 5;
+	string door = 6;
+	string postalCode = 7;
+	string city = 8;
+	string propertyNumber = 9;
+	string matrikelNumber = 10;
+	string districtCode = 11;
+	string districtName = 12;
+	bool isVerified = 13;
+	string streetName = 14;
+	double latitude = 15;
+	double longitude = 16;
+	MunicipalityModel municipality = 17;
+	SupplementaryCityName supplementaryCityName = 18;
+}
+message MunicipalityModel{
+	string displayName = 1;
+	string code = 2;
+	string countryCode = 3;
+	string source = 4;
+}
+
+message SupplementaryCityName {
+	string displayName = 1;
+	string code = 2;
+	string countryCode = 3;
+	string source = 4;
+}
+
+message WishModel{
+	repeated string estateTypes = 1;
+	repeated RangeModel ranges = 2;
+	repeated LocationModel locations = 3;
+
+	message LocationModel {
+		string id = 1;
+		string namespace = 2;
+		string displayName = 3;
+		string source = 4;
+		string sourceId = 5;
+		string countryCode = 6;
+	}
+	message RangeModel {
+		string id = 1;
+		string namespace = 2;
+		string displayName = 3;
+		string lowerValue = 4;
+		string upperValue = 5;
+	}
+}
+
+message EntityRefModel {
+	string referenceNamespace = 1;
+	string referenceId = 2;
+}
+
+message ActorConsentModel{
+	string actorConsentId = 1;
+	string consentId = 2;
+	int32 consentVersion = 3;
+	string completionStatus = 4;
+	string consentStatus = 5;
+}
+message ConsentPermissionModel{
+	string namespace = 1;
+	string displayName = 2;
+}
+
+message KeyValueModel{
+	string key = 1;
+	string value = 2;
+}
+
+message PricingValueModel{
+	string namespace = 1;
+	int32 price = 2;
+	string currency = 3;
+}
+
+message AdTextModel{
+	string namespace = 1;
+	string displayName = 2;
+	string inputType = 3;
+	string payload = 4;
+}
+
+message EnergyLabelModel{
+	string energyLabelSerialIdentifier = 1;
+	string energyLabelClassification = 2;
+	string submitterCompanyIdentifier = 3;
+	string submitterConsultantName = 4;
+	string submitterCompanyName = 5;
+	google.protobuf.Timestamp validFrom = 6;
+	google.protobuf.Timestamp validTo = 7;
+	string demoLink = 8;
+	string additionalHeat = 9;
+	int32 calculatedConsumption = 10;
+	string totalProfitableInvestment = 11;
+	int32 extraCostPrYear = 12;
+	string possibleEnergyLabelForAllProfitableProposals = 13;
+	string heatSupply = 14;
+}
+
+message SearchFilter {
+	repeated FilterOption filtering = 1;
+	repeated SortOption sorting = 2;
+}
+
+message FilterOption {
+	string column = 1;
+	bool includeEmptyValues = 2;
+	repeated string includeValues = 3;
+	repeated string excludeValues = 4; 
+}
+
+message SortOption {
+	string column = 1;
+	int32 order = 2;
+}
+
+message NullableDateTimeOffset {
+	oneof kind {
+    google.protobuf.NullValue null = 1;
+    google.protobuf.Timestamp value = 2;
+  }
+}
+
+message NullableGuid {
+	oneof kind {
+    google.protobuf.NullValue null = 1;
+    string value = 2;
+  }
+}
