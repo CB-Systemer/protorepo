@@ -1,3 +1,4 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
 syntax = "proto3";
 option csharp_namespace = "Cbs.DataNodes.Api.Archive";
 
@@ -26,7 +27,7 @@ message ArchiveSmsRequest {
  string parent_id = 2;
  string parent_namespace = 3;
  string received_at = 4;
- repeated string recipient_number = 5;
+ repeated string recipient_numbers = 5;
  string tenant_id = 6;
  string resource_group_id = 7;
 }

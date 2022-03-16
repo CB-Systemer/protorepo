@@ -1,0 +1,46 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.ProjectCaseReference";
+
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+service ProjectCaseReferenceApi {
+	rpc GetProjectCaseReferencesForScope (ProjectCaseReferencesRequest) returns (ProjectCaseReferencesReply);
+	rpc GetProjectReferencedCases (ProjectCaseReferencesRequest) returns (GetProjectReferencedCasesReply);
+}
+
+message ProjectCaseReferencesRequest {
+	ActorContext actorContext = 1;
+	int32 top = 2;
+	int32 skip = 3;
+	string query = 4;
+	string sortBy = 5;
+	string id = 6;
+}
+
+message GetProjectReferencedCasesReply {
+	repeated string caseIds = 1;
+	int64 hits = 2;
+}
+
+message ProjectCaseReferencesReply {
+	repeated ProjectCaseReference projectCaseReferences = 1;
+	int64 hits = 2;
+}
+
+message ProjectCaseReference {
+	string id = 1;
+	string namespace = 2;
+	string groupKey = 3;
+	string groupName = 4;
+	string caseId = 5;
+	string caseDisplayName = 6;
+	string caseStateNamespace = 7;
+	string caseImageUrl = 8;
+	string rootId = 9;
+	string scopeId = 10;
+	string DisplayName = 11;
+	string ImageUrl = 12;
+	google.protobuf.Timestamp createdAt = 13;
+}
