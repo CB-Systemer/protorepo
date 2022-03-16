@@ -5,6 +5,8 @@ option csharp_namespace = "Chat.Api";
 service ChatApi {
   rpc Login (LoginRequest) returns (LoginReply);
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
+  rpc CreateChatV2 (CreateChatRequestV2) returns (CreateChatReply);
+  rpc UpdateChat (UpdateChatRequest) returns (UpdateChatReply);
   rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
@@ -42,10 +44,33 @@ message CreateChatRequest {
   repeated string actor_ids = 2;
 }
 
+message CreateChatRequestV2 {
+  string datanode_id = 1;
+  repeated ChatMember members = 2;
+}
+
+
 message CreateChatReply {
   string chat_id = 2;
   string chat_name = 3;
 }
+
+message UpdateChatRequest {
+  string datanode_id = 1;
+  repeated ChatMember members = 2;
+}
+
+message UpdateChatReply {
+}
+
+message ChatMember {
+  string actor_Id = 1;
+  bool is_active = 2;
+  bool receive_notifications = 3;
+  bool is_auto_added = 4;
+}
+
+
 
 message DeleteChatRequest {
   string datanode_id = 1;
