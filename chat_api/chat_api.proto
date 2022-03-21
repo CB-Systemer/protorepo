@@ -3,34 +3,45 @@ syntax = "proto3";
 
 option csharp_namespace = "Chat.Api";
 
+import "google/protobuf/timestamp.proto";
+
 service ChatApi {
-  rpc Login (LoginRequest) returns (LoginReply);
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
-  rpc CreateChatV2 (CreateChatRequestV2) returns (CreateChatReply);
   rpc UpdateChat (UpdateChatRequest) returns (UpdateChatReply);
+  rpc CreateMessage (CreateMessageRequest) returns (CreateMessageReply);
   rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
-  rpc GetChatV2 (GetChatRequest) returns (GetChatReplyV2);
+  rpc HasAccess(HasAccessRequest) returns (HasAccessReply);
 }
 
-message LoginRequest {
-  string actor_id = 1;
+message HasAccessRequest {
+	string datanode_id = 1;
+	string actor_id = 2;
 }
 
-message LoginReply {
-  string password = 1;
+message HasAccessReply {
+	bool has_access=1;
+}
+
+message CreateMessageRequest {
+  string datanode_id = 1;
   string actor_id = 2;
-  string server_url = 3;
+  string body = 3;
+}
+
+message CreateMessageReply {
+   ChatMessage message = 1;
 }
 
 message JoinChatRequest {
-  string datanode_id = 1;
-  string actor_id = 2;
+	string datanode_id = 1;
+	string actor_id = 2;
 }
 
 message JoinChatReply {
+
 }
 
 message LeaveChatRequest {
@@ -43,14 +54,8 @@ message LeaveChatReply {
 
 message CreateChatRequest {
   string datanode_id = 1;
-  repeated string actor_ids = 2;
-}
-
-message CreateChatRequestV2 {
-  string datanode_id = 1;
   repeated ChatMember members = 2;
 }
-
 
 message CreateChatReply {
   string chat_id = 2;
@@ -58,43 +63,40 @@ message CreateChatReply {
 }
 
 message UpdateChatRequest {
-  string datanode_id = 1;
-  repeated ChatMember members = 2;
+	string datanode_id = 1;
+	repeated ChatMember members = 2;
 }
 
 message UpdateChatReply {
 }
 
-message ChatMember {
-  string actor_Id = 1;
-  bool is_active = 2;
-  bool receive_notifications = 3;
-  bool is_auto_added = 4;
-}
-
-
-
 message DeleteChatRequest {
-  string datanode_id = 1;
+	string datanode_id = 1;
 }
 
 message DeleteChatReply {
 }
 
 message GetChatRequest {
-  string datanode_id = 1;
+	string datanode_id = 1;
 }
 
 message GetChatReply {
-  string datanode_id = 1;
-  string chat_id = 2;
-  string chat_name = 3;
-  repeated string actor_ids = 4;
+	string datanode_id = 1;
+	repeated ChatMember members = 2;
+	repeated ChatMessage messages = 3;
 }
 
-message GetChatReplyV2 {
-  string datanode_id = 1;
-  string chat_id = 2;
-  string chat_name = 3;
-  repeated ChatMember members = 4;
+message ChatMessage {
+	string id = 1;
+	string actor_id = 2;
+	string body = 3;
+	google.protobuf.Timestamp createdAt = 4;
+}
+
+message ChatMember {
+	string actor_id = 1;
+	bool is_active = 2;
+	bool receive_notifications = 3;
+	bool is_auto_added = 4;
 }
