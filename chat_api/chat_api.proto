@@ -8,7 +8,9 @@ import "google/protobuf/timestamp.proto";
 service ChatApi {
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
   rpc UpdateChat (UpdateChatRequest) returns (UpdateChatReply);
+  rpc UpdateMember (UpdateMemberRequest) returns (UpdateMemberReply);
   rpc CreateMessage (CreateMessageRequest) returns (CreateMessageReply);
+  rpc ReadMessage (ReadMessageRequest) returns (ReadMessageReply);
   rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
@@ -34,6 +36,26 @@ message CreateMessageRequest {
 message CreateMessageReply {
    ChatMessage message = 1;
 }
+
+message UpdateMemberRequest {
+  string datanode_id = 1;
+  string actor_id = 2;
+  bool is_active = 3;
+  bool receive_notifications = 4;
+}
+
+message UpdateMemberReply {
+}
+
+message ReadMessageRequest {
+  string datanode_id = 1;
+  string actor_id = 2;
+  string message_id = 3;
+}
+
+message ReadMessageReply {
+}
+
 
 message JoinChatRequest {
 	string datanode_id = 1;
