@@ -27,6 +27,7 @@ service CaseApi {
 
 message CasePublicProfileDisplayNameRequest{
 	string id = 1;
+	ActorContext actorContext = 2;
 }
 
 message CasePublicProfileDisplayNameReply{
