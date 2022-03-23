@@ -12,7 +12,7 @@ service CaseApi {
 	rpc GetResourceGroupCases (GetResourceGroupCasesRequest) returns (GetResourceGroupCasesReply);
 	rpc GetPublicProfile (CasePublicProfileRequest) returns (CasePublicProfileReply);
 	rpc GetPublicProfiles (CasePublicProfilesRequest) returns (CasePublicProfilesReply);
-	rpc GetPublicProfileDisplayName (CasePublicProfileDisplayNameRequest) returns (CasePublicProfileDisplayNameReply);
+	rpc GetPublicProfileDisplayNameByCaseId (GetPublicProfileDisplayNameByCaseIdRequest) returns (GetPublicProfileDisplayNameByCaseIdReply);
 	rpc GetPropertyFacts (CasePropertyFactsRequest) returns (CasePropertyFactsReply);
 	rpc GetCaseEconomy (CaseEconomyRequest) returns (CaseEconomyReply);
 	rpc GetLawRegulations (LawRegulationsRequest) returns (LawRegulationsReply);
@@ -25,12 +25,12 @@ service CaseApi {
 	rpc FindRelatedCasesCount (FindRelatedCasesCountRequest) returns (RelatedCasesCountReply);
 }
 
-message CasePublicProfileDisplayNameRequest{
+message GetPublicProfileDisplayNameByCaseIdRequest{
 	string id = 1;
 	ActorContext actorContext = 2;
 }
 
-message CasePublicProfileDisplayNameReply{
+message GetPublicProfileDisplayNameByCaseIdReply{
 	string displayName = 1;
 }
 
