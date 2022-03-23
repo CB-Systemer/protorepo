@@ -12,6 +12,10 @@ service ChatApi {
   rpc CreateMessage (CreateMessageRequest) returns (CreateMessageReply);
   rpc ReadMessage (ReadMessageRequest) returns (ReadMessageReply);
   rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
+  rpc ConnectChat (ConnectChatRequest) returns (ConnectChatReply);
+  rpc DisconnectChat (DisconnectChatRequest) returns (DisconnectChatReply);
+  rpc ConnectRoom (ConnectRoomRequest) returns (ConnectRoomReply);
+  rpc DisconnectRoom (DisconnectRoomRequest) returns (DisconnectRoomReply);
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
@@ -37,11 +41,47 @@ message CreateMessageReply {
    ChatMessage message = 1;
 }
 
+
+message ConnectChatRequest {
+  string actor_id = 1;
+}
+
+message ConnectChatReply {
+
+}
+
+message DisconnectChatRequest {
+  string actor_id = 1;
+}
+
+message DisconnectChatReply {
+	repeated string room_ids = 1;
+}
+
+message ConnectRoomRequest {
+  string datanode_id = 1;
+  string actor_id = 2;
+}
+
+message ConnectRoomReply {
+
+}
+
+message DisconnectRoomRequest {
+  string datanode_id = 1;
+  string actor_id = 2;
+}
+
+message DisconnectRoomReply {
+
+}
+
 message UpdateMemberRequest {
   string datanode_id = 1;
   string actor_id = 2;
   bool is_active = 3;
   bool receive_notifications = 4;
+
 }
 
 message UpdateMemberReply {
@@ -107,6 +147,7 @@ message GetChatReply {
 	string datanode_id = 1;
 	repeated ChatMember members = 2;
 	repeated ChatMessage messages = 3;
+	google.protobuf.Timestamp createdAt = 4;
 }
 
 message ChatMessage {
@@ -121,4 +162,8 @@ message ChatMember {
 	bool is_active = 2;
 	bool receive_notifications = 3;
 	bool is_auto_added = 4;
+	google.protobuf.Timestamp viewed_at = 5;
+	google.protobuf.Timestamp created_at = 6;
+	bool since_start = 7;
+	bool is_online = 8;
 }
