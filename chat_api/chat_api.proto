@@ -20,6 +20,7 @@ service ChatApi {
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
   rpc HasAccess(HasAccessRequest) returns (HasAccessReply);
+   rpc HasMembers(HasMembersRequest) returns (HasMembersReply);
 }
 
 message HasAccessRequest {
@@ -30,6 +31,15 @@ message HasAccessRequest {
 message HasAccessReply {
 	bool has_access=1;
 }
+
+message HasMembersRequest {
+	string datanode_id = 1;
+}
+
+message HasMembersReply {
+	bool has_members=1;
+}
+
 
 message CreateMessageRequest {
   string datanode_id = 1;
@@ -116,7 +126,7 @@ message LeaveChatReply {
 
 message CreateChatRequest {
   string datanode_id = 1;
-  repeated ChatMember members = 2;
+  repeated CreateChatMember members = 2;
 }
 
 message CreateChatReply {
@@ -126,7 +136,8 @@ message CreateChatReply {
 
 message UpdateChatRequest {
 	string datanode_id = 1;
-	repeated ChatMember members = 2;
+	repeated UpdateChatMember members = 2;
+	bool is_sync_request = 3;
 }
 
 message UpdateChatReply {
@@ -144,6 +155,10 @@ message GetChatRequest {
 }
 
 message GetChatReply {
+	Chat chat = 1;
+}
+
+message Chat {
 	string datanode_id = 1;
 	repeated ChatMember members = 2;
 	repeated ChatMessage messages = 3;
@@ -157,6 +172,20 @@ message ChatMessage {
 	google.protobuf.Timestamp createdAt = 4;
 }
 
+message CreateChatMember {
+	string actor_id = 1;
+	bool is_active = 2;
+	bool receive_notifications = 3;
+	bool is_auto_added = 4;
+}
+
+message UpdateChatMember {
+	string actor_id = 1;
+	bool is_active = 2;
+	bool receive_notifications = 3;
+	bool is_auto_added = 5;
+}
+
 message ChatMember {
 	string actor_id = 1;
 	bool is_active = 2;
@@ -166,4 +195,5 @@ message ChatMember {
 	google.protobuf.Timestamp created_at = 6;
 	bool since_start = 7;
 	bool is_online = 8;
+	string type = 9;
 }
