@@ -24,19 +24,19 @@ message GetFavoriteReply {
 
 message GetFavoritesForActorRequest {
 	string actorId = 1;
-	ActorContext actorContext = 2;
 	bool includeInactive = 3;
 	int32 skip = 4;
 	int32 top = 5;
+	repeated string permissions = 6;
 }
 
 message GetFavoritesForCaseRequest {
 	string query = 1;
 	string caseId = 2;
-	ActorContext actorContext = 3;
 	bool includeInactive = 4;
 	int32 skip = 5;
 	int32 top = 6;
+	repeated string permissions = 7;
 }
 
 message FavoritesReply{
@@ -69,7 +69,7 @@ message Favorite {
 	string tenantId = 22;
 	CaseData caseData = 23;
 }
-message CaseData 
+message CaseData
 {
 	string caseId = 1;
 	string casePublicProfileId = 2;
