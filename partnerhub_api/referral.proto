@@ -1,0 +1,81 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "PartnerHub.Api.Protos";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+service ReferralService {
+  rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
+  rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
+  
+  rpc GetReferralsForContext (GetReferralByContextRequest) returns (ReferralList);
+  rpc GetReferralsForProduct (GetReferralByProductRequest) returns (ReferralList);
+  rpc GetReferralsForRecipient (GetReferralByRecipientRequest) returns (ReferralList);
+}
+
+message ReferralDto{
+  string id = 13;
+
+  string product_id = 1;
+  int32 product_version = 2;
+  string product_type = 3;
+
+  string referred_actor_id = 4;
+  string referred_actor_namespace = 5;
+
+  string display_name = 6;
+  string short_description = 7;
+
+  string recipient_resource_group_id = 11;
+
+  google.protobuf.StringValue order_recipient_id = 9;
+  google.protobuf.StringValue order_recipient_namespace = 10;
+  
+  string created_by = 12;
+  string created_at = 14;
+  string updated_by = 15;
+  string updated_at = 16;
+}
+
+message ReferralList{
+  repeated ReferralDto referrals = 1;
+}
+
+message CreateReferralRequest{
+  string product_id = 1;
+  int32 product_version = 2;
+  string product_type = 3;
+  
+  string referred_actor_id = 4;
+  string referred_actor_namespace = 5;
+    
+  string display_name = 6;
+  string short_description = 7;
+  string executing_actor_id = 8;
+
+  string recipient_resource_group_id = 11;
+
+  google.protobuf.StringValue created_by_actor_id = 12;
+
+  google.protobuf.StringValue order_recipient_id = 9;
+  google.protobuf.StringValue order_recipient_namespace = 10;
+}
+
+message CancelReferralRequest{
+  string id = 1;  
+  string executing_actor_id = 2;
+}
+
+message GetReferralByProductRequest{
+  string product_id = 1;
+  google.protobuf.Int32Value product_version = 2;
+}
+
+message GetReferralByContextRequest{
+  string context_id = 1;
+}
+
+message GetReferralByRecipientRequest{
+  string order_recipient_id = 1;
+}
