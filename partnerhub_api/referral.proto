@@ -9,9 +9,15 @@ service ReferralService {
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
   
-  rpc GetReferralsForContext (GetReferralByContextRequest) returns (ReferralList);
+  rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
+  
   rpc GetReferralsForProduct (GetReferralByProductRequest) returns (ReferralList);
   rpc GetReferralsForRecipient (GetReferralByRecipientRequest) returns (ReferralList);
+  rpc GetReferralsForResourceGroup (GetReferralByResourceGroupRequest) returns (ReferralList);
+  rpc GetReferralsForAssignedActor (GetReferralByAssignedActorRequest) returns (ReferralList);
+
+  rpc GetReferralsCreatedByActor (GetReferralsCreatedByActorRequest) returns (ReferralList);
+  rpc GetReferralsCreatedFromResourceGroup (GetReferralsCreatedFromResourceGroupRequest) returns (ReferralList);
 }
 
 message ReferralDto{
@@ -32,7 +38,11 @@ message ReferralDto{
   google.protobuf.StringValue order_recipient_id = 9;
   google.protobuf.StringValue order_recipient_namespace = 10;
   
+  repeated InformationFieldDto information_fields = 17;
+  string status = 18;
+  
   string created_by = 12;
+  string created_from_resource_group_id = 19;
   string created_at = 14;
   string updated_by = 15;
   string updated_at = 16;
@@ -57,9 +67,17 @@ message CreateReferralRequest{
   string recipient_resource_group_id = 11;
 
   google.protobuf.StringValue created_by_actor_id = 12;
+  string created_from_resource_group = 14;
 
   google.protobuf.StringValue order_recipient_id = 9;
   google.protobuf.StringValue order_recipient_namespace = 10;
+  repeated InformationFieldDto information_fields = 13;
+}
+
+message InformationFieldDto{
+  string identifier = 1;
+  string type = 2;
+  string value = 3;
 }
 
 message CancelReferralRequest{
@@ -70,12 +88,35 @@ message CancelReferralRequest{
 message GetReferralByProductRequest{
   string product_id = 1;
   google.protobuf.Int32Value product_version = 2;
+  repeated string resource_group_scopes = 3;
 }
 
-message GetReferralByContextRequest{
-  string context_id = 1;
+message GetReferralsByReferredActorRequest{
+  string referred_actor_id = 1;
+  repeated string resource_group_scopes = 2;
 }
 
 message GetReferralByRecipientRequest{
   string order_recipient_id = 1;
+  repeated string resource_group_scopes = 2;
 }
+
+message GetReferralByResourceGroupRequest{
+  string resource_group_id = 1;
+}
+
+message GetReferralByAssignedActorRequest{
+  string assigned_actor_id = 1;
+  repeated string resource_group_scopes = 2;
+}
+
+message GetReferralsCreatedByActorRequest{
+  string actor_id = 1;
+  repeated string resource_group_scopes = 2;
+}
+
+message GetReferralsCreatedFromResourceGroupRequest{
+  string resource_group_id = 1;
+}
+
+    
