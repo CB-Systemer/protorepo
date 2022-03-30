@@ -11,10 +11,11 @@ service RecomApi {
 }
 
 message GetRecipientsInfoMessageRequest {
-  repeated ActorRecipient actor_recipients = 1;
+  reserved 1 to 5;
+  ActorContext actor_context = 6;
   string context_tenant_id = 7;
   string context_resource_group_id = 8;
-  ActorContext actor_context = 6;
+  repeated string actor_recipients = 9;
 }
 
 message GetRecipientsInfoMessageReply {
@@ -26,6 +27,8 @@ message ActorRecipientInfo {
   string display_name = 2;
   string sms_number = 3;
   string actor_id = 4;
+  string tenant_id = 5;
+  string resource_group_id = 6;
 }
 
 message SendSmsMessageRequest {

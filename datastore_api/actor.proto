@@ -8,6 +8,7 @@ import "common/common.proto";
 
 service ActorApi {
   rpc GetActor (GetActorRequest) returns (ActorReply);
+  rpc GetActorsById (GetActorsByIdRequest) returns (GetActorsByIdReply);
   rpc GetActorExists (GetActorExistsRequest) returns (GetActorExistsResponse);
   rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
   rpc UpdateActor (UpdateActorRequest) returns (ActorReply);
@@ -36,9 +37,9 @@ message FindRelatedActorsRequest{
   string applicationId = 1;
   string identityId = 2;
   repeated string emails = 3;
-  repeated string phones = 4; 
+  repeated string phones = 4;
   int32 top = 5;
-  int32 skip = 6; 
+  int32 skip = 6;
 }
 
 message FindActorsRequest{
@@ -74,7 +75,14 @@ message IndexActorsReply {
 
 message GetActorRequest {
   string actorId = 1;
+  reserved 2 to 5;
   repeated string permissions = 6;
+}
+
+message GetActorsByIdRequest {
+	repeated string actorIds = 1;
+	reserved 2 to 5;
+	repeated string permissions = 6;
 }
 
 message GetDbActorRequest {
@@ -125,6 +133,13 @@ message ActorReply {
   string scrollId = 4;
 }
 
+message GetActorsByIdReply{
+	repeated Actor actors = 1;
+	int64 total = 2;
+	string debugInformation = 3;
+	string scrollId = 4;
+}
+
 message Actor {
 	string id = 1;
 	string namespace = 2;
@@ -151,8 +166,8 @@ message Actor {
 	string executedById = 23;
 	string scopeUpdatedById = 24;
 	bool isDeleted = 25;
-	repeated string namespaces = 26;		
-	string createdFromSource = 27;	
+	repeated string namespaces = 26;
+	string createdFromSource = 27;
 	string externalId = 28;
 	repeated ActorRoleReference actorRoleReferences = 29;
 	repeated ActorIdentitySearchModel actorIdentities = 30;
