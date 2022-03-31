@@ -19,8 +19,9 @@ service ChatApi {
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
+  rpc GetChatList (GetChatListRequest) returns (GetChatListReply);
   rpc HasAccess(HasAccessRequest) returns (HasAccessReply);
-   rpc HasMembers(HasMembersRequest) returns (HasMembersReply);
+  rpc HasMembers(HasMembersRequest) returns (HasMembersReply);
 }
 
 message HasAccessRequest {
@@ -156,6 +157,14 @@ message GetChatRequest {
 
 message GetChatReply {
 	Chat chat = 1;
+}
+
+message GetChatListRequest {
+	repeated string datanode_ids = 1;
+}
+
+message GetChatListReply {
+	repeated Chat chats = 1;
 }
 
 message Chat {
