@@ -8,7 +8,9 @@ import "google/protobuf/wrappers.proto";
 service ReferralService {
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
-  
+
+  rpc GetReferralDetails (GetReferralsDetailsRequest) returns (ReferralDto);
+
   rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
   
   rpc GetReferralsForProduct (GetReferralByProductRequest) returns (ReferralList);
@@ -84,6 +86,11 @@ message InformationFieldDto{
 message CancelReferralRequest{
   string id = 1;  
   string executing_actor_id = 2;
+}
+
+message GetReferralsDetailsRequest{
+  string id = 1;
+  repeated string resource_group_scopes = 2;
 }
 
 message GetReferralByProductRequest{
