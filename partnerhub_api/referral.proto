@@ -9,7 +9,7 @@ service ReferralService {
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
 
-  rpc GetReferralDetails (GetReferralsDetailsRequest) returns (ReferralDto);
+  rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDto);
 
   rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
   
@@ -88,7 +88,7 @@ message CancelReferralRequest{
   string executing_actor_id = 2;
 }
 
-message GetReferralsDetailsRequest{
+message GetReferralDetailsRequest{
   string id = 1;
   repeated string resource_group_scopes = 2;
 }
