@@ -1,0 +1,24 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataNodes.Api.DatanodeReference";
+
+service DatanodeReferenceApi {
+	rpc GetDatanodeReference(GetDatanodeReferenceRequest) returns (GetDatanodeReferenceResponse);
+}
+
+message GetDatanodeReferenceRequest {
+	string datanodeId = 1;
+}
+
+message GetDatanodeReferenceResponse {
+	string datanodeId = 1;
+	string datanode_namespace = 2;
+	string parent_datanode_id = 3;
+	string parent_namespace = 4;
+	string scope_datanode_id = 5;
+	string scope_namespace = 6;
+	string root_datanode_id = 7;
+	string root_namespace = 8;
+	string resource_group_id = 9;
+	string data_store_id = 10;
+	string display_name = 11;
+}
