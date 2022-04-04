@@ -1,4 +1,3 @@
-// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
 syntax = "proto3";
 
 option csharp_namespace = "Coco.Api";
@@ -47,6 +46,7 @@ service CocoApi {
   rpc GetConsentConfig(GetSingleConfigRequest) returns (GetConsentConfigReply);
   rpc GetActorConfig(GetSingleConfigRequest) returns (GetActorConfigReply);
   rpc GetActorRoleConfig(GetSingleConfigRequest) returns (GetActorRoleConfigReply);
+  rpc GetManyActorRolesWildcardConfig(GetManyWildcardConfigRequest) returns (GetManyActorRolesConfigReply);
   rpc GetManyActorRolesConfig(GetManyConfigRequest) returns (GetManyActorRolesConfigReply);
   rpc GetAppointmentConfig(GetSingleConfigRequest) returns (GetAppointmentConfigReply);
   rpc GetCampaignConfig(GetSingleConfigRequest) returns (GetCampaignConfigReply);
@@ -204,6 +204,11 @@ message GetSingleConfigRequest {
 message GetManyConfigRequest {
     string consumer_id = 1;
 	repeated string namespaces = 2;
+}
+
+message GetManyWildcardConfigRequest {
+    string consumer_id = 1;
+	repeated string wildcards = 2;
 }
 
 message GetTypesRequest {
@@ -377,7 +382,6 @@ message ReminderDto {
     string icon_name = 4;
     string template_target_namespace = 6;
 }
-
 
 message GetAllConfirmationsReply {
 	repeated ConfirmationDto configs = 1;
@@ -663,7 +667,7 @@ message ManagedFieldFragmentDto {
     string vat_code = 23;
     FieldDataTypeDto field_data_type = 24;
     FieldCalculatedTypeDto field_calculated_type = 25;
-    repeated FieldOptionListItemDto option_list = 26;
+	repeated FieldOptionListItemDto option_list = 26;
 }
 
 message FieldOptionListItemDto {
@@ -708,7 +712,7 @@ enum FieldValueTypeDto
         CalculateMean = 17;
         CalculateNewest = 18;
         CalculateOldest = 19;
-        OptionList = 20;
+		OptionList = 20;
     }
 
 
@@ -782,6 +786,7 @@ message ActorRoleConfigDto {
     string unknown_actor_display_name = 6;
     string instance_namespace = 7;
     bool is_selectable = 8;
+    bool is_non_participant_role = 9;
 }
 
 message AppointmentConfigDto{
