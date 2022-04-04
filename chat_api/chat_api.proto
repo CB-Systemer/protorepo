@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 
 service ChatApi {
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
+  rpc ElevateRole (ElevateRoleRequest) returns (ElevateRoleReply);
   rpc UpdateChat (UpdateChatRequest) returns (UpdateChatReply);
   rpc UpdateMember (UpdateMemberRequest) returns (UpdateMemberReply);
   rpc CreateMessage (CreateMessageRequest) returns (CreateMessageReply);
@@ -41,6 +42,13 @@ message HasMembersReply {
 	bool has_members=1;
 }
 
+message ElevateRoleRequest {
+	string datanode_id = 1;
+	string actor_id = 2;
+}
+
+message ElevateRoleReply {
+}
 
 message CreateMessageRequest {
   string datanode_id = 1;
