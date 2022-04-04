@@ -1,0 +1,34 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataStore.Api.ProductIndex";
+
+
+service ProductIndexApi {
+    rpc RebuildIndex (RebuildSearchIndexRequest) returns (RebuildSearchIndexReply);
+    rpc Reindex (ReindexRequest) returns (ReindexReply);
+    rpc UpdateMappings (UpdateMappingsRequest) returns (UpdateMappingsReply);
+}
+
+message RebuildSearchIndexRequest {
+};
+
+message RebuildSearchIndexReply {
+	bool success = 1;
+	string message = 2;
+};
+
+message ReindexRequest {
+};
+
+message ReindexReply {
+};
+
+message UpdateMappingsRequest {
+};
+
+message UpdateMappingsReply {
+	bool success = 1;
+	string message = 2;
+};
+
