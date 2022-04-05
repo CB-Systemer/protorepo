@@ -1,3 +1,4 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED THROUGH OUR PROTOREPO **********************************
 syntax = "proto3";
 
 option csharp_namespace = "Coco.Api";
