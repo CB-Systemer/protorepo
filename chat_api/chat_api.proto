@@ -20,9 +20,19 @@ service ChatApi {
   rpc LeaveChat (LeaveChatRequest) returns (LeaveChatReply);
   rpc DeleteChat (DeleteChatRequest) returns (DeleteChatReply);
   rpc GetChat (GetChatRequest) returns (GetChatReply);
+  rpc GetMyUnreadChatCount (GetMyUnreadChatCountRequest) returns (GetMyUnreadChatCountReply);
   rpc GetChatList (GetChatListRequest) returns (GetChatListReply);
   rpc HasAccess(HasAccessRequest) returns (HasAccessReply);
   rpc HasMembers(HasMembersRequest) returns (HasMembersReply);
+}
+
+message GetMyUnreadChatCountRequest {
+	string actor_id = 1;
+	repeated string datanode_ids = 2;
+}
+
+message GetMyUnreadChatCountReply {
+	int32 count = 1;
 }
 
 message HasAccessRequest {
