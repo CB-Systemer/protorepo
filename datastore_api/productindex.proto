@@ -8,6 +8,7 @@ service ProductIndexApi {
     rpc RebuildIndex (RebuildSearchIndexRequest) returns (RebuildSearchIndexReply);
     rpc Reindex (ReindexRequest) returns (ReindexReply);
     rpc UpdateMappings (UpdateMappingsRequest) returns (UpdateMappingsReply);
+    rpc GetProductsFromProductPackages (GetProductsRequest) returns (GetProductsReply);
 }
 
 message RebuildSearchIndexRequest {
@@ -31,4 +32,67 @@ message UpdateMappingsReply {
 	bool success = 1;
 	string message = 2;
 };
+
+message GetProductsRequest {
+    repeated string product_package_id = 1;
+}
+
+message GetProductsReply {
+    repeated ProductDto products = 1;
+}
+
+message ProductDto {
+    string product_id = 1;
+    string product_package_id = 2;
+    string display_name = 3;
+    string image_url = 4;
+    PriceType price_type = 5;
+    int32 price = 6;
+    repeated InformationFieldDto information_fields = 7;
+    repeated AttachmentOptionDto attachment_options = 8;
+    repeated SubProductDto sub_products = 9;
+}
+
+enum PriceType {
+    ReferralFee = 0;
+    PricePerUnit = 1;
+}
+
+message SubProductDto {
+    string product_id = 1;
+    string display_name = 2;
+    string image_url = 3;
+    int32 price = 4;
+    int32 priority = 5;
+    bool use_amount_declaration = 6;
+    repeated InformationFieldDto information_fields = 7;
+    repeated AttachmentOptionDto attachment_options = 8;
+}
+
+message InformationFieldDto {
+    
+    string field_identifier = 1;
+    string field_name = 2;
+    string field_type = 3;
+    int32 field_priority = 4;
+    bool required = 5;
+    string description = 6;
+    repeated InformationFieldOptionDto options = 7;
+}
+
+message InformationFieldOptionDto {
+    string name = 1;
+    string value = 2;
+    int32 priority = 3;
+}
+
+message AttachmentOptionDto {
+    string attachment_identifier = 1;
+    string attachment_name = 2;
+    string attachment_type = 3;
+    bool allow_multiple = 4;
+    bool required = 5;
+    string Description = 6;
+    int32 priority = 7;
+}
 
