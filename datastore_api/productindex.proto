@@ -35,6 +35,8 @@ message UpdateMappingsReply {
 
 message GetProductsRequest {
     repeated string product_package_id = 1;
+    string product_type = 2;
+    string product_channel = 3;
 }
 
 message GetProductsReply {
@@ -48,14 +50,33 @@ message ProductDto {
     string image_url = 4;
     PriceType price_type = 5;
     int32 price = 6;
-    repeated InformationFieldDto information_fields = 7;
-    repeated AttachmentOptionDto attachment_options = 8;
-    repeated SubProductDto sub_products = 9;
+    ApprovalState global_admin_approval_state = 7;
+    ProductStatus product_status = 8;
+    string product_type = 9;
+    string product_channel = 10;
+    repeated InformationFieldDto information_fields = 11;
+    repeated AttachmentOptionDto attachment_options = 12;
+    repeated SubProductDto sub_products = 13;
 }
 
 enum PriceType {
     ReferralFee = 0;
     PricePerUnit = 1;
+}
+
+enum ProductStatus {
+    Inactive = 0;
+    Active = 1;
+    Replaced = 2;
+    Removed = 3;
+}
+
+enum ApprovalState {
+    NotApproved = 0;
+    Pending = 1;
+    Approved = 2;
+    Rejected = 3;
+    Revoked = 4;
 }
 
 message SubProductDto {
@@ -65,8 +86,12 @@ message SubProductDto {
     int32 price = 4;
     int32 priority = 5;
     bool use_amount_declaration = 6;
-    repeated InformationFieldDto information_fields = 7;
-    repeated AttachmentOptionDto attachment_options = 8;
+    ApprovalState global_admin_approval_state = 7;
+    ProductStatus product_status = 8;
+    string product_type = 9;
+    string product_channel = 10;
+    repeated InformationFieldDto information_fields = 11;
+    repeated AttachmentOptionDto attachment_options = 12;
 }
 
 message InformationFieldDto {
