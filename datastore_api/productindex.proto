@@ -2,6 +2,7 @@
 
 syntax = "proto3";
 option csharp_namespace = "Cbs.DataStore.Api.ProductIndex";
+import "google/type/money.proto";
 
 
 service ProductIndexApi {
@@ -49,7 +50,7 @@ message ProductDto {
     string display_name = 3;
     string image_url = 4;
     PriceType price_type = 5;
-    int32 price = 6;
+    google.type.Money price = 6;
     ApprovalState global_admin_approval_state = 7;
     ProductStatus product_status = 8;
     string product_type = 9;
@@ -57,6 +58,24 @@ message ProductDto {
     repeated InformationFieldDto information_fields = 11;
     repeated AttachmentOptionDto attachment_options = 12;
     repeated SubProductDto sub_products = 13;
+    repeated ImageReferenceDto image_urls = 14;
+    string short_description = 15;
+    string description = 16;
+    string partner_product_identifier = 17;
+    string price_unit = 18;
+    string vat_rate = 19;
+    bool allow_amount_declaration_at_delivery = 20;
+    bool show_status_to_sender = 21;
+    bool show_case_state_to_sender = 22;
+    bool allow_messages = 23;
+    bool allow_sender_cancellation = 24;
+    OrderRecipientMode order_recipient_mode = 25;
+    string product_category= 26;
+}
+
+message ImageReferenceDto {
+    string url = 1;
+    int32 prirority = 2;
 }
 
 enum PriceType {
@@ -79,11 +98,18 @@ enum ApprovalState {
     Revoked = 4;
 }
 
+enum OrderRecipientMode {
+    Self = 0;
+    ChainMembers = 1;
+    AllRecipients = 2;
+    Specific = 3;
+}
+
 message SubProductDto {
     string product_id = 1;
     string display_name = 2;
     string image_url = 3;
-    int32 price = 4;
+    google.type.Money price = 4;
     int32 priority = 5;
     bool use_amount_declaration = 6;
     ApprovalState global_admin_approval_state = 7;
@@ -92,6 +118,19 @@ message SubProductDto {
     string product_channel = 10;
     repeated InformationFieldDto information_fields = 11;
     repeated AttachmentOptionDto attachment_options = 12;
+    string product_category = 13;
+    repeated ImageReferenceDto image_urls = 14;
+    string short_description = 15;
+    string description = 16;
+    string partner_product_identifier = 17;
+    string price_unit = 18;
+    string vat_rate = 19;
+    bool allow_amount_declaration_at_delivery = 20;
+    bool show_status_to_sender = 21;
+    bool show_case_state_to_sender = 22;
+    bool allow_messages = 23;
+    bool allow_sender_cancellation = 24;
+    OrderRecipientMode order_recipient_mode = 25;
 }
 
 message InformationFieldDto {
@@ -120,4 +159,5 @@ message AttachmentOptionDto {
     string Description = 6;
     int32 priority = 7;
 }
+
 
