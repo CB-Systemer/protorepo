@@ -1053,4 +1053,10 @@ message ListDefinitionCocoDto {
     string namespace = 1;
     string displayName = 2;
     repeated string listContent = 3;
+    repeated ListColumnDto extra_columns = 4;
+}
+
+message ListColumnDto {
+  string property = 1;
+  string header = 2;
 }

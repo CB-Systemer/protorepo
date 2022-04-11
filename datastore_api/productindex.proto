@@ -4,7 +4,6 @@ syntax = "proto3";
 option csharp_namespace = "Cbs.DataStore.Api.ProductIndex";
 import "google/type/money.proto";
 
-
 service ProductIndexApi {
     rpc RebuildIndex (RebuildSearchIndexRequest) returns (RebuildSearchIndexReply);
     rpc Reindex (ReindexRequest) returns (ReindexReply);
