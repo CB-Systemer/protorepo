@@ -69,6 +69,7 @@ service CocoApi {
   rpc GetAllGroups(GetAllConfigRequest) returns (GetAllGroupsReply);
   rpc GetAllActorPickerFilters(GetAllConfigRequest) returns (GetAllActorPickerFiltersReply);
   rpc GetListDefinition(GetSingleConfigRequest) returns (GetListDefinitionReply);
+  rpc GetAllListDefinitions(GetAllConfigRequest) returns (GetAllListDefinitionsReply);
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
@@ -1047,6 +1048,10 @@ message GroupItemCocoDto {
 
 message GetListDefinitionReply {
     ListDefinitionCocoDto listDefinition = 1;
+}
+
+message GetAllListDefinitionsReply {
+    repeated ListDefinitionCocoDto listDefinitions = 1;
 }
 
 message ListDefinitionCocoDto {
