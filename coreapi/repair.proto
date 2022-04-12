@@ -1,0 +1,19 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Core.Api";
+
+
+service RepairApi {
+	rpc Repair (RepairRequest) returns (RepairReply);
+}
+
+message RepairRequest {
+	repeated string namespaces = 1;
+	string repairAction = 2;
+	repeated string tenantIds = 3;
+}
+
+message RepairReply {
+	bool accepted = 1;
+}

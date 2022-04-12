@@ -1,8 +1,16 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+
 syntax = "proto3";
 option csharp_namespace = "Cbs.DataNodes.Api.DatanodeReference";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
 service DatanodeReferenceApi {
 	rpc GetDatanodeReference(GetDatanodeReferenceRequest) returns (GetDatanodeReferenceResponse);
+	
+	rpc GetDataNode (GetDataNodeRequest) returns (BasicDataNodeDto);
+	rpc GetDataNodes (GetDataNodesRequest) returns (DataNodesReply);
 }
 
 message GetDatanodeReferenceRequest {
@@ -21,4 +29,58 @@ message GetDatanodeReferenceResponse {
 	string resource_group_id = 9;
 	string data_store_id = 10;
 	string display_name = 11;
+}
+
+message GetDataNodeRequest{
+	string id = 1;
+	repeated string permissionList = 2;
+}
+
+message GetDataNodesRequest{
+	repeated string ids = 1;
+	repeated string permissionList = 2;
+}
+
+message DataNodesReply {
+	repeated BasicDataNodeDto dataNodes = 1;
+	int64 total = 2;	
+}
+
+message BasicDataNodeDto {
+	string id = 1;
+	string namespace = 2;
+	string displayName = 3;
+	
+	string parentId = 6;
+	string parentNamespace = 7;
+	string rootId = 8;
+	string rootNamespace = 9;
+	repeated string scopeNamespaces = 10;
+	string scopeId = 11;
+	string scopeNamespace = 12;
+	google.protobuf.StringValue description = 13;
+	google.protobuf.StringValue imageUrl = 15;
+	string dataStoreId = 16;
+	string resourceGroupId = 17;
+	google.protobuf.Timestamp createdAt = 19;
+	google.protobuf.Timestamp lastUpdatedAt = 20;
+	google.protobuf.Timestamp executedAt = 21;
+	google.protobuf.Timestamp scopeUpdatedAt = 22;
+	string createdById = 23;
+	string lastUpdatedById = 24;
+	string executedById = 25;
+	string scopeUpdatedById = 26;
+	bool isDeleted = 27;
+	repeated string namespaces = 28;
+	string stateFlowNamespace = 29;
+	string stateNamespace = 30;
+	string stateCategoryNamespace = 31;
+	string stateReasonNamespace = 36;
+	google.protobuf.StringValue createdFromSource = 32;
+	repeated DataNodeExternalReferenceSearchModel externalReferences = 35;
+}
+
+message DataNodeExternalReferenceSearchModel {
+	string externalId = 1;
+	string externalSystemNamespace = 2;
 }

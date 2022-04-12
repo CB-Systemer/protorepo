@@ -1,0 +1,157 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Core.Api";
+
+import "coreapi/coredtos.proto";
+import "google/protobuf/wrappers.proto";
+
+service ResourceGroupApi {
+  rpc GetResourceGroup (GetResourceGroupRequest) returns (GetResourceGroupReply);
+  rpc Search (SearchRequest) returns (SearchResourceGroupsReply);
+  rpc SearchChains (SearchRequest) returns (SearchResourceGroupsReply);
+  rpc CreateChainMemberRelation (CreateChainMemberRelationRequest) returns (CreateChainMemberRelationReply);
+  rpc RemoveChainMemberRelation (RemoveChainMemberRelationRequest) returns (RemoveChainMemberRelationReply);
+  rpc SearchChainReferences (SearchChainReferencesRequest) returns (SearchResourceGroupsReply);
+  rpc SearchChainMembers (SearchChainMembersRequest) returns (SearchResourceGroupsReply);
+  rpc ListResourceGroups (ListResourceGroupRequest) returns (SearchResourceGroupsReply);
+  rpc GetFilterSettings (GetFilterSettingsRequest) returns (GetFilterSettingsReply);
+  rpc SetConfiguration (SetConfigurationRequest) returns (SetConfigurationReply);
+  rpc IndexResourceGroup (IndexRequest) returns (IndexReply);
+  rpc TerminateResourceGroup (TerminateResourceGroupRequest) returns (TerminateResourceGroupReply);
+  rpc CreateApiAccess (CreateResourceGroupApiAccessRequest) returns (CreateResourceGroupApiAccessReply);
+  rpc RemoveApiAccess (RemoveResourceGroupApiAccessRequest) returns (RemoveResourceGroupApiAccessReply);
+  rpc GetApiAccess (GetResourceGroupApiAccessRequest) returns (GetResourceGroupApiAccessReply);
+  rpc GetApiAccessList (GetResourceGroupApiAccessListRequest) returns (GetResourceGroupApiAccessListReply);
+  rpc GetChainMembers (GetChainMembersRequest) returns (GetChainMembersReply);
+}
+
+message CreateChainMemberRelationRequest {
+  string storeId = 1;
+  string chainId = 2;
+  string actorId = 3;
+}
+
+message CreateChainMemberRelationReply {
+  ResourceGroupDto chainMember = 1;
+}
+
+message RemoveChainMemberRelationRequest {
+  string storeId = 1;
+  string chainId = 2;
+  string actorId = 3;
+}
+
+message RemoveChainMemberRelationReply {
+}
+
+message GetResourceGroupRequest {
+  string resourceGroupId = 1;
+}
+
+message GetResourceGroupReply {
+  string resource_group_id = 1;
+  string data_store_id = 2;
+  string namespace = 3;
+  string display_name = 4;
+}
+
+message SearchResourceGroupsReply {
+	int32 count = 1;
+	int32 total = 2;
+	repeated ResourceGroupDto Documents = 3;
+}
+
+message SearchChainReferencesRequest {
+	string chainId = 1;
+	SearchRequest searcRequest = 2;
+}
+
+message SearchChainMembersRequest {
+	string chainId = 1;
+	SearchRequest searcRequest = 2;
+}
+
+message SetConfigurationRequest {
+	repeated string resourceGroupIds = 1;
+	string configuration = 2;
+};
+
+message SetConfigurationReply { 
+};
+
+message ListResourceGroupRequest{
+	int32 top = 1;
+	int32 skip = 2;
+	google.protobuf.StringValue tenant_id = 3;
+	google.protobuf.StringValue resource_group_id = 4;
+	google.protobuf.StringValue datastore_id = 5;
+	bool include_technical_resourceGroups = 6;
+}
+
+message TerminateResourceGroupRequest {
+	string resource_group_id = 1;
+	string new_resource_group_id = 2;
+	bool dry_run = 3;
+}
+
+message TerminateResourceGroupReply {
+	string processId = 1;
+}
+
+message CreateResourceGroupApiAccessRequest {
+	string display_name = 1;
+	string resource_group_id = 2;
+    bool is_admin = 3;
+    string executing_actor_id = 4; 
+}
+
+message CreateResourceGroupApiAccessReply {
+	string id = 1;
+	string display_name = 2;
+	string resource_group_id = 3;
+    bool is_admin = 4; 
+    string client_id = 5;
+    string client_secret = 6;
+}
+
+message RemoveResourceGroupApiAccessRequest {
+	string id = 1;
+	string resource_group_id = 2;
+	string executing_actor_id = 3;
+}
+
+message RemoveResourceGroupApiAccessReply {
+}
+
+
+
+message GetResourceGroupApiAccessRequest {
+	string id = 1;
+	string resource_group_id = 2;
+}
+message GetResourceGroupApiAccessReply {
+	ApiAccess api_access = 1;
+}
+message GetResourceGroupApiAccessListRequest {
+	string resource_group_id = 1;
+}
+message GetResourceGroupApiAccessListReply {
+	repeated ApiAccess api_accesses = 1;
+}
+
+message ApiAccess {
+	string id = 1;
+	string display_name = 2;
+	string resource_group_id = 3;
+	bool is_admin = 4; 
+	string client_id = 5;
+}
+
+message GetChainMembersRequest {
+	string resource_group_id = 1;
+}
+
+message GetChainMembersReply {
+	repeated ResourceGroupDto chain_members = 1;
+}

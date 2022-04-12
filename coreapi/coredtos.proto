@@ -1,0 +1,135 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Core.Api";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message SearchRequest {
+	int32 top = 1;
+	int32 skip = 2;
+	string query = 3;
+	SearchFilterDto filter = 4;
+}
+
+message SearchFilterDto {
+	repeated FilterDto filtering = 1;
+	repeated SortDto sorting = 2;
+	repeated SearchDto searching = 3;
+};
+
+message IndexRequest {
+	repeated string ids = 1;
+	bool instant = 2;
+}
+
+message IndexReply {
+}
+
+message FilterDto {
+	string field = 1;
+	repeated string exclude = 2;
+}
+
+message SortDto {
+	string field = 1;
+	int32 order = 2;
+}
+
+message SearchDto {
+	repeated string field = 1;
+	string query = 2;
+}
+
+message GetFilterSettingsRequest {
+}
+
+message GetFilterSettingsReply {
+	repeated FieldOptionDto fields = 1;
+}
+
+message FieldOptionDto {
+	string field = 1;
+	string displayName = 2;
+	repeated OptionDto options = 3;
+}
+
+message OptionDto {
+	string value = 1;
+	string displayName = 2;
+}
+
+enum WhiteListingType {
+	Unknown = 0;
+	Email = 1;
+    Phone = 2;
+}
+
+message WhiteListingDto {
+	string value = 1;
+	WhiteListingType type = 2;
+	string id = 3;
+	google.protobuf.Timestamp createdAt = 4;
+	string createdById = 5;
+}
+
+message TenantDto {
+	string id = 1;
+	string displayName = 2;
+	string namespace = 3;
+	string parentId = 4;
+	bool isProduction = 5;
+	int32 applicationCount = 6;
+	int32 resourceGroupCount = 7;
+	int32 dataStoreCount = 8;
+	string elasticPoolName = 9;
+	repeated WhiteListingDto whiteListings = 10;
+	string storagePoolName = 11;
+}
+
+message DataStoreDto {
+	string id = 1;
+	string displayName = 2;
+	string namespace = 3;
+	string databaseName = 4;
+	google.protobuf.StringValue tenant_id = 5;
+	google.protobuf.StringValue tenant_display_name = 6;
+	string status = 7;
+	bool permissionsEnabled = 8;
+	bool offline = 9;
+	int64 matrixRecordCount = 10;
+}
+
+message IdDisplayNameDto {
+	string id = 1;
+	string display_name = 2;
+}
+
+message ResourceGroupDto {
+	string id = 1;
+	string displayName = 2;
+	string externalId = 3;
+	string namespace = 4;	
+	string tenantId = 5;
+	string configuration = 6;
+	int32 applicationCount = 7;
+	repeated ApplicationDto applications = 8;
+	repeated ChainMemberDto chainMembers = 9;
+	string datastore_id = 10;
+}
+
+message ApplicationDto{
+	string id = 1;
+	string displayName = 2;
+	google.protobuf.StringValue namespace = 3;
+	google.protobuf.StringValue tenant_id = 4;
+	google.protobuf.StringValue tenant_display_name = 5;
+	google.protobuf.StringValue resource_group_id = 6;
+	google.protobuf.StringValue resource_group_display_name = 7;
+	google.protobuf.StringValue url = 8;
+}
+
+message ChainMemberDto{
+	string id = 1;
+	string displayName = 2;
+}
