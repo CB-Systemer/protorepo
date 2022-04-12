@@ -3,8 +3,18 @@ syntax = "proto3";
 
 option csharp_namespace = "Core.Api";
 
+import "coreapi/coredtos.proto";
+
 service TenantApi {
+  rpc CreateTenant (CreateTenantRequest) returns (CreateTenantReply);
+  rpc DeleteTenant (DeleteTenantRequest) returns (DeleteTenantReply);
+  rpc UpdateTenantDisplayName (UpdateTenantDisplayNameRequest) returns (GetTenantV2Reply);
   rpc GetTenant (GetTenantRequest) returns (GetTenantReply);
+  rpc GetTenantV2 (GetTenantRequest) returns (GetTenantV2Reply);
+  rpc Search (SearchRequest) returns (SearchTenantsReply);
+  rpc GetFilterSettings (GetFilterSettingsRequest) returns (GetFilterSettingsReply);
+  rpc AddWhiteListing (AddWhiteListingRequest) returns (AddWhiteListingReply);
+  rpc RemoveWhiteListing (RemoveWhiteListingRequest) returns (RemoveWhiteListingReply);
 }
 
 message GetTenantRequest {
@@ -16,3 +26,55 @@ message GetTenantReply {
   bool isProduction = 2;
 }
 
+message GetTenantV2Reply {
+	TenantDto tenant = 1;
+}
+
+message SearchTenantsReply {
+	int32 count = 1;
+	int32 total = 2;
+	repeated TenantDto Documents = 3;
+}
+
+message CreateTenantRequest {
+	string displayName = 1;
+	string systemName = 2;
+	string elasticPoolName = 3;
+	bool isProduction = 4;
+	string dataStoreDisplayName = 5;
+	string resourceGroupDisplayName = 6;
+	string storagePoolName = 7;
+}
+
+message CreateTenantReply {
+	TenantDto tenant = 1;
+}
+
+message AddWhiteListingRequest {
+	string tenantId = 1;
+	string value = 2;
+	WhiteListingType type = 3;
+}
+
+message AddWhiteListingReply {
+}
+
+message RemoveWhiteListingRequest {
+	string tenantId = 1;
+	string whiteListingId = 2;
+}
+
+message RemoveWhiteListingReply {
+}
+
+message DeleteTenantRequest {
+	repeated string tenantIds = 1;
+}
+
+message DeleteTenantReply {
+}
+
+message UpdateTenantDisplayNameRequest {
+	string tenantId = 1;
+	string displayName = 2;
+}

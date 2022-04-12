@@ -1,0 +1,27 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Core.Api";
+
+import "coreapi/coredtos.proto";
+import "google/protobuf/wrappers.proto";
+
+service DataStoreCoreApi {
+  rpc Search (SearchRequest) returns (SearchDataStoresReply);
+  rpc ListDataStores (ListDataStoresRequest) returns (SearchDataStoresReply);
+}
+
+message SearchDataStoresReply {
+	int32 count = 1;
+	int32 total = 2;
+	repeated DataStoreDto Documents = 3;
+}
+
+message ListDataStoresRequest{
+	int32 top = 1;
+	int32 skip = 2;
+	google.protobuf.StringValue tenant_id = 3;
+	google.protobuf.StringValue datastore_id = 4;
+}
+
+

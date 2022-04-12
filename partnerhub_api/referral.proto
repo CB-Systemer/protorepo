@@ -4,15 +4,17 @@ syntax = "proto3";
 option csharp_namespace = "PartnerHub.Api.Protos";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
+import "google/type/money.proto";
+import "google/protobuf/timestamp.proto";
 
 service ReferralService {
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
 
-  rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDto);
+  rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDtoDetails);
 
   rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
-  
+
   rpc GetReferralsForProduct (GetReferralByProductRequest) returns (ReferralList);
   rpc GetReferralsForRecipient (GetReferralByRecipientRequest) returns (ReferralList);
   rpc GetReferralsForResourceGroup (GetReferralByResourceGroupRequest) returns (ReferralList);
@@ -25,29 +27,94 @@ service ReferralService {
 message ReferralDto{
   string id = 13;
 
+  string product_package_id = 11;
   string product_id = 1;
   int32 product_version = 2;
   string product_type = 3;
-
-  string referred_actor_id = 4;
-  string referred_actor_namespace = 5;
-
   string display_name = 6;
   string short_description = 7;
+  google.type.Money price = 8;
+  google.protobuf.StringValue price_unit_namespace = 23;
+  google.protobuf.DoubleValue vat_rate = 21;
 
-  string recipient_resource_group_id = 11;
-
-  google.protobuf.StringValue order_recipient_id = 9;
-  google.protobuf.StringValue order_recipient_namespace = 10;
+  google.protobuf.StringValue referenceCaseId = 5;
   
-  repeated InformationFieldDto information_fields = 17;
   string status = 18;
-  
+  repeated InformationFieldDto information_fields = 17;
+   
+  OrderActorDto referred_actor = 4;
+  OrderPartyDto receiver_order_party = 9;
+  OrderActorDto sent_by = 22;
+
   string created_by = 12;
-  string created_from_resource_group_id = 19;
-  string created_at = 14;
+  google.protobuf.Timestamp created_at_utc = 14;
   string updated_by = 15;
-  string updated_at = 16;
+  google.protobuf.Timestamp updated_at_utc = 16;
+  
+  string referenceId = 19;
+  bool amount_set_on_delivery = 20;
+
+  bool allow_cancellation = 24;
+  bool allow_comment = 25;
+  bool show_status_to_sender = 26;
+  bool show_case_state_to_sender = 27;
+
+  google.protobuf.StringValue comment = 28;
+}
+
+message ReferralDtoDetails{
+  ReferralDto referral = 1;
+
+  OrderActorDto sent_by = 2;
+  OrderActorDto assigned_to = 4;
+  OrderActorDto referred_actor = 5;
+  OrderActorDto external_updated_by = 8;
+
+  OrderPartyDto receiver_resource_group = 9;
+  OrderPartyDto receiver_order_party = 10;
+  OrderPartyDto sender_order_resourceGroup = 11;
+  OrderPartyDto sender_order_party = 12;
+  
+}
+
+message OrderActorDto{
+  google.protobuf.StringValue id = 1; // optional. ex will be missing if an actor is referred from a bank into realequity. [Nicolaj]
+  google.protobuf.StringValue realEquityActorId = 9;
+
+  google.protobuf.StringValue display_name = 2;
+  google.protobuf.StringValue first_name = 3;
+  google.protobuf.StringValue last_name = 4;
+  google.protobuf.StringValue email = 5;
+  PhoneDto phone = 6;
+  AddressDto address = 7;
+}
+
+message OrderPartyDto{
+  string id = 1;
+  string display_name = 2;
+  string namespace = 3;
+  repeated NamespaceValuePairDto externalIdentifiers = 4;  
+}
+
+message NamespaceValuePairDto{
+  string namespace = 1;
+  string value = 2;
+}
+
+message PhoneDto{
+  google.protobuf.StringValue number = 1;
+  google.protobuf.StringValue country_code = 2;
+}
+
+message AddressDto{
+  google.protobuf.StringValue display_name = 9;
+  google.protobuf.StringValue street = 1;
+  google.protobuf.StringValue street_number = 2;
+  google.protobuf.StringValue floor = 4;
+  google.protobuf.StringValue door = 5;
+  google.protobuf.StringValue city = 6;
+  google.protobuf.StringValue zip_code = 7;
+  google.protobuf.StringValue country = 8;
 }
 
 message ReferralList{
@@ -56,24 +123,36 @@ message ReferralList{
 
 message CreateReferralRequest{
   string product_id = 1;
+  string product_package_id = 17;
   int32 product_version = 2;
   string product_type = 3;
+  string display_name = 4;
+  string short_description = 5;
+  google.type.Money price = 15;
+  google.protobuf.StringValue price_unit_namespace = 16;
+  google.protobuf.DoubleValue vat_rate = 23;
   
-  string referred_actor_id = 4;
-  string referred_actor_namespace = 5;
-    
-  string display_name = 6;
-  string short_description = 7;
-  string executing_actor_id = 8;
+  string executing_actor_id = 6;
+  repeated string executing_actor_permissions = 14;
 
-  string recipient_resource_group_id = 11;
+  OrderActorDto referred_actor = 7;
 
-  google.protobuf.StringValue created_by_actor_id = 12;
-  string created_from_resource_group = 14;
+  string recipient_resource_group_id = 9;
+  google.protobuf.StringValue recipient_order_party_id = 10;
 
-  google.protobuf.StringValue order_recipient_id = 9;
-  google.protobuf.StringValue order_recipient_namespace = 10;
+  string sent_by_resource_group = 11;
+  google.protobuf.StringValue sender_order_party_id = 12;
+  OrderActorDto sent_by = 8;
+
   repeated InformationFieldDto information_fields = 13;
+
+  bool allow_cancellation = 18;
+  bool allow_comment = 19;
+  bool show_status_to_sender = 20;
+  bool show_case_state_to_sender = 21;
+  
+  google.protobuf.StringValue comment = 22;
+  bool amount_set_on_delivery = 24;
 }
 
 message InformationFieldDto{
@@ -84,8 +163,9 @@ message InformationFieldDto{
 }
 
 message CancelReferralRequest{
-  string id = 1;  
+  string id = 1;
   string executing_actor_id = 2;
+  string executing_resource_group_id = 3;
 }
 
 message GetReferralDetailsRequest{
@@ -126,5 +206,3 @@ message GetReferralsCreatedByActorRequest{
 message GetReferralsCreatedFromResourceGroupRequest{
   string resource_group_id = 1;
 }
-
-    

@@ -197,6 +197,7 @@ message AddressSearchModel{
 	string countryCode = 2;
 	string displayName = 3;
 	string streetNumber = 4;
+  string streetName = 14;
 	string floor = 5;
 	string door = 6;
 	string postalCode = 7;
