@@ -11,16 +11,9 @@ service ActorApi {
   rpc GetActorsById (GetActorsByIdRequest) returns (GetActorsByIdReply);
   rpc GetActorExists (GetActorExistsRequest) returns (GetActorExistsResponse);
   rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
-  rpc UpdateActor (UpdateActorRequest) returns (ActorReply);
   rpc GetActors (GetActorsRequest) returns (GetActorsReply);
-  rpc CreateIndex (CreateIndexRequest) returns (CreateIndexReply);
-  rpc Index (IndexActorsRequest) returns (IndexActorsReply);
   rpc FindActors (FindActorsRequest) returns (FindActorsReply);
   rpc FindRelatedActors (FindRelatedActorsRequest) returns (FindActorsReply);
-}
-
-message CreateIndexRequest{
-
 }
 
 message GetActorExistsRequest {
@@ -57,22 +50,6 @@ message FindActorsReply {
  string scrollId = 4;
 }
 
-message CreateIndexReply{
- bool indexCreated = 1;
- string error = 2;
-}
-
-message IndexActorsRequest {
- string namespace = 1;
- string datastoreId = 2;
- string tenantId = 3;
-}
-
-message IndexActorsReply {
- bool reIndexed = 1;
- string error = 2;
-}
-
 message GetActorRequest {
   string actorId = 1;
   reserved 2 to 5;
@@ -104,11 +81,6 @@ message GetDbActorReply {
 	repeated ActorIdentitySearchModel identities = 10;
 	repeated PhoneSearchModel phones = 11;
 	string dataStoreId = 12;
-}
-
-message UpdateActorRequest {
-  string actorId = 1;
-  string displayName = 2;
 }
 
 message GetActorsRequest{
