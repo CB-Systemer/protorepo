@@ -6,7 +6,7 @@ import "google/protobuf/wrappers.proto";
 
 service DatanodeApi {
   rpc GetConfig (GetConfigRequest) returns (GetConfigResponse);
-  
+
 }
 
 message GetConfigResponse {
@@ -39,6 +39,7 @@ message DatanodeConfigDto {
     string baseUrl = 18;
     bool state_flow_disabled = 19;
     string state_flow_picker_type = 22;
+    bool include_path_details_in_search_index = 23;
 }
 
 message TargetConfigDto {
