@@ -790,9 +790,8 @@ message ActorRoleConfigDto {
     string instance_namespace = 7;
     bool is_selectable = 8;
     bool is_non_participant_role = 9;
-    string endUserRemovedStateNamespace = 10;
-    string endUserRemovedStateReasonNamespace = 11;
-
+    google.protobuf.StringValue endUserRemovedStateNamespace = 10;
+    google.protobuf.StringValue endUserRemovedStateReasonNamespace = 11;
 }
 
 message AppointmentConfigDto{
