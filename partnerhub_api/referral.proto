@@ -68,13 +68,13 @@ message ReferralDtoDetails{
   OrderActorDto sent_by = 2;
   OrderActorDto assigned_to = 4;
   OrderActorDto referred_actor = 5;
-  OrderActorDto external_updated_by = 8;
+  OrderActorDto updated_by = 8;
+  OrderActorDto created_by = 13;
 
   OrderPartyDto receiver_resource_group = 9;
   OrderPartyDto receiver_order_party = 10;
   OrderPartyDto sender_order_resourceGroup = 11;
-  OrderPartyDto sender_order_party = 12;
-  
+  OrderPartyDto sender_order_party = 12;  
 }
 
 message OrderActorDto{
@@ -131,8 +131,9 @@ message CreateReferralRequest{
   google.type.Money price = 15;
   google.protobuf.StringValue price_unit_namespace = 16;
   google.protobuf.DoubleValue vat_rate = 23;
-  
-  string executing_actor_id = 6;
+    
+  string executing_actor_id = 6; 
+  OrderActorDto custom_executing_actor = 25;
   repeated string executing_actor_permissions = 14;
 
   OrderActorDto referred_actor = 7;
@@ -166,6 +167,7 @@ message CancelReferralRequest{
   string id = 1;
   string executing_actor_id = 2;
   string executing_resource_group_id = 3;
+  repeated string executing_actor_permissions = 4;
 }
 
 message GetReferralDetailsRequest{
