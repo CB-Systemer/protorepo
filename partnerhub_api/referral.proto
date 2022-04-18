@@ -10,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 service ReferralService {
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
+  rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
 
   rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDtoDetails);
 
@@ -31,6 +32,7 @@ message ReferralDto{
   string product_id = 1;
   int32 product_version = 2;
   string product_type = 3;
+  string product_channel_namespace = 10;
   string display_name = 6;
   string short_description = 7;
   google.type.Money price = 8;
@@ -73,8 +75,26 @@ message ReferralDtoDetails{
 
   OrderPartyDto receiver_resource_group = 9;
   OrderPartyDto receiver_order_party = 10;
+  ReceiverCaseStatusDto receiver_case_reference_status = 14; 
+      
   OrderPartyDto sender_order_resourceGroup = 11;
   OrderPartyDto sender_order_party = 12;  
+}
+
+message ReceiverCaseStatusDto{
+  string case_reference_id = 1;
+  string display_name = 2;
+  string case_number = 3;
+  string state_namespace = 4;
+  string state_reason_namespace = 5;
+  string state_flow_namespace = 6;
+  string state_category_namespace = 7;
+  repeated EndResultDto end_results = 8;
+}
+
+message EndResultDto{
+  string end_result_namespace = 1;
+  string end_result_outcome_namespace = 2;
 }
 
 message OrderActorDto{
@@ -126,6 +146,7 @@ message CreateReferralRequest{
   string product_package_id = 17;
   int32 product_version = 2;
   string product_type = 3;
+  string product_channel_namespace = 26;
   string display_name = 4;
   string short_description = 5;
   google.type.Money price = 15;
@@ -154,6 +175,17 @@ message CreateReferralRequest{
   
   google.protobuf.StringValue comment = 22;
   bool amount_set_on_delivery = 24;
+}
+
+message SetReceiverCaseReferenceIdRequest{
+  string referral_id = 1;
+  string case_id = 6;
+  
+  string executing_actor_id = 2;
+  OrderActorDto custom_executing_actor = 3;
+  repeated string executing_actor_permissions = 4;
+
+  repeated string resource_group_scopes = 5;
 }
 
 message InformationFieldDto{
