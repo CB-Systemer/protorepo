@@ -39,7 +39,8 @@ message ReferralDto{
   google.protobuf.StringValue price_unit_namespace = 23;
   google.protobuf.DoubleValue vat_rate = 21;
 
-  google.protobuf.StringValue referenceCaseId = 5;
+  google.protobuf.StringValue case_payload_reference_id = 5;
+  google.protobuf.StringValue receiver_case_reference_id = 29;
   
   string status = 18;
   repeated InformationFieldDto information_fields = 17;
@@ -66,7 +67,8 @@ message ReferralDto{
 
 message ReferralDtoDetails{
   ReferralDto referral = 1;
-
+  google.protobuf.StringValue case_reference_payload = 3;
+  
   OrderActorDto sent_by = 2;
   OrderActorDto assigned_to = 4;
   OrderActorDto referred_actor = 5;
@@ -174,6 +176,7 @@ message CreateReferralRequest{
   bool show_case_state_to_sender = 21;
   
   google.protobuf.StringValue comment = 22;
+  google.protobuf.StringValue case_payload_reference_id = 27;
   bool amount_set_on_delivery = 24;
 }
 
