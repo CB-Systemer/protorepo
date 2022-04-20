@@ -11,15 +11,18 @@ service ReferralService {
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
+  rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
 
   rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDtoDetails);
 
   rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
 
-  rpc GetReferralsForProduct (GetReferralByProductRequest) returns (ReferralList);
-  rpc GetReferralsForRecipient (GetReferralByRecipientRequest) returns (ReferralList);
-  rpc GetReferralsForResourceGroup (GetReferralByResourceGroupRequest) returns (ReferralList);
-  rpc GetReferralsForAssignedActor (GetReferralByAssignedActorRequest) returns (ReferralList);
+  rpc GetReferralsForProduct (GetReferralsByProductRequest) returns (ReferralList);
+  rpc GetReferralsForRecipient (GetReferralsByRecipientRequest) returns (ReferralList);
+  rpc GetReferralsForResourceGroup (GetReferralsByResourceGroupRequest) returns (ReferralList);
+  rpc GetReferralsForAssignedActor (GetReferralsByAssignedActorRequest) returns (ReferralList);
+
+  rpc GetReferralsForCaseReference (GetReferralsByCaseReferenceRequest) returns (ReferralList);
 
   rpc GetReferralsCreatedByActor (GetReferralsCreatedByActorRequest) returns (ReferralList);
   rpc GetReferralsCreatedFromResourceGroup (GetReferralsCreatedFromResourceGroupRequest) returns (ReferralList);
@@ -41,10 +44,11 @@ message ReferralDto{
 
   google.protobuf.StringValue case_payload_reference_id = 5;
   google.protobuf.StringValue receiver_case_reference_id = 29;
-  
+  google.protobuf.StringValue receiver_actor_reference_id = 32;
+
   string status = 18;
   repeated InformationFieldDto information_fields = 17;
-   
+
   OrderActorDto referred_actor = 4;
   OrderPartyDto receiver_order_party = 9;
   OrderActorDto sent_by = 22;
@@ -53,7 +57,7 @@ message ReferralDto{
   google.protobuf.Timestamp created_at_utc = 14;
   string updated_by = 15;
   google.protobuf.Timestamp updated_at_utc = 16;
-  
+
   string referenceId = 19;
   bool amount_set_on_delivery = 20;
 
@@ -63,12 +67,14 @@ message ReferralDto{
   bool show_case_state_to_sender = 27;
 
   google.protobuf.StringValue comment = 28;
+  google.protobuf.StringValue receiver_internal_note = 30;
+  google.protobuf.StringValue sender_internal_note = 31;
 }
 
 message ReferralDtoDetails{
   ReferralDto referral = 1;
   google.protobuf.StringValue case_reference_payload = 3;
-  
+
   OrderActorDto sent_by = 2;
   OrderActorDto assigned_to = 4;
   OrderActorDto referred_actor = 5;
@@ -77,10 +83,10 @@ message ReferralDtoDetails{
 
   OrderPartyDto receiver_resource_group = 9;
   OrderPartyDto receiver_order_party = 10;
-  ReceiverCaseStatusDto receiver_case_reference_status = 14; 
-      
+  ReceiverCaseStatusDto receiver_case_reference_status = 14;
+
   OrderPartyDto sender_order_resourceGroup = 11;
-  OrderPartyDto sender_order_party = 12;  
+  OrderPartyDto sender_order_party = 12;
 }
 
 message ReceiverCaseStatusDto{
@@ -115,7 +121,7 @@ message OrderPartyDto{
   string id = 1;
   string display_name = 2;
   string namespace = 3;
-  repeated NamespaceValuePairDto externalIdentifiers = 4;  
+  repeated NamespaceValuePairDto externalIdentifiers = 4;
 }
 
 message NamespaceValuePairDto{
@@ -154,8 +160,8 @@ message CreateReferralRequest{
   google.type.Money price = 15;
   google.protobuf.StringValue price_unit_namespace = 16;
   google.protobuf.DoubleValue vat_rate = 23;
-    
-  string executing_actor_id = 6; 
+
+  string executing_actor_id = 6;
   OrderActorDto custom_executing_actor = 25;
   repeated string executing_actor_permissions = 14;
 
@@ -163,10 +169,12 @@ message CreateReferralRequest{
 
   string recipient_resource_group_id = 9;
   google.protobuf.StringValue recipient_order_party_id = 10;
+  google.protobuf.StringValue receiver_internal_note = 28;
 
   string sent_by_resource_group = 11;
   google.protobuf.StringValue sender_order_party_id = 12;
   OrderActorDto sent_by = 8;
+  google.protobuf.StringValue sender_internal_note = 29;
 
   repeated InformationFieldDto information_fields = 13;
 
@@ -174,7 +182,7 @@ message CreateReferralRequest{
   bool allow_comment = 19;
   bool show_status_to_sender = 20;
   bool show_case_state_to_sender = 21;
-  
+
   google.protobuf.StringValue comment = 22;
   google.protobuf.StringValue case_payload_reference_id = 27;
   bool amount_set_on_delivery = 24;
@@ -183,7 +191,18 @@ message CreateReferralRequest{
 message SetReceiverCaseReferenceIdRequest{
   string referral_id = 1;
   string case_id = 6;
-  
+
+  string executing_actor_id = 2;
+  OrderActorDto custom_executing_actor = 3;
+  repeated string executing_actor_permissions = 4;
+
+  repeated string resource_group_scopes = 5;
+}
+
+message SetReceiverActorReferenceIdRequest{
+  string referral_id = 1;
+  string actor_id = 6;
+
   string executing_actor_id = 2;
   OrderActorDto custom_executing_actor = 3;
   repeated string executing_actor_permissions = 4;
@@ -210,36 +229,73 @@ message GetReferralDetailsRequest{
   repeated string resource_group_scopes = 2;
 }
 
-message GetReferralByProductRequest{
+message GetReferralsByProductRequest{
   string product_id = 1;
   google.protobuf.Int32Value product_version = 2;
   repeated string resource_group_scopes = 3;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6; 
 }
 
 message GetReferralsByReferredActorRequest{
   string referred_actor_id = 1;
   repeated string resource_group_scopes = 2;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
 }
 
-message GetReferralByRecipientRequest{
+message GetReferralsByRecipientRequest{
   string order_recipient_id = 1;
   repeated string resource_group_scopes = 2;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
 }
 
-message GetReferralByResourceGroupRequest{
+message GetReferralsByResourceGroupRequest{
   string resource_group_id = 1;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
 }
 
-message GetReferralByAssignedActorRequest{
+message GetReferralsByAssignedActorRequest{
   string assigned_actor_id = 1;
   repeated string resource_group_scopes = 2;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
 }
 
 message GetReferralsCreatedByActorRequest{
   string actor_id = 1;
   repeated string resource_group_scopes = 2;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
 }
 
 message GetReferralsCreatedFromResourceGroupRequest{
   string resource_group_id = 1;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
+}
+
+message GetReferralsByCaseReferenceRequest{
+  string case_reference_id = 1;
+  repeated string resource_group_scopes = 2;
+
+  google.protobuf.Int32Value top = 4;
+  google.protobuf.Int32Value skip = 5;
+  repeated string status_filters = 6;
 }
