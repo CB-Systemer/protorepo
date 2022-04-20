@@ -116,6 +116,7 @@ message ResourceGroupDto {
 	repeated ApplicationDto applications = 8;
 	repeated ChainMemberDto chainMembers = 9;
 	string datastore_id = 10;
+	string status = 11;
 }
 
 message ApplicationDto{
