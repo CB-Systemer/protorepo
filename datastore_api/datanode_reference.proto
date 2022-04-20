@@ -9,7 +9,7 @@ import "google/protobuf/wrappers.proto";
 service DatanodeReferenceApi {
 	rpc GetDatanodeReference(GetDatanodeReferenceRequest) returns (GetDatanodeReferenceResponse);
 	
-	rpc GetDataNode (GetDataNodeRequest) returns (BasicDataNodeDto);
+	rpc GetDataNode (GetDataNodeRequest) returns (GetDataNodeReply);
 	rpc GetDataNodes (GetDataNodesRequest) returns (DataNodesReply);
 }
 
@@ -39,6 +39,10 @@ message GetDataNodeRequest{
 message GetDataNodesRequest{
 	repeated string ids = 1;
 	repeated string permissionList = 2;
+}
+
+message GetDataNodeReply{
+	BasicDataNodeDto dataNode = 1;
 }
 
 message DataNodesReply {
