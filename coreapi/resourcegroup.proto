@@ -54,6 +54,7 @@ message GetResourceGroupReply {
   string data_store_id = 2;
   string namespace = 3;
   string display_name = 4;
+  string status = 5;
 }
 
 message SearchResourceGroupsReply {
