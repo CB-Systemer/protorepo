@@ -12,6 +12,7 @@ service ReferralService {
   rpc CancelReferral(CancelReferralRequest) returns (ReferralDto);
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
+  rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
 
   rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDtoDetails);
 
@@ -208,6 +209,17 @@ message SetReceiverActorReferenceIdRequest{
   repeated string executing_actor_permissions = 4;
 
   repeated string resource_group_scopes = 5;
+}
+
+message SetAssignedToRequest{
+  string referral_id = 1;
+  OrderActorDto assigned_to = 2;
+
+  string executing_actor_id = 3;
+  OrderActorDto custom_executing_actor = 4;
+  repeated string executing_actor_permissions = 5;
+
+  repeated string resource_group_scopes = 6;
 }
 
 message InformationFieldDto{
