@@ -8,9 +8,10 @@ service FileService {
 }
 
 message UploadFileRequest {
-    string filename = 1;
-    string contentType = 2;
-    bytes content = 3;
+    string parent_id = 1;
+    string filename = 2;
+    string content_type = 3;
+    bytes content = 4;
 }
 
 message UploadFileReply {
