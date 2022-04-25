@@ -534,5 +534,10 @@ message Appointment {
 	string display_name = 3;
 	google.protobuf.Timestamp start = 4;
 	google.protobuf.Timestamp end = 5;
-	string responsible_agent = 6;
+	ResponsibleAgent responsible_agent = 6;
+}
+
+message ResponsibleAgent {
+	string id = 1;
+	string display_name = 2;
 }
