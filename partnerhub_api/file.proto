@@ -1,0 +1,18 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "PartnerHub.Api.Protos";
+
+service FileService {
+  rpc UploadFile (UploadFileRequest) returns (UploadFileReply);
+}
+
+message UploadFileRequest {
+    string filename = 1;
+    string contentType = 2;
+    bytes content = 3;
+}
+
+message UploadFileReply {
+    string url = 1;
+}
