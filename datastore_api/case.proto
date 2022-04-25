@@ -299,6 +299,7 @@ message CasePublicProfile {
 	string advertisementMunicipalityCountryCode = 82;
 	AdvertisementZip advertisementZip = 83;
 	AdvertisementMunicipality advertisementMunicipality = 84;
+	repeated Appointment appointments = 85;
 }
 
 message ExternalReference{
@@ -525,4 +526,13 @@ message EnergyLabel {
 		int32 version = 16;
 		bool notRelevant = 17;
 	}
+}
+
+message Appointment {
+	string id = 1;
+	string namespace = 2;
+	string display_name = 3;
+	google.protobuf.Timestamp start = 4;
+	google.protobuf.Timestamp end = 5;
+	string responsible_agent = 6;
 }
