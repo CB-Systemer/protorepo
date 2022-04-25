@@ -532,8 +532,8 @@ message Appointment {
 	string id = 1;
 	string namespace = 2;
 	string display_name = 3;
-	google.protobuf.Timestamp start = 4;
-	google.protobuf.Timestamp end = 5;
+	NullableDateTimeOffset start = 4;
+	NullableDateTimeOffset end = 5;
 	ResponsibleAgent responsible_agent = 6;
 }
 
