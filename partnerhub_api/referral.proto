@@ -328,5 +328,6 @@ message AddAttachmentRequest {
 }
 
 message AddAttachmentReply {
-  string url = 1;
+  string product_order_id = 1;
+  string attachment_id = 2;
 }
