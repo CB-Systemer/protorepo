@@ -16,6 +16,7 @@ message ExecutingActorContext {
 
 service TemplatingApi {
   rpc GetTemplate (GetTemplateRequest) returns (GetTemplateReply);
+  rpc GetSeededTemplateList (GetSeededTemplateListRequest) returns (GetSeededTemplateListReply);
   rpc DownloadTemplate (DownloadTemplateRequest) returns (DownloadTemplateReply);
   rpc UploadTemplate (UploadTemplateRequest) returns (UploadTemplateReply);
   rpc PreviewTemplate (PreviewTemplateRequest) returns (PreviewTemplateReply);
@@ -24,6 +25,23 @@ service TemplatingApi {
   rpc BuildTemplate (BuildTemplateRequest) returns (BuildTemplateReply);
   rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
+}
+
+message GetSeededTemplateListRequest {
+  string resource_group_id = 1;
+}
+
+message GetSeededTemplateListReply {
+	repeated SeededTemplateDto templates = 1;
+}
+
+message SeededTemplateDto {
+  string id = 1;
+  repeated string templates = 3;
+  string data = 4;
+  repeated TemplateContext context = 5;
+  repeated TemplatePreview previews = 8;
+  string displayName = 7;
 }
 
 message GetTemplateOptionsRequest {
