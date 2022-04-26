@@ -5,15 +5,29 @@ option csharp_namespace = "PartnerHub.Api.Protos";
 
 service FileService {
   rpc UploadFile (UploadFileRequest) returns (UploadFileReply);
+  rpc GetFile (GetFileRequest) returns (GetFileReply);
 }
 
 message UploadFileRequest {
-    string parent_id = 1;
-    string filename = 2;
-    string content_type = 3;
-    bytes content = 4;
+    string container_id = 1;
+    string blob_name = 2;
+    string filename = 3;
+    string content_type = 4;
+    bytes content = 5;
 }
 
 message UploadFileReply {
-    string url = 1;
+    string container_id = 1;
+    string blob_name = 2;
+}
+
+message GetFileRequest {
+    string container_id = 1;
+    string blob_name = 2;
+}
+
+message GetFileReply {
+    string filename = 1;
+    string content_type = 2;
+    bytes content = 3;
 }
