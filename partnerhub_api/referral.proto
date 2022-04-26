@@ -320,6 +320,11 @@ message AddAttachmentRequest {
   string filename = 3;
   string content_type = 4;
   bytes content = 5;
+
+  string executing_actor_id = 6;
+  OrderActorDto custom_executing_actor = 7;
+  repeated string executing_actor_permissions = 8;
+
 }
 
 message AddAttachmentReply {
