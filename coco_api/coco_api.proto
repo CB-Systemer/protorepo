@@ -73,6 +73,15 @@ service CocoApi {
   rpc GetConfigNames(GetConfigNamesRequest) returns (GetConfigNamesReply);
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
+  rpc GetActiveDocumentTemplates(GetActiveDocumentTemplatesRequest) returns (GetActiveDocumentTemplatesReply);
+}
+
+message GetActiveDocumentTemplatesRequest {
+  string consumer_id = 1;
+}
+
+message GetActiveDocumentTemplatesReply {
+  repeated string document_templates = 3;
 }
 
 message GetReflowConfigReply {
