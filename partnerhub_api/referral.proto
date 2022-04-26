@@ -27,6 +27,8 @@ service ReferralService {
 
   rpc GetReferralsCreatedByActor (GetReferralsCreatedByActorRequest) returns (ReferralList);
   rpc GetReferralsCreatedFromResourceGroup (GetReferralsCreatedFromResourceGroupRequest) returns (ReferralList);
+
+  rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
 }
 
 message ReferralDto{
@@ -310,4 +312,16 @@ message GetReferralsByCaseReferenceRequest{
   google.protobuf.Int32Value top = 4;
   google.protobuf.Int32Value skip = 5;
   repeated string status_filters = 6;
+}
+
+message AddAttachmentRequest {
+  string product_order_id = 1;
+  string attachmentIdentifier = 2;
+  string filename = 3;
+  string content_type = 4;
+  bytes content = 5;
+}
+
+message AddAttachmentReply {
+  string url = 1;
 }
