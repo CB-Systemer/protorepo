@@ -42,6 +42,7 @@ message ReferralDto{
   string product_channel_namespace = 10;
   string display_name = 6;
   string short_description = 7;
+  ProductStatusDto custom_status = 37;
   google.type.Money price = 8;
   google.protobuf.StringValue price_unit_namespace = 23;
   google.protobuf.DoubleValue vat_rate = 21;
@@ -169,6 +170,7 @@ message CreateReferralRequest{
   string product_channel_namespace = 26;
   string display_name = 4;
   string short_description = 5;
+  repeated ProductStatusDto product_statuses = 28;
   google.type.Money price = 15;
   google.protobuf.StringValue price_unit_namespace = 16;
   google.protobuf.DoubleValue vat_rate = 23;
@@ -181,7 +183,7 @@ message CreateReferralRequest{
 
   string recipient_resource_group_id = 9;
   google.protobuf.StringValue recipient_order_party_id = 10;
-  google.protobuf.StringValue receiver_internal_note = 28;
+  google.protobuf.StringValue receiver_internal_note = 30;
 
   string sent_by_resource_group = 11;
   google.protobuf.StringValue sender_order_party_id = 12;
@@ -356,4 +358,9 @@ message AttachmentDto {
   string attachment_id = 2;
   string attachment_identifier = 3;
   string filename = 4;
+}
+
+message ProductStatusDto{
+  string identifier = 1;
+  string display_name = 2;
 }
