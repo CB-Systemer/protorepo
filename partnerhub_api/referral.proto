@@ -79,7 +79,7 @@ message ReferralDto{
   google.protobuf.StringValue receiver_internal_note = 30;
   google.protobuf.StringValue sender_internal_note = 31;
 
-  repeated AttachmentDto attachments = 33;
+  repeated AttachmentDto attachments = 36;
 }
 
 message ReferralDtoDetails{
