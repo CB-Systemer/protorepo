@@ -13,6 +13,7 @@ service ReferralService {
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
+  rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
 
   rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDtoDetails);
 
@@ -53,7 +54,12 @@ message ReferralDto{
   repeated InformationFieldDto information_fields = 17;
 
   OrderActorDto referred_actor = 4;
-  OrderPartyDto receiver_order_party = 9;
+  OrderPartyDto receiver_resource_group = 9;
+  OrderPartyDto receiver_order_party = 33;
+  
+  OrderPartyDto sender_order_resourceGroup = 34;
+  OrderPartyDto sender_order_party = 35;
+  
   OrderActorDto sent_by = 22;
 
   string created_by = 12;
@@ -317,7 +323,18 @@ message GetReferralsByCaseReferenceRequest{
   repeated string status_filters = 6;
 }
 
-message AddAttachmentRequest {
+message UpdateStatusRequest{
+  string product_order_id = 1;
+  string status = 2;
+
+  string executing_actor_id = 3;
+  OrderActorDto custom_executing_actor = 4;
+  repeated string executing_actor_permissions = 5;
+
+  repeated string resource_group_scopes = 6;
+}
+
+  message AddAttachmentRequest {
   string product_order_id = 1;
   string attachmentIdentifier = 2;
   string filename = 3;
@@ -327,7 +344,6 @@ message AddAttachmentRequest {
   string executing_actor_id = 6;
   OrderActorDto custom_executing_actor = 7;
   repeated string executing_actor_permissions = 8;
-
 }
 
 message AddAttachmentReply {
