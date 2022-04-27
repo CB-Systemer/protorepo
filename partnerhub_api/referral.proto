@@ -72,6 +72,8 @@ message ReferralDto{
   google.protobuf.StringValue comment = 28;
   google.protobuf.StringValue receiver_internal_note = 30;
   google.protobuf.StringValue sender_internal_note = 31;
+
+  repeated AttachmentDto attachments = 33;
 }
 
 message ReferralDtoDetails{
@@ -90,6 +92,7 @@ message ReferralDtoDetails{
 
   OrderPartyDto sender_order_resourceGroup = 11;
   OrderPartyDto sender_order_party = 12;
+  
 }
 
 message ReceiverCaseStatusDto{
@@ -328,6 +331,11 @@ message AddAttachmentRequest {
 }
 
 message AddAttachmentReply {
+  AttachmentDto attachment = 1;
+}
+
+message AttachmentDto {
   string product_order_id = 1;
   string attachment_id = 2;
+  string filename = 3;
 }
