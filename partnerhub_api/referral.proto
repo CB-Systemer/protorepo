@@ -327,8 +327,8 @@ message GetReferralsByCaseReferenceRequest{
 
 message UpdateStatusRequest{
   string product_order_id = 1;
-  string status = 2;
-  string custom_status = 7;
+  google.protobuf.StringValue status = 2;
+  google.protobuf.StringValue custom_status = 7;
 
   string executing_actor_id = 3;
   OrderActorDto custom_executing_actor = 4;
