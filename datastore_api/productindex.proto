@@ -9,6 +9,7 @@ service ProductIndexApi {
     rpc Reindex (ReindexRequest) returns (ReindexReply);
     rpc UpdateMappings (UpdateMappingsRequest) returns (UpdateMappingsReply);
     rpc GetProductsFromProductPackages (GetProductsRequest) returns (GetProductsReply);
+    rpc GetOrderableProduct (GetOrderableProductRequest) returns (GetOrderableProductReply);
 }
 
 message RebuildSearchIndexRequest {
@@ -43,6 +44,16 @@ message GetProductsReply {
     repeated ProductDto products = 1;
 }
 
+message GetOrderableProductRequest {
+    string product_package_id = 1;
+    string product_id = 2;
+}
+
+message GetOrderableProductReply {
+    ProductDto product = 1;
+}
+
+
 message ProductDto {
     string product_id = 1;
     string product_package_id = 2;
@@ -70,6 +81,8 @@ message ProductDto {
     bool allow_sender_cancellation = 24;
     OrderRecipientMode order_recipient_mode = 25;
     string product_category= 26;
+    string owner_resource_group_id = 27;
+    repeated string allowed_order_organizations = 28;
 }
 
 message ImageReferenceDto {
