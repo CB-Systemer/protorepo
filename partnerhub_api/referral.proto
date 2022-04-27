@@ -337,5 +337,6 @@ message AddAttachmentReply {
 message AttachmentDto {
   string product_order_id = 1;
   string attachment_id = 2;
-  string filename = 3;
+  string attachment_identifier = 3;
+  string filename = 4;
 }
