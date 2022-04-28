@@ -83,6 +83,7 @@ message ProductDto {
     string product_category= 26;
     string owner_resource_group_id = 27;
     repeated string allowed_order_organizations = 28;
+    int32 product_version = 29;
 }
 
 message ImageReferenceDto {
