@@ -8,6 +8,7 @@ import "google/protobuf/empty.proto";
 service InstallationService {
   rpc GetActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
   rpc GetInActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
+  rpc IsInstalled (IsInstalledRequest) returns (IsInstalledReply);
 
 
   rpc InstallPackage (InstallPackageRequest) returns (google.protobuf.Empty);
@@ -45,4 +46,13 @@ message InstallPackageRequest{
 message UnInstallPackageRequest{
   string scope_id = 1;
   string product_package_id = 2;
+}
+
+message IsInstalledRequest {
+  string product_package_id = 1;
+  string resource_group_id = 2;
+}
+
+message IsInstalledReply {
+  bool is_installed = 1;
 }
