@@ -375,7 +375,7 @@ message AddDeliveryRequest {
 }
 
 message AddDeliveryReply {
-  DeliveryDto delivery;
+  DeliveryDto delivery = 1;
 }
 
 message DeliveryDto {
@@ -385,5 +385,4 @@ message DeliveryDto {
   string json_payload = 4;
   bool has_attachment = 5;
   string attachment_filename = 6;
-  
 }
