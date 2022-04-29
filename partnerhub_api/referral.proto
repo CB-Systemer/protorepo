@@ -14,6 +14,7 @@ service ReferralService {
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
   rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
+  rpc GetAvailableCustomStatuses(GetAvailableStatusesRequest) returns (GetAvailableStatusesReply);
 
   rpc GetReferralDetails (GetReferralDetailsRequest) returns (ReferralDtoDetails);
 
@@ -346,6 +347,7 @@ message UpdateStatusRequest{
 
   string executing_actor_id = 6;
   OrderActorDto custom_executing_actor = 7;
+  //todo: add resourcegroup scopes [Nicolaj]
   repeated string executing_actor_permissions = 8;
 }
 
@@ -363,4 +365,13 @@ message AttachmentDto {
 message ProductStatusDto{
   string identifier = 1;
   string display_name = 2;
+}
+
+message GetAvailableStatusesRequest{
+  string product_order_id = 1;
+  repeated string resource_group_scopes = 6;
+}
+
+message GetAvailableStatusesReply{
+  repeated ProductStatusDto statuses = 1;
 }
