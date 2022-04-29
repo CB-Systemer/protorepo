@@ -379,7 +379,7 @@ message AddDeliveryReply {
 }
 
 message DeliveryDto {
-  string product_order_id;
+  string product_order_id = 1;
   string display_name = 2;
   string data_node_namespace = 3;
   string json_payload = 4;
