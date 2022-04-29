@@ -72,7 +72,7 @@ message ReferralDto{
   string referenceId = 19;
   bool amount_set_on_delivery = 20;
 
-  bool allow_cancellation = 24;
+  bool allow_sender_cancellation = 24;
   bool allow_comment = 25;
   bool show_status_to_sender = 26;
   bool show_case_state_to_sender = 27;
@@ -193,7 +193,7 @@ message CreateReferralRequest{
 
   repeated InformationFieldDto information_fields = 13;
 
-  bool allow_cancellation = 18;
+  bool allow_sender_cancellation = 18;
   bool allow_comment = 19;
   bool show_status_to_sender = 20;
   bool show_case_state_to_sender = 21;
