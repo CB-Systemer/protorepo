@@ -30,8 +30,10 @@ service ReferralService {
   rpc GetReferralsCreatedFromResourceGroup (GetReferralsCreatedFromResourceGroupRequest) returns (ReferralList);
 
   rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
+  rpc DownloadAttachment (DownloadAttachemntRequest) returns (DownloadReply);
 
   rpc AddDelivery (AddDeliveryRequest) returns (AddDeliveryReply);
+  rpc DownloadDelivery (DownloadDeliveryRequest) returns (DownloadReply);
 }
 
 message ReferralDto{
@@ -385,4 +387,20 @@ message DeliveryDto {
   string json_payload = 4;
   bool has_attachment = 5;
   string attachment_filename = 6;
+}
+
+message DownloadAttachemntRequest {
+  string product_order_id = 1;
+  string attachment_id = 2;
+}
+
+message DownloadDeliveryRequest {
+  string product_order_id = 1;
+  string delivery_id = 2;
+}
+
+message DownloadReply {
+  string filename = 1;
+  string content_type = 2;
+  bytes content = 3;
 }
