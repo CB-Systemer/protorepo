@@ -889,7 +889,7 @@ message LawRegulationConfigDto {
 }
 
 message LawRegulationItemDto {
-     string namespace = 1;
+    string namespace = 1;
     string icon_name = 2;
     string display_name = 3;
     bool enabled_by_default= 4;
@@ -898,8 +898,14 @@ message LawRegulationItemDto {
 
 
 message ToDoConfigDto {
-    string incomplete_reasons= 1;
-    string complete_reasons = 2;
+    google.protobuf.StringValue incomplete_reasons= 1;
+    google.protobuf.StringValue complete_reasons = 2;
+    google.protobuf.BoolValue allowCustomerSelfService = 3;
+    google.protobuf.BoolValue enableSelfServiceByDefault = 4;
+    google.protobuf.StringValue customerSelfServiceRejectedStateNamespace = 5;
+    google.protobuf.StringValue customerSelfServiceRejectedReasonNamespace = 6;
+    google.protobuf.StringValue customerSelfServiceCompletedStateNamespace = 7;
+    google.protobuf.StringValue customerSelfServiceCompletedReasonNamespace = 8;
 }
 
 message GetEstateConfigReply {
