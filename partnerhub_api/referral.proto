@@ -386,12 +386,13 @@ message AddDeliveryReply {
 }
 
 message DeliveryDto {
-  string product_order_id = 1;
-  string display_name = 2;
-  string data_node_namespace = 3;
-  string json_payload = 4;
-  bool has_attachment = 5;
-  string attachment_filename = 6;
+  string id = 1;
+  string product_order_id = 2;
+  string display_name = 3;
+  string data_node_namespace = 4;
+  string json_payload = 5;
+  bool has_attachment = 6;
+  string attachment_filename = 7;
 }
 
 message DownloadAttachemntRequest {
