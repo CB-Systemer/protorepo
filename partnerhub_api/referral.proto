@@ -31,6 +31,10 @@ service ReferralService {
   rpc GetReferralsCreatedFromResourceGroup (GetReferralsCreatedFromResourceGroupRequest) returns (ReferralList);
 
   rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
+  rpc DownloadAttachment (DownloadAttachemntRequest) returns (DownloadReply);
+
+  rpc AddDelivery (AddDeliveryRequest) returns (AddDeliveryReply);
+  rpc DownloadDelivery (DownloadDeliveryRequest) returns (DownloadReply);
 }
 
 message ReferralDto{
@@ -360,6 +364,50 @@ message AttachmentDto {
   string attachment_id = 2;
   string attachment_identifier = 3;
   string filename = 4;
+}
+
+message AddDeliveryRequest {
+  string product_order_id = 1;
+  string display_name = 2;
+  string data_node_namespace = 3;
+  string json_payload = 4;
+  bool has_attachment = 5;
+  string attachment_filename = 6;
+  string attachment_content_type = 7;
+  bytes attachment_content = 8;
+
+  string executing_actor_id = 9;
+  OrderActorDto custom_executing_actor = 10;
+  repeated string executing_actor_permissions = 11;
+}
+
+message AddDeliveryReply {
+  DeliveryDto delivery = 1;
+}
+
+message DeliveryDto {
+  string product_order_id = 1;
+  string display_name = 2;
+  string data_node_namespace = 3;
+  string json_payload = 4;
+  bool has_attachment = 5;
+  string attachment_filename = 6;
+}
+
+message DownloadAttachemntRequest {
+  string product_order_id = 1;
+  string attachment_id = 2;
+}
+
+message DownloadDeliveryRequest {
+  string product_order_id = 1;
+  string delivery_id = 2;
+}
+
+message DownloadReply {
+  string filename = 1;
+  string content_type = 2;
+  bytes content = 3;
 }
 
 message ProductStatusDto{
