@@ -3,6 +3,7 @@
 syntax = "proto3";
 option csharp_namespace = "Cbs.DataStore.Api.ProductIndex";
 import "google/type/money.proto";
+import "google/protobuf/wrappers.proto";
 
 service ProductIndexApi {
     rpc RebuildIndex (RebuildSearchIndexRequest) returns (RebuildSearchIndexReply);
@@ -35,9 +36,10 @@ message UpdateMappingsReply {
 };
 
 message GetProductsRequest {
-    repeated string product_package_id = 1;
+    repeated string product_package_ids = 1;
     string product_type = 2;
     string product_channel = 3;
+    google.protobuf.StringValue product_category = 4;
 }
 
 message GetProductsReply {
