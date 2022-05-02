@@ -24,6 +24,7 @@ service ResourceGroupApi {
   rpc GetApiAccess (GetResourceGroupApiAccessRequest) returns (GetResourceGroupApiAccessReply);
   rpc GetApiAccessList (GetResourceGroupApiAccessListRequest) returns (GetResourceGroupApiAccessListReply);
   rpc GetChainMembers (GetChainMembersRequest) returns (GetChainMembersReply);
+  rpc MoveResourceGroupToTenant(MoveResourceGroupToTenantRequest) returns (MoveResourceGroupToTenantReply);
 }
 
 message CreateChainMemberRelationRequest {
@@ -76,10 +77,10 @@ message SearchChainMembersRequest {
 message SetConfigurationRequest {
 	repeated string resourceGroupIds = 1;
 	string configuration = 2;
-};
+}
 
 message SetConfigurationReply { 
-};
+}
 
 message ListResourceGroupRequest{
 	int32 top = 1;
@@ -88,16 +89,6 @@ message ListResourceGroupRequest{
 	google.protobuf.StringValue resource_group_id = 4;
 	google.protobuf.StringValue datastore_id = 5;
 	bool include_technical_resourceGroups = 6;
-}
-
-message TerminateResourceGroupRequest {
-	string resource_group_id = 1;
-	string new_resource_group_id = 2;
-	bool dry_run = 3;
-}
-
-message TerminateResourceGroupReply {
-	string processId = 1;
 }
 
 message CreateResourceGroupApiAccessRequest {
@@ -124,8 +115,6 @@ message RemoveResourceGroupApiAccessRequest {
 
 message RemoveResourceGroupApiAccessReply {
 }
-
-
 
 message GetResourceGroupApiAccessRequest {
 	string id = 1;
@@ -155,4 +144,25 @@ message GetChainMembersRequest {
 
 message GetChainMembersReply {
 	repeated ResourceGroupDto chain_members = 1;
+}
+
+message TerminateResourceGroupRequest {
+    string resource_group_id = 1;
+}
+
+message TerminateResourceGroupReply {
+	string processId = 1;
+	string namespace = 2;
+	bool success = 3;
+}
+
+message MoveResourceGroupToTenantRequest {
+	string resource_group_id = 1;
+	string tenant_id = 2;
+}
+
+message MoveResourceGroupToTenantReply {
+	string processId = 1;
+	string namespace = 2;
+	bool success = 3;
 }
