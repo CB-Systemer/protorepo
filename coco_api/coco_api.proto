@@ -74,7 +74,7 @@ service CocoApi {
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
   rpc GetActiveDocumentTemplates(GetActiveDocumentTemplatesRequest) returns (GetActiveDocumentTemplatesReply);
-  rpc GetSmsCommand(GetSmsCommandRequest) returns (GetSingleConfigRequest);
+  rpc GetSmsCommand(GetSmsCommandReply) returns (GetSingleConfigRequest);
 }
 
 message GetActiveDocumentTemplatesRequest {
