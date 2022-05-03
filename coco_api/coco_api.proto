@@ -1091,6 +1091,10 @@ message GetSmsCommandRequest {
 }
 
 message GetSmsCommandResponse {
+   SmsCommandConfigDto config = 1;
+}
+
+message SmsCommandConfigDto {
     string instance_namespace = 1;
     int32 timeoutInMinutes = 2;
     string queueDestinationAddress = 3;
@@ -1099,7 +1103,7 @@ message GetSmsCommandResponse {
     repeated CommandDto Commands = 6;
     string description = 7;
     string display_name = 8;
-    string icon_name = 8;
+    string icon_name = 9;
 }
 
 message CommandDto {
