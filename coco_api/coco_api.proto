@@ -1090,7 +1090,7 @@ message GetSmsCommandRequest {
     string namespace = 2;
 }
 
-message GetSmsCommandResponse {
+message GetSmsCommandReply {
    SmsCommandConfigDto config = 1;
 }
 
