@@ -835,6 +835,14 @@ message CampaignConfigDto{
 message CaseConfigDto {
     string project_case_reference_type = 1;
     bool is_case_collection = 2;
+    repeated AllowedCaseRoleDto allowed_roles_on_create = 3;
+}
+
+message AllowedCaseRoleDto {
+    string role_namespace = 1;
+    bool allow_multiple = 2;
+    int32 order = 3;
+    bool default = 4;
 }
 
 message GetCaseConfigReply {
