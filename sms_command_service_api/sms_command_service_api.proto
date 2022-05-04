@@ -3,7 +3,7 @@ syntax = "proto3";
 
 option csharp_namespace = "SmsCommandService.Api";
 
-service RecomApi {
+service SmsCommandServiceApi {
   rpc CreateSession (CreateSessionRequest) returns (CreateSessionReply);
   rpc SendCommand (SendCommandRequest) returns (SendCommandReply);
 }
