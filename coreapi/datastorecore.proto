@@ -9,6 +9,7 @@ import "google/protobuf/wrappers.proto";
 service DataStoreCoreApi {
   rpc Search (SearchRequest) returns (SearchDataStoresReply);
   rpc ListDataStores (ListDataStoresRequest) returns (SearchDataStoresReply);
+  rpc GetFilterSettings (GetFilterSettingsRequest) returns (GetFilterSettingsReply);
 }
 
 message SearchDataStoresReply {
