@@ -4,6 +4,7 @@ syntax = "proto3";
 option csharp_namespace = "Templating.Api";
 
 package templating;
+import "google/protobuf/wrappers.proto";
 
 message ExecutingActorContext {
   string access_token = 1;
@@ -145,7 +146,7 @@ message TemplatePreview {
 
 message PreviewTemplateRequest {
   string templateId = 1;
-  string data = 2;
+  google.protobuf.StringValue data = 2;
   ExecutingActorContext actor_context = 3;
   string type = 5;
 }
