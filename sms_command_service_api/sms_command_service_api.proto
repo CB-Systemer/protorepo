@@ -10,10 +10,13 @@ service  SmsCommandServiceApi {
 
 message CreateSessionRequest {
    string actor_id = 1;
-   string phone_number = 2;
-   string namespace = 3;
-   string external_reference = 4;
-   string resource_group_id = 5;
+   string actor_namespace = 2;
+   string phone_number = 3;
+   string command_namespace = 4;
+   string external_reference = 5;
+   string resource_group_id = 6;
+   string tenant_id = 7;
+   string data_store_id = 8;
 }
 
 message CreateSessionReply {
