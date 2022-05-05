@@ -843,6 +843,7 @@ message AllowedCaseRoleDto {
     bool allow_multiple = 2;
     int32 order = 3;
     bool default = 4;
+    bool default_to_current_employee = 5;
 }
 
 message GetCaseConfigReply {
