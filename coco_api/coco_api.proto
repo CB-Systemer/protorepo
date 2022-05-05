@@ -1114,6 +1114,6 @@ message CommandMapping {
 }
 
 message CommandDto {
-    string command = 1;
+    string name = 1;
     repeated string responses = 2;
 }
