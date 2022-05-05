@@ -1103,7 +1103,7 @@ message SmsCommandConfigDto {
     string queueDestinationAddress = 3;
     string templateId = 4;
     string phoneNumberPool = 5;
-    repeated CommandMapping CommandMapping = 6;
+    CommandMapping CommandMapping = 6;
     string description = 7;
     string display_name = 8;
     string icon_name = 9;
