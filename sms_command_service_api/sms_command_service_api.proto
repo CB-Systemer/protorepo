@@ -17,6 +17,7 @@ message CreateSessionRequest {
    string resource_group_id = 6;
    string tenant_id = 7;
    string data_store_id = 8;
+   string params = 9;
 }
 
 message CreateSessionReply {
