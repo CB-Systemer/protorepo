@@ -1102,14 +1102,18 @@ message SmsCommandConfigDto {
     int32 timeoutInMinutes = 2;
     string queueDestinationAddress = 3;
     string templateId = 4;
-    repeated string phoneNumberPool = 5;
-    repeated CommandDto Commands = 6;
+    string phoneNumberPool = 5;
+    repeated CommandMapping CommandMapping = 6;
     string description = 7;
     string display_name = 8;
     string icon_name = 9;
 }
 
+message CommandMapping {
+    repeated CommandDto commands = 1;
+}
+
 message CommandDto {
-    string name = 1;
-    repeated string options = 2;
+    string command = 1;
+    repeated string responses = 2;
 }
