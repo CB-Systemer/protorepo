@@ -23,6 +23,7 @@ message CreateSessionRequest {
 message CreateSessionReply {
     bool success = 1;
     string session_id = 2;
+    string message = 3;
 }
 
 message SendCommandRequest {
@@ -33,6 +34,7 @@ message SendCommandRequest {
 
 message SendCommandReply {
     bool success = 1;
+    string message = 2;
 }
 
 
