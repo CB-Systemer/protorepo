@@ -56,7 +56,6 @@ message ExecRefuncRequest {
   string userActorId = 10;
   string configData = 11;
   string RuntimeParams = 12;
-  bool is_preview = 13;
 }
 
 message ExecRefuncReply {
