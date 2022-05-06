@@ -97,6 +97,7 @@ message SendMessageRequest {
   bool isAlias = 16;
   repeated ArchiveOn archive_on = 17;
   bool send_many = 18;
+  string sender = 19;
 }
 
 message SendMessageReply {
