@@ -24,6 +24,7 @@ service TemplatingApi {
   rpc Initialize (InitializeRequest) returns (InitializeReply);
   rpc GetDocument (GetDocumentRequest) returns (GetDocumentReply);
   rpc BuildTemplate (BuildTemplateRequest) returns (BuildTemplateReply);
+  rpc MultiBuildTemplate (MultiBuildTemplateRequest) returns (MultiBuildTemplateReply);
   rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
 }
@@ -99,6 +100,28 @@ message BuildTemplateRequest {
 }
 
 message BuildTemplateReply {
+	string templateOutput = 1;
+  string errorMessage = 2;
+  int32 errorCode = 3;
+}
+
+message MultiBuildTemplateRequest {
+	string templateIdOrAlias = 1;
+	bool isAlias = 2;
+  string outputFormat = 5;
+  string contextDataNodeId = 6;
+  string contextTenantId = 7;
+  string contextResourceGroupId = 8;
+  ExecutingActorContext actor_context = 9;
+	repeated string formats = 13;
+	string params = 10;
+}
+
+message MultiBuildTemplateReply {
+  repeated TemplateOutputDto templates = 1;
+}
+
+message TemplateOutputDto {
 	string templateOutput = 1;
   string errorMessage = 2;
   int32 errorCode = 3;
