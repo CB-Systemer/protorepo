@@ -122,9 +122,10 @@ message MultiBuildTemplateReply {
 }
 
 message TemplateOutputDto {
-	string templateOutput = 1;
+  string templateOutput = 1;
   string errorMessage = 2;
   int32 errorCode = 3;
+  string format = 4;
 }
 
 message InitializeRequest {
