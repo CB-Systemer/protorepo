@@ -306,30 +306,29 @@ message GetProductOrdersByProductRequest{
   google.protobuf.Int32Value product_version = 2;
   repeated string resource_group_scopes = 3;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
+}
+
+message PagingFilterDto{
+  google.protobuf.Int32Value top = 1;
+  google.protobuf.Int32Value skip = 2;
+  repeated string status_filters = 3;
+  repeated string category_filters = 4;
+  google.protobuf.Timestamp updated_since = 5;  
 }
 
 message GetReferralsByReferredActorRequest{
   string referred_actor_id = 1;
   repeated string resource_group_scopes = 2;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByRecipientRequest{
   string order_recipient_id = 1;
   repeated string resource_group_scopes = 2;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByResourceGroupRequest{
@@ -337,51 +336,36 @@ message GetProductOrdersByResourceGroupRequest{
 
   repeated string resource_group_scopes = 2;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByAssignedActorRequest{
   string assigned_actor_id = 1;
   repeated string resource_group_scopes = 2;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersCreatedByActorRequest{
   string actor_id = 1;
   repeated string resource_group_scopes = 2;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersCreatedFromResourceGroupRequest{
   string resource_group_id = 1;
 
   repeated string resource_group_scopes = 2;
-  
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+
+  PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByCaseReferenceRequest{
   string case_reference_id = 1;
   repeated string resource_group_scopes = 2;
 
-  google.protobuf.Int32Value top = 4;
-  google.protobuf.Int32Value skip = 5;
-  repeated string status_filters = 6;
-  repeated string category_filters = 7;
+  PagingFilterDto paging_filter = 4;
 }
 
 message UpdateStatusRequest{
