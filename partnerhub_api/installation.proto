@@ -9,6 +9,7 @@ service InstallationService {
   rpc GetActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
   rpc GetInActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
   rpc IsInstalled (IsInstalledRequest) returns (IsInstalledReply);
+  rpc UpdateProductPackageVersionForInstallations (UpdateProductPackageVersionForInstallationsRequest) returns (google.protobuf.Empty);
 
 
   rpc InstallPackage (InstallPackageRequest) returns (google.protobuf.Empty);
@@ -55,4 +56,10 @@ message IsInstalledRequest {
 
 message IsInstalledReply {
   bool is_installed = 1;
+}
+
+message UpdateProductPackageVersionForInstallationsRequest{
+  string internal_product_package_id = 1;
+  string new_product_package_id = 2;
+  int32 new_product_version = 3;  
 }
