@@ -151,6 +151,7 @@ message GetTemplateReply {
   string displayName = 7;
   string errorMessage = 10;
   int32 errorCode = 9;
+  string form_fields = 11;
 }
 
 message TemplateSource {
