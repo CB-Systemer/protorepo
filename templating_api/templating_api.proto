@@ -110,9 +110,9 @@ message MultiBuildTemplateRequest {
 	string templateIdOrAlias = 1;
 	bool isAlias = 2;
   string outputFormat = 5;
-  string contextDataNodeId = 6;
-  string contextTenantId = 7;
-  string contextResourceGroupId = 8;
+  google.protobuf.StringValue contextDataNodeId = 6;
+  google.protobuf.StringValue contextTenantId = 7;
+  google.protobuf.StringValue contextResourceGroupId = 8;
   ExecutingActorContext actor_context = 9;
 	repeated string formats = 13;
 	string params = 10;
