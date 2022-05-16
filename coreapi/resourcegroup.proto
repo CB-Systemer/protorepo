@@ -8,6 +8,7 @@ import "google/protobuf/wrappers.proto";
 
 service ResourceGroupApi {
   rpc GetResourceGroup (GetResourceGroupRequest) returns (GetResourceGroupReply);
+  rpc GetStore (GetResourceGroupRequest) returns (GetStoreReply);
   rpc Search (SearchRequest) returns (SearchResourceGroupsReply);
   rpc SearchChains (SearchRequest) returns (SearchResourceGroupsReply);
   rpc CreateChainMemberRelation (CreateChainMemberRelationRequest) returns (CreateChainMemberRelationReply);
@@ -55,7 +56,7 @@ message GetResourceGroupReply {
   string data_store_id = 2;
   string namespace = 3;
   string display_name = 4;
-  string status = 5;
+  string status = 5;  
 }
 
 message SearchResourceGroupsReply {
@@ -165,4 +166,18 @@ message MoveResourceGroupToTenantReply {
 	string processId = 1;
 	string namespace = 2;
 	bool success = 3;
+}
+
+message GetStoreReply{
+	StoreDto Store = 1;
+}
+
+message StoreDto{
+	string resource_group_id = 1;
+	string data_store_id = 2;
+	string namespace = 3;
+	string display_name = 4;
+	string status = 5;
+	google.protobuf.StringValue external_id = 6;
+	google.protobuf.StringValue cvr = 7;
 }

@@ -5,12 +5,15 @@ option csharp_namespace = "Cbs.DataNodes.Api.DatanodeReference";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "common/common.proto";
 
 service DatanodeReferenceApi {
 	rpc GetDatanodeReference(GetDatanodeReferenceRequest) returns (GetDatanodeReferenceResponse);
 	
 	rpc GetDataNode (GetDataNodeRequest) returns (GetDataNodeReply);
 	rpc GetDataNodes (GetDataNodesRequest) returns (DataNodesReply);
+	
+	rpc GetDataNodeContactInfo (GetDataNodeRequest) returns (DataNodeContactInfo);
 }
 
 message GetDatanodeReferenceRequest {
@@ -87,4 +90,10 @@ message BasicDataNodeDto {
 message DataNodeExternalReferenceSearchModel {
 	string externalId = 1;
 	string externalSystemNamespace = 2;
+}
+
+message DataNodeContactInfo{
+	EmailModel email = 1;
+	AddressModel primaryAddress = 2;
+	PhoneModel primaryPhone = 3;
 }
