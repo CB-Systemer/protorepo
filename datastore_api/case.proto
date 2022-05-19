@@ -4,6 +4,7 @@ option csharp_namespace = "Cbs.DataNodes.Api.Case";
 
 import "common/common.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 service CaseApi {
 	rpc RepairCase (RepairCaseRequest) returns (RepairCaseReply);
@@ -300,6 +301,7 @@ message CasePublicProfile {
 	AdvertisementZip advertisementZip = 83;
 	AdvertisementMunicipality advertisementMunicipality = 84;
 	repeated Appointment appointments = 85;
+	google.protobuf.StringValue primaryPropositionEconomyNamespace = 86;
 }
 
 message ExternalReference{
