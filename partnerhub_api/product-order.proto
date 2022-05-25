@@ -19,10 +19,10 @@ service ProductOrderService {
   rpc GetReferralsForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (ReferralList);
   rpc GetReferralsCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (ReferralList);
   rpc GetReferralsCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (ReferralList);
-  
+
   // Orders
   rpc CreateOrder (CreateOrderRequest) returns (OrderDto);
-  rpc GetOrderDetails (GetProductOrderDetailsRequest) returns (OrderDtoDetails);  
+  rpc GetOrderDetails (GetProductOrderDetailsRequest) returns (OrderDtoDetails);
   rpc GetOrdersForProduct (GetProductOrdersByProductRequest) returns (OrderList);
   rpc GetOrdersForRecipient (GetProductOrdersByRecipientRequest) returns (OrderList);
   rpc GetOrdersForResourceGroup (GetProductOrdersByResourceGroupRequest) returns (OrderList);
@@ -30,11 +30,12 @@ service ProductOrderService {
   rpc GetOrdersForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (OrderList);
   rpc GetOrdersCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (OrderList);
   rpc GetOrdersCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (OrderList);
-  
+
   // ProductOrder (shared)
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
+  
   rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
   rpc GetAvailableCustomStatuses(GetAvailableStatusesRequest) returns (GetAvailableStatusesReply);
 
@@ -50,7 +51,7 @@ message ReferralDto{
   ProductOrderDto product_order = 2;
 }
 
-message OrderDto{  
+message OrderDto{
   ProductOrderDto product_order = 1;
 }
 
@@ -107,12 +108,12 @@ message ProductOrderDto{
 message ReferralDtoDetails{
   ReferralDto referral = 1;
   ProductOrderDtoDetails product_order_details = 2;
-  OrderActorDto referred_actor = 5;  
 }
 
 message OrderDtoDetails{
   OrderDto order = 1;
   ProductOrderDtoDetails product_order_details = 2;
+  repeated SubProductDto sub_products = 3;
 }
 
 message ProductOrderDtoDetails{
@@ -129,6 +130,7 @@ message ProductOrderDtoDetails{
 
   OrderPartyDto sender_order_resourceGroup = 11;
   OrderPartyDto sender_order_party = 12;
+  google.type.Money total_price = 15;
 }
 
 message ReceiverCaseStatusDto{
@@ -166,11 +168,11 @@ message OrderPartyDto{
   repeated NamespaceValuePairDto externalIdentifiers = 4;
 
   google.protobuf.StringValue cvr = 5;
-  google.protobuf.StringValue store_external_id = 6;
-  
+  google.protobuf.StringValue external_id = 6;
+
   google.protobuf.StringValue email = 7;
   PhoneDto phone = 8;
-  AddressDto address = 9;  
+  AddressDto address = 9;
 }
 
 message NamespaceValuePairDto{
@@ -199,7 +201,7 @@ message ReferralList{
 }
 
 message OrderList{
-  repeated OrderDto orders = 1;
+  repeated OrderDto orders = 1;  
 }
 
 message CreateReferralRequest{
@@ -208,12 +210,42 @@ message CreateReferralRequest{
 }
 
 message CreateOrderRequest{
-  repeated SubProductDto sub_products = 1;
+  repeated CreateSubProductDto sub_products = 1;
   CreateProductOrderDto product_order = 2;
 }
 
+message CreateSubProductDto{
+  string product_id = 1;
+  google.type.Money Price = 2;
+  int32 quantity = 3;
+  string display_name = 4;
+  google.protobuf.StringValue short_description = 5;
+  string product_type = 6;
+  string product_category = 7;
+  repeated InformationFieldDto information_fields = 8;
+  repeated CreateAttachmentDto AllowedAttachments = 9;
+}
+
 message SubProductDto{
-  //to be
+  string id = 10;
+  string product_id = 1;
+  google.type.Money Price = 2;
+  int32 quantity = 3;
+  string display_name = 4;
+  google.protobuf.StringValue short_description = 5;
+  string product_type = 6;
+  string product_category = 7;
+  repeated InformationFieldDto information_fields = 8;
+  repeated AttachmentDto AllowedAttachments = 9;
+}
+
+message CreateAttachmentDto{
+  bool required = 1;
+  bool allow_multiple = 2;
+  google.protobuf.StringValue description = 3;
+  string attachment_identifier = 4;
+  string attachment_name = 5;
+  string attachment_type = 6;
 }
 
 message CreateProductOrderDto{
@@ -233,8 +265,7 @@ message CreateProductOrderDto{
   string executing_actor_id = 6;
   OrderActorDto custom_executing_actor = 25;
   repeated string executing_actor_permissions = 14;
-
-
+  
   string recipient_resource_group_id = 9;
   google.protobuf.StringValue recipient_order_party_id = 10;
   google.protobuf.StringValue receiver_internal_note = 30;
@@ -254,6 +285,7 @@ message CreateProductOrderDto{
   google.protobuf.StringValue comment = 22;
   google.protobuf.StringValue case_payload_reference_id = 27;
   bool amount_set_on_delivery = 24;
+  repeated CreateAttachmentDto allowed_attachments = 32;
 }
 
 message SetReceiverCaseReferenceIdRequest{
@@ -321,7 +353,7 @@ message PagingFilterDto{
   google.protobuf.Int32Value skip = 2;
   repeated string status_filters = 3;
   repeated string category_filters = 4;
-  google.protobuf.Timestamp updated_since = 5;  
+  google.protobuf.Timestamp updated_since = 5;
 }
 
 message GetReferralsByReferredActorRequest{
@@ -389,14 +421,16 @@ message UpdateStatusRequest{
 
 message AddAttachmentRequest {
   string product_order_id = 1;
+  google.protobuf.StringValue sub_product_id = 9;
   string attachmentIdentifier = 2;
   string filename = 3;
   string content_type = 4;
   bytes content = 5;
 
+  repeated string resource_group_scopes = 10;
+
   string executing_actor_id = 6;
   OrderActorDto custom_executing_actor = 7;
-  //todo: add resourcegroup scopes [Nicolaj]
   repeated string executing_actor_permissions = 8;
 }
 
@@ -407,8 +441,23 @@ message AddAttachmentReply {
 message AttachmentDto {
   string product_order_id = 1;
   string attachment_id = 2;
-  string attachment_identifier = 3;
-  string filename = 4;
+  
+  bool required = 3;
+  bool allow_multiple = 4;
+  google.protobuf.StringValue description = 5;
+  string attachment_identifier = 6;
+  string attachment_name = 7;
+  string attachment_type = 8;
+  
+  repeated FileDto files = 9;
+}
+
+message FileDto{
+  string id = 1;
+  string filename = 2;
+  string content_type = 3;
+  string url = 4;
+  int32 size = 5;
 }
 
 message AddDeliveryRequest {
@@ -416,10 +465,11 @@ message AddDeliveryRequest {
   string display_name = 2;
   string data_node_namespace = 3;
   string json_payload = 4;
-  bool has_attachment = 5;
   string attachment_filename = 6;
   string attachment_content_type = 7;
   bytes attachment_content = 8;
+
+  repeated string resource_group_scopes = 12;
 
   string executing_actor_id = 9;
   OrderActorDto custom_executing_actor = 10;
@@ -441,19 +491,19 @@ message DeliveryDto {
 }
 
 message DownloadAttachmentRequest {
-  string product_order_id = 1;
+  string context_id = 1;
   string attachment_id = 2;
+  repeated string resource_group_scopes = 3;
 }
 
 message DownloadDeliveryRequest {
   string product_order_id = 1;
   string delivery_id = 2;
+  repeated string resource_group_scopes = 3;
 }
 
 message DownloadReply {
-  string filename = 1;
-  string content_type = 2;
-  bytes content = 3;
+  repeated FileDto files = 1;
 }
 
 message ProductStatusDto{
