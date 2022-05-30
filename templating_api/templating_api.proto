@@ -45,6 +45,7 @@ message SeededTemplateDto {
   repeated TemplatePreview previews = 8;
   string displayName = 7;
   string form_fields = 10;
+  google.protobuf.StringValue ui = 11;
 }
 
 message GetTemplateOptionsRequest {
@@ -57,10 +58,11 @@ message GetTemplateOptionsReply {
 }
 
 message TemplateOption {
-	string data_node_id = 1;
-	bool is_default = 2;
+  string data_node_id = 1;
+  bool is_default = 2;
   string display_name = 3;
   double sort_order = 4;
+  google.protobuf.StringValue ui = 5;
 }
 
 message MergeDataRequest {
@@ -153,6 +155,7 @@ message GetTemplateReply {
   string errorMessage = 10;
   int32 errorCode = 9;
   string form_fields = 11;
+  google.protobuf.StringValue ui = 12;
 }
 
 message TemplateSource {
