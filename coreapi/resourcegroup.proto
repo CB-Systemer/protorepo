@@ -58,6 +58,7 @@ message GetResourceGroupReply {
   string display_name = 4;
   string status = 5;
   google.protobuf.StringValue external_id = 6;
+  string tenant_id = 7;
 }
 
 message SearchResourceGroupsReply {
