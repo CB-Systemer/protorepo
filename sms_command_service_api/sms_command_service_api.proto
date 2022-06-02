@@ -13,11 +13,9 @@ message CreateSessionRequest {
    string phone_number = 2;
    string country_code = 3;
    string command_namespace = 4;
-   string external_reference = 5;
+   string external_reference_id = 5;
    string resource_group_id = 6;
-   string tenant_id = 7;
-   string data_store_id = 8;
-   string template_params = 9;
+   string template_params = 7;
 }
 
 message CreateSessionReply {
