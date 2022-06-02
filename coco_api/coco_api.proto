@@ -1103,12 +1103,13 @@ message SmsCommandConfigDto {
     string instance_namespace = 1;
     int32 timeoutInMinutes = 2;
     string queueDestinationAddress = 3;
-    string templateId = 4;
-    string phoneNumberPool = 5;
-    CommandMapping CommandMapping = 6;
-    string description = 7;
-    string display_name = 8;
-    string icon_name = 9;
+    string challengeTemplateTargetNamespace = 4;
+    string acceptedResponseTemplateTargetNamespace = 5;
+    string rejectedResponseTemplateTargetNamespace = 6;
+    CommandMapping CommandMapping = 7;
+    string description = 8;
+    string display_name = 9;
+    string icon_name = 10;
 }
 
 message CommandMapping {
