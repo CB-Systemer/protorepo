@@ -1101,15 +1101,16 @@ message GetSmsCommandReply {
 
 message SmsCommandConfigDto {
     string instance_namespace = 1;
-    int32 timeoutInMinutes = 2;
-    string queueDestinationAddress = 3;
-    string challengeTemplateTargetNamespace = 4;
-    string acceptedResponseTemplateTargetNamespace = 5;
-    string rejectedResponseTemplateTargetNamespace = 6;
-    CommandMapping CommandMapping = 7;
-    string description = 8;
-    string display_name = 9;
-    string icon_name = 10;
+    int32 timeout_in_minutes = 2;
+    int32 Timeout_grace_period_in_minutes = 3;
+    string queue_destination_address = 4;
+    string challenge_template_target_namespace = 5;
+    string accepted_response_template_target_namespace = 6;
+    string rejected_response_template_target_namespace = 7;
+    CommandMapping CommandMapping = 8;
+    string description = 9;
+    string display_name = 10;
+    string icon_name = 11;
 }
 
 message CommandMapping {
