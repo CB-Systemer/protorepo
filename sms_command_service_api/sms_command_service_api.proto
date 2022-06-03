@@ -20,8 +20,9 @@ message CreateSessionRequest {
 
 message CreateSessionReply {
     bool success = 1;
-    string session_id = 2;
-    string message = 3;
+    string sender_phone_number = 2;
+    string reply_phone_number = 3;
+    string message = 4;
 }
 
 message SendCommandRequest {
