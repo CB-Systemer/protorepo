@@ -3,7 +3,7 @@ syntax = "proto3";
 
 option csharp_namespace = "Billing.Api";
 
-service MetricsApi {
+service BillingMetricsApi {
 	rpc SmsSent (SmsSentMetricRequest) returns (SmsSentMetricReply);
 }
 
