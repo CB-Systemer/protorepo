@@ -5,6 +5,7 @@ option csharp_namespace = "Billing.Api";
 
 service BillingMetricsApi {
 	rpc SmsSent (SmsSentMetricRequest) returns (SmsSentMetricReply);
+    rpc EmailSent (EmailSentMetricRequest) returns (EmailSentMetricReply);
 }
 
 message SmsSentMetricRequest {
@@ -19,6 +20,21 @@ message SmsSentMetricRequest {
 }
 
 message SmsSentMetricReply {
+	bool success = 1;
+    string status = 2;
+}
+
+message EmailSentMetricRequest {
+	string tenant_id = 1;
+    string resource_group_id = 2;
+    string application_id = 3;
+    string rext_id = 4;
+    string executing_actor_id = 5;
+    string transaction_id = 6;
+    string email_address = 7;
+}
+
+message EmailSentMetricReply {
 	bool success = 1;
     string status = 2;
 }
