@@ -15,6 +15,7 @@ message SmsSentMetricRequest {
     string phone = 5;
     string country_code = 6;
     string executing_actor_id = 7;
+    string transaction_id = 8;
 }
 
 message SmsSentMetricReply {
