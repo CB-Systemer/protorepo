@@ -123,4 +123,5 @@ message BillingContext {
    string application_id = 3;
    string transaction_id = 4;
    string executing_actor_id = 5;
+   string rext_id = 6;
 }
