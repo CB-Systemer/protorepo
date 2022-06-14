@@ -789,6 +789,7 @@ message ActorConfigDto {
     string phone_type_namespace = 3;
     string so_me_type_namespace = 4;
     repeated string allowed_primary_contact_actor_types = 5;
+    string default_notebook_namespace = 6;
 }
 
 message ActorRoleConfigDto {
