@@ -4,11 +4,16 @@ syntax = "proto3";
 option csharp_namespace = "Billing.Api";
 
 service BillingMetricsApi {
-	rpc SmsSent (SmsSentMetricRequest) returns (SmsSentMetricReply);
-    rpc EmailSent (EmailSentMetricRequest) returns (EmailSentMetricReply);
+	rpc SmsSent (CreateSmsMetricRequest) returns (CreateMetricReply);
+    rpc SmsHandled (CreateSmsMetricRequest) returns (CreateMetricReply);
+    rpc NemIdSent (CreateNemIdMetricRequest) returns (CreateMetricReply);
+    rpc NemIdHandled (CreateNemIdMetricRequest) returns (CreateMetricReply);
+    rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);
+    rpc ApiRequestCompleted (CreateApiMetricRequest) returns (CreateMetricReply);
+    rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
 }
 
-message SmsSentMetricRequest {
+message CreateSmsMetricRequest {
 	string tenant_id = 1;
     string resource_group_id = 2;
     string application_id = 3;
@@ -19,12 +24,7 @@ message SmsSentMetricRequest {
     string transaction_id = 8;
 }
 
-message SmsSentMetricReply {
-	bool success = 1;
-    string status = 2;
-}
-
-message EmailSentMetricRequest {
+message CreateEmailMetricRequest {
 	string tenant_id = 1;
     string resource_group_id = 2;
     string application_id = 3;
@@ -34,7 +34,35 @@ message EmailSentMetricRequest {
     repeated string recipient_email_addresses = 7;
 }
 
-message EmailSentMetricReply {
+message CreateNemIdMetricRequest {
+	string tenant_id = 1;
+    string resource_group_id = 2;
+    string application_id = 3;
+    string executing_actor_id = 4;
+    string transaction_id = 5;
+    string provider = 6;
+    string cpr_number = 7;
+}
+
+message CreateApiMetricRequest {
+	string tenant_id = 1;
+    string resource_group_id = 2;
+    string executing_actor_id = 3;
+    string method = 4;
+    string path = 5;
+}
+
+message CreateLoginMetricRequest {
+	string tenant_id = 1;
+    string resource_group_id = 2;
+    string application_id = 3;
+    string executing_actor_id = 4;
+    string transaction_id = 5;
+    string provider = 6;
+    string identity_id = 7;
+}
+
+message CreateMetricReply {
 	bool success = 1;
     string status = 2;
 }
