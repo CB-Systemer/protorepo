@@ -61,11 +61,10 @@ message ProductDto {
     string product_package_id = 2;
     string display_name = 3;
     string image_url = 4;
-    PriceType price_type = 5;
     google.type.Money price = 6;
-    ApprovalState global_admin_approval_state = 7;
-    ProductStatus product_status = 8;
-    string product_type = 9;
+    ApprovalState approval_status = 7;
+    ProductStatus status = 8;
+    string product_namespace = 9;
     string product_channel = 10;
     repeated InformationFieldDto information_fields = 11;
     repeated AttachmentOptionDto attachment_options = 12;
@@ -73,13 +72,12 @@ message ProductDto {
     repeated ImageReferenceDto image_urls = 14;
     string short_description = 15;
     string description = 16;
-    string partner_product_identifier = 17;
+    string custom_product_identifier = 17;
     string price_unit = 18;
     string vat_rate = 19;
     bool allow_amount_declaration_at_delivery = 20;
     bool show_status_to_sender = 21;
     bool show_case_state_to_sender = 22;
-    bool allow_messages = 23;
     bool allow_sender_cancellation = 24;
     OrderRecipientMode order_recipient_mode = 25;
     string product_category= 26;
@@ -91,11 +89,6 @@ message ProductDto {
 message ImageReferenceDto {
     string url = 1;
     int32 prirority = 2;
-}
-
-enum PriceType {
-    ReferralFee = 0;
-    PricePerUnit = 1;
 }
 
 enum ProductStatus {
@@ -127,9 +120,9 @@ message SubProductDto {
     google.type.Money price = 4;
     int32 priority = 5;
     bool use_amount_declaration = 6;
-    ApprovalState global_admin_approval_state = 7;
+    ApprovalState approval_status = 7;
     ProductStatus product_status = 8;
-    string product_type = 9;
+    string product_namespace = 9;
     string product_channel = 10;
     repeated InformationFieldDto information_fields = 11;
     repeated AttachmentOptionDto attachment_options = 12;
@@ -137,13 +130,12 @@ message SubProductDto {
     repeated ImageReferenceDto image_urls = 14;
     string short_description = 15;
     string description = 16;
-    string partner_product_identifier = 17;
+    string custom_product_identifier = 17;
     string price_unit = 18;
     string vat_rate = 19;
     bool allow_amount_declaration_at_delivery = 20;
     bool show_status_to_sender = 21;
     bool show_case_state_to_sender = 22;
-    bool allow_messages = 23;
     bool allow_sender_cancellation = 24;
     OrderRecipientMode order_recipient_mode = 25;
 }
@@ -176,5 +168,3 @@ message AttachmentOptionDto {
     string Description = 6;
     int32 priority = 7;
 }
-
-

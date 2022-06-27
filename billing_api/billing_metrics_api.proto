@@ -6,6 +6,7 @@ option csharp_namespace = "Billing.Api";
 service BillingMetricsApi {
 	rpc SmsSent (CreateSmsMetricRequest) returns (CreateMetricReply);
     rpc SmsHandled (CreateSmsMetricRequest) returns (CreateMetricReply);
+    rpc SmsLoginSent (CreateSmsMetricRequest) returns (CreateMetricReply);
     rpc NemIdSent (CreateNemIdMetricRequest) returns (CreateMetricReply);
     rpc NemIdHandled (CreateNemIdMetricRequest) returns (CreateMetricReply);
     rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);

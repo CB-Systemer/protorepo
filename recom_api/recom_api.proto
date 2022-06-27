@@ -7,6 +7,7 @@ service RecomApi {
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
   rpc SendSmsMessage (SendSmsMessageRequest) returns (SendSmsMessageReply);
   rpc SendEmailMessage (SendEmailMessageRequest) returns (SendEmailMessageReply);
+  rpc SendAnonymousEmailMessage (SendAnonymousEmailRequest) returns (SendEmailMessageReply);
   rpc GetRecipientsInfoMessage (GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
 }
 
@@ -80,6 +81,17 @@ message ArchiveOn {
 message SendEmailMessageReply {
   string status = 1;
   bool success = 2;
+}
+
+message SendAnonymousEmailRequest {
+  string subject = 1;
+  string content = 2;
+  repeated string recipients = 3;
+  bool send_instant = 4;
+  string context_tenant_id = 5;
+  string context_resource_group_id = 6;
+  ActorContext actor_context = 7;
+  BillingContext billing_context = 8;
 }
 
 message SendMessageRequest {

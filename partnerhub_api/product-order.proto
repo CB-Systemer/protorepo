@@ -94,11 +94,9 @@ message ProductOrderDto{
   bool amount_set_on_delivery = 20;
 
   bool allow_sender_cancellation = 24;
-  bool allow_comment = 25;
   bool show_status_to_sender = 26;
   bool show_case_state_to_sender = 27;
 
-  google.protobuf.StringValue comment = 28;
   google.protobuf.StringValue receiver_internal_note = 30;
   google.protobuf.StringValue sender_internal_note = 31;
 
@@ -279,11 +277,9 @@ message CreateProductOrderDto{
   repeated InformationFieldDto information_fields = 13;
 
   bool allow_sender_cancellation = 18;
-  bool allow_comment = 19;
   bool show_status_to_sender = 20;
   bool show_case_state_to_sender = 21;
 
-  google.protobuf.StringValue comment = 22;
   google.protobuf.StringValue case_payload_reference_id = 27;
   bool amount_set_on_delivery = 24;
   repeated CreateAttachmentDto allowed_attachments = 32;
