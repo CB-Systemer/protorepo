@@ -11,6 +11,7 @@ service ProductIndexApi {
     rpc UpdateMappings (UpdateMappingsRequest) returns (UpdateMappingsReply);
     rpc GetProductsFromProductPackages (GetProductsRequest) returns (GetProductsReply);
     rpc GetOrderableProduct (GetOrderableProductRequest) returns (GetOrderableProductReply);
+    rpc ResolveDataNodeId (ResolveDataNodeIdRequest) returns (ResolveDataNodeIdReply);
 }
 
 message RebuildSearchIndexRequest {
@@ -167,4 +168,13 @@ message AttachmentOptionDto {
     bool required = 5;
     string Description = 6;
     int32 priority = 7;
+}
+
+message ResolveDataNodeIdRequest {
+    google.protobuf.StringValue product_id = 1;
+    google.protobuf.StringValue product_package_id = 2;
+}
+
+message ResolveDataNodeIdReply{
+    google.protobuf.StringValue data_node_id = 1;
 }
