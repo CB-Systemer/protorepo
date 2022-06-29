@@ -58,8 +58,12 @@ message GetOrderableProductReply {
 
 
 message ProductDto {
-    string product_id = 1;
+    string product_id = 1;    
     string product_package_id = 2;
+
+    string product_datanode_id = 30;    
+    string product_package_datanode_id = 31;
+
     string display_name = 3;
     string image_url = 4;
     google.type.Money price = 6;
