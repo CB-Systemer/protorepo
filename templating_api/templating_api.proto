@@ -27,6 +27,22 @@ service TemplatingApi {
   rpc MultiBuildTemplate (MultiBuildTemplateRequest) returns (MultiBuildTemplateReply);
   rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
+  rpc GetPdf (GetPdfRequest) returns (GetPdfReply);
+}
+
+message GetPdfRequest {
+	string html = 1;
+	PrintOptions options = 2;
+}
+
+message PrintOptions {
+	string format = 1;
+}
+
+message GetPdfReply {
+	bytes bytes = 1;
+	int32 errorCode = 2;
+	string errorMessage = 3;
 }
 
 message GetSeededTemplateListRequest {
