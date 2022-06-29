@@ -30,6 +30,7 @@ service TemplatingApi {
   rpc GetPdf (GetPdfRequest) returns (GetPdfReply);
 }
 
+
 message GetPdfRequest {
 	string html = 1;
 	PrintOptions options = 2;
