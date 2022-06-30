@@ -4,6 +4,7 @@ syntax = "proto3";
 option csharp_namespace = "PartnerHub.Api.Protos";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 
 service InstallationService {
   rpc GetActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
@@ -28,7 +29,7 @@ message InstallationDto {
   string scope_id = 1;
   string scope_namespace = 8;
   string product_package_id = 2;
-  string internal_product_package_id = 9;
+  string product_package_datanode_id = 9;
   int32 product_package_version = 7;
   google.protobuf.Timestamp installed_at = 3;
   google.protobuf.Timestamp unInstalled_at = 4;
@@ -39,7 +40,7 @@ message InstallationDto {
 message InstallPackageRequest{
   string scope_id = 1;
   string product_package_id = 3;
-  string internal_product_package_id = 5;
+  string product_package_datanode_id = 5;
   int32 product_package_version = 2;
   bool inheritance_enabled = 4;
 }
@@ -56,10 +57,13 @@ message IsInstalledRequest {
 
 message IsInstalledReply {
   bool is_installed = 1;
+  google.protobuf.StringValue product_package_id = 2;
+  google.protobuf.Int32Value product_package_version = 3;
+  google.protobuf.StringValue product_package_datanode_id = 4;
 }
 
 message UpdateProductPackageVersionForInstallationsRequest{
-  string internal_product_package_id = 1;
-  string new_product_package_id = 2;
-  int32 new_product_version = 3;  
+  string product_package_datanode_id = 1;
+  string product_package_id = 2;
+  int32 product_package_version = 3;  
 }
