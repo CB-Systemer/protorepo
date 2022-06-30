@@ -59,9 +59,14 @@ message ProductOrderDto{
   string id = 13;
 
   string product_package_id = 11;
+  int32 product_package_version = 40;
+  string product_package_datanode_id = 38;
+  
   string product_id = 1;
   int32 product_version = 2;
-  string product_type = 3;
+  string product_datanode_id = 39;
+  
+  string product_namespace = 3;
   string product_channel_namespace = 10;
   string display_name = 6;
   string short_description = 7;
@@ -215,11 +220,13 @@ message CreateOrderRequest{
 
 message CreateSubProductDto{
   string product_id = 1;
+  int32 product_version = 12;
+  string product_datanode_id = 11;
   google.type.Money Price = 2;
   int32 quantity = 3;
   string display_name = 4;
   google.protobuf.StringValue short_description = 5;
-  string product_type = 6;
+  string product_namespace = 6;
   string product_category = 7;
   repeated InformationFieldDto information_fields = 8;
   repeated CreateAttachmentDto AllowedAttachments = 9;
@@ -228,11 +235,13 @@ message CreateSubProductDto{
 message SubProductDto{
   string id = 10;
   string product_id = 1;
+  int32 product_version = 12;
+  string product_datanode_id = 11;
   google.type.Money Price = 2;
   int32 quantity = 3;
   string display_name = 4;
   google.protobuf.StringValue short_description = 5;
-  string product_type = 6;
+  string product_namespace = 6;
   string product_category = 7;
   repeated InformationFieldDto information_fields = 8;
   repeated AttachmentDto AllowedAttachments = 9;
@@ -249,9 +258,14 @@ message CreateAttachmentDto{
 
 message CreateProductOrderDto{
   string product_id = 1;
-  string product_package_id = 17;
   int32 product_version = 2;
-  string product_type = 3;
+  string product_datanode_id = 33;
+  
+  string product_package_id = 17;
+  int32 product_package_version = 34;
+  string product_package_datanode_id = 35;
+  
+  string product_namespace = 3;
   string product_channel_namespace = 26;
   string product_category = 31;
   string display_name = 4;
