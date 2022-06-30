@@ -49,6 +49,7 @@ message GetProductsReply {
 
 message GetOrderableProductRequest {
     string product_package_id = 1;
+    int32 product_package_version = 3;
     string product_id = 2;
 }
 
@@ -120,7 +121,7 @@ enum OrderRecipientMode {
 
 message SubProductDto {
     string product_id = 1;
-    string product_version = 26;
+    int32 product_version = 26;
     string product_datanode_id = 27;
 
     string display_name = 2;
