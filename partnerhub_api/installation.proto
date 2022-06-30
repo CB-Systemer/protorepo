@@ -4,6 +4,7 @@ syntax = "proto3";
 option csharp_namespace = "PartnerHub.Api.Protos";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 
 service InstallationService {
   rpc GetActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
@@ -56,6 +57,9 @@ message IsInstalledRequest {
 
 message IsInstalledReply {
   bool is_installed = 1;
+  google.protobuf.StringValue product_package_id = 2;
+  google.protobuf.Int32Value product_package_version = 3;
+  google.protobuf.StringValue product_package_datanode_id = 4;
 }
 
 message UpdateProductPackageVersionForInstallationsRequest{
