@@ -120,6 +120,9 @@ enum OrderRecipientMode {
 
 message SubProductDto {
     string product_id = 1;
+    string product_version = 26;
+    string product_datanode_id = 27;
+
     string display_name = 2;
     string image_url = 3;
     google.type.Money price = 4;
