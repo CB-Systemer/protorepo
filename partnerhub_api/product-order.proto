@@ -249,9 +249,14 @@ message CreateAttachmentDto{
 
 message CreateProductOrderDto{
   string product_id = 1;
-  string product_package_id = 17;
   int32 product_version = 2;
-  string product_type = 3;
+  string product_datanode_id = 33;
+  
+  string product_package_id = 17;
+  int32 product_package_version = 34;
+  string product_package_datanode_id = 35;
+  
+  string product_namespace = 3;
   string product_channel_namespace = 26;
   string product_category = 31;
   string display_name = 4;
