@@ -6,6 +6,7 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 import "google/type/money.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
 
 service ProductOrderService {
   // Referrals
@@ -44,6 +45,9 @@ service ProductOrderService {
 
   rpc AddDelivery (AddDeliveryRequest) returns (AddDeliveryReply);
   rpc DownloadDelivery (DownloadDeliveryRequest) returns (DownloadReply);
+
+  rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
+  rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
 }
 
 message ReferralDto{
@@ -529,4 +533,48 @@ message GetAvailableStatusesRequest{
 
 message GetAvailableStatusesReply{
   repeated ProductStatusDto statuses = 1;
+}
+
+message GetProductOrderActivityLog{
+  string product_order_id = 1;
+  repeated string resource_group_scopes = 2;
+} 
+
+message ActivityLogList{
+  repeated ActivityLogDto logs = 1;
+}
+
+message ActivityLogDto{
+  string id = 1;
+  string product_order_id = 2;  
+  google.protobuf.Timestamp created_at_utc = 4;
+  
+  string executing_actor_id = 5;  
+  OrderActorDto created_by_actor = 6;
+
+  oneof data {
+    CustomLogDataDto custom_log_data = 7;
+    StatusChangeDataDto status_change_data = 8;
+  }
+}
+
+message StatusChangeDataDto{
+  string FromStatus = 1;
+  string ToStatus = 2;
+  google.protobuf.StringValue from_custom_status = 3;
+  google.protobuf.StringValue to_custom_status = 4;
+}
+
+message CustomLogDataDto{
+  string message = 1;
+}
+
+message CreateCustomLogRequest{
+  string product_order_id = 1;
+  repeated string resource_group_scopes = 2;
+  string message = 3;
+  
+  string executing_actor_id = 4;
+  OrderActorDto custom_executing_actor = 5;
+  repeated string executing_actor_permissions = 6;
 }
