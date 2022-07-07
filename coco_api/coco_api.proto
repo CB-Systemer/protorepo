@@ -75,6 +75,7 @@ service CocoApi {
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
   rpc GetActiveDocumentTemplates(GetActiveDocumentTemplatesRequest) returns (GetActiveDocumentTemplatesReply);
   rpc GetSmsCommand(GetSingleConfigRequest) returns (GetSmsCommandReply);
+  rpc GetAllSmsCommands(GetAllConfigRequest) returns (GetAllSmsCommandReply);
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -1099,7 +1100,7 @@ message ColumnDefinitionDto {
 message GetAllSmsCommandReply {
     repeated SmsCommandConfigDto lists = 1;
  }
- 
+
 message GetSmsCommandReply {
    SmsCommandConfigDto config = 1;
 }
