@@ -1096,6 +1096,10 @@ message ColumnDefinitionDto {
   int32 order = 2;
 }
 
+message GetAllSmsCommandReply {
+    repeated SmsCommandConfigDto lists = 1;
+ }
+ 
 message GetSmsCommandReply {
    SmsCommandConfigDto config = 1;
 }
