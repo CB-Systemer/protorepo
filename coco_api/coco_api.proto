@@ -74,7 +74,8 @@ service CocoApi {
   rpc GetConsumerConfigName(GetConsumerConfigNameRequest) returns (GetConsumerConfigNameReply);
   rpc SetConsumerConfigName(SetConsumerConfigNameRequest) returns (SetConsumerConfigNameReply);
   rpc GetActiveDocumentTemplates(GetActiveDocumentTemplatesRequest) returns (GetActiveDocumentTemplatesReply);
-  rpc GetSmsCommand(GetSingleConfigRequest) returns (GetSmsCommandReply);
+  rpc GetSmsCommand(GetSingleConfigRequest) returns (GetSmsCommandReply);  
+  rpc GetAllSmsCommand(GetAllConfigRequest) returns (GetAllSmsCommandReply);  
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -1112,6 +1113,10 @@ message SmsCommandConfigDto {
     string description = 9;
     string display_name = 10;
     string icon_name = 11;
+}
+
+message GetAllSmsCommandReply{
+    repeated SmsCommandConfigDto lists = 1;
 }
 
 message CommandMapping {

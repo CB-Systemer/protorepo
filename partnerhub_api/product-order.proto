@@ -110,6 +110,10 @@ message ProductOrderDto{
   google.protobuf.StringValue sender_internal_note = 31;
 
   repeated AttachmentDto attachments = 36;
+
+  string product_consent_mode = 41;
+  google.protobuf.StringValue product_custom_consent_text = 42;
+  google.protobuf.StringValue product_consent_template_namespace = 43;
 }
 
 message ReferralDtoDetails{
@@ -301,6 +305,10 @@ message CreateProductOrderDto{
   google.protobuf.StringValue case_payload_reference_id = 27;
   bool amount_set_on_delivery = 24;
   repeated CreateAttachmentDto allowed_attachments = 32;
+  
+  string product_consent_mode = 36;
+  google.protobuf.StringValue product_custom_consent_text = 37;
+  google.protobuf.StringValue product_consent_template_namespace = 38;
 }
 
 message SetReceiverCaseReferenceIdRequest{
