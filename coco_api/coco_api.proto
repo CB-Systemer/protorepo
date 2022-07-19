@@ -97,7 +97,7 @@ message QuestionnaireDto {
     string display_name = 2;
     string description = 3;
     string icon_name = 4;
-    string formlyDefinition = 5;
+    string formDefinition = 5;
 }
 
 message GetQuestionnaireReply {
