@@ -8,7 +8,7 @@ service ExternalIntegrationApi {
 }
 
 message GetBBRDataRequest {
-    string address_display_name = 1;
+    string kvhx = 1;
 }
 
 message GetBBRDataReply {
