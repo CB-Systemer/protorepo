@@ -1,0 +1,19 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED THROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "External.Integration.Api";
+
+service ExternalIntegrationApi {
+    rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
+}
+
+message GetBBRDataRequest {
+    string kvhx = 1;
+}
+
+message GetBBRDataReply {
+    string useCode = 1;
+    string use = 2;
+    int32 area = 3;
+    int32 landArea = 4;
+}
