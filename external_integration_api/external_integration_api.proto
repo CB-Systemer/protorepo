@@ -12,4 +12,7 @@ message GetBBRDataRequest {
 }
 
 message GetBBRDataReply {
+    string useCode = 1;
+    int32 area = 2;
+    int32 landArea = 3;
 }
