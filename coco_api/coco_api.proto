@@ -98,6 +98,7 @@ message QuestionnaireDto {
     string description = 3;
     string icon_name = 4;
     string formDefinition = 5;
+    string b2cTitle = 6;
 }
 
 message GetQuestionnaireReply {
