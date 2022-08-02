@@ -14,8 +14,10 @@ message CreateSessionRequest {
    string country_code = 3;
    string command_namespace = 4;
    string external_reference_id = 5;
-   string resource_group_id = 6;
-   string template_params = 7;
+   string sender_resource_group_id = 6;
+   string receiver_resource_group_id = 7;
+   string template_params = 8;
+   string actorDisplayName = 9;
 }
 
 message CreateSessionReply {
