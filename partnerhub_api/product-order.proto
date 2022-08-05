@@ -292,6 +292,7 @@ message CreateProductOrderDto{
   google.protobuf.StringValue recipient_order_party_id = 10;
   google.protobuf.StringValue receiver_internal_note = 30;
 
+  OrderActorDto sender_assigned_to_actor = 39;
   string sent_by_resource_group = 11;
   google.protobuf.StringValue sender_order_party_id = 12;
   OrderActorDto sent_by = 8;
