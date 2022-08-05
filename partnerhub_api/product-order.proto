@@ -131,6 +131,7 @@ message ProductOrderDtoDetails{
   google.protobuf.StringValue case_reference_payload = 3;
 
   OrderActorDto sent_by = 2;
+  OrderActorDto sender_assigned_to = 16;
   OrderActorDto assigned_to = 4;
   OrderActorDto updated_by = 8;
   OrderActorDto created_by = 13;
