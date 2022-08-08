@@ -12,6 +12,8 @@ service ProductOrderService {
   // Referrals
   rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
   rpc GetReferralDetails (GetProductOrderDetailsRequest) returns (ReferralDtoDetails);
+  rpc GetReferralsForReferredActorAndIsSender (GetReferralsByReferredActorRequest) returns (ReferralList);
+  rpc GetReferralsForReferredActorAndIsReceiver (GetReferralsByReferredActorRequest) returns (ReferralList);
   rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
   rpc GetReferralsForProduct (GetProductOrdersByProductRequest) returns (ReferralList);
   rpc GetReferralsForRecipient (GetProductOrdersByRecipientRequest) returns (ReferralList);
