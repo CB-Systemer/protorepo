@@ -38,6 +38,8 @@ service ProductOrderService {
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
+  rpc SetSenderInternalNote(SetInternalNote) returns (google.protobuf.Empty);
+  rpc SetReceiverInternalNote(SetInternalNote) returns (google.protobuf.Empty);
   
   rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
   rpc GetAvailableCustomStatuses(GetAvailableStatusesRequest) returns (GetAvailableStatusesReply);
@@ -338,6 +340,17 @@ message SetReceiverActorReferenceIdRequest{
 message SetAssignedToRequest{
   string referral_id = 1;
   OrderActorDto assigned_to = 2;
+
+  string executing_actor_id = 3;
+  OrderActorDto custom_executing_actor = 4;
+  repeated string executing_actor_permissions = 5;
+
+  repeated string resource_group_scopes = 6;
+}
+
+message SetInternalNote{
+  string referral_id = 1;
+  string internal_note = 2;
 
   string executing_actor_id = 3;
   OrderActorDto custom_executing_actor = 4;
