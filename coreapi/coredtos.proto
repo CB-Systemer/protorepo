@@ -29,6 +29,7 @@ message IndexReply {
 message FilterDto {
 	string field = 1;
 	repeated string exclude = 2;
+	repeated string include = 3;
 }
 
 message SortDto {
