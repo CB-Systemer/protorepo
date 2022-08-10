@@ -26,6 +26,7 @@ service ResourceGroupApi {
   rpc GetApiAccessList (GetResourceGroupApiAccessListRequest) returns (GetResourceGroupApiAccessListReply);
   rpc GetChainMembers (GetChainMembersRequest) returns (GetChainMembersReply);
   rpc MoveResourceGroupToTenant(MoveResourceGroupToTenantRequest) returns (MoveResourceGroupToTenantReply);
+  rpc MoveEmployeeToResourceGroup(MoveEmployeeToResourceGroupRequest) returns (MoveEmployeeToResourceGroupReply);
 }
 
 message CreateChainMemberRelationRequest {
@@ -182,4 +183,16 @@ message StoreDto{
 	string status = 5;
 	google.protobuf.StringValue external_id = 6;
 	google.protobuf.StringValue cvr = 7;
+}
+
+message MoveEmployeeToResourceGroupRequest {
+	string actorId = 1;
+	string actorResourceGroupId = 2;
+	string targetResourceGroupId = 3;
+}
+
+message MoveEmployeeToResourceGroupReply {
+	string processId = 1;
+	string namespace = 2;
+	bool success = 3;
 }
