@@ -28,11 +28,31 @@ service TemplatingApi {
   rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
   rpc GetPdf (GetPdfRequest) returns (GetPdfReply);
+  rpc GetDocumentTemplatePdf (GetDocumentTemplatePdfRequest) returns (GetDocumentTemplatePdfReply);
 }
 
 message GetPdfRequest {
 	string html = 1;
 	PrintOptions options = 2;
+}
+
+message GetDocumentTemplatePdfRequest {
+	string templateIdOrAlias = 1;
+	repeated string scriptData = 2;
+	PrintOptions options = 3;
+	string outputFormat = 4;
+	string contextDataNodeId = 5;
+	string contextTenantId = 6;
+	string contextResourceGroupId = 7;
+	ExecutingActorContext actor_context = 8;
+	string format = 9;
+	string params = 10;
+}
+
+message GetDocumentTemplatePdfReply {
+	bytes bytes = 1;
+	int32 errorCode = 2;
+	string errorMessage = 3;
 }
 
 message PrintOptions {
