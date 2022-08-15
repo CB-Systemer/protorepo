@@ -22,6 +22,15 @@ service ProductOrderService {
   rpc GetReferralsForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (ReferralList);
   rpc GetReferralsCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (ReferralList);
   rpc GetReferralsCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (ReferralList);
+  
+  // ReferralCounts
+  rpc GetReferralsForReferredActorAndIsSenderCount (GetReferralsByReferredActorRequest) returns (CountDto);
+  rpc GetReferralsForReferredActorAndIsReceiverCount (GetReferralsByReferredActorRequest) returns (CountDto);
+  
+  rpc GetReferralsForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
+  rpc GetReferralsForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
+  rpc GetReferralsCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
+  rpc GetReferralsCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
 
   // Orders
   rpc CreateOrder (CreateOrderRequest) returns (OrderDto);
@@ -34,6 +43,12 @@ service ProductOrderService {
   rpc GetOrdersCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (OrderList);
   rpc GetOrdersCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (OrderList);
 
+  // OrderCounts
+  rpc GetOrdersForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
+  rpc GetOrdersForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
+  rpc GetOrdersCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
+  rpc GetOrdersCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
+  
   // ProductOrder (shared)
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
@@ -600,4 +615,8 @@ message CreateCustomLogRequest{
   string executing_actor_id = 4;
   OrderActorDto custom_executing_actor = 5;
   repeated string executing_actor_permissions = 6;
+}
+
+message CountDto{
+  int32 count = 1;
 }
