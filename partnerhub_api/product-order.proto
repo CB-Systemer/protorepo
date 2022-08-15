@@ -40,6 +40,12 @@ service ProductOrderService {
   rpc GetOrdersCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (OrderList);
   rpc GetOrdersCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (OrderList);
 
+  // OrderCounts
+  rpc GetOrdersForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
+  rpc GetOrdersForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
+  rpc GetOrdersCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
+  rpc GetOrdersCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
+  
   // ProductOrder (shared)
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
