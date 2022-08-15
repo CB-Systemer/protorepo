@@ -26,6 +26,8 @@ service ProductOrderService {
   // ReferralCounts
   rpc GetReferralsForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
   rpc GetReferralsForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
+  rpc GetReferralsCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
+  rpc GetReferralsCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
 
   // Orders
   rpc CreateOrder (CreateOrderRequest) returns (OrderDto);
