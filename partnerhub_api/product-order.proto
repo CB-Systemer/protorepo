@@ -22,6 +22,10 @@ service ProductOrderService {
   rpc GetReferralsForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (ReferralList);
   rpc GetReferralsCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (ReferralList);
   rpc GetReferralsCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (ReferralList);
+  
+  // ReferralCounts
+  rpc GetReferralsForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
+  rpc GetReferralsForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
 
   // Orders
   rpc CreateOrder (CreateOrderRequest) returns (OrderDto);
@@ -600,4 +604,8 @@ message CreateCustomLogRequest{
   string executing_actor_id = 4;
   OrderActorDto custom_executing_actor = 5;
   repeated string executing_actor_permissions = 6;
+}
+
+message CountDto{
+  int32 count = 1;
 }
