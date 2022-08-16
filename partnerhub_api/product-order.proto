@@ -48,6 +48,8 @@ service ProductOrderService {
   rpc GetOrdersForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
   rpc GetOrdersCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
   rpc GetOrdersCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
+
+  rpc GetOrdersForCaseReferenceCount (GetProductOrdersByCaseReferenceRequest) returns (CountDto);
   
   // ProductOrder (shared)
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
@@ -618,5 +620,6 @@ message CreateCustomLogRequest{
 }
 
 message CountDto{
-  int32 count = 1;
+  int32 total_count = 1;
+  int32 active_count = 2;
 }
