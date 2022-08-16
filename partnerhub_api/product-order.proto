@@ -618,5 +618,6 @@ message CreateCustomLogRequest{
 }
 
 message CountDto{
-  int32 count = 1;
+  int32 total_count = 1;
+  int32 active_count = 2;
 }
