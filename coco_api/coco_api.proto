@@ -794,6 +794,12 @@ message DatanodeCocoDto {
     string state_flow_picker_type = 23;
     google.protobuf.StringValue short_display_name = 24;
     bool include_path_details_in_search_index = 25;
+    UploadFileCocoDto upload_file = 26;
+}
+
+message UploadFileCocoDto {
+    google.protobuf.StringValue mime_types_filters = 1;
+    google.protobuf.StringValue regex_filter = 2;
 }
 
 message AllowedSharingLevelsDto {
