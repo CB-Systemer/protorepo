@@ -800,6 +800,7 @@ message DatanodeCocoDto {
 message UploadFileCocoDto {
     google.protobuf.StringValue mime_types_filters = 1;
     google.protobuf.StringValue regex_filter = 2;
+    int64 max_size = 3;
 }
 
 message AllowedSharingLevelsDto {
