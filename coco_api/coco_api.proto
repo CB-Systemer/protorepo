@@ -77,7 +77,9 @@ service CocoApi {
   rpc GetSmsCommand(GetSingleConfigRequest) returns (GetSmsCommandReply);  
   rpc GetAllSmsCommand(GetAllConfigRequest) returns (GetAllSmsCommandReply);  
   rpc GetQuestionnaire(GetSingleConfigRequest) returns (GetQuestionnaireReply);
-  rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);  
+  rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);
+  rpc GetSingleEntity(GetSingleConfigRequest) returns (GetEntityReply);
+  rpc GetAllEntities(GetAllConfigRequest) returns (GetAllEntitiesReply);
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -1152,4 +1154,18 @@ message CommandMapping {
 message CommandDto {
     string name = 1;
     repeated string responses = 2;
+}
+
+message GetEntityReply{
+  EntityDto config = 1; 
+}
+
+message EntityDto{
+  string display_name = 1;
+  string namespace = 2;
+  NotificationEventsDto notification_settings = 3;
+}
+
+message GetAllEntitiesReply{
+  repeated EntityDto configs = 1; 
 }
