@@ -43,8 +43,8 @@ message ChildrenCountRequest{
 	repeated string archiveNamespaces = 7;
 	repeated string chatNamespaces = 8;
 	repeated string advertisementNamespaces = 9;
-	repeated string mediaPlanNamespaces = 10;
-	repeated string mediaNamespaces = 11;
+	repeated string mediaAlbumNamespaces = 10;
+	repeated string mediaItemNamespaces = 11;
 	repeated string marketingMaterialNamespaces = 12;
 }
 
@@ -57,8 +57,8 @@ message ChildrenCountReply{
 	int64 archiveCount = 5;
 	int64 chatCount = 6;
 	int64 advertisementCount = 7;
-	int64 mediaPlanCount = 8;
-	int64 mediaCount = 9;
+	int64 mediaAlbumCount = 8;
+	int64 mediaItemCount = 9;
 }
 
 message ContextListCountRequest {
