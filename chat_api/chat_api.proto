@@ -10,6 +10,7 @@ service ChatApi {
   rpc ElevateRole (ElevateRoleRequest) returns (ElevateRoleReply);
   rpc UpdateChat (UpdateChatRequest) returns (UpdateChatReply);
   rpc UpdateMember (UpdateMemberRequest) returns (UpdateMemberReply);
+  rpc UpdateMembers (UpdateMembersRequest) returns (UpdateMembersReply);
   rpc CreateMessage (CreateMessageRequest) returns (CreateMessageReply);
   rpc ReadMessage (ReadMessageRequest) returns (ReadMessageReply);
   rpc JoinChat (JoinChatRequest) returns (JoinChatReply);
@@ -116,6 +117,13 @@ message UpdateMemberRequest {
   bool is_active = 3;
   bool receive_notifications = 4;
 
+}
+
+message UpdateMembersRequest {
+ repeated UpdateMemberRequest members = 1;
+}
+
+message UpdateMembersReply {
 }
 
 message UpdateMemberReply {
