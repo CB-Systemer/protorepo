@@ -409,6 +409,7 @@ message PagingFilterDto{
   repeated string status_filters = 3;
   repeated string category_filters = 4;
   google.protobuf.Timestamp updated_since = 5;
+  google.protobuf.StringValue query = 6;
 }
 
 message GetReferralsByReferredActorRequest{
