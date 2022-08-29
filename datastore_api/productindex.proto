@@ -159,6 +159,7 @@ message InformationFieldDto {
     repeated InformationFieldOptionDto options = 7;
     repeated string allowed_actor_roles = 8;
     bool allow_multiple_actors = 9;
+    bool autofill = 10;
 }
 
 message InformationFieldOptionDto {
