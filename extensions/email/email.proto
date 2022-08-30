@@ -238,6 +238,7 @@ message EmailAccount{
   bool connectionError = 6;
   CalendarDto Calendar = 7;
   google.protobuf.StringValue tenantDisplayName = 8;
+  google.protobuf.StringValue tenantId = 9;
 }
 
 message EmailFolder {
