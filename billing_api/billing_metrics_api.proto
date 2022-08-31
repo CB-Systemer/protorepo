@@ -74,6 +74,7 @@ message CreateProductOrderMetricRequest {
     string product_id = 5;
     string product_package_id = 6;
     string receiver_resource_group_id = 7;
+    string product_order_namespace = 8;
 }
 
 message CreateMetricReply {
