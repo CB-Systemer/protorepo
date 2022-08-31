@@ -13,6 +13,7 @@ service BillingMetricsApi {
     rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);
     rpc ApiRequestCompleted (CreateApiMetricRequest) returns (CreateMetricReply);
     rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
+    rpc ProductOrderSent (CreateProductOrderMetricRequest) returns (CreateMetricReply);
 }
 
 message CreateSmsMetricRequest {
@@ -64,6 +65,15 @@ message CreateLoginMetricRequest {
     string transaction_id = 5;
     string provider = 6;
     string identity_id = 7;
+}
+
+message CreateProductOrderMetricRequest {
+	string tenant_id = 1;
+    string resource_group_id = 2;
+    string executing_actor_id = 4;
+    string product_id = 5;
+    string product_package_id = 5;
+    string receiver_resource_group_id = 6;
 }
 
 message CreateMetricReply {
