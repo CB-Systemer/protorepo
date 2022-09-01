@@ -47,6 +47,7 @@ message SendSmsMessageRequest {
 message SendSmsMessageReply {
   string status = 1;
   bool success = 2;
+  bool can_retry = 3;
 }
 
 message SendEmailMessageRequest {
@@ -113,11 +114,13 @@ message SendMessageRequest {
   bool send_many = 18;
   string sender = 19;
   BillingContext billing_context = 20;
+
 }
 
 message SendMessageReply {
   string status = 1;
   bool success = 2;
+  bool can_retry = 3;
 }
 
 message ActorContext {
