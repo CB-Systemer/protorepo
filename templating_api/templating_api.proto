@@ -28,7 +28,7 @@ service TemplatingApi {
   rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
   rpc GetPdf (GetPdfRequest) returns (GetPdfReply);
-  rpc GetPdfByUrl (GetPdfByUrlRequest) returns (GetPdfReply);
+  rpc GetPdfFromUrl (GetPdfFromUrlRequest) returns (GetPdfReply);
   rpc GetDocumentTemplatePdf (GetDocumentTemplatePdfRequest) returns (GetDocumentTemplatePdfReply);
 }
 
@@ -37,8 +37,8 @@ message GetPdfRequest {
 	PrintOptions options = 2;
 }
 
-message GetPdfByUrlRequest {
-	string html = 1;
+message GetPdfFromUrlRequest {
+	string url = 1;
 	PrintOptions options = 2;
 }
 
