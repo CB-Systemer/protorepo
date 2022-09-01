@@ -28,10 +28,16 @@ service TemplatingApi {
   rpc MergeData (MergeDataRequest) returns (MergeDataReply);
   rpc GetTemplateOptions (GetTemplateOptionsRequest) returns (GetTemplateOptionsReply);
   rpc GetPdf (GetPdfRequest) returns (GetPdfReply);
+  rpc GetPdfByUrl (GetPdfByUrlRequest) returns (GetPdfReply);
   rpc GetDocumentTemplatePdf (GetDocumentTemplatePdfRequest) returns (GetDocumentTemplatePdfReply);
 }
 
 message GetPdfRequest {
+	string html = 1;
+	PrintOptions options = 2;
+}
+
+message GetPdfByUrlRequest {
 	string html = 1;
 	PrintOptions options = 2;
 }
