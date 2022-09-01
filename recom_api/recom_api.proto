@@ -48,8 +48,8 @@ message SendSmsMessageReply {
   string status = 1;
   bool success = 2;
   bool can_retry = 3;
-  error_code = 4;
-  error_message = 5;
+  int32 error_code = 4;
+  string error_message = 5;
 }
 
 message SendEmailMessageRequest {
@@ -85,8 +85,8 @@ message SendEmailMessageReply {
   string status = 1;
   bool success = 2;
   bool can_retry = 3;
-  error_code = 4;
-  error_message = 5;
+  int32 error_code = 4;
+  string error_message = 5;
 }
 
 message SendAnonymousEmailRequest {
@@ -126,8 +126,8 @@ message SendMessageReply {
   string status = 1;
   bool success = 2;
   bool can_retry = 3;
-  error_code = 4;
-  error_message = 5;
+  int32 error_code = 4;
+  string error_message = 5;
 }
 
 message ActorContext {
