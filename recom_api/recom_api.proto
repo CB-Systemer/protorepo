@@ -48,6 +48,8 @@ message SendSmsMessageReply {
   string status = 1;
   bool success = 2;
   bool can_retry = 3;
+  error_code = 4;
+  error_message = 5;
 }
 
 message SendEmailMessageRequest {
@@ -82,6 +84,9 @@ message ArchiveOn {
 message SendEmailMessageReply {
   string status = 1;
   bool success = 2;
+  bool can_retry = 3;
+  error_code = 4;
+  error_message = 5;
 }
 
 message SendAnonymousEmailRequest {
@@ -121,6 +126,8 @@ message SendMessageReply {
   string status = 1;
   bool success = 2;
   bool can_retry = 3;
+  error_code = 4;
+  error_message = 5;
 }
 
 message ActorContext {
