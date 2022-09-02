@@ -89,6 +89,7 @@ message ProductDto {
     string owner_resource_group_id = 27;
     repeated string allowed_order_organizations = 28;
     int32 product_version = 29;
+    ConsentMode consent_mode = 30;
 }
 
 message ImageReferenceDto {
@@ -116,6 +117,12 @@ enum OrderRecipientMode {
     ChainMembers = 1;
     AllRecipients = 2;
     Specific = 3;
+}
+
+enum ConsentMode {
+    NoConsent = 0;
+    Implicit = 1;
+    Sms = 2;
 }
 
 message SubProductDto {
