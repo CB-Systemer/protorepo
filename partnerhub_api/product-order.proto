@@ -379,7 +379,7 @@ message SetInternalNote{
 message InformationFieldDto{
   string identifier = 1;
   string type = 2;
-  string value = 3;
+  google.protobuf.StringValue value = 3;
   string name = 4;
 }
 
