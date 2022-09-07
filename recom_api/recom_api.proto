@@ -53,7 +53,7 @@ message SendSmsMessageRequest {
   BillingContext billing_context = 9;
   string transactionId = 10;
   repeated string tags = 11;
-  callbackQueueName = 12;
+  string callbackQueueName = 12;
 }
 
 message SendSmsMessageReply {
@@ -82,7 +82,7 @@ message SendEmailMessageRequest {
   BillingContext billing_context = 14;
   string transactionId = 15;
   repeated string tags = 16;
-  callbackQueueName = 17;
+  string callbackQueueName = 17;
 }
 
 message ActorRecipient {
@@ -117,7 +117,7 @@ message SendAnonymousEmailRequest {
   BillingContext billing_context = 8;
   string transactionId = 9;
   repeated string tags = 10;
-  callbackQueueName = 11;
+  string callbackQueueName = 11;
 }
 
 message SendMessageRequest {
@@ -141,7 +141,7 @@ message SendMessageRequest {
   BillingContext billing_context = 20;
   string transactionId = 21;
   repeated string tags = 22;
-  callbackQueueName = 23;
+  string callbackQueueName = 23;
 }
 
 message SendMessageReply {
