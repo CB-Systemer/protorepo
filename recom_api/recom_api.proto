@@ -51,6 +51,9 @@ message SendSmsMessageRequest {
   string contextTenantId = 7;
   string contextResourceGroupId = 8;
   BillingContext billing_context = 9;
+  string transactionId = 10;
+  repeated string tags = 11;
+  callbackQueueName = 12;
 }
 
 message SendSmsMessageReply {
@@ -59,6 +62,7 @@ message SendSmsMessageReply {
   bool can_retry = 3;
   int32 error_code = 4;
   string error_message = 5;
+  string message = 6; 
 }
 
 message SendEmailMessageRequest {
@@ -76,6 +80,9 @@ message SendEmailMessageRequest {
   repeated ArchiveOn archive_on = 12;
   bool send_many = 13;
   BillingContext billing_context = 14;
+  string transactionId = 15;
+  repeated string tags = 16;
+  callbackQueueName = 17;
 }
 
 message ActorRecipient {
@@ -96,6 +103,7 @@ message SendEmailMessageReply {
   bool can_retry = 3;
   int32 error_code = 4;
   string error_message = 5;
+  string message = 6;
 }
 
 message SendAnonymousEmailRequest {
@@ -107,6 +115,9 @@ message SendAnonymousEmailRequest {
   string context_resource_group_id = 6;
   ActorContext actor_context = 7;
   BillingContext billing_context = 8;
+  string transactionId = 9;
+  repeated string tags = 10;
+  callbackQueueName = 11;
 }
 
 message SendMessageRequest {
@@ -128,7 +139,9 @@ message SendMessageRequest {
   bool send_many = 18;
   string sender = 19;
   BillingContext billing_context = 20;
-
+  string transactionId = 21;
+  repeated string tags = 22;
+  callbackQueueName = 23;
 }
 
 message SendMessageReply {
@@ -137,6 +150,7 @@ message SendMessageReply {
   bool can_retry = 3;
   int32 error_code = 4;
   string error_message = 5;
+  string message = 6;
 }
 
 message ActorContext {
