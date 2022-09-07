@@ -9,6 +9,15 @@ service RecomApi {
   rpc SendEmailMessage (SendEmailMessageRequest) returns (SendEmailMessageReply);
   rpc SendAnonymousEmailMessage (SendAnonymousEmailRequest) returns (SendEmailMessageReply);
   rpc GetRecipientsInfoMessage (GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
+  rpc GetPhoneNumberPool (GetPhoneNumberPoolRequest) returns (GetPhoneNumberPoolReply);
+}
+
+message GetPhoneNumberPoolRequest {
+
+}
+
+message GetPhoneNumberPoolReply {
+  repeated string numbers = 1;
 }
 
 message GetRecipientsInfoMessageRequest {
