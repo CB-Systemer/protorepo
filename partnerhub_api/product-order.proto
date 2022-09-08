@@ -596,7 +596,12 @@ message ActivityLogDto{
   oneof data {
     CustomLogDataDto custom_log_data = 7;
     StatusChangeDataDto status_change_data = 8;
+    CreatedLogDto created_log_data = 9;
   }
+}
+
+message CreatedLogDto {
+  string initialStatus = 1;
 }
 
 message StatusChangeDataDto{
