@@ -1,0 +1,263 @@
+syntax = "proto3";
+
+option csharp_namespace = "Cbs.Partner.Api.Services.Project";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/any.proto";
+
+service ProjectApi {
+  rpc CreateProject (CreateProjectRequest) returns (CreateProjectResponse);
+  rpc DeleteProject (DeleteProjectRequest) returns (EmptyResponse);
+  
+  rpc UpdateProject (UpdateProjectRequest) returns (UpdateProjectResponse);
+  rpc ListProjects (ListProjectsRequest) returns (ListProjectsResponse);
+  rpc GetProject (GetProjectRequest) returns (ProjectDto);
+
+  rpc UpdateInstallationScopes (UpdateInstallationScopesRequest) returns (UpdateInstallationScopesResponse);
+  rpc UpdateProjectAudience(UpdateProjectAudienceRequest) returns (UpdateProjectAudienceResponse);
+  rpc UpdateProjectName(UpdateProjectNameRequest) returns (UpdateProjectNameResponse); 
+  rpc UpdateProjectDescription(UpdateProjectDescriptionRequest) returns (UpdateProjectDescriptionResponse);
+  rpc TemplateProject(TemplateProjectRequest) returns (TemplateProjectResponse);
+  
+  rpc CreateRemoteDebug (CreateRemoteDebugRequest) returns (CreateRemoteDebugResponse);
+  rpc UpdateRemoteDebug (UpdateRemoteDebugRequest) returns (UpdateRemoteDebugResponse);
+  rpc DeleteRemoteDebug (DeleteRemoteDebugRequest) returns (DeleteRemoteDebugResponse);
+  rpc ListRemoteDebug (ListRemoteDebugRequest) returns (ListRemoteDebugResponse);
+
+  rpc CreateProjectApiAccess (ProjectApiAccessRequest) returns (ProjectApiAccessReply);
+  rpc RotateProjectApiSecret (ProjectApiAccessRequest) returns (ProjectApiAccessReply);
+  rpc DeleteProjectApiAccess (ProjectApiAccessRequest) returns (google.protobuf.Empty);
+  
+  rpc CreateAuthenticationMethod (CreateAuthenticationMethodRequest) returns (AuthenticationMethodDto);
+  rpc UpdateAuthenticationMethod (UpdateAuthenticationMethodRequest) returns (AuthenticationMethodDto);
+  rpc DeleteAuthenticationMethod (DeleteAuthenticationMethodRequest) returns (google.protobuf.Empty);
+  rpc GetAuthMethodByInstallation (GetAuthMethodByInstallationRequest) returns (GetAuthMethodByInstallationReply);
+}
+
+message EmptyResponse {
+}
+
+message UpdateRemoteDebugRequest {
+    string projectId = 1;
+    string id = 2;
+    google.protobuf.BoolValue enabled = 3;
+}
+
+message UpdateRemoteDebugResponse {
+  RemoteDebugDto debug = 1;
+}
+
+message DeleteRemoteDebugRequest {
+    string projectId = 1;
+    string id = 2;
+}
+
+message DeleteRemoteDebugResponse {
+}
+
+message CreateRemoteDebugResponse {
+  RemoteDebugDto debug = 1;
+}
+
+message CreateRemoteDebugRequest {
+    string projectId = 1;
+    string actorId = 2;
+    string url = 3;
+}
+
+message ListRemoteDebugRequest {
+    string projectId = 1;
+}
+
+message ListRemoteDebugResponse {
+  repeated RemoteDebugDto debugs = 1;
+}
+message RemoteDebugDto {
+	string id = 1;
+	string actorId = 2;
+    string url = 3;
+    google.protobuf.BoolValue enabled = 4;
+    string projectId = 5;
+}
+
+message ListProjectsRequest {
+    string executingUserId = 2;
+}
+
+message GetProjectRequest{
+    string projectId = 1;
+    string executingUserId = 2;
+}
+
+message ListProjectsResponse {
+  repeated ProjectDto projects = 1;
+}
+
+message CreateProjectRequest {
+    string partnerId = 1;
+    string projectName = 3;
+    string projectSlug = 4;
+    string executingUserId = 2;
+    string description = 5;
+    google.protobuf.BoolValue initDatanodes = 6;
+    google.protobuf.BoolValue initRenderers = 7;
+    repeated createApplicationDto applications = 9;
+}
+
+message createApplicationDto{
+    string name = 1;
+    string namespace = 2;
+}
+
+message CreateProjectResponse {
+  ProjectDto extension = 1;
+}
+
+message DeleteProjectRequest {
+    string ProjectId = 1;
+    string executingUserId = 3;
+}
+
+message UpdateProjectNameRequest {
+    string name = 1;
+    string id = 2;
+}
+
+message UpdateProjectNameResponse {
+    string name = 1;
+    string id = 2;
+}
+
+message UpdateProjectDescriptionRequest {
+    string description = 1;
+    string id = 2;
+}
+
+message UpdateProjectDescriptionResponse {
+    string description = 1;
+    string id = 2;
+}
+
+message UpdateProjectRequest {
+    google.protobuf.Int32Value initId = 1;
+    string status = 2;
+}
+
+message UpdateProjectResponse {
+  string projectId = 1;
+  ProjectDto project = 2;
+}
+
+message ProjectDto {
+	string id = 1;
+	string partnerId = 2;
+    string createdById = 3;
+    google.protobuf.Timestamp createdAt = 4;
+    string name = 5;
+    string slug = 6;
+    string partnerSlug = 7;
+    string description = 8;
+    string logoUrl = 9;
+    google.protobuf.BoolValue isPublished = 10;
+    google.protobuf.BoolValue isReleased = 11;
+    string status = 13;
+    repeated string installationScopes = 14;
+    repeated string allowedAudienceIds = 15;
+	google.protobuf.BoolValue allowAllAudiences = 16;
+    string realEquityClientId = 17;
+    repeated AuthenticationMethodDto AuthenticationMethods = 18;
+}
+
+message UpdateInstallationScopesRequest{
+    string projectId = 1;
+    repeated string installationScopes = 2;
+}
+
+message UpdateInstallationScopesResponse{
+    string projectId = 1;
+    repeated string installationScopes = 2;
+}
+
+message UpdateProjectAudienceRequest{
+	string id = 1;
+	google.protobuf.BoolValue allowAllAudiences = 2;
+    repeated string allowedAudienceIds = 3;
+}
+
+message UpdateProjectAudienceResponse{
+    google.protobuf.BoolValue allowAllAudiences = 1;
+    repeated string allowedAudienceIds = 2;
+}
+
+message applicationTemplateDto{
+    string type = 1;
+    string name = 2;
+}
+
+message TemplateProjectRequest{
+    applicationTemplateDto application = 1;
+    string projectId = 2;
+}
+ 
+message TemplateProjectResponse{
+}
+
+message ProjectApiAccessRequest {
+	string id = 1;
+	string executingUserId = 2;
+}
+
+message ProjectApiAccessReply{
+	string clientId = 1;
+	string clientSecret = 2;
+}
+
+message CreateAuthenticationMethodRequest{
+    string projectId = 1;
+    string executingUserId = 2;
+
+    AuthenticationMethodDto authModel = 3;
+}
+
+message UpdateAuthenticationMethodRequest{
+    string projectId = 1;
+    string baseUrl = 4;
+    string executingUserId = 2;
+
+    AuthenticationMethodDto authModel = 3;
+}
+
+message AuthenticationMethodDto{
+    string baseUrl = 1;
+    google.protobuf.Any model = 2;
+}
+
+message ApiKeyDto{
+    string headerName = 1;
+    string apiKey = 2;
+}
+
+message ClientCredentialDto{
+    string tokenUrl = 4;
+    string clientId = 1;
+    string clientSecret = 2;
+    string scope = 3;
+}
+
+message DeleteAuthenticationMethodRequest{
+    string projectId = 1;
+    string executingUserId = 2;
+    string baseUrl = 3;
+}
+
+message GetAuthMethodByInstallationRequest{
+	string projectId = 1;
+	string scopeId = 2;
+	string actorId = 3;
+	string baseUrl = 4;
+}
+
+message GetAuthMethodByInstallationReply{
+	AuthenticationMethodDto auth = 1;
+}
