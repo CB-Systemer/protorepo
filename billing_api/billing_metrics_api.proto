@@ -27,6 +27,7 @@ message CreateSmsMetricRequest {
     string transaction_id = 8;
     string content = 9;
     string command_namespace = 10;
+    string provider = 11;
 }
 
 message CreateEmailMetricRequest {
