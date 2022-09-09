@@ -119,7 +119,7 @@ message MessageStatusDto {
 }
 
 message GetAllMessageStatusesReply {
-    repeated QuestionnaireDto list = 1;
+    repeated MessageStatusDto list = 1;
 }
 
 message ReflowDto {
