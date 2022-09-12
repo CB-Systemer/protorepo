@@ -54,6 +54,7 @@ message SendSmsMessageRequest {
   string transactionId = 10;
   repeated Tag tags = 11;
   string callbackQueueName = 12;
+  string recipientActorId = 13;
 }
 
 message SendSmsMessageReply {
