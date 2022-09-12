@@ -77,7 +77,8 @@ service CocoApi {
   rpc GetSmsCommand(GetSingleConfigRequest) returns (GetSmsCommandReply);  
   rpc GetAllSmsCommand(GetAllConfigRequest) returns (GetAllSmsCommandReply);  
   rpc GetQuestionnaire(GetSingleConfigRequest) returns (GetQuestionnaireReply);
-  rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);  
+  rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);
+  rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply);  
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -107,6 +108,18 @@ message GetQuestionnaireReply {
 
 message GetAllQuestionnairesReply {
     repeated QuestionnaireDto list = 1;
+}
+
+message MessageStatusDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    bool isFinal = 5;
+}
+
+message GetAllMessageStatusesReply {
+    repeated MessageStatusDto list = 1;
 }
 
 message ReflowDto {
