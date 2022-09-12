@@ -305,6 +305,7 @@ message CreateProductOrderDto{
   google.protobuf.DoubleValue vat_rate = 23;
 
   string executing_actor_id = 6;
+  google.protobuf.StringValue executing_resource_group_id = 39;
   OrderActorDto custom_executing_actor = 25;
   repeated string executing_actor_permissions = 14;
   
@@ -621,6 +622,7 @@ message CreateCustomLogRequest{
   string message = 3;
   
   string executing_actor_id = 4;
+  google.protobuf.StringValue executing_resource_group_id = 7;
   OrderActorDto custom_executing_actor = 5;
   repeated string executing_actor_permissions = 6;
 }
