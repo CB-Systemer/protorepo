@@ -592,6 +592,7 @@ message ActivityLogDto{
   google.protobuf.Timestamp created_at_utc = 4;
   
   string executing_actor_id = 5;  
+  google.protobuf.StringValue executing_resource_group_id = 10;
   OrderActorDto created_by_actor = 6;
 
   oneof data {
