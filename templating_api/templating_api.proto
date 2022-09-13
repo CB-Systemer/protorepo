@@ -40,6 +40,8 @@ message GetPdfRequest {
 message GetPdfFromUrlRequest {
 	string url = 1;
 	PrintOptions options = 2;
+	string tenantId = 3;
+	string resourceGroupId = 4;
 }
 
 message GetDocumentTemplatePdfRequest {
