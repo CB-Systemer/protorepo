@@ -78,6 +78,7 @@ message ReferralDto{
 
 message OrderDto{
   ProductOrderDto product_order = 1;
+  repeated SubProductDto sub_products = 2;
 }
 
 message ProductOrderDto{
