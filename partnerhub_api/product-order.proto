@@ -70,7 +70,7 @@ service ProductOrderService {
   rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
 
-  rpc GetResourceGroupRole (GetResouceGroupRoleRequest) return (GetResourceGroupRoleReply);
+  rpc GetResourceGroupRole (GetResouceGroupRoleRequest) returns (GetResourceGroupRoleReply);
 }
 
 message ReferralDto{
