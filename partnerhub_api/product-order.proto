@@ -22,11 +22,11 @@ service ProductOrderService {
   rpc GetReferralsForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (ReferralList);
   rpc GetReferralsCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (ReferralList);
   rpc GetReferralsCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (ReferralList);
-  
+
   // ReferralCounts
   rpc GetReferralsForReferredActorAndIsSenderCount (GetReferralsByReferredActorRequest) returns (CountDto);
   rpc GetReferralsForReferredActorAndIsReceiverCount (GetReferralsByReferredActorRequest) returns (CountDto);
-  
+
   rpc GetReferralsForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
   rpc GetReferralsForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
   rpc GetReferralsCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
@@ -50,22 +50,23 @@ service ProductOrderService {
   rpc GetOrdersCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
 
   rpc GetOrdersForCaseReferenceCount (GetProductOrdersByCaseReferenceRequest) returns (CountDto);
-  
+
   // ProductOrder (shared)
   rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
   rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
   rpc SetSenderInternalNote(SetInternalNote) returns (google.protobuf.Empty);
   rpc SetReceiverInternalNote(SetInternalNote) returns (google.protobuf.Empty);
-  
+
   rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
   rpc GetAvailableCustomStatuses(GetAvailableStatusesRequest) returns (GetAvailableStatusesReply);
 
   rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
   rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadReply);
 
-  rpc AddDelivery (AddDeliveryRequest) returns (AddDeliveryReply);
-  rpc DownloadDelivery (DownloadDeliveryRequest) returns (DownloadReply);
+  rpc CreateDeliverable (CreateDeliverableRequest) returns (CreateDeliverableReply);
+  rpc DeleteDeliverable (DeleteDeliverableRequest) returns (google.protobuf.Empty);
+  rpc DownloadDeliverable (DownloadDeliverableRequest) returns (DownloadReply);
 
   rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
@@ -89,11 +90,11 @@ message ProductOrderDto{
   string product_package_id = 11;
   int32 product_package_version = 40;
   string product_package_datanode_id = 38;
-  
+
   string product_id = 1;
   int32 product_version = 2;
   string product_datanode_id = 39;
-  
+
   string product_namespace = 3;
   string product_channel_namespace = 10;
   string display_name = 6;
@@ -237,7 +238,7 @@ message ReferralList{
 }
 
 message OrderList{
-  repeated OrderDto orders = 1;  
+  repeated OrderDto orders = 1;
 }
 
 message CreateReferralRequest{
@@ -292,11 +293,11 @@ message CreateProductOrderDto{
   string product_id = 1;
   int32 product_version = 2;
   string product_datanode_id = 33;
-  
+
   string product_package_id = 17;
   int32 product_package_version = 34;
   string product_package_datanode_id = 35;
-  
+
   string product_namespace = 3;
   string product_channel_namespace = 26;
   string product_category = 31;
@@ -311,7 +312,7 @@ message CreateProductOrderDto{
   google.protobuf.StringValue executing_resource_group_id = 39;
   OrderActorDto custom_executing_actor = 25;
   repeated string executing_actor_permissions = 14;
-  
+
   string recipient_resource_group_id = 9;
   google.protobuf.StringValue recipient_order_party_id = 10;
   google.protobuf.StringValue receiver_internal_note = 30;
@@ -330,7 +331,7 @@ message CreateProductOrderDto{
   google.protobuf.StringValue case_payload_reference_id = 27;
   bool amount_set_on_delivery = 24;
   repeated CreateAttachmentDto allowed_attachments = 32;
-  
+
   string product_consent_mode = 36;
   google.protobuf.StringValue product_custom_consent_text = 37;
   google.protobuf.StringValue product_consent_template_namespace = 38;
@@ -501,14 +502,14 @@ message AddAttachmentReply {
 message AttachmentDto {
   string product_order_id = 1;
   string attachment_id = 2;
-  
+
   bool required = 3;
   bool allow_multiple = 4;
   google.protobuf.StringValue description = 5;
   string attachment_identifier = 6;
   string attachment_name = 7;
   string attachment_type = 8;
-  
+
   repeated FileDto files = 9;
 }
 
@@ -520,27 +521,77 @@ message FileDto{
   int32 size = 5;
 }
 
-message AddDeliveryRequest {
+message CreateDeliverableRequest {
   string product_order_id = 1;
-  string display_name = 2;
-  string data_node_namespace = 3;
-  string json_payload = 4;
-  string attachment_filename = 6;
-  string attachment_content_type = 7;
-  bytes attachment_content = 8;
+  string deliverable_element_namespace = 13;
+
+  oneof data {
+    CreatePropertyConditionReportDto property_condition_report = 2;
+    CreateElectricalInspectionReportDto electrical_inspection_report = 3;
+    CreateMediaFileDto media_file = 4;
+  }
+  google.protobuf.StringValue attachment_filename = 6;
+  google.protobuf.StringValue attachment_content_type = 7;
+  google.protobuf.BytesValue attachment_content = 8;
 
   repeated string resource_group_scopes = 12;
 
   string executing_actor_id = 9;
   OrderActorDto custom_executing_actor = 10;
-  repeated string executing_actor_permissions = 11;
+  repeated string executing_actor_permissions = 11; // needed?
 }
 
-message AddDeliveryReply {
-  DeliveryDto delivery = 1;
+message CreatePropertyConditionReportDto{
+  string document_created_by_display_name = 1;
+  string company_display_name = 2;
+  
+  google.protobuf.Timestamp report_creation_date = 3;
+  google.protobuf.Timestamp report_due_date = 4;
+  
+  int32 critical_damages_count = 5;
+  int32 severe_damages_count = 6;
+  int32 less_severe_damages_count = 7;
+  int32 possible_damages_count = 8;
 }
 
-message DeliveryDto {
+message CreateElectricalInspectionReportDto{
+  string document_created_by_display_name = 1;
+  string company_display_name = 2;
+  
+  google.protobuf.Timestamp report_creation_date = 3;
+  google.protobuf.Timestamp report_due_date = 4;
+
+  int32 fire_risk_count = 5;
+  int32 electric_shock_risk_count = 6;
+  int32 illegal_installation_count = 7;
+  int32 need_investigation_count = 8;
+}
+
+message CreateMediaFileDto{
+  MediaFileType type = 7;
+  int32 priority = 8;
+  google.protobuf.StringValue description = 9;
+}
+
+enum MediaFileType{
+  Unknown = 0;
+  Image = 1;
+  FloorPlan = 3;
+  Map = 4;
+  Video = 5;
+}
+
+message DeleteDeliverableRequest{
+  string deliverable_id = 1;
+  string product_order_id = 2;
+  repeated string resource_group_scopes = 3;
+}
+
+message CreateDeliverableReply {
+  DeliverableDto deliverable = 1;
+}
+
+message DeliverableDto {
   string id = 1;
   string product_order_id = 2;
   string display_name = 3;
@@ -556,9 +607,9 @@ message DownloadAttachmentRequest {
   repeated string resource_group_scopes = 3;
 }
 
-message DownloadDeliveryRequest {
+message DownloadDeliverableRequest {
   string product_order_id = 1;
-  string delivery_id = 2;
+  string Deliverable_id = 2;
   repeated string resource_group_scopes = 3;
 }
 
@@ -583,7 +634,7 @@ message GetAvailableStatusesReply{
 message GetProductOrderActivityLog{
   string product_order_id = 1;
   repeated string resource_group_scopes = 2;
-} 
+}
 
 message ActivityLogList{
   repeated ActivityLogDto logs = 1;
@@ -591,10 +642,10 @@ message ActivityLogList{
 
 message ActivityLogDto{
   string id = 1;
-  string product_order_id = 2;  
+  string product_order_id = 2;
   google.protobuf.Timestamp created_at_utc = 4;
-  
-  string executing_actor_id = 5;  
+
+  string executing_actor_id = 5;
   google.protobuf.StringValue executing_resource_group_id = 10;
   OrderActorDto created_by_actor = 6;
 
@@ -624,7 +675,7 @@ message CreateCustomLogRequest{
   string product_order_id = 1;
   repeated string resource_group_scopes = 2;
   string message = 3;
-  
+
   string executing_actor_id = 4;
   google.protobuf.StringValue executing_resource_group_id = 7;
   OrderActorDto custom_executing_actor = 5;
