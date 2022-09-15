@@ -538,7 +538,7 @@ message CreateDeliverableRequest {
 
   string executing_actor_id = 9;
   OrderActorDto custom_executing_actor = 10;
-  repeated string executing_actor_permissions = 11; // needed?
+  repeated string executing_actor_permissions = 11;
 }
 
 message CreatePropertyConditionReportDto{
@@ -585,6 +585,10 @@ message DeleteDeliverableRequest{
   string deliverable_id = 1;
   string product_order_id = 2;
   repeated string resource_group_scopes = 3;
+
+  string executing_actor_id = 9;
+  OrderActorDto custom_executing_actor = 10;
+  repeated string executing_actor_permissions = 11;
 }
 
 message CreateDeliverableReply {
