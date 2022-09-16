@@ -64,7 +64,7 @@ service ProductOrderService {
   rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
   rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadReply);
 
-  rpc CreateDeliverable (CreateDeliverableRequest) returns (CreateDeliverableReply);
+  rpc CreateDeliverable (CreateDeliverableRequest) returns (DeliverableDto);
   rpc DeleteDeliverable (DeleteDeliverableRequest) returns (google.protobuf.Empty);
   rpc DownloadDeliverable (DownloadDeliverableRequest) returns (DownloadReply);
 
@@ -506,6 +506,7 @@ message AttachmentDto {
   bool required = 3;
   bool allow_multiple = 4;
   google.protobuf.StringValue description = 5;
+
   string attachment_identifier = 6;
   string attachment_name = 7;
   string attachment_type = 8;
@@ -521,18 +522,23 @@ message FileDto{
   int32 size = 5;
 }
 
+message CreateFileDto{
+  string filename = 1;
+  string content_type = 2;  
+  bytes content = 3;
+}
+
 message CreateDeliverableRequest {
   string product_order_id = 1;
   string deliverable_element_namespace = 13;
 
   oneof data {
-    CreatePropertyConditionReportDto property_condition_report = 2;
-    CreateElectricalInspectionReportDto electrical_inspection_report = 3;
-    CreateMediaFileDto media_file = 4;
+    PropertyConditionReportDto property_condition_report = 2;
+    ElectricalInspectionReportDto electrical_inspection_report = 3;
+    MediaFileDto media_file = 4;
   }
-  google.protobuf.StringValue attachment_filename = 6;
-  google.protobuf.StringValue attachment_content_type = 7;
-  google.protobuf.BytesValue attachment_content = 8;
+
+  CreateFileDto file = 6;
 
   repeated string resource_group_scopes = 12;
 
@@ -541,23 +547,23 @@ message CreateDeliverableRequest {
   repeated string executing_actor_permissions = 11;
 }
 
-message CreatePropertyConditionReportDto{
+message PropertyConditionReportDto{
   string document_created_by_display_name = 1;
   string company_display_name = 2;
-  
+
   google.protobuf.Timestamp report_creation_date = 3;
   google.protobuf.Timestamp report_due_date = 4;
-  
+
   int32 critical_damages_count = 5;
   int32 severe_damages_count = 6;
   int32 less_severe_damages_count = 7;
   int32 possible_damages_count = 8;
 }
 
-message CreateElectricalInspectionReportDto{
+message ElectricalInspectionReportDto{
   string document_created_by_display_name = 1;
   string company_display_name = 2;
-  
+
   google.protobuf.Timestamp report_creation_date = 3;
   google.protobuf.Timestamp report_due_date = 4;
 
@@ -567,18 +573,10 @@ message CreateElectricalInspectionReportDto{
   int32 need_investigation_count = 8;
 }
 
-message CreateMediaFileDto{
-  MediaFileType type = 7;
+message MediaFileDto{
+  string type = 7;
   int32 priority = 8;
   google.protobuf.StringValue description = 9;
-}
-
-enum MediaFileType{
-  Unknown = 0;
-  Image = 1;
-  FloorPlan = 3;
-  Map = 4;
-  Video = 5;
 }
 
 message DeleteDeliverableRequest{
@@ -591,18 +589,17 @@ message DeleteDeliverableRequest{
   repeated string executing_actor_permissions = 11;
 }
 
-message CreateDeliverableReply {
-  DeliverableDto deliverable = 1;
-}
-
 message DeliverableDto {
   string id = 1;
   string product_order_id = 2;
-  string display_name = 3;
-  string data_node_namespace = 4;
-  string json_payload = 5;
-  bool has_attachment = 6;
-  string attachment_filename = 7;
+  string deliverable_element_namespace = 3;
+
+  oneof data {
+    PropertyConditionReportDto property_condition_report = 4;
+    ElectricalInspectionReportDto electrical_inspection_report = 5;
+    MediaFileDto media_file = 6;
+  }
+  FileDto file = 7;
 }
 
 message DownloadAttachmentRequest {
