@@ -629,7 +629,15 @@ message CreateCustomLogRequest{
   repeated string executing_actor_permissions = 6;
   google.protobuf.StringValue resource_group_id = 7;
   google.protobuf.StringValue order_party_id = 8;
+  ExecutingRole role = 9;
 }
+
+enum ExecutingRole {
+  None = 0;
+  Sender = 1;
+  Receiver = 2;
+}
+
 
 message CountDto{
   int32 total_count = 1;
