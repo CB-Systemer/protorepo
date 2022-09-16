@@ -593,10 +593,11 @@ message ActivityLogDto{
   string id = 1;
   string product_order_id = 2;  
   google.protobuf.Timestamp created_at_utc = 4;
-  
   string executing_actor_id = 5;  
-  google.protobuf.StringValue executing_resource_group_id = 10;
   OrderActorDto created_by_actor = 6;
+  google.protobuf.StringValue resource_group_id = 10;
+  google.protobuf.StringValue order_party_id = 11;
+  google.protobuf.StringValue order_party_display_name = 12;
 
   oneof data {
     CustomLogDataDto custom_log_data = 7;
@@ -626,9 +627,10 @@ message CreateCustomLogRequest{
   string message = 3;
   
   string executing_actor_id = 4;
-  google.protobuf.StringValue executing_resource_group_id = 7;
   OrderActorDto custom_executing_actor = 5;
   repeated string executing_actor_permissions = 6;
+  google.protobuf.StringValue resource_group_id = 7;
+  google.protobuf.StringValue order_party_id = 8;
 }
 
 message CountDto{
