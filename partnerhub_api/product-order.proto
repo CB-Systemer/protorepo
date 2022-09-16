@@ -69,8 +69,6 @@ service ProductOrderService {
 
   rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
-
-  rpc GetResourceGroupRole (GetResourceGroupRoleRequest) returns (GetResourceGroupRoleReply);
 }
 
 message ReferralDto{
@@ -636,14 +634,4 @@ message CreateCustomLogRequest{
 message CountDto{
   int32 total_count = 1;
   int32 active_count = 2;
-}
-
-message GetResourceGroupRoleRequest {
-  string product_order_id = 1;
-  string resource_group_id = 2;
-}
-
-message GetResourceGroupRoleReply {
-  bool isSender = 1;
-  bool isReceiver = 2;
 }
