@@ -648,7 +648,7 @@ message ActivityLogDto{
   google.protobuf.StringValue executing_resource_group_id = 10;
 
   OrderActorDto created_by_actor = 6;
-  google.protobuf.StringValue resource_group_id = 10;
+  google.protobuf.StringValue resource_group_id = 13;
   google.protobuf.StringValue order_party_id = 11;
   google.protobuf.StringValue order_party_display_name = 12;
 
