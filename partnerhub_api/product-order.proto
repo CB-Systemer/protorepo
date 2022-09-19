@@ -70,8 +70,6 @@ service ProductOrderService {
 
   rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
-
-  rpc GetResourceGroupRole (GetResourceGroupRoleRequest) returns (GetResourceGroupRoleReply);
 }
 
 message ReferralDto{
@@ -648,7 +646,11 @@ message ActivityLogDto{
 
   string executing_actor_id = 5;
   google.protobuf.StringValue executing_resource_group_id = 10;
+
   OrderActorDto created_by_actor = 6;
+  google.protobuf.StringValue resource_group_id = 10;
+  google.protobuf.StringValue order_party_id = 11;
+  google.protobuf.StringValue order_party_display_name = 12;
 
   oneof data {
     CustomLogDataDto custom_log_data = 7;
@@ -678,22 +680,21 @@ message CreateCustomLogRequest{
   string message = 3;
 
   string executing_actor_id = 4;
-  google.protobuf.StringValue executing_resource_group_id = 7;
   OrderActorDto custom_executing_actor = 5;
   repeated string executing_actor_permissions = 6;
+  google.protobuf.StringValue resource_group_id = 7;
+  google.protobuf.StringValue order_party_id = 8;
+  ExecutingRole role = 9;
 }
+
+enum ExecutingRole {
+  None = 0;
+  Sender = 1;
+  Receiver = 2;
+}
+
 
 message CountDto{
   int32 total_count = 1;
   int32 active_count = 2;
-}
-
-message GetResourceGroupRoleRequest {
-  string product_order_id = 1;
-  string resource_group_id = 2;
-}
-
-message GetResourceGroupRoleReply {
-  bool isSender = 1;
-  bool isReceiver = 2;
 }
