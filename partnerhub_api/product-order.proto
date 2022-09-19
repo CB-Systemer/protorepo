@@ -575,6 +575,13 @@ message MediaFileDto{
   string type = 7;
   int32 priority = 8;
   google.protobuf.StringValue description = 9;
+
+  google.protobuf.StringValue x_s_url = 10;
+  google.protobuf.StringValue s_url = 11;
+  google.protobuf.StringValue m_url = 12;
+  google.protobuf.StringValue l_url = 13;
+  google.protobuf.StringValue x_l_url = 14;
+  google.protobuf.StringValue original_url = 15;
 }
 
 message DeleteDeliverableRequest{
