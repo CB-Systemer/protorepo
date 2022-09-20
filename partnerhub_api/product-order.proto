@@ -132,7 +132,7 @@ message ProductOrderDto{
   google.protobuf.StringValue receiver_internal_note = 30;
   google.protobuf.StringValue sender_internal_note = 31;
 
-  repeated AttachmentDto attachments = 36;
+  repeated AttachmentDto attachments = 36;  
 
   string product_consent_mode = 41;
   google.protobuf.StringValue product_custom_consent_text = 42;
@@ -166,6 +166,7 @@ message ProductOrderDtoDetails{
   OrderPartyDto sender_resourceGroup_primary_chain = 1;
   OrderPartyDto sender_order_party = 12;
   google.type.Money total_price = 15;
+  repeated DeliverableDto deliverables = 16;
 }
 
 message ReceiverCaseStatusDto{
