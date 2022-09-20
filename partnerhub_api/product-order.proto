@@ -515,7 +515,7 @@ message AttachmentDto {
 message FileDto{
   string id = 1;
   string filename = 2;
-  string content_type = 3;
+  google.protobuf.StringValue content_type = 3;
   string url = 4;
   int32 size = 5;
 }
