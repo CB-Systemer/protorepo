@@ -32,6 +32,7 @@ message GetDatanodeReferenceResponse {
 	string resource_group_id = 9;
 	string data_store_id = 10;
 	string display_name = 11;
+	string tenant_id = 12;
 }
 
 message GetDataNodeRequest{

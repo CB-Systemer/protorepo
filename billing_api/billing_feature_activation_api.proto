@@ -1,0 +1,51 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Billing.Api";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service BillingFeatureActivationApi {
+	rpc CreateFeatureActivation (CreateFeatureActivationRequest) returns (CreateFeatureActivationReply);
+    rpc RemoveFeatureActivation (RemoveFeatureActivationRequest) returns (RemoveFeatureActivationReply);
+    rpc GetDataNodeFeatureActivations (GetDataNodeFeatureActivationsRequest) returns (GetDataNodeFeatureActivationsReply);
+}
+
+message CreateFeatureActivationRequest {
+	google.protobuf.StringValue namespace = 1;
+    google.protobuf.StringValue data_node_id = 2;
+    google.protobuf.StringValue resource_group_id = 3;
+    google.protobuf.StringValue tenant_id = 4;
+    google.protobuf.StringValue actor_id = 5;
+}
+
+message CreateFeatureActivationReply {
+	bool success = 1;
+    google.protobuf.StringValue id = 2;
+}
+
+message RemoveFeatureActivationRequest {
+    google.protobuf.StringValue id = 1;
+}
+
+message RemoveFeatureActivationReply {
+    bool success = 1;
+}
+
+message GetDataNodeFeatureActivationsRequest {
+    google.protobuf.StringValue data_node_id = 1;
+}
+
+message FeatureActivationDto {
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue namespace = 2;
+    google.protobuf.Timestamp createdAt = 3;
+    google.protobuf.StringValue createdBy = 4;
+    google.protobuf.StringValue data_node_id = 5;
+    google.protobuf.StringValue resource_group_id = 6;
+    google.protobuf.StringValue tenant_id = 7;
+}
+
+message GetDataNodeFeatureActivationsReply {
+    repeated string list = 1;
+}

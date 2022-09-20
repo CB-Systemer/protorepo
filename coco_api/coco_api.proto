@@ -78,7 +78,8 @@ service CocoApi {
   rpc GetAllSmsCommand(GetAllConfigRequest) returns (GetAllSmsCommandReply);  
   rpc GetQuestionnaire(GetSingleConfigRequest) returns (GetQuestionnaireReply);
   rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);
-  rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply);  
+  rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply); 
+  rpc GetAllFeatureActivations(GetAllConfigRequest) returns (GetAllFeatureActivationsReply);
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -104,6 +105,19 @@ message QuestionnaireDto {
 
 message GetQuestionnaireReply {
     QuestionnaireDto config = 1;
+}
+
+message FeatureActivationDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string icon_name = 4;
+    string scope = 5;
+    string billing_metric_namespace = 6;
+}
+
+message GetAllFeatureActivationsReply {
+   repeated FeatureActivationDto list = 1;
 }
 
 message GetAllQuestionnairesReply {
