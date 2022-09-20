@@ -117,7 +117,7 @@ message FeatureActivationDto {
 }
 
 message GetAllFeatureActivationsReply {
-   FeatureActivationDto list = 1;
+   repeated FeatureActivationDto list = 1;
 }
 
 message GetAllQuestionnairesReply {
