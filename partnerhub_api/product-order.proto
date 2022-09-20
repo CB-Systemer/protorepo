@@ -521,7 +521,7 @@ message FileDto{
 }
 
 message CreateFileDto{
-  string filename = 1;
+  string file_name = 1;
   string content_type = 2;  
   bytes content = 3;
 }
