@@ -47,5 +47,5 @@ message FeatureActivationDto {
 }
 
 message GetDataNodeFeatureActivationsReply {
-    repeated FeatureActivationDto list = 1;
+    repeated string list = 1;
 }
