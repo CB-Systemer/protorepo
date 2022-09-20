@@ -475,6 +475,7 @@ message UpdateStatusRequest{
   repeated string executing_actor_permissions = 5;
 
   repeated string resource_group_scopes = 6;
+  ExecutingRole role = 8;
 }
 
 message AddAttachmentRequest {
