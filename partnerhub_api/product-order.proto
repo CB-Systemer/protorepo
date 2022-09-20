@@ -516,7 +516,7 @@ message FileDto{
   string id = 1;
   string filename = 2;
   google.protobuf.StringValue content_type = 3;
-  string url = 4;
+  google.protobuf.StringValue url = 4;
   int32 size = 5;
 }
 
