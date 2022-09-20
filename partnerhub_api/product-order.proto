@@ -584,6 +584,7 @@ message MediaFileDto{
   google.protobuf.StringValue original_url = 15;
 
   google.protobuf.StringValue referenced_file_name = 16;
+  google.protobuf.Int32Value referenced_file_size = 17;
 }
 
 message DeleteDeliverableRequest{
