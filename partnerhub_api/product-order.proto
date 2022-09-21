@@ -332,6 +332,9 @@ message CreateProductOrderDto{
   string product_consent_mode = 36;
   google.protobuf.StringValue product_custom_consent_text = 37;
   google.protobuf.StringValue product_consent_template_namespace = 38;
+
+  google.protobuf.BoolValue require_case_when_completed = 40;
+  google.protobuf.BoolValue supplemental_state_required_when_completed = 41;
 }
 
 message SetReceiverCaseReferenceIdRequest{
