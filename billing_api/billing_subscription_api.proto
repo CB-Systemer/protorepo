@@ -1,0 +1,20 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Billing.Api";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service BillingSubscriptionApi {
+	rpc GetAutomaticFeatureActivation (GetAutomaticFeatureActivationRequest) returns (GetAutomaticFeatureActivationReply);
+}
+
+message GetAutomaticFeatureActivationRequest {
+	google.protobuf.StringValue namespace = 1;
+    google.protobuf.StringValue owner_id = 2;
+}
+
+message GetAutomaticFeatureActivationReply {
+	bool enabled = 1;
+}
+

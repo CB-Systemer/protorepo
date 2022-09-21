@@ -43,6 +43,7 @@ message GetPdfFromUrlRequest {
 	string tenantId = 3;
 	string resourceGroupId = 4;
 	string accessToken = 5;
+  string dataNodeId = 6;
 }
 
 message GetDocumentTemplatePdfRequest {
