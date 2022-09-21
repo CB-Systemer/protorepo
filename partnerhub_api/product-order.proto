@@ -136,6 +136,9 @@ message ProductOrderDto{
   string product_consent_mode = 41;
   google.protobuf.StringValue product_custom_consent_text = 42;
   google.protobuf.StringValue product_consent_template_namespace = 43;
+
+  google.protobuf.BoolValue require_case_when_completed = 44;
+  google.protobuf.BoolValue supplemental_state_required_when_completed = 45;
 }
 
 message ReferralDtoDetails{
@@ -332,6 +335,9 @@ message CreateProductOrderDto{
   string product_consent_mode = 36;
   google.protobuf.StringValue product_custom_consent_text = 37;
   google.protobuf.StringValue product_consent_template_namespace = 38;
+
+  google.protobuf.BoolValue require_case_when_completed = 40;
+  google.protobuf.BoolValue supplemental_state_required_when_completed = 41;
 }
 
 message SetReceiverCaseReferenceIdRequest{
@@ -475,6 +481,7 @@ message UpdateStatusRequest{
   repeated string executing_actor_permissions = 5;
 
   repeated string resource_group_scopes = 6;
+  ExecutingRole role = 8;
 }
 
 message AddAttachmentRequest {
