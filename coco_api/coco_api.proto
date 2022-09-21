@@ -80,6 +80,7 @@ service CocoApi {
   rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);
   rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply); 
   rpc GetAllFeatureActivations(GetAllConfigRequest) returns (GetAllFeatureActivationsReply);
+  rpc GetAllAgreements(GetAllConfigRequest) return (GetAllAgreementsReply);
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -134,6 +135,31 @@ message MessageStatusDto {
 
 message GetAllMessageStatusesReply {
     repeated MessageStatusDto list = 1;
+}
+
+message AgreementDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+
+    repeated FeatureToggleDto feature_toggles = 3;
+    repeated FeatureActivationPriceDto feature_activation_prices = 4;
+    repeated ConsumptionMetricPriceDto consumption_metric_prices = 5;
+}
+
+message FeatureToggleDto {
+    string instance_namespace = 1;
+}
+
+message FeatureActivationPriceDto {
+    string instance_namespace = 1;
+}
+
+message ConsumptionMetricPriceDto {
+    string instance_namespace = 1;
+}
+
+message GetAllAgreementsReply {
+    repeated AgreementDto agreements = 1;
 }
 
 message ReflowDto {
