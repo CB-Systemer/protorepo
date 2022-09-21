@@ -80,7 +80,7 @@ service CocoApi {
   rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);
   rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply); 
   rpc GetAllFeatureActivations(GetAllConfigRequest) returns (GetAllFeatureActivationsReply);
-  rpc GetAllAgreements(GetAllConfigRequest) return (GetAllAgreementsReply);
+  rpc GetAllAgreements(GetAllConfigRequest) returns (GetAllAgreementsReply);
 }
 
 message GetActiveDocumentTemplatesRequest {
