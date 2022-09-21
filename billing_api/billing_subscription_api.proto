@@ -14,7 +14,7 @@ message GetAutomaticFeatureActivationRequest {
     google.protobuf.StringValue owner_id = 2;
 }
 
-message CreateFeatureActivationReply {
+message GetAutomaticFeatureActivationReply {
 	bool enabled = 1;
 }
 
