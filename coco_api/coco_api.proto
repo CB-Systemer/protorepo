@@ -81,6 +81,7 @@ service CocoApi {
   rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply); 
   rpc GetAllFeatureActivations(GetAllConfigRequest) returns (GetAllFeatureActivationsReply);
   rpc GetAllAgreements(GetAllConfigRequest) returns (GetAllAgreementsReply);
+  rpc GetAgreement(GetSingleConfigRequest) returns (GetAgreementReply);
 }
 
 message GetActiveDocumentTemplatesRequest {
@@ -160,6 +161,10 @@ message ConsumptionMetricPriceDto {
 
 message GetAllAgreementsReply {
     repeated AgreementDto agreements = 1;
+}
+
+message GetAgreementReply {
+    AgreementDto agreement = 1;
 }
 
 message ReflowDto {
