@@ -626,6 +626,7 @@ message DownloadAttachmentRequest {
   string context_id = 1;
   string attachment_id = 2;
   repeated string resource_group_scopes = 3;
+  google.protobuf.StringValue file_id = 4;
 }
 
 message DownloadDeliverableRequest {
