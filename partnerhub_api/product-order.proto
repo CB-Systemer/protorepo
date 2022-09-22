@@ -140,7 +140,7 @@ message ProductOrderDto{
 
   google.protobuf.BoolValue require_case_when_completed = 44;
   google.protobuf.BoolValue supplemental_state_required_when_completed = 45;
-  google.protobuf.BoolValue allow_mesages = 46;
+  google.protobuf.BoolValue allow_messages = 46;
 }
 
 message ReferralDtoDetails{
@@ -341,7 +341,7 @@ message CreateProductOrderDto{
 
   google.protobuf.BoolValue require_case_when_completed = 40;
   google.protobuf.BoolValue supplemental_state_required_when_completed = 41;
-  google.protobuf.BoolValue allow_mesages = 42;
+  google.protobuf.BoolValue allow_messages = 42;
 }
 
 message SetReceiverCaseReferenceIdRequest{
