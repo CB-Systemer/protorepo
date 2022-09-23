@@ -82,6 +82,24 @@ service CocoApi {
   rpc GetAllFeatureActivations(GetAllConfigRequest) returns (GetAllFeatureActivationsReply);
   rpc GetAllAgreements(GetAllConfigRequest) returns (GetAllAgreementsReply);
   rpc GetAgreement(GetSingleConfigRequest) returns (GetAgreementReply);
+  rpc GetRegistrationFlow(GetSingleConfigRequest) returns (GetRegistrationFlowReply);
+  rpc GetAllRegistrationFlows(GetAllConfigRequest) returns (GetAllRegistrationFlowsReply);
+}
+
+message RegistrationFlowDto {
+    string instance_namespace = 1;
+    string display_name = 2;
+    string description = 3;
+    string title = 4;
+    string flowDefinition = 5;
+}
+
+message GetRegistrationFlowReply {
+    RegistrationFlowDto config = 1;
+}
+
+message GetAllRegistrationFlowsReply {
+    repeated RegistrationFlowDto list = 1;
 }
 
 message GetActiveDocumentTemplatesRequest {
