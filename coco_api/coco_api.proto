@@ -1095,6 +1095,7 @@ message ProductCategoryCocoDto {
     string displayName = 2;
     bool active = 3;
     int32 priority = 4;
+    repeated string can_create_deliverables_of_type = 5;
 }
 
 message ProductChannelCocoDto {
