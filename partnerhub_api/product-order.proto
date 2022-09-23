@@ -679,6 +679,7 @@ message ActivityLogDto{
     CustomLogDataDto custom_log_data = 7;
     StatusChangeDataDto status_change_data = 8;
     CreatedLogDto created_log_data = 9;
+    CaseStateChangedDataDto case_state_changed_data = 14;
   }
 }
 
@@ -695,6 +696,11 @@ message StatusChangeDataDto{
 
 message CustomLogDataDto{
   string message = 1;
+}
+
+message CaseStateChangedDataDto {
+  string case_from_status = 1;
+  string case_to_status = 2;
 }
 
 message CreateCustomLogRequest{
