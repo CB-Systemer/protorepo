@@ -79,7 +79,8 @@ service CocoApi {
   rpc GetQuestionnaire(GetSingleConfigRequest) returns (GetQuestionnaireReply);
   rpc GetAllQuestionnaires(GetAllConfigRequest) returns (GetAllQuestionnairesReply);
   rpc GetAllMessageStatuses(GetAllConfigRequest) returns (GetAllMessageStatusesReply); 
-  rpc GetAllFeatureActivations(GetAllConfigRequest) returns (GetAllFeatureActivationsReply);
+  rpc GetAllFeatures(GetAllConfigRequest) returns (GetAllFeaturesReply);
+  rpc GetFeature(GetSingleConfigRequest) returns (GetFeatureReply);
   rpc GetAllAgreements(GetAllConfigRequest) returns (GetAllAgreementsReply);
   rpc GetAgreement(GetSingleConfigRequest) returns (GetAgreementReply);
   rpc GetRegistrationFlow(GetSingleConfigRequest) returns (GetRegistrationFlowReply);
@@ -127,17 +128,20 @@ message GetQuestionnaireReply {
     QuestionnaireDto config = 1;
 }
 
-message FeatureActivationDto {
+message FeatureDto {
     string instance_namespace = 1;
     string display_name = 2;
     string description = 3;
-    string icon_name = 4;
-    string scope = 5;
-    string billing_metric_namespace = 6;
+    string metric_namespace = 4;
+    string specifics_json = 5;
 }
 
-message GetAllFeatureActivationsReply {
-   repeated FeatureActivationDto list = 1;
+message GetAllFeaturesReply {
+   repeated FeatureDto list = 1;
+}
+
+message GetFeatureReply {
+   FeatureDto feature = 1;
 }
 
 message GetAllQuestionnairesReply {
@@ -159,23 +163,22 @@ message GetAllMessageStatusesReply {
 message AgreementDto {
     string instance_namespace = 1;
     string display_name = 2;
-
-    repeated FeatureToggleDto feature_toggles = 3;
-    repeated FeatureActivationPriceDto feature_activation_prices = 4;
-    repeated ConsumptionMetricPriceDto consumption_metric_prices = 5;
+    repeated string standard_features = 3;
+    repeated BillingMetricDto billing_metrics = 4;
 }
 
-message FeatureToggleDto {
-    string instance_namespace = 1;
+message BillingMetricDto {
+    string metric_namespace = 1;
+    string display_name = 2;
+    string price = 3;
+    repeated MetricGroupingKeyDto metric_grouping_keys = 4;
 }
 
-message FeatureActivationPriceDto {
-    string instance_namespace = 1;
-}
-
-message ConsumptionMetricPriceDto {
-    string instance_namespace = 1;
-}
+message MetricGroupingKeyDto {
+    string key = 1;
+    string display_name = 2;
+    string price = 3;
+} 
 
 message GetAllAgreementsReply {
     repeated AgreementDto agreements = 1;
