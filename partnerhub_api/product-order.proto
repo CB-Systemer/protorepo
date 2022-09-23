@@ -699,8 +699,8 @@ message CustomLogDataDto{
 }
 
 message CaseStateChangedDataDto {
-  string case_from_status = 1;
-  string case_to_status = 2;
+  string from_case_status = 1;
+  string to_case_status = 2;
 }
 
 message CreateCustomLogRequest{
