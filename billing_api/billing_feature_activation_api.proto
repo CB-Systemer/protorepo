@@ -8,15 +8,16 @@ import "google/protobuf/timestamp.proto";
 service BillingFeatureActivationApi {
 	rpc CreateFeatureActivation (CreateFeatureActivationRequest) returns (CreateFeatureActivationReply);
     rpc RemoveFeatureActivation (RemoveFeatureActivationRequest) returns (RemoveFeatureActivationReply);
-    rpc GetDataNodeFeatureActivations (GetDataNodeFeatureActivationsRequest) returns (GetDataNodeFeatureActivationsReply);
+    rpc GetFeatureActivationsByReferenceId (GetFeatureActivationsByReferenceIdRequest) returns (GetFeatureActivationsReply);
 }
 
 message CreateFeatureActivationRequest {
 	google.protobuf.StringValue namespace = 1;
-    google.protobuf.StringValue data_node_id = 2;
-    google.protobuf.StringValue resource_group_id = 3;
-    google.protobuf.StringValue tenant_id = 4;
-    google.protobuf.StringValue actor_id = 5;
+    google.protobuf.StringValue reference_id = 2;
+    google.protobuf.StringValue grouping_key = 3;
+    google.protobuf.StringValue resource_group_id = 4;
+    google.protobuf.StringValue tenant_id = 5;
+    google.protobuf.StringValue actor_id = 6;
 }
 
 message CreateFeatureActivationReply {
@@ -32,8 +33,8 @@ message RemoveFeatureActivationReply {
     bool success = 1;
 }
 
-message GetDataNodeFeatureActivationsRequest {
-    google.protobuf.StringValue data_node_id = 1;
+message GetFeatureActivationsByReferenceIdRequest {
+    google.protobuf.StringValue reference_id = 1;
 }
 
 message FeatureActivationDto {
@@ -46,6 +47,6 @@ message FeatureActivationDto {
     google.protobuf.StringValue tenant_id = 7;
 }
 
-message GetDataNodeFeatureActivationsReply {
+message GetFeatureActivationsReply {
     repeated string list = 1;
 }
