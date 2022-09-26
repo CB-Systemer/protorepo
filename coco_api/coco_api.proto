@@ -875,6 +875,7 @@ message DatanodeCocoDto {
     google.protobuf.StringValue short_display_name = 24;
     bool include_path_details_in_search_index = 25;
     UploadFileCocoDto upload_file = 26;
+    repeated string feature_namespaces = 27;
 }
 
 message UploadFileCocoDto {
