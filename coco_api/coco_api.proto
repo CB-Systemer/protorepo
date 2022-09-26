@@ -134,6 +134,7 @@ message FeatureDto {
     string description = 3;
     string metric_namespace = 4;
     string specifics_json = 5;
+    bool enabled = 6;
 }
 
 message GetAllFeaturesReply {
