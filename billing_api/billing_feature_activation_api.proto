@@ -18,6 +18,7 @@ message CreateFeatureActivationRequest {
     google.protobuf.StringValue resource_group_id = 4;
     google.protobuf.StringValue tenant_id = 5;
     google.protobuf.StringValue actor_id = 6;
+    google.protobuf.StringValue reference_namespace = 7;
 }
 
 message CreateFeatureActivationReply {
