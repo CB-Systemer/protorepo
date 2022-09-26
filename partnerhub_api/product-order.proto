@@ -545,6 +545,7 @@ message CreateDeliverableRequest {
     PropertyConditionReportDto property_condition_report = 2;
     ElectricalInspectionReportDto electrical_inspection_report = 3;
     MediaFileDto media_file = 4;
+    MediaFileReferenceDto file_reference = 5;
   }
 
   CreateFileDto file = 6;
@@ -583,9 +584,15 @@ message ElectricalInspectionReportDto{
 }
 
 message MediaFileDto{
-  string type = 7;
-  int32 priority = 8;
-  google.protobuf.StringValue description = 9;
+  string type = 1;
+  int32 priority = 2;
+  google.protobuf.StringValue description = 3;
+}
+
+message MediaFileReferenceDto{
+  string type = 1;
+  int32 priority = 2;
+  google.protobuf.StringValue description = 3;
 
   google.protobuf.StringValue x_s_url = 10;
   google.protobuf.StringValue s_url = 11;
@@ -617,6 +624,7 @@ message DeliverableDto {
     PropertyConditionReportDto property_condition_report = 4;
     ElectricalInspectionReportDto electrical_inspection_report = 5;
     MediaFileDto media_file = 6;
+    MediaFileReferenceDto media_file_reference = 9;
   }
   FileDto file = 7;
   
