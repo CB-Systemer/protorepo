@@ -95,6 +95,7 @@ message ProductOrderDto{
 
   string product_namespace = 3;
   string product_channel_namespace = 10;
+  string product_category_namespace = 47;
   string display_name = 6;
   string short_description = 7;
   ProductStatusDto custom_status = 37;
