@@ -418,6 +418,7 @@ message Estate{
 	bool isFlexProperty = 10;
 	repeated Registration registrations = 11;
 	repeated EntityFeatureRegistration entityFeatureRegistrations = 12;
+	string id = 13;
 }
 
 message EntityFeatureRegistration {
