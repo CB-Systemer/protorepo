@@ -594,15 +594,15 @@ message MediaFileReferenceDto{
   int32 priority = 2;
   google.protobuf.StringValue description = 3;
 
-  google.protobuf.StringValue x_s_url = 10;
-  google.protobuf.StringValue s_url = 11;
-  google.protobuf.StringValue m_url = 12;
-  google.protobuf.StringValue l_url = 13;
-  google.protobuf.StringValue x_l_url = 14;
-  google.protobuf.StringValue original_url = 15;
+  string x_s_url = 10;
+  string s_url = 11;
+  string m_url = 12;
+  string l_url = 13;
+  string x_l_url = 14;
+  string original_url = 15;
 
-  google.protobuf.StringValue referenced_file_name = 16;
-  google.protobuf.Int32Value referenced_file_size = 17;
+  string referenced_file_name = 16;
+  int32 referenced_file_size = 17;
 }
 
 message DeleteDeliverableRequest{
