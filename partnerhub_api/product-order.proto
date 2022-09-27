@@ -542,8 +542,8 @@ message CreateDeliverableRequest {
   string deliverable_element_namespace = 13;
 
   oneof data {
-    TilstandsReportDto property_condition_report = 2;
-    ElEftersynReportDto electrical_inspection_report = 3;
+    TilstandsReportDto tilstands_report = 2;
+    ElEftersynReportDto el_eftersyn_report = 3;
     ImageFileDto image_file = 4;
     ImageReferenceDto image_reference = 5;
   }
