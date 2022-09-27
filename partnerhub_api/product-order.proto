@@ -64,7 +64,7 @@ service ProductOrderService {
   rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
   rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadReply);
 
-  rpc CreateDeliverable (CreateDeliverableRequest) returns (DeliverableDto);
+  rpc CreateDeliverable (CreateDeliverableRequest) returns (DeliverableDto);  
   rpc DeleteDeliverable (DeleteDeliverableRequest) returns (google.protobuf.Empty);
   rpc DownloadDeliverable (DownloadDeliverableRequest) returns (DownloadReply);
 
@@ -542,9 +542,10 @@ message CreateDeliverableRequest {
   string deliverable_element_namespace = 13;
 
   oneof data {
-    PropertyConditionReportDto property_condition_report = 2;
-    ElectricalInspectionReportDto electrical_inspection_report = 3;
-    MediaFileDto media_file = 4;
+    TilstandsReportDto tilstands_report = 2;
+    ElEftersynReportDto el_eftersyn_report = 3;
+    ImageFileDto image_file = 4;
+    ImageReferenceDto image_reference = 5;
   }
 
   CreateFileDto file = 6;
@@ -556,7 +557,7 @@ message CreateDeliverableRequest {
   repeated string executing_actor_permissions = 11;
 }
 
-message PropertyConditionReportDto{
+message TilstandsReportDto{
   string document_created_by_display_name = 1;
   string company_display_name = 2;
 
@@ -569,7 +570,7 @@ message PropertyConditionReportDto{
   int32 possible_damages_count = 8;
 }
 
-message ElectricalInspectionReportDto{
+message ElEftersynReportDto{
   string document_created_by_display_name = 1;
   string company_display_name = 2;
 
@@ -582,20 +583,26 @@ message ElectricalInspectionReportDto{
   int32 need_investigation_count = 8;
 }
 
-message MediaFileDto{
-  string type = 7;
-  int32 priority = 8;
-  google.protobuf.StringValue description = 9;
+message ImageFileDto{
+  string type = 1;
+  int32 priority = 2;
+  google.protobuf.StringValue description = 3;
+}
 
-  google.protobuf.StringValue x_s_url = 10;
-  google.protobuf.StringValue s_url = 11;
-  google.protobuf.StringValue m_url = 12;
-  google.protobuf.StringValue l_url = 13;
-  google.protobuf.StringValue x_l_url = 14;
-  google.protobuf.StringValue original_url = 15;
+message ImageReferenceDto{
+  string type = 1;
+  int32 priority = 2;
+  google.protobuf.StringValue description = 3;
 
-  google.protobuf.StringValue referenced_file_name = 16;
-  google.protobuf.Int32Value referenced_file_size = 17;
+  string x_s_url = 10;
+  string s_url = 11;
+  string m_url = 12;
+  string l_url = 13;
+  string x_l_url = 14;
+  string original_url = 15;
+
+  string referenced_file_name = 16;
+  int32 referenced_file_size = 17;
 }
 
 message DeleteDeliverableRequest{
@@ -614,9 +621,12 @@ message DeliverableDto {
   string deliverable_element_namespace = 3;
 
   oneof data {
-    PropertyConditionReportDto property_condition_report = 4;
-    ElectricalInspectionReportDto electrical_inspection_report = 5;
-    MediaFileDto media_file = 6;
+    TilstandsReportDto tilstands_report = 4;
+    ElEftersynReportDto el_eftersyn_report = 5;
+    ImageFileDto image_file = 6;
+    ImageReferenceDto image_reference = 9;
+    // VideoFileDto
+    // VideoReferenceDto
   }
   FileDto file = 7;
   
