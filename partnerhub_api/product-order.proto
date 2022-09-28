@@ -691,6 +691,7 @@ message ActivityLogDto{
     StatusChangeDataDto status_change_data = 8;
     CreatedLogDto created_log_data = 9;
     CaseStateChangedDataDto case_state_changed_data = 14;
+    SmsLogDto sms_log = 15;
   }
 }
 
@@ -705,8 +706,18 @@ message StatusChangeDataDto{
   google.protobuf.StringValue to_custom_status = 4;
 }
 
-message CustomLogDataDto{
+message CustomLogDataDto {
   string message = 1;
+}
+
+message SmsLogDto {
+  string sms_body = 1;
+  SmsDirection direction = 2;
+}
+
+enum SmsDirection {
+  Incoming = 0;
+  Outgoing = 1;
 }
 
 message CaseStateChangedDataDto {
