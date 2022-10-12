@@ -10,6 +10,8 @@ service BillingMetricsApi {
     rpc SmsCommandSent (CreateSmsMetricRequest) returns (CreateMetricReply);
     rpc NemIdSent (CreateNemIdMetricRequest) returns (CreateMetricReply);
     rpc NemIdHandled (CreateNemIdMetricRequest) returns (CreateMetricReply);
+    rpc MitIdSent (CreateMitIdMetricRequest) returns (CreateMetricReply);
+    rpc MitIdHandled (CreateMitIdMetricRequest) returns (CreateMetricReply);
     rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);
     rpc ApiRequestCompleted (CreateApiMetricRequest) returns (CreateMetricReply);
     rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
@@ -48,6 +50,16 @@ message CreateNemIdMetricRequest {
     string transaction_id = 5;
     string provider = 6;
     string cpr_number = 7;
+}
+
+message CreateMitIdMetricRequest {
+	string tenant_id = 1;
+    string resource_group_id = 2;
+    string application_id = 3;
+    string executing_actor_id = 4;
+    string transaction_id = 5;
+    string provider = 6;
+    string user_name = 7;
 }
 
 message CreateApiMetricRequest {
