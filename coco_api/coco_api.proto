@@ -85,6 +85,7 @@ service CocoApi {
   rpc GetAgreement(GetSingleConfigRequest) returns (GetAgreementReply);
   rpc GetRegistrationFlow(GetSingleConfigRequest) returns (GetRegistrationFlowReply);
   rpc GetAllRegistrationFlows(GetAllConfigRequest) returns (GetAllRegistrationFlowsReply);
+  rpc GetAllThemeConfig(GetAllConfigRequest) returns (GetAllThemeConfigReply);
 }
 
 message RegistrationFlowDto {
@@ -254,6 +255,15 @@ message AccessConfigDto {
 message GetThemeConfigReply {
     string json = 1;
 }
+
+message GetAllThemeConfigReply {
+    repeated ThemeConfigDto configs = 1;
+}
+
+message ThemeConfigDto {
+    string json = 1;
+}
+
 
 message GetContentConfigReply{
     string json = 1;
