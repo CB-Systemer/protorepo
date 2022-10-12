@@ -86,6 +86,7 @@ service CocoApi {
   rpc GetRegistrationFlow(GetSingleConfigRequest) returns (GetRegistrationFlowReply);
   rpc GetAllRegistrationFlows(GetAllConfigRequest) returns (GetAllRegistrationFlowsReply);
   rpc GetAllThemeConfig(GetAllConfigRequest) returns (GetAllThemeConfigReply);
+  rpc GetAllReflowConfig(GetAllConfigRequest) returns (GetAllReflowConfigReply);
 }
 
 message RegistrationFlowDto {
@@ -210,6 +211,10 @@ message ReflowActionDto {
   string ui_params = 7;
   bool continue_on_error = 8;
   string messages = 9;
+}
+
+message GetAllReflowConfigReply {
+    repeated ReflowDto reflows = 1;
 }
 
 message GetImageTagRequest {
