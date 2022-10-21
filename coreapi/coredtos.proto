@@ -108,7 +108,9 @@ message DataStoreDto {
 	google.protobuf.StringValue createdById = 17;
 	google.protobuf.Timestamp createdAt = 18;
 	google.protobuf.StringValue lastUpdatedById = 19;
-	google.protobuf.Timestamp lastUpdatedAt = 20;	
+	google.protobuf.Timestamp lastUpdatedAt = 20;
+	google.protobuf.StringValue system_name = 21;
+
 }
 
 message IdDisplayNameDto {
