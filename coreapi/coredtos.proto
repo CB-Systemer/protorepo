@@ -89,16 +89,22 @@ message TenantDto {
 }
 
 message DataStoreDto {
-	string id = 1;
-	string displayName = 2;
-	string namespace = 3;
-	string databaseName = 4;
+	google.protobuf.StringValue id = 1;
+	google.protobuf.StringValue displayName = 2;
+	google.protobuf.StringValue namespace = 3;
+	google.protobuf.StringValue databaseName = 4;
 	google.protobuf.StringValue tenant_id = 5;
 	google.protobuf.StringValue tenant_display_name = 6;
-	string status = 7;
+	google.protobuf.StringValue status = 7;
 	bool permissionsEnabled = 8;
 	bool offline = 9;
 	int64 matrixRecordCount = 10;
+	google.protobuf.StringValue versioning_strategy = 11;
+    google.protobuf.Int32Value versioning_keep_alive_watermark = 12;
+    google.protobuf.StringValue backup_strategy = 13;
+    google.protobuf.Int32Value backup_retention = 14;
+    bool enable_deletion_policy = 15;
+    google.protobuf.Int32Value deletion_policy_retention = 16;
 }
 
 message IdDisplayNameDto {
