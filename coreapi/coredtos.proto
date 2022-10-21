@@ -105,6 +105,10 @@ message DataStoreDto {
     google.protobuf.Int32Value backup_retention = 14;
     bool enable_deletion_policy = 15;
     google.protobuf.Int32Value deletion_policy_retention = 16;
+	google.protobuf.StringValue createdById = 17;
+	google.protobuf.Timestamp createdAt = 18;
+	google.protobuf.StringValue lastUpdatedById = 19;
+	google.protobuf.Timestamp lastUpdatedAt = 20;	
 }
 
 message IdDisplayNameDto {
