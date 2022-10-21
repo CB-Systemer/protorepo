@@ -48,14 +48,15 @@ message CreateReply {
 }
 
 message UpdateSettingsRequest {
-   google.protobuf.StringValue versioning_strategy = 1;
-   google.protobuf.Int32Value versioning_keep_alive_watermark = 2;
-   google.protobuf.StringValue backup_strategy = 3;
-   google.protobuf.Int32Value backup_retention = 4;
-   bool enable_deletion_policy = 5;
-   google.protobuf.Int32Value deletion_policy_retention = 6;
-   bool offline = 7;
-   bool permissions_enabled = 8;
+   google.protobuf.StringValue datastore_id = 1;
+   google.protobuf.StringValue versioning_strategy = 2;
+   google.protobuf.Int32Value versioning_keep_alive_watermark = 3;
+   google.protobuf.StringValue backup_strategy = 4;
+   google.protobuf.Int32Value backup_retention = 5;
+   bool enable_deletion_policy = 6;
+   google.protobuf.Int32Value deletion_policy_retention = 7;
+   bool offline = 8;
+   bool permissions_enabled = 9;
 }
 
 message ChangeStatusRequest {
