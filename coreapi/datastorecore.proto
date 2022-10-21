@@ -10,6 +10,13 @@ service DataStoreCoreApi {
   rpc Search (SearchRequest) returns (SearchDataStoresReply);
   rpc ListDataStores (ListDataStoresRequest) returns (SearchDataStoresReply);
   rpc GetFilterSettings (GetFilterSettingsRequest) returns (GetFilterSettingsReply);
+
+  rpc Create (CreateRequest) returns (CreateReply);
+  rpc UpdateSettings (UpdateSettingsRequest) returns (UpdateDataStoreReply);
+  rpc ChangeStatus (ChangeStatusRequest) returns (UpdateDataStoreReply);
+  rpc UpdateOfflineFlag (UpdateOfflineFlagRequest) returns (UpdateDataStoreReply);
+  rpc UpdatePermissionsEnabledFlag (UpdatePermissionsEnabledFlagRequest) returns (UpdateDataStoreReply);
+  rpc Delete (DeleteRequest) returns (DeleteReply);
 }
 
 message SearchDataStoresReply {
@@ -23,6 +30,64 @@ message ListDataStoresRequest{
 	int32 skip = 2;
 	google.protobuf.StringValue tenant_id = 3;
 	google.protobuf.StringValue datastore_id = 4;
+}
+
+message CreateRequest {
+	google.protobuf.StringValue datastore_id = 1;
+	google.protobuf.StringValue display_name = 2;
+	google.protobuf.StringValue system_name = 3;
+	google.protobuf.StringValue tenant_id = 4;
+	bool permissions_enabled = 5;
+}
+
+message CreateReply {
+	google.protobuf.StringValue datastore_id = 1;
+	bool success = 2;
+	google.protobuf.Int32Value errorCode = 3;
+	google.protobuf.StringValue errorMessage = 4;
+}
+
+message UpdateSettingsRequest {
+   google.protobuf.StringValue versioning_strategy = 1;
+   google.protobuf.Int32Value versioning_keep_alive_watermark = 2;
+   google.protobuf.StringValue backup_strategy = 3;
+   google.protobuf.Int32Value backup_retention = 4;
+   bool enable_deletion_policy = 5;
+   google.protobuf.Int32Value deletion_policy_retention = 6;
+   bool offline = 7;
+   bool permissions_enabled = 8;
+}
+
+message ChangeStatusRequest {
+	google.protobuf.StringValue datastore_id = 1;
+	google.protobuf.StringValue status = 2;
+}
+
+message UpdateOfflineFlagRequest {
+	repeated google.protobuf.StringValue datastore_ids = 1;
+	bool offline = 2;
+}
+
+message UpdatePermissionsEnabledFlagRequest {
+	google.protobuf.StringValue datastore_id = 1;
+	bool permissions_enabled = 2;
+}
+
+message UpdateDataStoreReply {
+	bool success = 1;
+	google.protobuf.Int32Value errorCode = 2;
+	google.protobuf.StringValue errorMessage = 3;
+}
+
+message DeleteRequest {
+	google.protobuf.StringValue datastore_id = 1;
+	bool validate_resource_groups = 2;
+}
+
+message DeleteReply { 
+	bool success = 1;
+	google.protobuf.Int32Value errorCode = 2;
+	google.protobuf.StringValue errorMessage = 3;
 }
 
 
