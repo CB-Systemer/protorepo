@@ -11,6 +11,8 @@ service DataStoreCoreApi {
   rpc ListDataStores (ListDataStoresRequest) returns (SearchDataStoresReply);
   rpc GetFilterSettings (GetFilterSettingsRequest) returns (GetFilterSettingsReply);
 
+  rpc GetDataStore (GetDataStoreRequest) returns (GetDataStoreReply);
+
   rpc Create (CreateRequest) returns (CreateReply);
   rpc UpdateSettings (UpdateSettingsRequest) returns (UpdateDataStoreReply);
   rpc ChangeStatus (ChangeStatusRequest) returns (UpdateDataStoreReply);
@@ -30,6 +32,17 @@ message ListDataStoresRequest{
 	int32 skip = 2;
 	google.protobuf.StringValue tenant_id = 3;
 	google.protobuf.StringValue datastore_id = 4;
+}
+
+message GetDataStoreRequest {
+	google.protobuf.StringValue datastore_id = 1;
+}
+
+message GetDataStoreReply {
+	bool success = 1;
+	message DataStoreDto Dto = 2;
+	google.protobuf.Int32Value errorCode = 3;
+	google.protobuf.StringValue errorMessage = 4;
 }
 
 message CreateRequest {
