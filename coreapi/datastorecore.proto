@@ -40,7 +40,7 @@ message GetDataStoreRequest {
 
 message GetDataStoreReply {
 	bool success = 1;
-	message DataStoreDto Dto = 2;
+	DataStoreDto Dto = 2;
 	google.protobuf.Int32Value errorCode = 3;
 	google.protobuf.StringValue errorMessage = 4;
 }
