@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "RealEquity.Api";
+
+import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
+
+service RealEquity {
+    rpc InvokeService(InvokeServiceEnvelope) returns (InvokeServiceResponseEnvelope);
+}
+
+message InvokeServiceEnvelope {
+    string id = 1;
+    string method = 2;
+    google.protobuf.Any data = 3;
+    map<string,string> metadata = 4;
+}
+
+message InvokeServiceResponseEnvelope {
+    google.protobuf.Any data = 1;
+    map<string,string> metadata = 2;
+}
