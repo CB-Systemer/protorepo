@@ -106,7 +106,7 @@ message UpdateDataStoreReply {
 
 message DeleteRequest {
 	google.protobuf.StringValue datastore_id = 1;
-	bool validate_resource_groups = 2;
+	bool delete_resource_groups = 2;
 }
 
 message DeleteReply { 
