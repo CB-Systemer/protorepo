@@ -14,6 +14,7 @@ service DataStoreCoreApi {
   rpc GetDataStore (GetDataStoreRequest) returns (GetDataStoreReply);
 
   rpc Create (CreateRequest) returns (CreateReply);
+  rpc ProvisionAndMigrate (ProvisionAndMigrateRequest) returns (ProvisionAndMigrateReply);
   rpc UpdateSettings (UpdateSettingsRequest) returns (UpdateDataStoreReply);
   rpc ChangeStatus (ChangeStatusRequest) returns (UpdateDataStoreReply);
   rpc UpdateOfflineFlag (UpdateOfflineFlagRequest) returns (UpdateDataStoreReply);
@@ -58,6 +59,16 @@ message CreateReply {
 	bool success = 2;
 	google.protobuf.Int32Value errorCode = 3;
 	google.protobuf.StringValue errorMessage = 4;
+}
+
+message ProvisionAndMigrateRequest {
+	google.protobuf.StringValue datastore_id = 1;
+}
+
+message ProvisionAndMigrateReply {
+	bool success = 1;
+	google.protobuf.Int32Value errorCode = 2;
+	google.protobuf.StringValue errorMessage = 3;
 }
 
 message UpdateSettingsRequest {
