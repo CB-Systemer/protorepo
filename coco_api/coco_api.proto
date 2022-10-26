@@ -892,6 +892,7 @@ message DatanodeCocoDto {
     UploadFileCocoDto upload_file = 26;
     repeated string feature_namespaces = 27;
     bool include_sharing_details_in_search_index = 28;
+    bool allow_manual_sharing = 29;
 }
 
 message UploadFileCocoDto {
