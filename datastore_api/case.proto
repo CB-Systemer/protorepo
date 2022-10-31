@@ -307,13 +307,13 @@ message CasePublicProfile {
 
 message MediaItem{
 	string displayName = 1;
-	string description = 2;
+	google.protobuf.StringValue description = 2;
 	int32 priority = 3;
-	string lg_url = 4;
-	string md_url = 5;
-	string xl_url = 6;
-	string sm_url = 7;
-	string xs_url = 8;
+	google.protobuf.StringValue lg_url = 4;
+	google.protobuf.StringValue md_url = 5;
+	google.protobuf.StringValue xl_url = 6;
+	google.protobuf.StringValue sm_url = 7;
+	google.protobuf.StringValue xs_url = 8;
 	string namespace = 9;
 }
 
