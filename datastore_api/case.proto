@@ -302,6 +302,19 @@ message CasePublicProfile {
 	AdvertisementMunicipality advertisementMunicipality = 84;
 	repeated Appointment appointments = 85;
 	google.protobuf.StringValue primaryPropositionEconomyNamespace = 86;
+	repeated MediaItem mediaItems = 87;
+}
+
+message MediaItem{
+	string displayName = 1;
+	string description = 2;
+	int32 priority = 3;
+	string lg_url = 4;
+	string md_url = 5;
+	string xl_url = 6;
+	string sm_url = 7;
+	string xs_url = 8;
+	string namespace = 9;
 }
 
 message ExternalReference{
