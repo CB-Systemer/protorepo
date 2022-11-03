@@ -1195,6 +1195,7 @@ message GroupCocoDto {
     string description = 2;
     repeated GroupItemCocoDto items = 3;
     string group_namespace = 4;
+    google.protobuf.Int32Value priority = 5;
 }
 
 message GroupItemCocoDto {
