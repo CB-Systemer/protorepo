@@ -49,7 +49,7 @@ message GetActorsFromRoleByRootRequest{
  int32 skip = 2;
  repeated string actorPermissions = 3;
  string rootId = 4;
- repeated string roleNamespaces = 6;
+ repeated string roleNamespaces = 5;
 }
 
 message FindActorsReply {
