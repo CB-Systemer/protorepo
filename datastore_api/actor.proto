@@ -13,6 +13,7 @@ service ActorApi {
   rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
   rpc GetActors (GetActorsRequest) returns (GetActorsReply);
   rpc FindActors (FindActorsRequest) returns (FindActorsReply);
+  rpc GetActorsFromRoleByRoot (GetActorsFromRoleByRootRequest) returns (GetActorsReply);
   rpc FindRelatedActors (FindRelatedActorsRequest) returns (FindActorsReply);
 }
 
@@ -41,6 +42,14 @@ message FindActorsRequest{
  int32 top = 3;
  int32 skip = 4;
  repeated string actorPermissions = 5;
+}
+
+message GetActorsFromRoleByRootRequest{
+ int32 top = 1;
+ int32 skip = 2;
+ repeated string actorPermissions = 3;
+ string rootId = 4;
+ repeated string roleNamespaces = 6;
 }
 
 message FindActorsReply {
