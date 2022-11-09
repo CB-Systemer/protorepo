@@ -54,6 +54,9 @@ message ActorRole {
 	string parentNamespace = 22;
 	string displayName = 23;
 	string typeDisplayName = 24;
+    string phone = 25;
+    string email = 26;
+    string address = 27;
 }
 
 message NullableInt {
