@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 option csharp_namespace = "Recom.Api";
+import "google/protobuf/wrappers.proto";
 
 service RecomApi {
   rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
@@ -55,6 +56,7 @@ message SendSmsMessageRequest {
   repeated Tag tags = 11;
   string callbackQueueName = 12;
   string recipientActorId = 13;
+  google.protobuf.StringValue smsGateway = 14;
 }
 
 message SendSmsMessageReply {
