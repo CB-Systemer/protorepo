@@ -929,6 +929,7 @@ message ActorRoleConfigDto {
     bool is_non_participant_role = 9;
     google.protobuf.StringValue endUserRemovedStateNamespace = 10;
     google.protobuf.StringValue endUserRemovedStateReasonNamespace = 11;
+	bool is_primary_role_type = 12;
 }
 
 message AppointmentConfigDto{
