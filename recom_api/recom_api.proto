@@ -14,7 +14,7 @@ service RecomApi {
 }
 
 message GetPhoneNumberPoolRequest {
-
+  google.protobuf.StringValue smsGateway = 1;
 }
 
 message GetPhoneNumberPoolReply {
