@@ -5,6 +5,7 @@ option csharp_namespace = "Coco.Api";
 import "google/protobuf/wrappers.proto";
 
 service CocoApi {
+  rpc GetExecutions (GetExecutionsRequest) returns (GetExecutionsReply);
   rpc GetPolicy (GetAllConfigRequest) returns (GetPolicyReply);
   rpc GetDataNode (GetSingleDatanodeRequest) returns (GetDataNodeReply);
   rpc GetStateflow (GetSingleConfigRequest) returns (GetStateflowReply);
@@ -322,6 +323,13 @@ message GetAllConfigRequest {
     string consumer_id = 1;
 }
 
+message GetExecutionsRequest {
+
+}
+
+message GetExecutionsReply {
+  repeated string destroyable = 1;
+}
 
 message GetSingleConfigRequest {
     string consumer_id = 1;
