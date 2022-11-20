@@ -707,6 +707,7 @@ message ActivityLogDto{
     CreatedLogDto created_log_data = 9;
     CaseStateChangedDataDto case_state_changed_data = 14;
     SmsLogDto sms_log = 15;
+    ManualConsentLogDto manual_consent_log = 16;
   }
 }
 
@@ -733,6 +734,10 @@ message SmsLogDto {
 enum SmsDirection {
   Incoming = 0;
   Outgoing = 1;
+}
+
+message ManualConsentLogDto {
+  string description = 1;
 }
 
 message CaseStateChangedDataDto {
