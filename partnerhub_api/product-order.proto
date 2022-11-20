@@ -678,13 +678,6 @@ message GetAvailableStatusesReply{
   repeated ProductStatusDto statuses = 1;
 }
 
-message RegisterConsentRequest {
-    string product_order_id = 1;
-    string description = 2;
-}
-
-message RegisterConsentReply {
-}
 
 message GetProductOrderActivityLog{
   string product_order_id = 1;
@@ -770,4 +763,17 @@ enum ExecutingRole {
 message CountDto{
   int32 total_count = 1;
   int32 active_count = 2;
+}
+
+message RegisterConsentRequest {
+  string product_order_id = 1;
+  string description = 2;
+
+  string executing_actor_id = 3;
+  repeated string executing_actor_permissions = 4;
+
+  repeated string resource_group_scopes = 5;
+}
+
+message RegisterConsentReply {
 }
