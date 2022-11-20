@@ -70,6 +70,8 @@ service ProductOrderService {
 
   rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
+
+  rpc RegisterConsent (RegisterConsentRequest) returns (RegisterConsentReply);
 }
 
 message ReferralDto{
@@ -674,6 +676,14 @@ message GetAvailableStatusesRequest{
 
 message GetAvailableStatusesReply{
   repeated ProductStatusDto statuses = 1;
+}
+
+message RegisterConsentRequest {
+    string product_order_id = 1;
+    string description = 2;
+}
+
+message RegisterConsentReply {
 }
 
 message GetProductOrderActivityLog{
