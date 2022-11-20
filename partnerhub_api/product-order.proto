@@ -773,6 +773,7 @@ message RegisterConsentRequest {
   repeated string executing_actor_permissions = 4;
 
   repeated string resource_group_scopes = 5;
+  string resource_group_id = 6;
 }
 
 message RegisterConsentReply {
