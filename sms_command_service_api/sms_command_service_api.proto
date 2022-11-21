@@ -6,6 +6,7 @@ option csharp_namespace = "SmsCommandService.Api";
 service  SmsCommandServiceApi {
   rpc CreateSession (CreateSessionRequest) returns (CreateSessionReply);
   rpc SendCommand (SendCommandRequest) returns (SendCommandReply);
+  rpc RegisterManualReply (RegisterManualReplyRequest) returns (RegisterManualReplyResponse);
 }
 
 message CreateSessionRequest {
@@ -34,6 +35,17 @@ message SendCommandRequest {
 }
 
 message SendCommandReply {
+    bool success = 1;
+    string message = 2;
+}
+
+message RegisterManualReplyRequest {
+    string external_reference_id = 1;
+    string command_namespace = 2;
+    string text = 3;
+}
+
+message RegisterManualReplyResponse {
     bool success = 1;
     string message = 2;
 }
