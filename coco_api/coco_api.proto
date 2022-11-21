@@ -1248,6 +1248,7 @@ message SmsCommandConfigDto {
     string description = 9;
     string display_name = 10;
     string icon_name = 11;
+    string sms_log_destination_address = 12; 
 }
 
 message GetAllSmsCommandReply{
