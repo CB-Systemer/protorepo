@@ -914,6 +914,7 @@ message AllowedSharingLevelsDto {
     bool anyUser = 2;
     bool chain = 3;
     bool chainMember = 4;
+    bool inheritance = 5;
 }
 
 message ActorConfigDto {
