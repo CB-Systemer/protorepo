@@ -420,11 +420,11 @@ message DistributionChannelDto {
     bool used_for_public_advertisement = 8;
     bool allow_delay_override = 9;
     bool include_in_public_profile = 10;
-    bool include_in_match_engine = 11;
-    bool manually_controlled = 12;
+    bool include_in_match_engine = 11;    
     string description = 13;
     int32 days_delayed = 14;
     repeated DistributionChannelCaseTypeDto included_case_types = 15;
+    reserved 12;
 }
 
 message DistributionChannelCaseTypeDto {
