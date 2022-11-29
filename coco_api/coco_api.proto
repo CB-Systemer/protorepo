@@ -903,12 +903,12 @@ message DatanodeCocoDto {
     bool allow_manual_sharing = 29;
     DisplayNameSettingsDto display_name_settings = 30;
 }
-    
+
 message DisplayNameSettingsDto {
     string display_name_mode = 1;
-    string fallback_display_name = 2;
-    string generated_display_name = 3;
-    string combined_display_name = 4;
+    google.protobuf.StringValue fallback_display_name = 2;
+    google.protobuf.StringValue generated_display_name = 3;
+    google.protobuf.StringValue combined_display_name = 4;
 }
 
 message UploadFileCocoDto {
