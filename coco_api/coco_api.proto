@@ -101,6 +101,7 @@ message TaxonomyCocoDto {
     string label = 3;
     google.protobuf.StringValue description = 4;
     repeated TaxonCocoDto taxons = 5;
+    string taxonomy_namespace = 6;
 }
 
 message TaxonCocoDto {
