@@ -88,6 +88,26 @@ service CocoApi {
   rpc GetAllRegistrationFlows(GetAllConfigRequest) returns (GetAllRegistrationFlowsReply);
   rpc GetAllThemeConfig(GetAllConfigRequest) returns (GetAllThemeConfigReply);
   rpc GetAllReflowConfig(GetAllConfigRequest) returns (GetAllReflowConfigReply);
+  rpc GetAllTaxonomies(GetAllConfigRequest) returns (GetAllTaxonomiesReply);
+}
+
+message GetAllTaxonomiesReply {
+    repeated TaxonomyCocoDto list = 1;
+}
+
+message TaxonomyCocoDto {
+    int32 priority = 1;
+    string selection_type = 2;
+    string label = 3;
+    google.protobuf.StringValue description = 4;
+    repeated TaxonCocoDto taxons = 5;
+}
+
+message TaxonCocoDto {
+    string namespace = 1;
+    int32 priority = 2;
+    string taxon_type = 3;
+    string label = 4;
 }
 
 message RegistrationFlowDto {
