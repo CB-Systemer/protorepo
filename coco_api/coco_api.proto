@@ -902,6 +902,20 @@ message DatanodeCocoDto {
     bool include_sharing_details_in_search_index = 28;
     bool allow_manual_sharing = 29;
     DisplayNameSettingsDto display_name_settings = 30;
+    repeated DataNodeTaxonCocoDto taxonomies = 31;
+    repeated string required_taxonomies = 32;
+}
+    
+message DataNodeTaxonCocoDto {
+    string taxonomy_namespace = 1;
+    bool is_default = 2;
+    DataNodeTaxonLevelHandlingCocoDto level_handling = 3;
+}
+
+enum DataNodeTaxonLevelHandlingCocoDto {
+    Self = 0;
+    SubLevel = 1;
+    Both = 2;
 }
 
 message DisplayNameSettingsDto {
