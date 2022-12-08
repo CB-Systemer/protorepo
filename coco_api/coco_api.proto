@@ -958,6 +958,7 @@ message AllowedSharingLevelsDto {
     bool chain = 3;
     bool chainMember = 4;
     bool inheritance = 5;
+    repeated string allowed_roles = 6;
 }
 
 message ActorConfigDto {
