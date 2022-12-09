@@ -89,6 +89,17 @@ service CocoApi {
   rpc GetAllThemeConfig(GetAllConfigRequest) returns (GetAllThemeConfigReply);
   rpc GetAllReflowConfig(GetAllConfigRequest) returns (GetAllReflowConfigReply);
   rpc GetAllTaxonomies(GetAllConfigRequest) returns (GetAllTaxonomiesReply);
+  rpc ResolveTaxonomies(ResolveTaxonomiesRequest) returns (ResolveTaxonomiesReply);
+}
+
+message ResolveTaxonomiesRequest {
+    string consumer_id = 1;
+    repeated string ordered_parent_namespaces = 2;
+    string create_namespace = 3;
+}
+
+message ResolveTaxonomiesReply {
+   repeated TaxonomyCocoDto taxonomies = 1;
 }
 
 message GetAllTaxonomiesReply {
@@ -109,6 +120,9 @@ message TaxonCocoDto {
     int32 priority = 2;
     string taxon_type = 3;
     string label = 4;
+    bool default_value = 5;
+    bool hidden = 6;
+    bool readonly = 7;
 }
 
 message RegistrationFlowDto {
@@ -923,14 +937,34 @@ message DatanodeCocoDto {
     bool include_sharing_details_in_search_index = 28;
     bool allow_manual_sharing = 29;
     DisplayNameSettingsDto display_name_settings = 30;
-    repeated DataNodeTaxonCocoDto taxonomies = 31;
-    repeated string required_taxonomies = 32;
+    DataNodeTaxonomySettingsCocoDto taxonomy_settings = 31;
 }
-    
-message DataNodeTaxonCocoDto {
+   
+enum DataNodeTaxonomyInheritanceModeCocoDto {
+    Intersect = 0;
+    Reset = 1;
+    Passthrough = 2;
+}
+
+message DataNodeTaxonomySettingsCocoDto {
+    DataNodeTaxonomyInheritanceModeCocoDto inheritance_mode = 1;
+    repeated DataNodeTaxonomyCocoDto taxonomies = 2;
+}
+
+enum DataNodeTaxonomyRequiredCocoDto {
+    Required = 0;
+    Optional = 1;
+}
+
+message DataNodeTaxonomyCocoDto {
     string taxonomy_namespace = 1;
-    bool is_default = 2;
+    DataNodeTaxonomyRequiredCocoDto required = 2;
     DataNodeTaxonLevelHandlingCocoDto level_handling = 3;
+    repeated DataNodeTaxonCocoDto allowed_taxons = 4;
+}
+message DataNodeTaxonCocoDto {
+    string taxon_namespace = 1;
+    string default_value = 2;
 }
 
 enum DataNodeTaxonLevelHandlingCocoDto {
