@@ -120,7 +120,7 @@ message TaxonCocoDto {
     int32 priority = 2;
     string taxon_type = 3;
     string label = 4;
-    bool default_value = 5;
+    string default_value = 5;
     bool hidden = 6;
     bool readonly = 7;
 }
