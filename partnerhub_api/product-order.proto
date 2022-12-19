@@ -114,6 +114,7 @@ message ProductOrderDto{
 
   OrderPartyDto receiver_resource_group = 9;
   OrderPartyDto receiver_order_party = 33;
+  OrderActorDto receiver_assigned_to = 48;
 
   OrderPartyDto sender_order_resourceGroup = 34;
   OrderPartyDto sender_order_party = 35;
@@ -161,7 +162,6 @@ message ProductOrderDtoDetails{
   google.protobuf.StringValue case_reference_payload = 3;
 
   OrderActorDto sent_by = 2;
-  OrderActorDto assigned_to = 4;
   OrderActorDto updated_by = 8;
   OrderActorDto created_by = 13;
 
