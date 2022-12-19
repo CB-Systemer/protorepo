@@ -4,16 +4,31 @@ syntax = "proto3";
 option csharp_namespace = "External.Integration.Api";
 
 service ExternalIntegrationApi {
-    rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
+  rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
+  rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
 }
 
 message GetBBRDataRequest {
-    string kvhx = 1;
+  string kvhx = 1;
 }
 
 message GetBBRDataReply {
-    string useCode = 1;
-    string use = 2;
-    int32 area = 3;
-    int32 landArea = 4;
+  string useCode = 1;
+  string use = 2;
+  int32 area = 3;
+  int32 landArea = 4;
+}
+
+message ValidateCaseForBoligsidenRequest {
+  string caseId = 1;
+}
+
+message ValidateCaseForBoligsidenReply{
+  bool valid = 1;
+  repeated ValidationErrorDto errors = 2;
+}
+
+message ValidationErrorDto{
+    string error_message = 1;
+    string error_code = 2;
 }
