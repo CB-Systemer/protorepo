@@ -120,7 +120,7 @@ message TaxonCocoDto {
     int32 priority = 2;
     string taxon_type = 3;
     string label = 4;
-    string default_value = 5;
+    google.protobuf.BoolValue default_value = 5;
     bool hidden = 6;
     bool readonly = 7;
 }
@@ -964,7 +964,7 @@ message DataNodeTaxonomyCocoDto {
 }
 message DataNodeTaxonCocoDto {
     string taxon_namespace = 1;
-    string default_value = 2;
+    google.protobuf.BoolValue default_value = 2;
 }
 
 enum DataNodeTaxonLevelHandlingCocoDto {
