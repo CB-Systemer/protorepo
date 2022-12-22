@@ -113,6 +113,7 @@ message TaxonomyCocoDto {
     google.protobuf.StringValue description = 4;
     repeated TaxonCocoDto taxons = 5;
     string taxonomy_namespace = 6;
+    google.protobuf.BoolValue is_required = 7;
 }
 
 message TaxonCocoDto {
