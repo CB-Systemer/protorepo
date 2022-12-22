@@ -458,8 +458,13 @@ message DistributionChannelDto {
     bool include_in_public_profile = 10;
     bool include_in_match_engine = 11;    
     string description = 13;
-    int32 days_delayed = 14;
+    int32 days_delayed = 14;    
     repeated DistributionChannelCaseTypeDto included_case_types = 15;
+    
+    bool external_config_enabled = 16;
+    google.protobuf.StringValue external_config_username = 17;
+    google.protobuf.StringValue external_config_password = 18;
+    
     reserved 12;
 }
 
