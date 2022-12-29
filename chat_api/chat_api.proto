@@ -5,6 +5,7 @@ option csharp_namespace = "Chat.Api";
 
 import "google/protobuf/timestamp.proto";
 
+
 service ChatApi {
   rpc CreateChat (CreateChatRequest) returns (CreateChatReply);
   rpc ElevateRole (ElevateRoleRequest) returns (ElevateRoleReply);
