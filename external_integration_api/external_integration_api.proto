@@ -6,6 +6,7 @@ option csharp_namespace = "External.Integration.Api";
 service ExternalIntegrationApi {
   rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
   rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
+  rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
 }
 
 message GetBBRDataRequest {
