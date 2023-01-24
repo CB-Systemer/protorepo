@@ -7,6 +7,8 @@ service ExternalIntegrationApi {
   rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
   rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
   rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
+  rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
+  rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
 }
 
 message GetBBRDataRequest {
@@ -32,4 +34,32 @@ message ValidateCaseForBoligsidenReply{
 message ValidationErrorDto{
     string error_message = 1;
     string error_code = 2;
+}
+
+message SearchAddressRequest {
+  string lookup_service = 1;
+  string country_code = 2;
+  string query = 3;
+  int32 max_results = 4;
+}
+
+message SearchAddressReply {
+  repeated SearchAddressDto addresses = 1;
+}
+
+message SearchAddressDto {
+  string id = 1;
+  string display_name = 2;
+  string country_code = 3;
+}
+
+message GetAddressDetailsRequest {
+  string lookup_service = 1;
+  string id = 2;
+}
+
+message GetAddressDetailsReply {
+  string id = 1;
+  string street_name = 2;
+  string street_number = 3;  
 }
