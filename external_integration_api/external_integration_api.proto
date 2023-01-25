@@ -55,7 +55,8 @@ message SearchAddressDto {
 
 message GetAddressDetailsRequest {
   string lookup_service = 1;
-  string id = 2;
+  string country_code = 2;
+  string id = 3;
 }
 
 message GetAddressDetailsReply {
