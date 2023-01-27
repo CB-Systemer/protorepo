@@ -73,4 +73,5 @@ message GetAddressDetailsReply {
   string municipality_name = 11;
   double latitude = 12;
   double longitude = 13;
+  string display_name = 14;
 }
