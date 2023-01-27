@@ -13,6 +13,7 @@ service BillingMetricsApi {
     rpc MitIdSent (CreateMitIdMetricRequest) returns (CreateMetricReply);
     rpc MitIdHandled (CreateMitIdMetricRequest) returns (CreateMetricReply);
     rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);
+    rpc EmailHandled (CreateEmailMetricRequest) returns (CreateMetricReply);
     rpc AdLoginHandled (CreateAdLoginMetricRequest) returns (CreateMetricReply);
     rpc ApiRequestCompleted (CreateApiMetricRequest) returns (CreateMetricReply);
     rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
