@@ -74,4 +74,11 @@ message GetAddressDetailsReply {
   double latitude = 12;
   double longitude = 13;
   string display_name = 14;
+  bool is_validated = 15;
+  repeated AddressIdentifier identifiers = 16;
+}
+
+message AddressIdentifier {
+    string namespace = 1;
+    string value = 2;
 }
