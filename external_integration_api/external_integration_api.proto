@@ -80,6 +80,8 @@ message GetAddressDetailsReply {
   string property_number = 18;
   string supplementary_city_name_code = 19;
   string supplementary_city_name = 20;
+  string district_code = 21;
+  string district_name = 22;
 }
 
 message AddressIdentifier {
