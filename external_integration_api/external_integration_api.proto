@@ -82,6 +82,7 @@ message GetAddressDetailsReply {
   string supplementary_city_name = 20;
   string district_code = 21;
   string district_name = 22;
+  string matrikel_number = 23;
 }
 
 message AddressIdentifier {
