@@ -76,6 +76,10 @@ message GetAddressDetailsReply {
   string display_name = 14;
   bool is_validated = 15;
   repeated AddressIdentifier identifiers = 16;
+  string kvhx = 17;
+  string property_number = 18;
+  string supplementary_city_name_code = 19;
+  string supplementary_city_name = 20;
 }
 
 message AddressIdentifier {
