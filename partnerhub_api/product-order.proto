@@ -425,6 +425,7 @@ message PagingFilterDto{
   repeated string category_filters = 4;
   google.protobuf.Timestamp updated_since = 5;
   google.protobuf.StringValue query = 6;
+  repeated string assigned_to_actor_ids = 7;
 }
 
 message GetReferralsByReferredActorRequest{
@@ -443,6 +444,7 @@ message GetProductOrdersByRecipientRequest{
 
 message GetProductOrdersByResourceGroupRequest{
   string resource_group_id = 1;
+
 
   repeated string resource_group_scopes = 2;
 
