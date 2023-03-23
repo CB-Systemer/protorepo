@@ -9,6 +9,8 @@ service ExternalIntegrationApi {
   rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
+
+  rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
 }
 
 message GetBBRDataRequest {
@@ -89,3 +91,23 @@ message AddressIdentifier {
     string namespace = 1;
     string value = 2;
 }
+
+message SearchLocationRequest {
+  string country_code = 1;
+  string query = 2;
+  int32 max_results = 3;
+}
+
+message SearchLocationReply {
+  bool success = 1;
+  string message = 2;
+  repeated SearchLocationDto results = 3;
+}
+
+message SearchLocationDto {
+  string id = 1;
+  string display_name = 2;
+  string country_code = 3;
+}
+
+
