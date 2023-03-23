@@ -11,6 +11,8 @@ service ExternalIntegrationApi {
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
 
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
+
+  rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
 }
 
 message GetBBRDataRequest {
@@ -111,4 +113,16 @@ message SearchLocationDto {
   string country_code = 3;
 }
 
+message ResolvePolygonRequest {
+  string consumer_id = 1;
+  string country_code = 2;
+  string namespace = 3;
+  string id = 4;
+}
 
+message ResolvePolygonReply {
+  string country_code = 1;
+  string namespace = 2;
+  string id = 3;
+  string geometry_json = 4;
+}
