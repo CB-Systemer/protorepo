@@ -121,6 +121,19 @@ message ResolvePolygonRequest {
 }
 
 message ResolvePolygonReply {
+  bool success = 1;
+  oneof kind {
+    LocationPolygonDto polygon = 2;
+    ErrorMessageDto error_message = 3;
+  }
+}
+
+message ErrorMessageDto {
+  bool fatal = 1;
+  string reason = 2;
+}
+
+message LocationPolygonDto {
   string country_code = 1;
   string namespace = 2;
   string id = 3;
