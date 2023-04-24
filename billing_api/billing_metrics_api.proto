@@ -79,6 +79,7 @@ message CreateApiMetricRequest {
     string executing_actor_id = 3;
     string method = 4;
     string path = 5;
+    string host = 6;
 }
 
 message CreateLoginMetricRequest {
