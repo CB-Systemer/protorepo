@@ -303,8 +303,14 @@ message CasePublicProfile {
 	repeated Appointment appointments = 85;
 	google.protobuf.StringValue primaryPropositionEconomyNamespace = 86;
 	repeated MediaItem mediaItems = 87;
+	repeated TaxonPublicProfile taxons = 88;
 }
 
+message TaxonPublicProfile{
+	bool value = 1;
+	google.protobuf.StringValue taxon_namespace = 2;
+	google.protobuf.StringValue taxonomy_namespace = 3;
+}
 message MediaItem{
 	string displayName = 1;
 	google.protobuf.StringValue description = 2;
@@ -432,6 +438,7 @@ message Estate{
 	repeated Registration registrations = 11;
 	repeated EntityFeatureRegistration entityFeatureRegistrations = 12;
 	string id = 13;
+	repeated TaxonPublicProfile taxons = 14;
 }
 
 message EntityFeatureRegistration {
