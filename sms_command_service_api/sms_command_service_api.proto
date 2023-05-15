@@ -19,6 +19,8 @@ message CreateSessionRequest {
    string receiver_resource_group_id = 7;
    string template_params = 8;
    string actorDisplayName = 9;
+   string senderDisplayName = 10;
+   string receiverDisplayName = 11;
 }
 
 message CreateSessionReply {
