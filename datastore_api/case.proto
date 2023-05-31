@@ -304,6 +304,18 @@ message CasePublicProfile {
 	google.protobuf.StringValue primaryPropositionEconomyNamespace = 86;
 	repeated MediaItem mediaItems = 87;
 	repeated TaxonPublicProfile taxons = 88;
+    repeated PublicDocument public_documents = 89;
+}
+
+message PublicDocument {
+    string id = 1;
+	string namespace = 2;
+    string parent_id = 3;
+    string parent_namespace = 4;
+    string display_name = 5;
+	string url = 6;
+ 	google.protobuf.Timestamp last_updated_at = 7;
+	google.protobuf.Timestamp created_at = 8;
 }
 
 message TaxonPublicProfile{
