@@ -246,6 +246,7 @@ message ReferralList{
 
 message OrderList{
   repeated OrderDto orders = 1;
+  google.protobuf.Int32Value total_count = 2;
 }
 
 message CreateReferralRequest{
