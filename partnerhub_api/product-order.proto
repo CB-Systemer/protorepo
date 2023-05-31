@@ -241,6 +241,7 @@ message AddressDto{
 
 message ReferralList{
   repeated ReferralDto referrals = 1;
+  google.protobuf.Int32Value total_count = 2;
 }
 
 message OrderList{
