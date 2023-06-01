@@ -9,6 +9,7 @@ service MatrixApi {
 	rpc UpsertMatrix (UpsertMatrixRequest) returns (UpsertMatrixReply);
 	rpc UpsertMatrixBatch (UpsertMatrixBatchRequest) returns (UpsertMatrixBatchReply);
 	rpc RemoveMatrix (RemoveMatrixRequest) returns (RemoveMatrixReply);
+	rpc RemoveMatrixBulk (RemoveMatrixBulkRequest) returns (RemoveMatrixBulkReply);
 	rpc RemoveMatricesByDatastore (RemoveMatricesByDatastoreRequest) returns (RemoveMatricesByDatastoreReply);
 }
 
@@ -42,6 +43,14 @@ message RemoveMatrixRequest {
 }
 
 message RemoveMatrixReply {
+	bool success = 1;
+}
+
+message RemoveMatrixBulkRequest {
+	repeated string dataNodeIds = 1;
+}
+
+message RemoveMatrixBulkReply {
 	bool success = 1;
 }
 
