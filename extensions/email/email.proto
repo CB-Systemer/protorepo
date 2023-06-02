@@ -244,6 +244,7 @@ message EmailAccount{
 	repeated EmailFolder EmailFolders = 3;
 	string email = 4;
 	bool verified = 5;
+	google.protobuf.Timestamp secret_end_date = 10;
 	bool connectionError = 6;
 	CalendarDto Calendar = 7;
 	google.protobuf.StringValue tenantDisplayName = 8;
