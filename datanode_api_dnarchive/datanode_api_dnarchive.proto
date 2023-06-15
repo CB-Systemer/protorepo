@@ -17,6 +17,7 @@ message ArchiveEmailRequest{
  string sender_email = 7;
  string subject = 8;
  string resource_group_id = 9;
+ string template_display_name = 10;
 }
 
 message ArchiveEmailReply {
@@ -30,6 +31,7 @@ message ArchiveSmsRequest {
  repeated string recipient_numbers = 5;
  string tenant_id = 6;
  string resource_group_id = 7;
+ string template_display_name = 8;
 }
 
 message ArchiveSmsReply {

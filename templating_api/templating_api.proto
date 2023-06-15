@@ -153,6 +153,7 @@ message BuildTemplateReply {
 	string templateOutput = 1;
   string errorMessage = 2;
   int32 errorCode = 3;
+  google.protobuf.StringValue typeDisplayName = 4;
 }
 
 message MultiBuildTemplateRequest {
@@ -176,6 +177,7 @@ message TemplateOutputDto {
   string errorMessage = 2;
   int32 errorCode = 3;
   string format = 4;
+  google.protobuf.StringValue typeDisplayName = 5;
 }
 
 message InitializeRequest {
