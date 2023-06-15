@@ -40,6 +40,7 @@ message GetProductsRequest {
     string product_type = 2;
     string product_channel = 3;
     google.protobuf.StringValue product_category = 4;
+	bool include_global_installed = 5;
 }
 
 message GetProductsReply {
