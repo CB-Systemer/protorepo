@@ -40,6 +40,7 @@ message ApiMetricCountGroupedByPartnerDto {
     google.protobuf.StringValue resource_group_id = 2;
     google.protobuf.StringValue partner_id = 3;
     google.protobuf.Int64Value total_count = 4;
+    google.protobuf.StringValue host = 5;
 }
 
 message GetApiMetricCountsResponse {

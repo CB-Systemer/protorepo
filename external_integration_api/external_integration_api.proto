@@ -4,16 +4,138 @@ syntax = "proto3";
 option csharp_namespace = "External.Integration.Api";
 
 service ExternalIntegrationApi {
-    rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
+  rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
+  rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
+  rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
+  rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
+  rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
+
+  rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
+
+  rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
 }
 
 message GetBBRDataRequest {
-    string kvhx = 1;
+  string kvhx = 1;
 }
 
 message GetBBRDataReply {
-    string useCode = 1;
-    string use = 2;
-    int32 area = 3;
-    int32 landArea = 4;
+  string useCode = 1;
+  string use = 2;
+  int32 area = 3;
+  int32 landArea = 4;
+}
+
+message ValidateCaseForBoligsidenRequest {
+  string caseId = 1;
+}
+
+message ValidateCaseForBoligsidenReply{
+  bool valid = 1;
+  repeated ValidationErrorDto errors = 2;
+}
+
+message ValidationErrorDto{
+    string error_message = 1;
+    string error_code = 2;
+}
+
+message SearchAddressRequest {
+  string lookup_service = 1;
+  string country_code = 2;
+  string query = 3;
+  int32 max_results = 4;
+}
+
+message SearchAddressReply {
+  repeated SearchAddressDto addresses = 1;
+}
+
+message SearchAddressDto {
+  string id = 1;
+  string display_name = 2;
+  string country_code = 3;
+}
+
+message GetAddressDetailsRequest {
+  string lookup_service = 1;
+  string country_code = 2;
+  string id = 3;
+}
+
+message GetAddressDetailsReply {
+  string id = 1;
+  string country_code = 2;
+  string street_name = 3;
+  string street_number = 4;
+  string street_code = 5;
+  string floor = 6;
+  string door = 7;
+  string zip_code = 8;
+  string city = 9;
+  string municipality_code = 10;
+  string municipality_name = 11;
+  double latitude = 12;
+  double longitude = 13;
+  string display_name = 14;
+  bool is_validated = 15;
+  repeated AddressIdentifier identifiers = 16;
+  string kvhx = 17;
+  string property_number = 18;
+  string supplementary_city_name_code = 19;
+  string supplementary_city_name = 20;
+  string district_code = 21;
+  string district_name = 22;
+  string matrikel_number = 23;
+}
+
+message AddressIdentifier {
+    string namespace = 1;
+    string value = 2;
+}
+
+message SearchLocationRequest {
+  string consumer_id = 1;
+  string country_code = 2;
+  string query = 3;
+  int32 max_results = 4;
+}
+
+message SearchLocationReply {
+  bool success = 1;
+  string message = 2;
+  repeated SearchLocationDto results = 3;
+}
+
+message SearchLocationDto {
+  string id = 1;
+  string display_name = 2;
+  string country_code = 3;
+}
+
+message ResolvePolygonRequest {
+  string consumer_id = 1;
+  string country_code = 2;
+  string namespace = 3;
+  string id = 4;
+}
+
+message ResolvePolygonReply {
+  bool success = 1;
+  oneof kind {
+    LocationPolygonDto polygon = 2;
+    ErrorMessageDto error_message = 3;
+  }
+}
+
+message ErrorMessageDto {
+  bool fatal = 1;
+  string reason = 2;
+}
+
+message LocationPolygonDto {
+  string country_code = 1;
+  string namespace = 2;
+  string id = 3;
+  string geometry_json = 4;
 }

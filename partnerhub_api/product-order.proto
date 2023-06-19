@@ -241,10 +241,12 @@ message AddressDto{
 
 message ReferralList{
   repeated ReferralDto referrals = 1;
+  google.protobuf.Int32Value total_count = 2;
 }
 
 message OrderList{
   repeated OrderDto orders = 1;
+  google.protobuf.Int32Value total_count = 2;
 }
 
 message CreateReferralRequest{
@@ -425,6 +427,7 @@ message PagingFilterDto{
   repeated string category_filters = 4;
   google.protobuf.Timestamp updated_since = 5;
   google.protobuf.StringValue query = 6;
+  repeated string assigned_to_actor_ids = 7;
 }
 
 message GetReferralsByReferredActorRequest{
@@ -443,6 +446,7 @@ message GetProductOrdersByRecipientRequest{
 
 message GetProductOrdersByResourceGroupRequest{
   string resource_group_id = 1;
+
 
   repeated string resource_group_scopes = 2;
 

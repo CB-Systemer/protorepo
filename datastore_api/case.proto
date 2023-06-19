@@ -303,8 +303,26 @@ message CasePublicProfile {
 	repeated Appointment appointments = 85;
 	google.protobuf.StringValue primaryPropositionEconomyNamespace = 86;
 	repeated MediaItem mediaItems = 87;
+	repeated TaxonPublicProfile taxons = 88;
+    repeated PublicDocument public_documents = 89;
 }
 
+message PublicDocument {
+    string id = 1;
+	string namespace = 2;
+    string parent_id = 3;
+    string parent_namespace = 4;
+    string display_name = 5;
+	string url = 6;
+ 	google.protobuf.Timestamp last_updated_at = 7;
+	google.protobuf.Timestamp created_at = 8;
+}
+
+message TaxonPublicProfile{
+	bool value = 1;
+	google.protobuf.StringValue taxon_namespace = 2;
+	google.protobuf.StringValue taxonomy_namespace = 3;
+}
 message MediaItem{
 	string displayName = 1;
 	google.protobuf.StringValue description = 2;
@@ -432,6 +450,7 @@ message Estate{
 	repeated Registration registrations = 11;
 	repeated EntityFeatureRegistration entityFeatureRegistrations = 12;
 	string id = 13;
+	repeated TaxonPublicProfile taxons = 14;
 }
 
 message EntityFeatureRegistration {

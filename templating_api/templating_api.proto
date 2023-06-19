@@ -144,14 +144,16 @@ message BuildTemplateRequest {
   string contextTenantId = 7;
   string contextResourceGroupId = 8;
   ExecutingActorContext actor_context = 9;
-	string format = 13;
 	string params = 10;
+  string otherActorId = 11;
+  string format = 13;
 }
 
 message BuildTemplateReply {
 	string templateOutput = 1;
   string errorMessage = 2;
   int32 errorCode = 3;
+  google.protobuf.StringValue typeDisplayName = 4;
 }
 
 message MultiBuildTemplateRequest {
@@ -175,6 +177,7 @@ message TemplateOutputDto {
   string errorMessage = 2;
   int32 errorCode = 3;
   string format = 4;
+  google.protobuf.StringValue typeDisplayName = 5;
 }
 
 message InitializeRequest {

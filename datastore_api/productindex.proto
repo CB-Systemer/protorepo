@@ -40,6 +40,7 @@ message GetProductsRequest {
     string product_type = 2;
     string product_channel = 3;
     google.protobuf.StringValue product_category = 4;
+	bool include_global_installed = 5;
 }
 
 message GetProductsReply {
@@ -74,7 +75,8 @@ message ProductDto {
     repeated InformationFieldDto information_fields = 11;
     repeated AttachmentOptionDto attachment_options = 12;
     repeated SubProductDto sub_products = 13;
-    repeated ImageReferenceDto image_urls = 14;
+    repeated ImageReferenceDto image_urls = 14;	
+		repeated ExternalMountDto external_mounts = 33;
     string short_description = 15;
     string description = 16;
     string custom_product_identifier = 17;
@@ -90,6 +92,13 @@ message ProductDto {
     repeated string allowed_order_organizations = 28;
     int32 product_version = 29;
     ConsentMode consent_mode = 32;
+}
+
+message ExternalMountDto{
+	string id = 1;
+	string display_name = 2;
+	string mount_namespace = 3;
+	google.protobuf.StringValue icon = 4; 
 }
 
 message ImageReferenceDto {
