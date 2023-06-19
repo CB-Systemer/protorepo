@@ -7,10 +7,9 @@ import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
 service InstallationService {  
-  rpc GetInstallations (GetInstallationsRequest) returns (InstallationResponse);
+  rpc GetInstallations (GetInstallationsRequest) returns (InstallationResponse);  
   rpc IsInstalled (IsInstalledRequest) returns (IsInstalledReply);
   rpc UpdateProductPackageVersionForInstallations (UpdateProductPackageVersionForInstallationsRequest) returns (google.protobuf.Empty);
-
 
   rpc InstallPackage (InstallPackageRequest) returns (google.protobuf.Empty);
   rpc UnInstallPackage (UnInstallPackageRequest) returns (google.protobuf.Empty);
@@ -19,6 +18,7 @@ service InstallationService {
 message GetInstallationsRequest {
   string resource_group_id = 1;
   bool only_active = 2;
+  bool ignore_scope = 4;
   repeated string product_package_ids = 3;
 }
 
