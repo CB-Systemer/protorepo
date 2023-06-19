@@ -8,7 +8,7 @@ import "google/protobuf/wrappers.proto";
 
 service InstallationService {
   rpc GetActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
-  rpc GetInActiveInstallations (GetInstallationsRequest) returns (InstallationResponse);
+  rpc GetInstallations (GetInstallationsRequest) returns (InstallationResponse);
   rpc IsInstalled (IsInstalledRequest) returns (IsInstalledReply);
   rpc UpdateProductPackageVersionForInstallations (UpdateProductPackageVersionForInstallationsRequest) returns (google.protobuf.Empty);
 
