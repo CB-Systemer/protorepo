@@ -19,6 +19,7 @@ service InstallationService {
 message GetInstallationsRequest {
   string resource_group_id = 1;
   bool only_active = 2;
+  repeated string product_package_ids = 3;
 }
 
 message InstallationResponse {
