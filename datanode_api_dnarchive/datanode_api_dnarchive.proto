@@ -18,6 +18,7 @@ message ArchiveEmailRequest{
  string subject = 8;
  string resource_group_id = 9;
  string template_display_name = 10;
+ string template_id = 11;
 }
 
 message ArchiveEmailReply {
