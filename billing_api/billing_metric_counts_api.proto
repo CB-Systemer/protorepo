@@ -8,7 +8,7 @@ import "google/protobuf/timestamp.proto";
 service BillingMetricCountsApi {
 	rpc GetMetricCounts (GetMetricCountsRequest) returns (GetMetricCountsResponse);
     rpc GetApiMetricCounts(GetApiMetricCountsRequest) returns (GetApiMetricCountsResponse);
-    rpc GetFeatureActivations(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
+    rpc GetFeatureActivationMetrics(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
 }
 
 message GetFeatureActivationsRequest {
