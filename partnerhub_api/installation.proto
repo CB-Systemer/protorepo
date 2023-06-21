@@ -17,9 +17,15 @@ service InstallationService {
 
 message GetInstallationsRequest {
   string resource_group_id = 1;
-  bool only_active = 2;
+  ActiveFilterType active_filter_type = 2;
   bool ignore_scope = 4;
   repeated string product_package_ids = 3;
+}
+
+enum ActiveFilterType{
+  ACTIVE = 0;
+  INACTIVE = 1;
+  ALL = 2;
 }
 
 message InstallationResponse {
