@@ -25,6 +25,7 @@ message GetInstallationsRequest {
 enum ActiveFilterType{
   ACTIVE = 0;
   INACTIVE = 1;
+  LATEST_INSTALLATION_IS_INACTIVE = 3;
   ALL = 2;
 }
 
