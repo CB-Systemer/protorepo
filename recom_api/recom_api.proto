@@ -145,6 +145,7 @@ message SendMessageRequest {
   string transactionId = 21;
   repeated Tag tags = 22;
   string callbackQueueName = 23;
+  google.protobuf.Timestamp lastPossibleRetryTimestamp = 24;
 }
 
 message SendMessageReply {
