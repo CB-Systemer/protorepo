@@ -58,6 +58,8 @@ message SendSmsMessageRequest {
   string callbackQueueName = 12;
   string recipientActorId = 13;
   google.protobuf.StringValue smsGateway = 14;
+  bool send_instant = 15;
+  google.protobuf.Timestamp lastPossibleRetryTimestamp = 16;
 }
 
 message SendSmsMessageReply {
