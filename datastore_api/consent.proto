@@ -1,0 +1,25 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+syntax = "proto3";
+
+option csharp_namespace = "Cbs.DataNodes.Api.Consent";
+
+import "common/common.proto";
+import "models/models.proto";
+import "google/protobuf/timestamp.proto";
+
+service ConsentApi {
+	rpc GetConsentOptionsForActor (GetConsentOptionsForActorRequest) returns (GetConsentOptionsForActorReply);
+}
+
+message GetConsentOptionsForActorRequest {
+	string actor_id = 1;
+	repeated string allowed_consent_option_ids = 2;
+	repeated string allowed_consent_option_namespaces = 3;
+	models.GrpcActorContext actorContext = 4;
+}
+
+message GetConsentOptionsForActorReply {
+	models.StatusMessage message_status = 1;
+	repeated models.ActorConsentDto actor_consents = 2;
+}
+

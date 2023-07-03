@@ -4,6 +4,7 @@ option csharp_namespace = "Cbs.DataNodes.Api.SharedProtos";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
 
 message ActorContext {
  string actorId = 1;
@@ -366,3 +367,4 @@ message NullableGuid {
     string value = 2;
   }
 }
+

@@ -1,0 +1,64 @@
+syntax = "proto3";
+package models;
+option csharp_namespace = "RealEquity.Grpc.Models";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
+
+message GrpcActorContext {
+    google.protobuf.StringValue actorId = 1;
+    google.protobuf.StringValue actorNamespace = 2;
+    google.protobuf.StringValue email = 3;
+    repeated google.protobuf.StringValue permissions = 4;
+    google.protobuf.StringValue executingTenantId = 5;
+    google.protobuf.StringValue executingResourceGroupId = 6;
+    google.protobuf.StringValue actorTenantId = 7;
+    google.protobuf.StringValue actorResourceGroupId = 8;
+    google.protobuf.StringValue authorizedTenantId = 9;
+    google.protobuf.StringValue authorizedResourceGroupId = 10;
+    google.protobuf.StringValue accessToken = 11;
+    google.protobuf.StringValue originActorId = 12;
+    google.protobuf.StringValue originActorNamespace = 13;
+    bool isImpersonation = 14;
+    bool hasRootAccess = 15;
+    repeated google.protobuf.StringValue sharedResourceGroups = 16;
+}
+
+message StatusMessage {
+	bool success = 1;
+	google.protobuf.StringValue error_message = 2;
+	repeated ValidationError validation_errors = 3;
+}
+
+message ValidationError {
+	string property_name = 1;
+	string error_message = 2;
+	string error_code = 3;
+}
+
+ enum ActorConsentStatusDto {
+        InActive = 0;
+        Pending = 1;
+        Answered = 2;
+    } 
+ enum ActorConsentAnswerDto {
+         Yes = 0;
+          No = 1;
+          NotAnswered = 2;
+    } 
+    
+message ActorConsentDto {
+   ActorConsentStatusDto status = 11;
+   ActorConsentAnswerDto answer = 12;
+    google.protobuf.StringValue consent_option_id = 1;
+	google.protobuf.StringValue headline = 2;
+	google.protobuf.StringValue consentText = 3;
+	google.protobuf.StringValue description = 4;
+	repeated string consentEnablers = 5;
+    google.protobuf.Timestamp occurred_at = 6;
+    google.protobuf.StringValue occurred_by = 7;
+    google.protobuf.Timestamp Executed_at = 8;
+    google.protobuf.StringValue executed_by = 9;
+    google.protobuf.StringValue executed_comment = 10;
+}
