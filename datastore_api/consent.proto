@@ -6,20 +6,89 @@ option csharp_namespace = "Cbs.DataNodes.Api.Consent";
 import "common/common.proto";
 import "models/models.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 service ConsentApi {
+	rpc GetActorConsentHistory (GetActorConsentHistoryRequest) returns (GetActorConsentHistoryReply);
 	rpc GetConsentOptionsForActor (GetConsentOptionsForActorRequest) returns (GetConsentOptionsForActorReply);
+	rpc CreateConsentOptionsForActor (CreateConsentOptionsForActorRequest) returns (CreateConsentOptionsForActorReply);
+	rpc AnswerConsentOptionsForActor (AnswerConsentOptionsForActorRequest) returns (AnswerConsentOptionsForActorReply);
+	rpc ResetConsentOptionsForActor (ResetConsentOptionsForActorRequest) returns (ResetConsentOptionsForActorReply);
+	rpc DeleteConsentOptionsForActor (DeleteConsentOptionsForActorRequest) returns (DeleteConsentOptionsForActorReply);	
 }
+
+message GetActorConsentHistoryRequest {
+	string actor_id = 2;
+	models.GrpcActorContext actorContext = 4;
+}
+
+message GetActorConsentHistoryReply {
+	repeated models.ActorConsentTrackedActivityDto activities = 2;
+	models.StatusMessage message_status = 1;
+}
+
 
 message GetConsentOptionsForActorRequest {
 	string actor_id = 1;
-	repeated string allowed_consent_option_ids = 2;
-	repeated string allowed_consent_option_namespaces = 3;
+	string consent_option_resource_group_id = 5;
 	models.GrpcActorContext actorContext = 4;
+}
+
+message AnswerConsentOptionsForActorRequest{
+	models.GrpcActorContext actorContext = 1;
+	string actor_consent_id = 2;
+	string actor_id = 3;
+	models.ActorConsentAnswerDto answer = 4;
+	google.protobuf.StringValue executed_comment = 5;
+}
+
+
+message ResetConsentOptionsForActorRequest{
+	models.GrpcActorContext actorContext = 1;
+	string actor_consent_id = 2;
+	string actor_id = 3;
+}
+
+message CreateConsentOptionsForActorRequest{
+	models.GrpcActorContext actorContext = 1;
+	string actor_id = 2;
+	string consent_option_id = 3;
+	repeated string consent_enablers = 4;
+	google.protobuf.StringValue description = 5;
+	google.protobuf.StringValue headline = 6;
+	google.protobuf.StringValue consent_text = 7;
+	google.protobuf.StringValue consent_option_resource_group_id = 9;
+}
+
+message DeleteConsentOptionsForActorRequest{
+	models.GrpcActorContext actorContext = 1;
+	string actor_consent_id = 2;
+	string actor_id = 3;
+}
+
+message DeleteConsentOptionsForActorReply {
+	models.StatusMessage message_status = 1;
 }
 
 message GetConsentOptionsForActorReply {
 	models.StatusMessage message_status = 1;
 	repeated models.ActorConsentDto actor_consents = 2;
 }
+
+message CreateConsentOptionsForActorReply {
+	models.StatusMessage message_status = 1;
+	models.ActorConsentDto actor_consent = 2;
+}
+
+message AnswerConsentOptionsForActorReply {
+	models.StatusMessage message_status = 1;
+	models.ActorConsentDto actor_consent = 2;
+}
+
+message ResetConsentOptionsForActorReply {
+	models.StatusMessage message_status = 1;
+	models.ActorConsentDto actor_consent = 2;
+}
+
+
 

@@ -38,19 +38,17 @@ message ValidationError {
 }
 
  enum ActorConsentStatusDto {
-        InActive = 0;
+        NotUsed = 0;
         Pending = 1;
         Answered = 2;
     } 
  enum ActorConsentAnswerDto {
-         Yes = 0;
-          No = 1;
-          NotAnswered = 2;
+        Yes = 0;
+        No = 1;
+        NotAnswered = 2;
     } 
     
 message ActorConsentDto {
-   ActorConsentStatusDto status = 11;
-   ActorConsentAnswerDto answer = 12;
     google.protobuf.StringValue consent_option_id = 1;
 	google.protobuf.StringValue headline = 2;
 	google.protobuf.StringValue consentText = 3;
@@ -61,4 +59,22 @@ message ActorConsentDto {
     google.protobuf.Timestamp Executed_at = 8;
     google.protobuf.StringValue executed_by = 9;
     google.protobuf.StringValue executed_comment = 10;
+    ActorConsentStatusDto status = 11;
+    ActorConsentAnswerDto answer = 12;
+    string actor_id = 13;
+    string id = 14;
+	google.protobuf.StringValue consent_option_resource_group_id = 15;
+}
+
+message ActorConsentTrackedActivityDto {
+    string tracked_activity_id = 1;
+    google.protobuf.StringValue consent_option_id = 2;
+    google.protobuf.StringValue actor_consent_id = 3;
+    google.protobuf.StringValue actor_consent_answer = 4;
+    google.protobuf.StringValue namespace = 5;
+    map<string, string> data = 6;
+    google.protobuf.StringValue body = 7;
+    google.protobuf.StringValue title = 8;
+    google.protobuf.Timestamp executed_at = 10;
+    google.protobuf.StringValue executed_by_id = 9;
 }
