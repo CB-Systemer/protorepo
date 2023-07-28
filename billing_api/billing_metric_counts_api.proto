@@ -8,6 +8,7 @@ import "google/protobuf/timestamp.proto";
 service BillingMetricCountsApi {
 	rpc GetMetricCounts (GetMetricCountsRequest) returns (GetMetricCountsResponse);
     rpc GetApiMetricCounts(GetApiMetricCountsRequest) returns (GetApiMetricCountsResponse);
+    rpc GetApiMetricCountsV2(GetApiMetricCountsRequest) returns (GetApiMetricCountsReply);
     rpc GetFeatureActivationMetrics(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
 }
 
@@ -56,6 +57,17 @@ message ApiMetricCountGroupedByPartnerDto {
 
 message GetApiMetricCountsResponse {
     repeated ApiMetricCountGroupedByPartnerDto list = 1;
+}
+
+message GetApiMetricCountsReply {
+    repeated ApiMetricCountsDto list = 1;
+}
+
+message ApiMetricCountsDto {
+    google.protobuf.StringValue tenantId = 1;
+    google.protobuf.StringValue partner_id = 2;
+    google.protobuf.StringValue host = 3;
+    google.protobuf.Int64Value total_count = 4;
 }
 
 message FeatureActivationMetricDto {
