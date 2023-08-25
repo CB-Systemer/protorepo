@@ -99,6 +99,7 @@ message EmailAttachment {
   string file_name = 1;
   string content_type = 2;
   bytes bytes = 3;
+  google.protobuf.StringValue content_id = 4;
 }
 
 message SendEmailReply {
