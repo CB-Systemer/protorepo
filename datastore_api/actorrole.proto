@@ -57,6 +57,9 @@ message ActorRole {
     string phone = 25;
     string email = 26;
     string address = 27;
+	string primary_contact_actor_id = 28;
+	string primary_contact_actor_namespace = 29;
+	string primary_contact_actor_display_name = 30;
 }
 
 message NullableInt {
