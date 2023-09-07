@@ -6,12 +6,12 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
 service RecomApi {
-  rpc SendMessage (SendMessageRequest) returns (SendMessageReply);
-  rpc SendSmsMessage (SendSmsMessageRequest) returns (SendSmsMessageReply);
-  rpc SendEmailMessage (SendEmailMessageRequest) returns (SendEmailMessageReply);
-  rpc SendAnonymousEmailMessage (SendAnonymousEmailRequest) returns (SendEmailMessageReply);
-  rpc GetRecipientsInfoMessage (GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
-  rpc GetPhoneNumberPool (GetPhoneNumberPoolRequest) returns (GetPhoneNumberPoolReply);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageReply);
+  rpc SendSmsMessage(SendSmsMessageRequest) returns (SendSmsMessageReply);
+  rpc SendEmailMessage(SendEmailMessageRequest) returns (SendEmailMessageReply);
+  rpc SendAnonymousEmailMessage(SendAnonymousEmailRequest) returns (SendEmailMessageReply);
+  rpc GetRecipientsInfoMessage(GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
+  rpc GetPhoneNumberPool(GetPhoneNumberPoolRequest) returns (GetPhoneNumberPoolReply);
 }
 
 message GetPhoneNumberPoolRequest {
@@ -44,12 +44,12 @@ message ActorRecipientInfo {
 }
 
 message SendSmsMessageRequest {
-	string number = 1;
-	string content = 2;
-	string countryCode = 3;
-	string sender = 4;
-	bool dryRun = 5;
-	ActorContext actorContext = 6;
+  string number = 1;
+  string content = 2;
+  string countryCode = 3;
+  string sender = 4;
+  bool dryRun = 5;
+  ActorContext actorContext = 6;
   string contextTenantId = 7;
   string contextResourceGroupId = 8;
   BillingContext billing_context = 9;
@@ -68,7 +68,7 @@ message SendSmsMessageReply {
   bool can_retry = 3;
   int32 error_code = 4;
   string error_message = 5;
-  string message = 6; 
+  string message = 6;
 }
 
 message SendEmailMessageRequest {
@@ -89,6 +89,7 @@ message SendEmailMessageRequest {
   string transactionId = 15;
   repeated Tag tags = 16;
   string callbackQueueName = 17;
+  google.protobuf.StringValue related_case_id = 18;
 }
 
 message ActorRecipient {
@@ -149,6 +150,7 @@ message SendMessageRequest {
   repeated Tag tags = 22;
   string callbackQueueName = 23;
   google.protobuf.Timestamp lastPossibleRetryTimestamp = 24;
+  google.protobuf.StringValue related_case_id = 25;
 }
 
 message SendMessageReply {
@@ -163,19 +165,19 @@ message SendMessageReply {
 message ActorContext {
   string access_token = 1;
   string tenant_id = 2;
-  string actor_id= 3;
-  string actor_namespace= 4;
+  string actor_id = 3;
+  string actor_namespace = 4;
   string resource_group_id = 5;
   repeated string permissions = 6;
 }
 
 message BillingContext {
-   string tenant_id = 1;
-   string resource_group_id = 2;
-   string application_id = 3;
-   string transaction_id = 4;
-   string executing_actor_id = 5;
-   string rext_id = 6;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string transaction_id = 4;
+  string executing_actor_id = 5;
+  string rext_id = 6;
 }
 
 message Tag {
