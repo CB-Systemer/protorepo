@@ -136,6 +136,7 @@ message DataNode {
 	NullableGuid relatedAppointmentId = 119;
 	NullableGuid responsibleActorId = 120;
 	string messageSubject = 121;
+	bool disableAutomaticMatchSendout = 122;
 }
 
 message DataNodeComment {
