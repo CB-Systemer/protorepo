@@ -748,6 +748,7 @@ message ManualConsentLogDto {
 message CaseStateChangedDataDto {
   string from_case_status = 1;
   string to_case_status = 2;
+  string state_flow_namespace = 3;
 }
 
 message CreateCustomLogRequest{
