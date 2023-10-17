@@ -591,6 +591,7 @@ message EnergyLabelDto{
 
 message LinkDto{
   string url = 1;
+  string display_name = 2;
 }
 
 message ElEftersynReportDto{
