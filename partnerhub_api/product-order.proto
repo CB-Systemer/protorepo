@@ -72,6 +72,8 @@ service ProductOrderService {
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
 
   rpc RegisterConsent (RegisterConsentRequest) returns (RegisterConsentReply);
+  
+  rpc DeleteActorId (DeleteActorIdRequest) returns (google.protobuf.Empty);
 }
 
 message ReferralDto{
@@ -792,6 +794,10 @@ message RegisterConsentRequest {
 
   repeated string resource_group_scopes = 5;
   string resource_group_id = 6;
+}
+
+message DeleteActorIdRequest{
+	string actor_id = 1;
 }
 
 message RegisterConsentReply {
