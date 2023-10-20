@@ -12,6 +12,7 @@ service RecomApi {
   rpc SendAnonymousEmailMessage(SendAnonymousEmailRequest) returns (SendEmailMessageReply);
   rpc GetRecipientsInfoMessage(GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
   rpc GetPhoneNumberPool(GetPhoneNumberPoolRequest) returns (GetPhoneNumberPoolReply);
+  rpc TestSmtp(TestSmtpEmailSendRequest) returns (SendEmailMessageReply);
 }
 
 message GetPhoneNumberPoolRequest {
@@ -183,4 +184,10 @@ message BillingContext {
 message Tag {
   string key = 1;
   string value = 2;
+}
+
+message TestSmtpEmailSendRequest{
+  string resource_group_id = 1;
+  string to = 2;
+  string from = 3;
 }
