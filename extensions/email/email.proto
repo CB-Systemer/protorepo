@@ -330,4 +330,5 @@ message AccountExistRequest{
 
 message ExistReply{
   bool exists = 1;
+  google.protobuf.StringValue email_address = 2;
 }
