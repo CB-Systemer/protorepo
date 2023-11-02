@@ -323,8 +323,9 @@ message Folder{
 
 message AccountExistRequest{
   string actor_id = 1;
-  string resourceGroupId = 2;
-  repeated string parentInstallationIds = 3;
+  string account_id = 2;
+  string resourceGroupId = 3;
+  repeated string parentInstallationIds = 4;
 }
 
 message ExistReply{
