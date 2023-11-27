@@ -171,6 +171,7 @@ message Actor {
 	int64 numberOfFavorites = 48;
 	int64 numberOfCases = 49;
 	string resourceGroupDisplayName = 50;
+	google.protobuf.Timestamp data_node_archived_at = 51; 
 }
 
 
