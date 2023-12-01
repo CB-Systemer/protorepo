@@ -260,7 +260,7 @@ message CasePublicProfile {
 	string priceNamespace = 42;
 	string priceCurrency = 43;
 	repeated Estate estates = 44;
-	repeated AdTextCollection adtextCollections = 45;
+	reserved 45;
 	repeated Label labels = 46;
 	string caseNumber = 47;
 	PriceData priceData = 48;
@@ -397,28 +397,6 @@ message PriceData {
 		string namespace = 1;
 		string currency = 2;
 		int32 price = 3;
-	}
-}
-
-message AdTextCollection{
-	string namespace = 1;
-	string displayName = 2;
-	repeated AdText adtexts = 3;
-}
-
-message AdText{
-	string namespace = 1;
-	string displayName = 2;
-	string payload = 3;
-
-	message AdTextData {
-		string shortDescription = 1;
-		string description = 2;
-		string inputType = 3;
-		int32 maxBullets  = 4;
-		bool readonly = 5;
-		string value = 6;
-		repeated string values = 7;
 	}
 }
 
