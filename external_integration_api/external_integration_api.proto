@@ -9,10 +9,17 @@ service ExternalIntegrationApi {
   rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
-
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
-
   rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
+  rpc GetEstateData(GetEstateDataRequest) returns (GetEstateDataReply);
+}
+
+message GetEstateDataRequest {
+  string estateId = 1;
+}
+
+message GetEstateDataReply {
+  bool success = 1;
 }
 
 message GetBBRDataRequest {

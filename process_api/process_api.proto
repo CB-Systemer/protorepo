@@ -1,0 +1,223 @@
+syntax = "proto3";
+
+option csharp_namespace = "Process.Api";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+service ProcessApi {
+	rpc GetProcesses (GetProcessesRequest) returns (GetProcessesReply);
+	rpc StartProcess (StartProcessRequest) returns (StartProcessReply);
+	rpc GetProcessStatus (GetProcessStatusRequest) returns (GetProcessStatusReply);
+	rpc GetProcessTasks (GetProcessTasksRequest) returns (GetProcessTasksReply);
+	rpc GetProcessTask (GetProcessTaskRequest) returns (GetProcessTaskReply);
+	rpc StartTask (StartTaskRequest) returns (StartTaskReply);
+	rpc UpdateTask (UpdateTaskRequest) returns (UpdateTaskReply);
+	rpc UpdateTaskState (UpdateTaskStateRequest) returns (UpdateTaskReply);
+	rpc RetryTask (RetryTaskRequest) returns (RetryTaskResponse);
+	rpc CancelProcesses (CancelProcessRequest) returns (CancelProcessReply);
+	rpc DeleteProcesses (DeleteProcessRequest) returns (DeleteProcessReply);
+	rpc CompleteProcess(CompleteProcessRequest) returns (CompleteProcessReply);
+	rpc FailProcess(FailProcessRequest) returns (FailProcessReply);
+	rpc UpdateProcessTaskStatus(UpdateProcessTaskStatusRequest) returns (UpdateProcessTaskStatusReply);
+	rpc UpdateProcessTaskResult(UpdateProcessTaskResultRequest) returns (UpdateProcessTaskResultReply);
+	rpc UpdateProcessTask(UpdateProcessTaskRequest) returns (UpdateProcessTaskReply);
+}
+
+message GetProcessesRequest {
+	string status = 1;
+	repeated string excludeNamespaces = 2;
+}
+
+message GetProcessesReply {
+	repeated ProcessDto processes = 1;
+}
+
+message StartProcessRequest {
+	string processId = 1;
+	string namespace = 2;
+	int32 expectedTasks = 3;
+	repeated InitialTaskDto InitialTasks = 4;
+	string description = 5;
+}
+
+message InitialTaskDto {
+	string taskId = 1;
+	string namespace = 2;
+	int32 order = 3;
+	string description = 4;
+}
+
+message StartProcessReply {
+	string id = 1;
+	string namespace = 2;
+	bool success = 3;
+}
+
+message GetProcessStatusRequest {
+	string id = 1;
+}
+
+message GetProcessStatusReply {
+	string id = 1;
+	string namespace = 2;
+	string status = 3;
+	int32 totalTasks = 4;
+	int32 completedTasks = 5;
+	int32 expectedTasks = 6;
+	int32 failedTasks = 7;
+	int32 cancelledTasks = 8;
+	bool isCompleted = 9;
+	bool isCancelled = 10;
+	string description = 11;
+	google.protobuf.Timestamp start = 12;
+	google.protobuf.Timestamp end = 13;
+	string taskStatus = 14;
+}
+
+message GetProcessTasksRequest {
+	string process_id = 1;
+}
+
+message GetProcessTaskRequest {
+	string task_id = 1;
+}
+
+message GetProcessTasksReply {
+	repeated TaskDto tasks = 1;
+}
+
+message GetProcessTaskReply {
+	TaskDto task = 1;
+}
+
+message StartTaskRequest {
+	string taskId = 1;
+	string processId = 2;
+	string taskNamespace = 3;
+	string description = 4;
+}
+
+message StartTaskReply {
+	string taskId = 1;
+	string processId = 2;
+	bool success = 3;
+}
+
+message UpdateTaskRequest {
+	string processId = 1;
+	string taskId = 2;
+	string status = 3;
+	string result = 4;
+}
+
+message UpdateTaskStateRequest{	
+	string taskId = 2;
+	string state_json = 3;
+}
+
+message UpdateTaskReply {
+	bool success = 1;
+}
+
+message RetryTaskRequest {
+	string processId = 1;
+	string taskId = 2;
+}
+
+message RetryTaskResponse {
+	bool success = 1;
+}
+
+message ProcessDto {
+	string id = 1;
+	string namespace = 2;
+	string status = 3;
+	string description = 4;
+	google.protobuf.Timestamp start = 5;
+	google.protobuf.Timestamp end = 6;
+	string taskStatus = 7;
+}
+
+message CancelProcessRequest {
+	repeated string processIds = 1;
+}
+
+message CancelProcessReply {
+	int32 tasksCancelled = 1;
+	bool success = 2;
+}
+
+message DeleteProcessRequest {
+	repeated string processIds = 1;
+}
+
+message DeleteProcessReply {
+	bool success = 1;
+}
+
+message TaskDto {
+	string id = 1;
+	string namespace = 2;
+	int32 order = 3;
+	string status = 4;
+	string progress = 5;
+	string result = 6;
+	string description = 7;
+	google.protobuf.Timestamp start = 8;
+	google.protobuf.Timestamp end = 9;
+	google.protobuf.StringValue state_json= 10;
+	bool can_retry = 11;
+}
+
+message CompleteProcessRequest {
+	string processId = 1;
+}
+
+message CompleteProcessReply {
+	bool success = 1;
+}
+
+message FailProcessRequest {
+	string processId = 1;
+}
+
+message FailProcessReply {
+	bool success = 1;
+}
+
+message UpdateProcessTaskStatusRequest {
+	string processId = 1;
+	string taskStatus = 2;
+}
+
+message UpdateProcessTaskStatusReply {
+	bool success = 1;
+}
+
+message UpdateProcessTaskResultRequest {
+	string processId = 1;
+	string taskId = 2;
+	string result = 3;
+}
+
+message UpdateProcessTaskResultReply {
+	bool success = 1;
+}
+
+message UpdateProcessTaskRequest {
+	string processId = 1;
+	string taskId = 2;
+	string taskStatus = 3;
+	string result = 4;
+	string progress = 5;
+	string orchestrationEventMessageJson = 6;
+	string orchestrationEventMessageTypeName = 7;
+	string orchestrationEventQueueName = 8;
+	string taskEventMessageJson = 9;
+	string taskEventMessageTypeName = 10;
+}
+
+message UpdateProcessTaskReply {
+	bool success = 1;
+}
