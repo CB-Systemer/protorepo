@@ -7,6 +7,30 @@ service  SmsCommandServiceApi {
   rpc CreateSession (CreateSessionRequest) returns (CreateSessionReply);
   rpc SendCommand (SendCommandRequest) returns (SendCommandReply);
   rpc RegisterManualReply (RegisterManualReplyRequest) returns (RegisterManualReplyResponse);
+  rpc GetCommandSessionsByActorId (GetByActorIdRequest) returns (GetCommandSessionsResponse);
+}
+
+message CommandSessionDto {
+   string actor_id = 1;
+   string phone_number = 2;
+   string country_code = 3;
+   string command_namespace = 4;
+   string external_reference_id = 5;
+   string sender_resource_group_id = 6;
+   string receiver_resource_group_id = 7;
+   string template_params = 8;
+   string actorDisplayName = 9;
+   string senderDisplayName = 10;
+   string receiverDisplayName = 11;
+   string namespace = 12;
+}
+
+message GetCommandSessionsResponse {
+  repeated CommandSessionDto sessions = 1;
+}
+
+message GetByActorIdRequest{
+    string actor_id = 1;
 }
 
 message CreateSessionRequest {
