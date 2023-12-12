@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 option csharp_namespace = "Billing.Api";
+import "google/protobuf/wrappers.proto";
 
 service BillingMetricsApi {
 	rpc SmsSent (CreateSmsMetricRequest) returns (CreateMetricReply);
@@ -42,6 +43,13 @@ message CreateEmailMetricRequest {
     string executing_actor_id = 5;
     string transaction_id = 6;
     repeated string recipient_email_addresses = 7;
+    EmailProvider emailProvider = 8;
+}
+
+enum EmailProvider{
+    sendgrid = 0;
+    smtp = 1;
+    office365 = 2;    
 }
 
 message CreateNemIdMetricRequest {

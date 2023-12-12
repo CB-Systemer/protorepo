@@ -28,6 +28,7 @@ service Email {
 
   // Accounts
   rpc GetAccounts(GetAccountsRequest) returns (EmailAccounts);
+  rpc AccountExist(AccountExistRequest) returns (ExistReply);
   rpc CreateAccount(CreateAccountRequest) returns (EmailAccount);
   rpc DeleteAccount(DeleteAccountRequest) returns (EmptyReply);
   rpc VerifyAccount(VerifyAccountRequest) returns (VerifyAccountReply);
@@ -318,4 +319,16 @@ message UpsertFoldersRequest{
 message Folder{
   string id = 1;
   int32 order = 2;
+}
+
+message AccountExistRequest{
+  string actor_id = 1;
+  string account_id = 2;
+  string resourceGroupId = 3;
+  repeated string parentInstallationIds = 4;
+}
+
+message ExistReply{
+  bool exists = 1;
+  google.protobuf.StringValue email_address = 2;
 }

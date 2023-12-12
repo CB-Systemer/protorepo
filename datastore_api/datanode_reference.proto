@@ -14,6 +14,8 @@ service DatanodeReferenceApi {
 	rpc GetDataNodes (GetDataNodesRequest) returns (DataNodesReply);
 	
 	rpc GetDataNodeContactInfo (GetDataNodeRequest) returns (DataNodeContactInfo);
+
+	rpc IndexDataNode (IndexDataNodeRequest) returns (IndexDataNodeReply);
 }
 
 message GetDatanodeReferenceRequest {
@@ -98,4 +100,13 @@ message DataNodeContactInfo{
 	EmailModel email = 1;
 	AddressModel primary_address = 2;
 	PhoneModel primary_phone = 3;
+}
+
+message IndexDataNodeRequest {
+	string data_node_id = 1;
+	bool update = 2;
+	bool instant_indexing = 3;
+}
+
+message IndexDataNodeReply {	
 }

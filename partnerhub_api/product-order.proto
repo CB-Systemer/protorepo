@@ -72,6 +72,8 @@ service ProductOrderService {
   rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
 
   rpc RegisterConsent (RegisterConsentRequest) returns (RegisterConsentReply);
+  
+  rpc DeleteActorId (DeleteActorIdRequest) returns (google.protobuf.Empty);
 }
 
 message ReferralDto{
@@ -553,6 +555,7 @@ message CreateDeliverableRequest {
     ImageFileDto image_file = 4;
     ImageReferenceDto image_reference = 5;
     EnergyLabelDto energy_label = 14;
+    LinkDto link = 15;
   }
 
   CreateFileDto file = 6;
@@ -586,6 +589,11 @@ message EnergyLabelDto{
   string report_number = 6;
 
   string energy_classification = 5;
+}
+
+message LinkDto{
+  string url = 1;
+  string display_name = 2;
 }
 
 message ElEftersynReportDto{
@@ -644,6 +652,7 @@ message DeliverableDto {
     ImageFileDto image_file = 6;
     ImageReferenceDto image_reference = 9;
     EnergyLabelDto energy_label = 10;
+    LinkDto link = 11;
     // VideoFileDto
     // VideoReferenceDto
   }
@@ -785,6 +794,10 @@ message RegisterConsentRequest {
 
   repeated string resource_group_scopes = 5;
   string resource_group_id = 6;
+}
+
+message DeleteActorIdRequest{
+	string actor_id = 1;
 }
 
 message RegisterConsentReply {
