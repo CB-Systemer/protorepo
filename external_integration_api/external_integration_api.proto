@@ -3,6 +3,8 @@ syntax = "proto3";
 
 option csharp_namespace = "External.Integration.Api";
 
+import "google/protobuf/wrappers.proto";
+
 service ExternalIntegrationApi {
   rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
   rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
