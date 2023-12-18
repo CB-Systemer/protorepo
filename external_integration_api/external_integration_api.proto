@@ -15,7 +15,10 @@ service ExternalIntegrationApi {
 }
 
 message GetEstateDataRequest {
-  string estateId = 1;
+  google.protobuf.StringValue estateId = 1;
+  google.protobuf.StringValue caseId = 2;
+  google.protobuf.StringValue caseNamespace = 3;
+  google.protobuf.StringValue addressId = 4;
 }
 
 message GetEstateDataReply {
