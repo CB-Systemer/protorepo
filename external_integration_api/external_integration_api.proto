@@ -25,6 +25,9 @@ message GetEstateDataRequest {
 
 message GetEstateDataReply {
   bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
+  google.protobuf.StringValue errorMessage = 4;
 }
 
 message GetBBRDataRequest {
