@@ -18,9 +18,10 @@ service ExternalIntegrationApi {
 
 message GetEstateDataRequest {
   google.protobuf.StringValue estateId = 1;
-  google.protobuf.StringValue caseId = 2;
-  google.protobuf.StringValue caseNamespace = 3;
-  google.protobuf.StringValue addressId = 4;
+  google.protobuf.StringValue estateDisplayName = 2;
+  google.protobuf.StringValue caseId = 3;
+  google.protobuf.StringValue caseNamespace = 4;
+  google.protobuf.StringValue addressId = 5;
 }
 
 message GetEstateDataReply {
