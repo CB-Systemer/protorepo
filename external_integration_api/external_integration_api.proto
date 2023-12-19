@@ -14,6 +14,19 @@ service ExternalIntegrationApi {
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
   rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
   rpc GetEstateData(GetEstateDataRequest) returns (GetEstateDataReply);
+  rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
+}
+
+message GetOwnershipTypeRequest {
+  google.protobuf.StringValue addressId = 1;
+}
+
+message GetOwnershipTypeReply {
+  bool success = 1;
+  google.protobuf.StringValue namespace = 2;
+  google.protobuf.StringValue displayName = 3;
+  int32 errorCode = 4; 
+  google.protobuf.StringValue errorMessage = 5;
 }
 
 message GetEstateDataRequest {
