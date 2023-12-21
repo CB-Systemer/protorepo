@@ -24,10 +24,10 @@ message GetOwnershipTypeRequest {
 
 message GetOwnershipTypeReply {
   bool success = 1;
-  google.protobuf.StringValue namespace = 2;
-  google.protobuf.StringValue displayName = 3;
+  string namespace = 2;
+  string displayName = 3;
   int32 errorCode = 4; 
-  google.protobuf.StringValue errorMessage = 5;
+  string errorMessage = 5;
 }
 
 message GetEstateDataRequest {
