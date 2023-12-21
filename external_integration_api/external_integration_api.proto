@@ -91,32 +91,63 @@ message GetAddressDetailsRequest {
   string lookup_service = 1;
   string country_code = 2;
   string id = 3;
+  bool is_entrance_address = 4;
 }
 
 message GetAddressDetailsReply {
+  bool success = 24;
+  string error_code = 25;
+  
   string id = 1;
+  string address_source = 27;
+  
   string country_code = 2;
+
+  string street_id = 29;
+  string street_source = 30;
   string street_name = 3;
   string street_number = 4;
   string street_code = 5;
+  
   string floor = 6;
   string door = 7;
+  
+  string zip_code_id = 31;
+  string zip_code_source = 32;
   string zip_code = 8;
-  string city = 9;
+  string city = 9; // zip_code_name / city_name
+  
+  string municipality_id = 35;
+  string municipality_source = 36;
   string municipality_code = 10;
   string municipality_name = 11;
+  
   double latitude = 12;
   double longitude = 13;
+  
   string display_name = 14;
   bool is_validated = 15;
+  
   repeated AddressIdentifier identifiers = 16;
   string kvhx = 17;
   string property_number = 18;
+  
+  string supplementary_city_id = 33;
+  string supplementary_city_source = 34;
   string supplementary_city_name_code = 19;
   string supplementary_city_name = 20;
+  
   string district_code = 21;
   string district_name = 22;
   string matrikel_number = 23;
+  
+  string entrance_address_id = 26;
+  string entrance_address_source = 28;
+    
+  string region_id = 37;
+  string region_source = 38;
+  string region_code = 39;
+  string region_name = 40;
 }
 
 message AddressIdentifier {
