@@ -130,7 +130,6 @@ message GetAddressDetailsReply {
   
   repeated AddressIdentifier identifiers = 16;
   string kvhx = 17;
-  string property_number = 18;
   
   string supplementary_city_id = 33;
   string supplementary_city_source = 34;
@@ -139,7 +138,9 @@ message GetAddressDetailsReply {
   
   string district_code = 21;
   string district_name = 22;
+  
   string matrikel_number = 23;
+  string property_number = 18;
   
   string entrance_address_id = 26;
   string entrance_address_source = 28;
