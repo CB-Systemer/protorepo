@@ -96,59 +96,59 @@ message GetAddressDetailsRequest {
 
 message GetAddressDetailsReply {
   bool success = 24;
-  string error_code = 25;
-  
-  string id = 1;
-  string address_source = 27;
-  
-  string country_code = 2;
+  google.protobuf.StringValue error_code = 25;
 
-  string street_id = 29;
-  string street_source = 30;
-  string street_name = 3;
-  string street_number = 4;
-  string street_code = 5;
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue address_source = 27;
+
+  google.protobuf.StringValue country_code = 2;
+
+  google.protobuf.StringValue street_id = 29;
+  google.protobuf.StringValue street_source = 30;
+  google.protobuf.StringValue street_name = 3;
+  google.protobuf.StringValue street_number = 4;
+  google.protobuf.StringValue street_code = 5;
+
+  google.protobuf.StringValue floor = 6;
+  google.protobuf.StringValue door = 7;
   
-  string floor = 6;
-  string door = 7;
+  google.protobuf.StringValue zip_code_id = 31;
+  google.protobuf.StringValue zip_code_source = 32;
+  google.protobuf.StringValue zip_code = 8;
+  google.protobuf.StringValue city = 9; // zip_code_name / city_name
   
-  string zip_code_id = 31;
-  string zip_code_source = 32;
-  string zip_code = 8;
-  string city = 9; // zip_code_name / city_name
-  
-  string municipality_id = 35;
-  string municipality_source = 36;
-  string municipality_code = 10;
-  string municipality_name = 11;
+  google.protobuf.StringValue municipality_id = 35;
+  google.protobuf.StringValue municipality_source = 36;
+  google.protobuf.StringValue municipality_code = 10;
+  google.protobuf.StringValue municipality_name = 11;
   
   double latitude = 12;
   double longitude = 13;
-  
-  string display_name = 14;
+
+  google.protobuf.StringValue display_name = 14;
   bool is_validated = 15;
   
   repeated AddressIdentifier identifiers = 16;
-  string kvhx = 17;
+  google.protobuf.StringValue kvhx = 17;
   
-  string supplementary_city_id = 33;
-  string supplementary_city_source = 34;
-  string supplementary_city_name_code = 19;
-  string supplementary_city_name = 20;
+  google.protobuf.StringValue supplementary_city_id = 33;
+  google.protobuf.StringValue supplementary_city_source = 34;
+  google.protobuf.StringValue supplementary_city_name_code = 19;
+  google.protobuf.StringValue supplementary_city_name = 20;
   
-  string district_code = 21;
-  string district_name = 22;
+  google.protobuf.StringValue district_code = 21;
+  google.protobuf.StringValue district_name = 22;
   
-  string matrikel_number = 23;
-  string property_number = 18;
+  google.protobuf.StringValue matrikel_number = 23;
+  google.protobuf.StringValue property_number = 18;
   
-  string entrance_address_id = 26;
-  string entrance_address_source = 28;
+  google.protobuf.StringValue entrance_address_id = 26;
+  google.protobuf.StringValue entrance_address_source = 28;
     
-  string region_id = 37;
-  string region_source = 38;
-  string region_code = 39;
-  string region_name = 40;
+  google.protobuf.StringValue region_id = 37;
+  google.protobuf.StringValue region_source = 38;
+  google.protobuf.StringValue region_code = 39;
+  google.protobuf.StringValue region_name = 40;
 }
 
 message AddressIdentifier {
