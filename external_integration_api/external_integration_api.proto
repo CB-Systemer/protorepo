@@ -47,6 +47,7 @@ message GetEstateDataReply {
 
 message GetBBRDataRequest {
   string kvhx = 1;
+  google.protobuf.StringValue source_address_id = 2;
 }
 
 message GetBBRDataReply {
