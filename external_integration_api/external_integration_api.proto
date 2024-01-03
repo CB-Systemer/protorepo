@@ -15,6 +15,7 @@ service ExternalIntegrationApi {
   rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
   rpc GetEstateData(GetEstateDataRequest) returns (GetEstateDataReply);
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
+  rpc GetBbrPropertyDetails (GetBbrPropertyDetailsRequest) returns (GetBbrPropertyDetailsReply);
 }
 
 message GetOwnershipTypeRequest {
@@ -43,6 +44,17 @@ message GetEstateDataReply {
   google.protobuf.StringValue processId = 2;
   google.protobuf.StringValue processNamespace = 3;
   google.protobuf.StringValue errorMessage = 4;
+}
+
+message GetBbrPropertyDetailsRequest() {
+  google.protobuf.StringValue bfeNumber = 1;
+}
+
+message GetBbrPropertyDetailsReply(){
+  google.protobuf.StringValue bbrAnvendelsesKode = 1;
+  int32 boligAreal = 2;
+  int32 erhvervsAreal = 3;
+  int32 kaelderAreal = 4;
 }
 
 message GetBBRDataRequest {
