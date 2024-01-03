@@ -46,11 +46,11 @@ message GetEstateDataReply {
   google.protobuf.StringValue errorMessage = 4;
 }
 
-message GetBbrPropertyDetailsRequest() {
+message GetBbrPropertyDetailsRequest {
   google.protobuf.StringValue bfeNumber = 1;
 }
 
-message GetBbrPropertyDetailsReply(){
+message GetBbrPropertyDetailsReply {
   google.protobuf.StringValue bbrAnvendelsesKode = 1;
   int32 boligAreal = 2;
   int32 erhvervsAreal = 3;
