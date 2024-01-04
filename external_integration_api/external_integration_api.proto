@@ -59,10 +59,11 @@ message GetBbrPropertyDetailsReply {
   google.protobuf.StringValue errorMessage = 2;
   google.protobuf.StringValue bbrAnvendelsesKode = 3;
   google.protobuf.StringValue bbrAnvendelse = 4;
-  int32 boligAreal = 5;
-  int32 erhvervsAreal = 6;
-  int32 kaelderAreal = 7;
-  int32 grundAreal = 8;
+  google.protobuf.StringValue estateType = 5;
+  int32 boligAreal = 6;
+  int32 erhvervsAreal = 7;
+  int32 kaelderAreal = 8;
+  int32 grundAreal = 9;
 }
 
 message GetIdeelAnpartDetailsRequest {
