@@ -71,7 +71,8 @@ message GetIdeelAnpartDetailsRequest {
 
 message IdeelAnpartDto {
    google.protobuf.StringValue id = 1;
-   repeated OwnerDto owners = 2;
+   int32 anpartNumber = 2;
+   repeated OwnerDto owners = 3;
 }
 
 message OwnerDto {
