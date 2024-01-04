@@ -83,7 +83,7 @@ message OwnerDto {
 message GetIdeelAnpartDetailsReply {
     bool success = 1;
     google.protobuf.StringValue errorMessage = 2;
-    repeated IdeelAnpartDto Items = 3;
+    repeated IdeelAnpartDto items = 3;
 }
 
 message GetBBRDataRequest {
