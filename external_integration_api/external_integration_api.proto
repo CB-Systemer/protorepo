@@ -16,6 +16,7 @@ service ExternalIntegrationApi {
   rpc GetEstateData(GetEstateDataRequest) returns (GetEstateDataReply);
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
   rpc GetBbrPropertyDetails (GetBbrPropertyDetailsRequest) returns (GetBbrPropertyDetailsReply);
+  rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
 }
 
 message GetOwnershipTypeRequest {
@@ -62,6 +63,26 @@ message GetBbrPropertyDetailsReply {
   int32 erhvervsAreal = 6;
   int32 kaelderAreal = 7;
   int32 grundAreal = 8;
+}
+
+message GetIdeelAnpartDetailsRequest {
+    google.protobuf.StringValue parentBfeNumber = 1;
+}
+
+message IdeelAnpartDto {
+   repeated OwnerDto Owners = 1;
+}
+
+message OwnerDto {
+   google.protobuf.StringValue name = 1;
+   google.protobuf.StringValue birthDay = 2;
+   google.protobuf.StringValue cvrNumber = 3;
+}
+
+message GetIdeelAnpartDetailsReply {
+    bool success = 1;
+    google.protobuf.StringValue errorMessage = 2;
+    repeated IdeelAnpartDto Items = 3;
 }
 
 message GetBBRDataRequest {
