@@ -55,10 +55,11 @@ message GetBbrPropertyDetailsReply {
   bool success = 1;
   google.protobuf.StringValue errorMessage = 2;
   google.protobuf.StringValue bbrAnvendelsesKode = 3;
-  int32 boligAreal = 4;
-  int32 erhvervsAreal = 5;
-  int32 kaelderAreal = 6;
-  int32 grundAreal = 7;
+  google.protobuf.StringValue bbrAnvendelse = 4;
+  int32 boligAreal = 5;
+  int32 erhvervsAreal = 6;
+  int32 kaelderAreal = 7;
+  int32 grundAreal = 8;
 }
 
 message GetBBRDataRequest {
