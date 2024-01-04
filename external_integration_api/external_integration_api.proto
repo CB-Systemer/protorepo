@@ -70,7 +70,8 @@ message GetIdeelAnpartDetailsRequest {
 }
 
 message IdeelAnpartDto {
-   repeated OwnerDto Owners = 1;
+   google.protobuf.StringValue id = 1;
+   repeated OwnerDto owners = 2;
 }
 
 message OwnerDto {
