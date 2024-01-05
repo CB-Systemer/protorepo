@@ -80,6 +80,7 @@ message IdeelAnpartDto {
 message GetRegisteredOwnersRequest {
     google.protobuf.StringValue bfeNumber = 1;
     google.protobuf.StringValue parentBfeNumber = 2;
+    google.protobuf.StringValue ownershipNamespace = 3;
 }
 
 message GetRegisteredOwnersReply {
