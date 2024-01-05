@@ -15,7 +15,7 @@ service ExternalIntegrationApi {
   rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
   rpc GetEstateData(GetEstateDataRequest) returns (GetEstateDataReply);
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
-  rpc GetBbrPropertyDetails (GetBbrPropertyDetailsRequest) returns (GetBbrPropertyDetailsReply);
+  rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
 }
@@ -51,14 +51,14 @@ message GetEstateDataReply {
   google.protobuf.StringValue errorMessage = 4;
 }
 
-message GetBbrPropertyDetailsRequest {
+message GetPropertyDetailsRequest {
   google.protobuf.StringValue bfeNumber = 1;
   google.protobuf.StringValue ownershipNamespace = 2;
   google.protobuf.StringValue addressId = 3;
   google.protobuf.StringValue entranceAddressId = 4;
 }
 
-message GetBbrPropertyDetailsReply {
+message GetPropertyDetailsReply {
   bool success = 1;
   google.protobuf.StringValue errorMessage = 2;
   google.protobuf.StringValue bbrAnvendelsesKode = 3;
