@@ -17,6 +17,7 @@ service ExternalIntegrationApi {
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
   rpc GetBbrPropertyDetails (GetBbrPropertyDetailsRequest) returns (GetBbrPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
+  rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
 }
 
 message GetOwnershipTypeRequest {
@@ -74,6 +75,17 @@ message IdeelAnpartDto {
    google.protobuf.StringValue id = 1;
    int32 anpartNumber = 2;
    repeated OwnerDto owners = 3;
+}
+
+message GetRegisteredOwnersRequest {
+    google.protobuf.StringValue bfeNumber = 1;
+    google.protobuf.StringValue parentBfeNumber = 2;
+}
+
+message GetRegisteredOwnersReply {
+    bool success = 1;
+    google.protobuf.StringValue errorMessage = 2;
+    repeated OwnerDto owners = 3;
 }
 
 message OwnerDto {
