@@ -31,6 +31,9 @@ message GetOwnershipTypeReply {
   string displayName = 3;
   int32 errorCode = 4; 
   string errorMessage = 5;
+  google.protobuf.StringValue bfeNumber = 6;
+  google.protobuf.StringValue parentBfeNumber = 7;
+
 }
 
 message GetEstateDataRequest {
