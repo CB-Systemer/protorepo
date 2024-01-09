@@ -38,10 +38,18 @@ message GetOwnershipTypeReply {
 
 message GetEstateDataRequest {
   google.protobuf.StringValue estateId = 1;
-  google.protobuf.StringValue estateDisplayName = 2;
-  google.protobuf.StringValue caseId = 3;
-  google.protobuf.StringValue caseNamespace = 4;
-  google.protobuf.StringValue addressId = 5;
+  google.protobuf.StringValue estateNamespace = 2;
+  google.protobuf.StringValue estateDisplayName = 3;
+  google.protobuf.StringValue caseId = 4;
+  google.protobuf.StringValue caseNamespace = 5;
+  google.protobuf.StringValue ownershipNamespace = 6;
+  google.protobuf.StringValue addressId = 7;
+  google.protobuf.StringValue entranceAddressId = 8;
+  google.protobuf.StringValue bfeNumber = 9;
+  google.protobuf.StringValue parentBfeNumber = 10;
+  google.protobuf.StringValue executingActorId = 11;
+  google.protobuf.StringValue executingResourceGroupId = 12;
+  google.protobuf.StringValue executingTenantId = 13;
 }
 
 message GetEstateDataReply {
