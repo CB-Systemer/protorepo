@@ -19,6 +19,7 @@ service ExternalIntegrationApi {
   rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
+  rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
 }
 
 message GetOwnershipTypeRequest {
@@ -111,6 +112,19 @@ message GetIdeelAnpartDetailsReply {
     bool success = 1;
     google.protobuf.StringValue errorMessage = 2;
     repeated IdeelAnpartDto items = 3;
+}
+
+message GetRepresentativeAddressRequest {
+   google.protobuf.StringValue bfeNumber = 1;
+   google.protobuf.StringValue ownershipNamespace = 2;
+
+}
+
+message GetRepresentativeAddressReply {
+   bool success = 1;
+   google.protobuf.StringValue addressId = 2;
+   google.protobuf.StringValue displayName = 3;
+   bool isEntranceAddress = 4;
 }
 
 message GetBBRDataRequest {
