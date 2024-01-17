@@ -115,6 +115,8 @@ message GetIdeelAnpartDetailsReply {
 
 message GetRepresentativeAddressRequest {
    google.protobuf.StringValue bfeNumber = 1;
+   google.protobuf.StringValue ownershipNamespace = 2;
+
 }
 
 message GetRepresentativeAddressReply {
