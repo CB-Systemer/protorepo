@@ -130,6 +130,7 @@ message ResourceGroupDto {
 	repeated ChainMemberDto chainMembers = 9;
 	string datastore_id = 10;
 	string status = 11;
+	string tenant_display_name = 12;
 }
 
 message ApplicationDto{
