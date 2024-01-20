@@ -5,8 +5,7 @@ option csharp_namespace = "External.Integration.Api";
 
 import "google/protobuf/wrappers.proto";
 
-service ExternalIntegrationApi {
-  rpc GetBBRData (GetBBRDataRequest) returns (GetBBRDataReply);
+service ExternalIntegrationApi {  
   rpc GetAddressByBFE (GetAddressByBFERequest) returns (GetAddressByBFEReply);
   rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
   rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
@@ -125,18 +124,6 @@ message GetRepresentativeAddressReply {
    google.protobuf.StringValue addressId = 2;
    google.protobuf.StringValue displayName = 3;
    bool isEntranceAddress = 4;
-}
-
-message GetBBRDataRequest {
-  string kvhx = 1;
-  google.protobuf.StringValue source_address_id = 2;
-}
-
-message GetBBRDataReply {
-  string useCode = 1;
-  string use = 2;
-  int32 area = 3;
-  int32 landArea = 4;
 }
 
 message ValidateCaseForBoligsidenRequest {
