@@ -124,7 +124,7 @@ message CasePrimaryAddressAndPropertyFactsRequest {
 message CasePrimaryAddressAndPropertyFactsReply {
 	string primaryAddressId = 1;
 	string primaryAddressDisplayName = 2;
-	repeated PropertyFact propertyFacts = 3;
+	repeated Registration registrations = 3;
 }
 
 message LawRegulationsRequest {
