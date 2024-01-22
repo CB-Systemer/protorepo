@@ -51,6 +51,7 @@ message GetEstateDataRequest {
   google.protobuf.StringValue executingActorId = 11;
   google.protobuf.StringValue executingResourceGroupId = 12;
   google.protobuf.StringValue executingTenantId = 13;
+  google.protobuf.StringValue estateIdentificationDataNodeId = 14;
 }
 
 message GetEstateDataReply {
