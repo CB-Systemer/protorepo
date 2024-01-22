@@ -123,7 +123,7 @@ message CasePrimaryAddressAndRegistrationsRequest {
 
 message CasePrimaryAddressAndRegistrationsReply {
 	string primaryAddressId = 1;
-	string primaryAddressDisplayName = 2;
+	string primaryAddressTypeDisplayName = 2;
 	repeated Registration registrations = 3;
 }
 
