@@ -15,7 +15,6 @@ service CaseApi {
 	rpc GetPublicProfiles (CasePublicProfilesRequest) returns (CasePublicProfilesReply);
 	rpc GetPublicProfileDisplayNameByCaseId (GetPublicProfileDisplayNameByCaseIdRequest) returns (GetPublicProfileDisplayNameByCaseIdReply);
 	rpc GetPropertyFacts (CasePropertyFactsRequest) returns (CasePropertyFactsReply);
-	rpc GetPrimaryAddressAndRegistrations (CasePrimaryAddressAndRegistrationsRequest) returns (CasePrimaryAddressAndRegistrationsReply);
 	rpc GetCaseEconomy (CaseEconomyRequest) returns (CaseEconomyReply);
 	rpc GetLawRegulations (LawRegulationsRequest) returns (LawRegulationsReply);
 	rpc GetAllCaseIdsByResourceGroup (GetAllCaseIdsByResourceGroupRequest) returns (GetAllCaseIdsReply);
@@ -114,17 +113,6 @@ message CasePropertyFactsRequest {
 
 message CasePropertyFactsReply {
 	repeated PropertyFact propertyFacts = 1;
-}
-
-message CasePrimaryAddressAndRegistrationsRequest { 
-	string caseId = 1;
-	ActorContext actorContext = 2;
-}
-
-message CasePrimaryAddressAndRegistrationsReply {
-	string primaryAddressId = 1;
-	string primaryAddressTypeDisplayName = 2;
-	repeated Registration registrations = 3;
 }
 
 message LawRegulationsRequest {
