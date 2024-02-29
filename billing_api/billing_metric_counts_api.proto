@@ -42,8 +42,8 @@ message MetricCountGroupedByDayDto {
 }
 
 message GetApiMetricCountsRequest {
-    google.protobuf.Timestamp from = 1;
-    google.protobuf.Timestamp to = 2;
+    google.protobuf.StringValue from = 1;
+    google.protobuf.StringValue to = 2;
 	repeated string partners = 3;
 }
 
