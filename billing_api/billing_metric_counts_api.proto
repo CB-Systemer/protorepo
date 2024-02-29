@@ -13,8 +13,8 @@ service BillingMetricCountsApi {
 }
 
 message GetFeatureActivationsRequest {
-    google.protobuf.Timestamp from = 1;
-    google.protobuf.Timestamp to = 2;
+    google.protobuf.StringValue from = 1;
+    google.protobuf.StringValue to = 2;
 	repeated string metric_namespaces = 3;
 }
 
@@ -23,8 +23,8 @@ message GetFeatureActivationsResponse {
 }
 
 message GetMetricCountsRequest {
-    google.protobuf.Timestamp from = 1;
-    google.protobuf.Timestamp to = 2;
+    google.protobuf.StringValue from = 1;
+    google.protobuf.StringValue to = 2;
 	repeated string metric_namespaces = 3;
 }
 
