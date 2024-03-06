@@ -53,6 +53,7 @@ message GetEstateDataRequest {
   google.protobuf.StringValue executingTenantId = 13;
   google.protobuf.StringValue estateIdentificationDataNodeId = 14;
   google.protobuf.StringValue ideelAnpartNumber = 15;
+  google.protobuf.StringValue parentProcessId = 16;
 }
 
 message GetEstateDataReply {
