@@ -22,7 +22,7 @@ service Email {
   // Misc
   rpc GetDomainsForTenant(GetDomainsForTenantRequest) returns (DomainsReply);
   rpc GetDomainsRaw(GetDomainsRawRequest) returns (DomainsReply);
-
+  rpc GetClientSecretExpirationDate(GetDomainsRawRequest) returns (GetClientSecretExpirationDateReply);
   rpc MarkAsRead(MarkAsReadRequest) returns (EmptyReply);
   rpc ResolveMenu(ResolveMenuRequest) returns (ContextMenuReply);
 
@@ -180,6 +180,9 @@ message DomainsReply {
   repeated Domain DomainList = 1;
 }
 
+message GetClientSecretExpirationDateReply {
+  google.protobuf.Timestamp client_secret_end_date = 1;
+}
 message Domain {
   string name = 1;
   bool isDefault = 2;
