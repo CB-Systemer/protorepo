@@ -126,6 +126,8 @@ message SendAnonymousEmailRequest {
   string transactionId = 9;
   repeated Tag tags = 10;
   string callbackQueueName = 11;
+  string fromEmailPrefix = 12;
+  string fromEmailDisplayName = 13;
 }
 
 message SendMessageRequest {
