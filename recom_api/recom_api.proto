@@ -154,6 +154,8 @@ message SendMessageRequest {
   string callbackQueueName = 23;
   google.protobuf.Timestamp lastPossibleRetryTimestamp = 24;
   google.protobuf.StringValue related_case_id = 25;
+  google.protobuf.StringValue content = 26;
+  google.protobuf.StringValue subject = 27;
 }
 
 message SendMessageReply {
