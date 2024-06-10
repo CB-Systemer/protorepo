@@ -19,8 +19,8 @@ service ExternalIntegrationApi {
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
-  rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) return (SendChainDataToBoligsidenReply);
-  rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) return (SendStoreDataToBoligsidenReply);
+  rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) returns (SendChainDataToBoligsidenReply);
+  rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
 }
 
 message GetOwnershipTypeRequest {
