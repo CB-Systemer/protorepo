@@ -19,6 +19,8 @@ service ExternalIntegrationApi {
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
+  rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) return (SendChainDataToBoligsidenReply);
+  rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) return (SendStoreDataToBoligsidenReply);
 }
 
 message GetOwnershipTypeRequest {
@@ -286,4 +288,38 @@ message GetAddressByBFEReply{
   
   google.protobuf.StringValue entrance_address_id = 3;
   google.protobuf.StringValue address_id = 4;
+}
+
+message SendChainDataToBoligsidenRequest {
+  string number = 1;
+  string display_name = 2;
+  string logo_url = 3;
+  string logo_changed = 4;
+  string supplier_number = 5;
+}
+
+message SendChainDataToBoligsidenReply {
+  bool success = 1;
+}
+
+message SendStoreDataToBoligsidenRequest {
+  string number = 1;
+  string handle = 2;
+  string display_name = 3;
+  string street_name = 4;
+  string place_name = 5;
+  string house_number = 6;
+  int32 floor = 7;
+  string floor_side = 8;
+  string municipality_number = 9;
+  string zip_code = 10;
+  string phone_number = 11;
+  string email_address = 12;
+  string website = 13;
+  string chain_number = 14;
+  string supplier_number = 15;
+}
+
+message SendStoreDataToBoligsidenReply {
+  bool success = 1;
 }
