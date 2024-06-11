@@ -304,20 +304,30 @@ message SendChainDataToBoligsidenReply {
 
 message SendStoreDataToBoligsidenRequest {
   string number = 1;
-  string handle = 2;
-  string display_name = 3;
-  string street_name = 4;
-  string place_name = 5;
-  string house_number = 6;
-  int32 floor = 7;
-  string floor_side = 8;
-  string municipality_number = 9;
-  string zip_code = 10;
-  string phone_number = 11;
-  string email_address = 12;
-  string website = 13;
-  string chain_number = 14;
-  string supplier_number = 15;
+  StoreData data = 2;
+  StoreDescription description = 3;  
+}
+
+message StoreData {
+  string chain_number = 1;
+  string display_name = 2;
+  string street_name = 3;
+  string place_name = 4;
+  string house_number = 5;
+  int32 floor = 6;
+  string floor_side = 7;
+  string municipality_number = 8;
+  string zip_code = 9;
+  string phone_number = 10;
+  string email_address = 11;
+  string website = 12;
+  string supplier_number = 13;
+  string handle = 14;
+}
+
+message StoreDescription {
+  string heading = 1;
+  string description = 2;
 }
 
 message SendStoreDataToBoligsidenReply {
