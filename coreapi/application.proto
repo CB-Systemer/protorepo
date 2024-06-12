@@ -9,8 +9,7 @@ import "google/protobuf/wrappers.proto";
 service ApplicationApi {
   rpc Search (SearchRequest) returns (SearchApplicationsReply);
   rpc ListApplications (ListApplicationsRequest) returns (SearchApplicationsReply);
-  rpc ListApplicationListForHierarchy (ListApplicationForHierarchyRequest) returns (ListApplicationListForHierarchyReply);
-  rpc GetDefaultApplicationsUrl (GetDefaultApplicationsUrlRequest) returns (GetDefaultApplicationsUrlReply);
+  rpc ListApplicationListForHierarchy (ListApplicationForHierarchyRequest) returns (ListApplicationListForHierarchyReply);  
   rpc RemoveApplicationFromIndex (RemoveApplicationFromIndexRequest) returns (RemoveApplicationFromIndexReply);
   rpc IndexApplication (IndexRequest) returns (IndexReply);
 }
@@ -58,21 +57,6 @@ message HierarchyApplicationDto{
 	google.protobuf.StringValue resource_group_display_name = 7;
 	
 	repeated string allowedActorTypes = 8;
-}
-
-message GetDefaultApplicationsUrlRequest{
-	string resourceGroupId = 1;
-}
-
-message GetDefaultApplicationsUrlReply{
-	DefaultApplicationDto b2b = 1;
-	DefaultApplicationDto b2c = 2;
-}
-
-message DefaultApplicationDto{
-	string url = 1;
-	string id = 2;
-	string displayName = 3;
 }
 
 
