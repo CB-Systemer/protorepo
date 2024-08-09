@@ -56,6 +56,12 @@ message GetEstateDataRequest {
   google.protobuf.StringValue estateIdentificationDataNodeId = 14;
   google.protobuf.StringValue ideelAnpartNumber = 15;
   google.protobuf.StringValue parentProcessId = 16;
+  google.protobuf.StringValue data_node_id = 17;
+  google.protobuf.StringValue data_node_namespace = 18;
+  google.protobuf.StringValue data_node_parent_id = 19;
+  google.protobuf.StringValue data_node_scope_id = 20;
+  google.protobuf.StringValue data_node_root_id = 21;
+  google.protobuf.StringValue resource_group_id = 22;
 }
 
 message GetEstateDataReply {
