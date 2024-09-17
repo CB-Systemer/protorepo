@@ -7,8 +7,6 @@ import "google/protobuf/wrappers.proto";
 
 service ExternalIntegrationApi {  
   rpc GetAddressByBFE (GetAddressByBFERequest) returns (GetAddressByBFEReply);
-  rpc ValidateCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
-  rpc ValidateRemoveCaseForBoligsiden (ValidateCaseForBoligsidenRequest) returns (ValidateCaseForBoligsidenReply);
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
@@ -298,7 +296,7 @@ message GetAddressByBFEReply{
 }
 
 message SendChainDataToBoligsidenRequest {
-  string store_id = 1;
+  string chain_id = 1;
 }
 
 message SendChainDataToBoligsidenReply {
