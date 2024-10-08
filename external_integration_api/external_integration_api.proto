@@ -24,6 +24,7 @@ service ExternalIntegrationApi {
 message GetOwnershipTypeRequest {
   string addressId = 1;
   bool isEntranceAddress = 2;
+  google.protobuf.StringValue bfeNumber = 3;
 }
 
 message GetOwnershipTypeReply {
