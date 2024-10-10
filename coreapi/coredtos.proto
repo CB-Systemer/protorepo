@@ -131,6 +131,7 @@ message ResourceGroupDto {
 	string datastore_id = 10;
 	string status = 11;
 	string tenant_display_name = 12;
+	string legal_display_name = 13;
 }
 
 message ApplicationDto{
