@@ -551,7 +551,7 @@ message CreateDeliverableRequest {
 
   oneof data {
     ConditionReportDto condition_report = 2;
-    ElectricalInstallationConditionReportDto el_eftersyn_report = 3;
+    ElectricalInstallationConditionReportDto electrical_installation_condition_report = 3;
     ImageFileDto image_file = 4;
     ImageReferenceDto image_reference = 5;
     EnergyLabelReportDto energy_label_report = 14;
@@ -648,7 +648,7 @@ message DeliverableDto {
 
   oneof data {
     ConditionReportDto condition_report = 4;
-    ElectricalInstallationConditionReportDto el_eftersyn_report = 5;
+    ElectricalInstallationConditionReportDto electrical_installation_condition_report = 5;
     ImageFileDto image_file = 6;
     ImageReferenceDto image_reference = 9;
     EnergyLabelReportDto energy_label_report = 10;
