@@ -117,7 +117,7 @@ message DataNode {
 	repeated KeyValueModel keyValues = 100;
 	repeated PricingValueModel pricingValues = 101;
 	repeated AdTextModel adTextValues = 102;
-	EnergyLabelModel energyLabel = 103;
+	EnergyLabelReportModel energyLabelReport = 103;
 	string externalPresentationUrl = 104;
 	bool concealedListing = 105;
 	bool underConstruction = 106;
@@ -321,9 +321,9 @@ message AdTextModel{
 	string payload = 4;
 }
 
-message EnergyLabelModel{
-	string energyLabelSerialIdentifier = 1;
-	string energyLabelClassification = 2;
+message EnergyLabelReportModel{
+	string energyLabelReportSerialIdentifier = 1;
+	string energyLabelReportClassification = 2;
 	string submitterCompanyIdentifier = 3;
 	string submitterConsultantName = 4;
 	string submitterCompanyName = 5;
@@ -334,7 +334,7 @@ message EnergyLabelModel{
 	int32 calculatedConsumption = 10;
 	string totalProfitableInvestment = 11;
 	int32 extraCostPrYear = 12;
-	string possibleEnergyLabelForAllProfitableProposals = 13;
+	string possibleEnergyLabelReportForAllProfitableProposals = 13;
 	string heatSupply = 14;
 }
 
