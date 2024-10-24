@@ -412,7 +412,7 @@ message CancelReferralRequest{
 message GetProductOrderDetailsRequest{
   string id = 1;
   repeated string resource_group_scopes = 2;
-  google.protobuf.BoolValue = 3
+  google.protobuf.BoolValue is_system = 3
 }
 
 message GetProductOrdersByProductRequest{
