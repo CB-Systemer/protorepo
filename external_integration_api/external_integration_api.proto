@@ -116,6 +116,7 @@ message OwnerDto {
    google.protobuf.StringValue name = 1;
    google.protobuf.StringValue birthDay = 2;
    google.protobuf.StringValue cvrNumber = 3;
+   google.protobuf.StringValue status = 4;
 }
 
 message GetIdeelAnpartDetailsReply {
