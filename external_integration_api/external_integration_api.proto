@@ -24,7 +24,6 @@ service ExternalIntegrationApi {
 
 message SyncMediaProviderRequest {
   google.protobuf.StringValue caseNumber = 1;
-  google.protobuf.StringValue provider = 2;
   google.protobuf.StringValue integrationId = 3;
   google.protobuf.StringValue resourceGroupId = 4;
   google.protobuf.StringValue deviceId = 5;
