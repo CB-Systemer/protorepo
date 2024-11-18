@@ -20,6 +20,22 @@ service ExternalIntegrationApi {
   rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) returns (SendChainDataToBoligsidenReply);
   rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
+  rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
+}
+
+message GetMediaProviderCountRequest {
+  google.protobuf.StringValue caseNumber = 1;
+  google.protobuf.StringValue integrationId = 3;
+  google.protobuf.StringValue resourceGroupId = 4;
+  google.protobuf.StringValue deviceId = 5;
+  google.protobuf.StringValue caseId = 6;
+  google.protobuf.StringValue tenantId = 7;
+  google.protobuf.StringValue providerNamespace = 8;
+  google.protobuf.StringValue userId = 9;
+}
+
+message GetMediaProviderCountReply {
+  int32 count = 1;
 }
 
 message SyncMediaProviderRequest {
