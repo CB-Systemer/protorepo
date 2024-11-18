@@ -322,6 +322,7 @@ message TaxonPublicProfile{
 	bool value = 1;
 	google.protobuf.StringValue taxon_namespace = 2;
 	google.protobuf.StringValue taxonomy_namespace = 3;
+	string note = 4;
 }
 message MediaItem{
 	string displayName = 1;
