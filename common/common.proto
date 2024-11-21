@@ -137,6 +137,7 @@ message DataNode {
 	NullableGuid responsibleActorId = 120;
 	string messageSubject = 121;
 	bool disableAutomaticMatchSendout = 122;
+	bool excludeFromPropositionSharedDocumentList = 123;
 }
 
 message DataNodeComment {
