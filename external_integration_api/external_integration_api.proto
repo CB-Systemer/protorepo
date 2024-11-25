@@ -21,6 +21,25 @@ service ExternalIntegrationApi {
   rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
+    rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
+}
+
+message GetEfktTextsRequest {
+  google.protobuf.StringValue caseNumber = 1;
+  google.protobuf.StringValue resourceGroupId = 2;
+  google.protobuf.StringValue clientId = 3;
+  google.protobuf.StringValue tenantId = 4;
+  google.protobuf.StringValue providerNamespace = 5;
+  google.protobuf.StringValue userId = 6;
+}
+
+message GetEfktTextsReply {
+  repeated TextItemDto Texts = 1; 
+}
+
+message TextItemDto {
+  string efktField = 1;
+  string text = 2;
 }
 
 message GetMediaProviderCountRequest {
