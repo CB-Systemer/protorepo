@@ -298,8 +298,8 @@ message VerifyAccountRequest{
 
 message GetVerifyLinkRequest{
 	string accountId = 1;
-	string extensionId = 2;
 	string actorId = 3;
+	reserved 2;
 }
 
 message GetVerifyLinkReply{
