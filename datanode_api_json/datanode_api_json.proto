@@ -26,6 +26,6 @@ message GetPersonalSettingsResponse{
 }
 
 message EmailAccountSettingsDto{
-	string extensionId = 1;
-    string primaryEmailAccountId = 2;
+	string primaryEmailAccountId = 2;
+	reserved 1;
 }
