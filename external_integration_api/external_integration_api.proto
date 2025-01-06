@@ -21,7 +21,7 @@ service ExternalIntegrationApi {
   rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
-    rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
+  rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
 }
 
 message GetEfktTextsRequest {
@@ -51,6 +51,8 @@ message GetMediaProviderCountRequest {
   google.protobuf.StringValue tenantId = 7;
   google.protobuf.StringValue providerNamespace = 8;
   google.protobuf.StringValue userId = 9;
+  google.protobuf.StringValue userName = 10;
+  google.protobuf.StringValue password = 11;
 }
 
 message GetMediaProviderCountReply {
@@ -67,6 +69,8 @@ message SyncMediaProviderRequest {
   google.protobuf.StringValue providerNamespace = 8;
   google.protobuf.StringValue userId = 9;
   repeated string mediaAlbumNamespaces = 10;
+  google.protobuf.StringValue userName = 11;
+  google.protobuf.StringValue password = 12;
 }
 
 message SyncMediaProviderReply {
