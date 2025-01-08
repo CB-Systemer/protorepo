@@ -28,13 +28,6 @@ service ChatApi {
   rpc GetChatList (GetChatListRequest) returns (GetChatListReply);
   rpc HasAccess(HasAccessRequest) returns (HasAccessReply);
   rpc HasMembers(HasMembersRequest) returns (HasMembersReply);
-
-	rpc ActivateAiAssistant(ActivateAiAssistantRequest) returns (google.protobuf.Empty);
-}
-
-message ActivateAiAssistantRequest {
-	string datanode_id = 1;
-	google.protobuf.StringValue type = 2;
 }
 
 message GetMyUnreadChatCountRequest {
