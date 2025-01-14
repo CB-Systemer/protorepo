@@ -5,113 +5,125 @@ option csharp_namespace = "Billing.Api";
 import "google/protobuf/wrappers.proto";
 
 service BillingMetricsApi {
-	rpc SmsSent (CreateSmsMetricRequest) returns (CreateMetricReply);
-    rpc SmsHandled (CreateSmsMetricRequest) returns (CreateMetricReply);
-    rpc SmsLoginSent (CreateSmsMetricRequest) returns (CreateMetricReply);
-    rpc SmsCommandSent (CreateSmsMetricRequest) returns (CreateMetricReply);
-    rpc NemIdSent (CreateNemIdMetricRequest) returns (CreateMetricReply);
-    rpc NemIdHandled (CreateNemIdMetricRequest) returns (CreateMetricReply);
-    rpc MitIdSent (CreateMitIdMetricRequest) returns (CreateMetricReply);
-    rpc MitIdHandled (CreateMitIdMetricRequest) returns (CreateMetricReply);
-    rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);
-    rpc EmailHandled (CreateEmailMetricRequest) returns (CreateMetricReply);
-    rpc AdLoginHandled (CreateAdLoginMetricRequest) returns (CreateMetricReply);
-    rpc ApiRequestCompleted (CreateApiMetricRequest) returns (CreateMetricReply);
-    rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
-    rpc ProductOrderSent (CreateProductOrderMetricRequest) returns (CreateMetricReply);
+  rpc SmsSent (CreateSmsMetricRequest) returns (CreateMetricReply);
+  rpc SmsHandled (CreateSmsMetricRequest) returns (CreateMetricReply);
+  rpc SmsLoginSent (CreateSmsMetricRequest) returns (CreateMetricReply);
+  rpc SmsCommandSent (CreateSmsMetricRequest) returns (CreateMetricReply);
+  rpc NemIdSent (CreateNemIdMetricRequest) returns (CreateMetricReply);
+  rpc NemIdHandled (CreateNemIdMetricRequest) returns (CreateMetricReply);
+  rpc MitIdSent (CreateMitIdMetricRequest) returns (CreateMetricReply);
+  rpc MitIdHandled (CreateMitIdMetricRequest) returns (CreateMetricReply);
+  rpc EmailSent (CreateEmailMetricRequest) returns (CreateMetricReply);
+  rpc EmailHandled (CreateEmailMetricRequest) returns (CreateMetricReply);
+  rpc AdLoginHandled (CreateAdLoginMetricRequest) returns (CreateMetricReply);
+  rpc ApiRequestCompleted (CreateApiMetricRequest) returns (CreateMetricReply);
+  rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
+  rpc ProductOrderSent (CreateProductOrderMetricRequest) returns (CreateMetricReply);
+  rpc EnergyProviderReferralEmailSent (EnergyProviderReferralMetricRequest) returns (CreateMetricReply);
 }
 
 message CreateSmsMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string application_id = 3;
-    string rext_id = 4;
-    string phone = 5;
-    string country_code = 6;
-    string executing_actor_id = 7;
-    string transaction_id = 8;
-    string content = 9;
-    string command_namespace = 10;
-    string provider = 11;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string rext_id = 4;
+  string phone = 5;
+  string country_code = 6;
+  string executing_actor_id = 7;
+  string transaction_id = 8;
+  string content = 9;
+  string command_namespace = 10;
+  string provider = 11;
 }
 
 message CreateEmailMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string application_id = 3;
-    string rext_id = 4;
-    string executing_actor_id = 5;
-    string transaction_id = 6;
-    repeated string recipient_email_addresses = 7;
-    EmailProvider emailProvider = 8;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string rext_id = 4;
+  string executing_actor_id = 5;
+  string transaction_id = 6;
+  repeated string recipient_email_addresses = 7;
+  EmailProvider emailProvider = 8;
 }
 
 enum EmailProvider{
-    sendgrid = 0;
-    smtp = 1;
-    office365 = 2;    
+  sendgrid = 0;
+  smtp = 1;
+  office365 = 2;
 }
 
 message CreateNemIdMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string application_id = 3;
-    string executing_actor_id = 4;
-    string transaction_id = 5;
-    string provider = 6;
-    string cpr_number = 7;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string executing_actor_id = 4;
+  string transaction_id = 5;
+  string provider = 6;
+  string cpr_number = 7;
 }
 
 message CreateMitIdMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string application_id = 3;
-    string executing_actor_id = 4;
-    string transaction_id = 5;
-    string provider = 6;
-    string user_name = 7;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string executing_actor_id = 4;
+  string transaction_id = 5;
+  string provider = 6;
+  string user_name = 7;
 }
 
 message CreateAdLoginMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string application_id = 3;
-    string executing_actor_id = 4;
-    string transaction_id = 5;
-    string provider = 6;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string executing_actor_id = 4;
+  string transaction_id = 5;
+  string provider = 6;
 }
 
 message CreateApiMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string executing_actor_id = 3;
-    string method = 4;
-    string path = 5;
-    string host = 6;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string executing_actor_id = 3;
+  string method = 4;
+  string path = 5;
+  string host = 6;
 }
 
 message CreateLoginMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string application_id = 3;
-    string executing_actor_id = 4;
-    string transaction_id = 5;
-    string provider = 6;
-    string identity_id = 7;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string application_id = 3;
+  string executing_actor_id = 4;
+  string transaction_id = 5;
+  string provider = 6;
+  string identity_id = 7;
 }
 
 message CreateProductOrderMetricRequest {
-	string tenant_id = 1;
-    string resource_group_id = 2;
-    string executing_actor_id = 4;
-    string product_id = 5;
-    string product_package_id = 6;
-    string receiver_resource_group_id = 7;
-    string product_order_namespace = 8;
+  string tenant_id = 1;
+  string resource_group_id = 2;
+  string executing_actor_id = 4;
+  string product_id = 5;
+  string product_package_id = 6;
+  string receiver_resource_group_id = 7;
+  string product_order_namespace = 8;
 }
 
 message CreateMetricReply {
-	bool success = 1;
-    string status = 2;
-    string metric_namespace = 3;
+  bool success = 1;
+  string status = 2;
+  string metric_namespace = 3;
 }
+
+message EnergyProviderReferralMetricRequest{
+    string tenant_id = 1;
+    string resource_group_id = 2;
+    string case_id = 3;
+    string executing_actor_id = 4;
+    string transaction_id = 5;    
+    string energy_provider_namespace = 6;
+    string energy_provider_email = 7;
+}
+
