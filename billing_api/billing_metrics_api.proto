@@ -121,9 +121,6 @@ message EnergyProviderReferralMetricRequest{
     string tenant_id = 1;
     string resource_group_id = 2;
     string case_id = 3;
-    string executing_actor_id = 4;
-    string transaction_id = 5;    
-    string energy_provider_namespace = 6;
-    string energy_provider_email = 7;
+    string energy_provider_namespace = 4;
 }
 
