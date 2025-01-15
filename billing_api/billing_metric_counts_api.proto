@@ -10,7 +10,7 @@ service BillingMetricCountsApi {
   rpc GetApiMetricCounts(GetApiMetricCountsRequest) returns (GetApiMetricCountsResponse);
   rpc GetApiMetricCountsV2(GetApiMetricCountsRequest) returns (GetApiMetricCountsReply);
   rpc GetFeatureActivationMetrics(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
-  rpc GetMetricByProviderCounts (GetMetricCountsByProviderRequest) returns (GetMetricByProviderCountsResponse);
+  rpc GetMetricCountsByProvider (GetMetricCountsByProviderRequest) returns (GetMetricCountsByProviderResponse);
 }
 
 message GetFeatureActivationsRequest {
@@ -88,7 +88,7 @@ message GetMetricCountsByProviderRequest{
   string metric_namespace = 3;
 }
 
-message GetMetricByProviderCountsResponse {
+message GetMetricCountsByProviderResponse {
   repeated MetricCountGroupedByProviderDto list = 1;
 }
 
