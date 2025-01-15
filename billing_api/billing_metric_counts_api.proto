@@ -6,78 +6,94 @@ import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
 service BillingMetricCountsApi {
-	rpc GetMetricCounts (GetMetricCountsRequest) returns (GetMetricCountsResponse);
-    rpc GetApiMetricCounts(GetApiMetricCountsRequest) returns (GetApiMetricCountsResponse);
-    rpc GetApiMetricCountsV2(GetApiMetricCountsRequest) returns (GetApiMetricCountsReply);
-    rpc GetFeatureActivationMetrics(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
+  rpc GetMetricCounts (GetMetricCountsRequest) returns (GetMetricCountsResponse);
+  rpc GetApiMetricCounts(GetApiMetricCountsRequest) returns (GetApiMetricCountsResponse);
+  rpc GetApiMetricCountsV2(GetApiMetricCountsRequest) returns (GetApiMetricCountsReply);
+  rpc GetFeatureActivationMetrics(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
+  rpc GetMetricByProviderCounts (GetMetricCountsByProviderRequest) returns (GetMetricByProviderCountsResponse);
 }
 
 message GetFeatureActivationsRequest {
-    google.protobuf.StringValue from = 1;
-    google.protobuf.StringValue to = 2;
-	repeated string metric_namespaces = 3;
+  google.protobuf.StringValue from = 1;
+  google.protobuf.StringValue to = 2;
+  repeated string metric_namespaces = 3;
 }
 
 message GetFeatureActivationsResponse {
-    repeated FeatureActivationMetricDto list = 1;
+  repeated FeatureActivationMetricDto list = 1;
 }
 
 message GetMetricCountsRequest {
-    google.protobuf.StringValue from = 1;
-    google.protobuf.StringValue to = 2;
-	repeated string metric_namespaces = 3;
+  google.protobuf.StringValue from = 1;
+  google.protobuf.StringValue to = 2;
+  repeated string metric_namespaces = 3;
 }
 
 message GetMetricCountsResponse {
-    repeated MetricCountGroupedByDayDto list = 1;
+  repeated MetricCountGroupedByDayDto list = 1;
 }
 
 message MetricCountGroupedByDayDto {
-    google.protobuf.StringValue tenantId = 1;
-    google.protobuf.StringValue resource_group_id = 2;
-    google.protobuf.StringValue metric_namespace = 3;
-    google.protobuf.StringValue country_code = 4;
-    google.protobuf.Int64Value total_count = 5;
-    google.protobuf.Timestamp date_created = 6;
+  google.protobuf.StringValue tenantId = 1;
+  google.protobuf.StringValue resource_group_id = 2;
+  google.protobuf.StringValue metric_namespace = 3;
+  google.protobuf.StringValue country_code = 4;
+  google.protobuf.Int64Value total_count = 5;
+  google.protobuf.Timestamp date_created = 6;
 }
 
 message GetApiMetricCountsRequest {
-    google.protobuf.StringValue from = 1;
-    google.protobuf.StringValue to = 2;
-	repeated string partners = 3;
+  google.protobuf.StringValue from = 1;
+  google.protobuf.StringValue to = 2;
+  repeated string partners = 3;
 }
 
 message ApiMetricCountGroupedByPartnerDto {
-    google.protobuf.StringValue tenantId = 1;
-    google.protobuf.StringValue resource_group_id = 2;
-    google.protobuf.StringValue partner_id = 3;
-    google.protobuf.Int64Value total_count = 4;
-    google.protobuf.StringValue host = 5;
+  google.protobuf.StringValue tenantId = 1;
+  google.protobuf.StringValue resource_group_id = 2;
+  google.protobuf.StringValue partner_id = 3;
+  google.protobuf.Int64Value total_count = 4;
+  google.protobuf.StringValue host = 5;
 }
 
 message GetApiMetricCountsResponse {
-    repeated ApiMetricCountGroupedByPartnerDto list = 1;
+  repeated ApiMetricCountGroupedByPartnerDto list = 1;
 }
 
 message GetApiMetricCountsReply {
-    repeated ApiMetricCountsDto list = 1;
+  repeated ApiMetricCountsDto list = 1;
 }
 
 message ApiMetricCountsDto {
-    google.protobuf.StringValue tenantId = 1;
-    google.protobuf.StringValue partner_id = 2;
-    google.protobuf.StringValue host = 3;
-    google.protobuf.Int64Value total_count = 4;
+  google.protobuf.StringValue tenantId = 1;
+  google.protobuf.StringValue partner_id = 2;
+  google.protobuf.StringValue host = 3;
+  google.protobuf.Int64Value total_count = 4;
 }
 
 message FeatureActivationMetricDto {
-    google.protobuf.StringValue tenant_id = 1;
-    google.protobuf.StringValue resource_group_id = 2;
-    google.protobuf.StringValue user_id = 3;
-    google.protobuf.StringValue metric = 4;
-    google.protobuf.StringValue reference_id = 5;
-    google.protobuf.StringValue reference_namespace = 6;
-    google.protobuf.StringValue reference_display_name = 7;
-    google.protobuf.Timestamp timestamp = 8;
+  google.protobuf.StringValue tenant_id = 1;
+  google.protobuf.StringValue resource_group_id = 2;
+  google.protobuf.StringValue user_id = 3;
+  google.protobuf.StringValue metric = 4;
+  google.protobuf.StringValue reference_id = 5;
+  google.protobuf.StringValue reference_namespace = 6;
+  google.protobuf.StringValue reference_display_name = 7;
+  google.protobuf.Timestamp timestamp = 8;
 }
 
+message GetMetricCountsByProviderRequest{
+  google.protobuf.StringValue from = 1;
+  google.protobuf.StringValue to = 2;
+  string metric_namespace = 3;
+}
+
+message GetMetricByProviderCountsResponse {
+  repeated MetricCountGroupedByProviderDto list = 1;
+}
+
+message MetricCountGroupedByProviderDto {
+  string metric_namespace = 1;
+  google.protobuf.StringValue provider = 2;
+  google.protobuf.Int64Value total_count = 3;
+}
