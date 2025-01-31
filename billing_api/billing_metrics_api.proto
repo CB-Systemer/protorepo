@@ -20,7 +20,7 @@ service BillingMetricsApi {
   rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
   rpc ProductOrderSent (CreateProductOrderMetricRequest) returns (CreateMetricReply);
   rpc EnergyProviderReferralEmailSent (EnergyProviderReferralMetricRequest) returns (CreateMetricReply);
-  rpc CaseDistributed (CreateCaseDistributedMetricRequest) return (CreateMetricReply);
+  rpc CaseDistributed (CreateCaseDistributedMetricRequest) returns (CreateMetricReply);
 }
 
 message CreateSmsMetricRequest {
