@@ -20,7 +20,6 @@ service BillingMetricsApi {
   rpc LoginCompleted (CreateLoginMetricRequest) returns (CreateMetricReply);
   rpc ProductOrderSent (CreateProductOrderMetricRequest) returns (CreateMetricReply);
   rpc EnergyProviderReferralEmailSent (EnergyProviderReferralMetricRequest) returns (CreateMetricReply);
-  rpc CaseDistributed (CreateCaseDistributedMetricRequest) returns (CreateMetricReply);
 }
 
 message CreateSmsMetricRequest {
@@ -123,12 +122,5 @@ message EnergyProviderReferralMetricRequest{
     string resource_group_id = 2;
     string case_id = 3;
     string energy_provider_namespace = 4;
-}
-
-message CreateCaseDistributedMetricRequest {
-  string tenant_id = 1;
-  string resource_group_id = 2;
-  string case_id = 3;
-  string destination_namespace = 4;
 }
 
