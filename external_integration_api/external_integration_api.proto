@@ -120,6 +120,7 @@ message GetEstateDataRequest {
   google.protobuf.StringValue data_node_root_id = 21;
   google.protobuf.StringValue resource_group_id = 22;
   google.protobuf.StringValue estateLocationDataNodeId = 23;
+  google.protobuf.BoolValue validate_address = 24;
 }
 
 message GetEstateDataReply {
