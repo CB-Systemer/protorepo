@@ -97,4 +97,5 @@ message MetricCountGroupedByProviderDto {
   string metric_namespace = 1;
   google.protobuf.StringValue provider = 2;
   google.protobuf.Int64Value total_count = 3;
+  google.protobuf.StringValue resource_group_id = 4;
 }
