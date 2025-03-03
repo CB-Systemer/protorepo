@@ -98,4 +98,8 @@ message MetricCountGroupedByProviderDto {
   google.protobuf.StringValue provider = 2;
   google.protobuf.Int64Value total_count = 3;
   google.protobuf.StringValue resource_group_id = 4;
+  google.protobuf.StringValue tenant_id = 5;
+  google.protobuf.StringValue case_id = 6;  
+  
+//  reserved 3;
 }
