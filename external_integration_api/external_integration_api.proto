@@ -57,6 +57,8 @@ message GetMediaProviderCountRequest {
 
 message GetMediaProviderCountReply {
   int32 count = 1;
+  bool success = 2;
+  string error_message = 3;
 }
 
 message SyncMediaProviderRequest {
