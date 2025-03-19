@@ -22,6 +22,7 @@ service ExternalIntegrationApi {
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
   rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
+  rpc SendToEnettetTenderReceiver(SendToEnettetTenderReceiverRequest) returns (SendToEnettetTenderReceiverReply);
 }
 
 message GetEfktTextsRequest {
@@ -372,4 +373,13 @@ message SendStoreDataToBoligsidenRequest {
 
 message SendStoreDataToBoligsidenReply {
   bool success = 1;
+}
+
+message SendToEnettetTenderReceiverRequest {
+  string case_id = 1;
+  bool is_production = 2;
+}
+
+message SendToEnettetTenderReceiverReply {
+  google.protobuf.StringValue enettet_id = 1;
 }
