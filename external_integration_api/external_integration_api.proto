@@ -382,4 +382,9 @@ message SendToEnettetTenderReceiverRequest {
 
 message SendToEnettetTenderReceiverReply {
   google.protobuf.StringValue enettet_id = 1;
+  google.protobuf.StringValue case_id = 2;
+  bool is_production = 3;
+  bool success = 4;
+  google.protobuf.StringValue request_data = 5;
+  google.protobuf.StringValue response_data = 6;
 }
