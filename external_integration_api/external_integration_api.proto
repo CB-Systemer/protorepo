@@ -378,6 +378,7 @@ message SendStoreDataToBoligsidenReply {
 message SendToEnettetTenderReceiverRequest {
   string case_id = 1;
   bool is_production = 2;
+  string sap_id = 3;
 }
 
 message SendToEnettetTenderReceiverReply {
