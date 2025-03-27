@@ -17,10 +17,10 @@ service ExternalIntegrationApi {
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
-  rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) returns (SendChainDataToBoligsidenReply);
-  rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
   rpc GetBoligsidenRealtorBranch (GetBoligsidenRealtorBranchRequest) returns (GetBoligsidenRealtorBranchReply);
   rpc SendBoligsidenRealtorBranch (SendBoligsidenRealtorBranchRequest) returns (SendBoligsidenRealtorBranchReply);
+  rpc GetBoligsidenRealtor (GetBoligsidenRealtorRequest) returns (GetBoligsidenRealtorReply);
+  rpc SendBoligsidenRealtor (SendBoligsidenRealtorRequest) returns (SendBoligsidenRealtorReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
   rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
@@ -356,25 +356,8 @@ message GetAddressByBFERequest{
 message GetAddressByBFEReply{
   bool success = 1;
   google.protobuf.StringValue errorMessage = 2;
-
   google.protobuf.StringValue entrance_address_id = 3;
   google.protobuf.StringValue address_id = 4;
-}
-
-message SendChainDataToBoligsidenRequest {
-  string chain_id = 1;
-}
-
-message SendChainDataToBoligsidenReply {
-  bool success = 1;
-}
-
-message SendStoreDataToBoligsidenRequest {
-  string store_id = 1;
-}
-
-message SendStoreDataToBoligsidenReply {
-  bool success = 1;
 }
 
 message GetBoligsidenRealtorBranchRequest {
@@ -387,13 +370,30 @@ message GetBoligsidenRealtorBranchReply {
 }
 
 message SendBoligsidenRealtorBranchRequest {
-    string resource_group_id = 1;
-    string realtor_branch_provider_id = 2;
-    string name = 3;
-    string image_url = 4;
+  string resource_group_id = 1;
+  string realtor_branch_provider_id = 2;
+  string name = 3;
+  string image_url = 4;
 }
 
 message SendBoligsidenRealtorBranchReply {
+  bool success = 1;
+}
+
+message GetBoligsidenRealtorRequest {
+  string resource_group_id = 1;
+  string provider_realtor_id = 2;
+}
+
+message GetBoligsidenRealtorReply {
+  bool exists = 1;
+}
+
+message SendBoligsidenRealtorRequest {
+  string resource_group_id = 1;
+}
+
+message SendBoligsidenRealtorReply {
   bool success = 1;
 }
 
