@@ -378,7 +378,7 @@ message SendStoreDataToBoligsidenReply {
 }
 
 message GetBoligsidenRealtorBranchRequest {
-  string realtor_branch_provide_id = 1;
+  string realtor_branch_provider_id = 1;
 }
 
 message GetBoligsidenRealtorBranchReply {
@@ -386,7 +386,7 @@ message GetBoligsidenRealtorBranchReply {
 }
 
 message SendBoligsidenRealtorBranchRequest {
-    string realtor_branch_provide_id = 1;
+    string realtor_branch_provider_id = 1;
     string name = 2;
     string image_url = 3;
 }
