@@ -382,7 +382,6 @@ message SendBoligsidenRealtorBranchReply {
 
 message GetBoligsidenRealtorRequest {
   string resource_group_id = 1;
-  string provider_realtor_id = 2;
 }
 
 message GetBoligsidenRealtorReply {
