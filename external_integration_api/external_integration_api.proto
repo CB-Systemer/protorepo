@@ -19,8 +19,8 @@ service ExternalIntegrationApi {
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
   rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) returns (SendChainDataToBoligsidenReply);
   rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
-  rpc GetBoligsidenChainInfo (GetBoligsidenChainInfoRequest) returns (GetBoligsidenChainInfoReply);
-  rpc SendBoligsidenChainInfo (SendBoligsidenChainInfoRequest) returns (SendBoligsidenChainInfoReply);
+  rpc GetBoligsidenRealtorBranch (GetBoligsidenRealtorBranchRequest) returns (GetBoligsidenRealtorBranchReply);
+  rpc SendBoligsidenRealtorBranch (SendBoligsidenRealtorBranchRequest) returns (SendBoligsidenRealtorBranchReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
   rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
@@ -377,21 +377,21 @@ message SendStoreDataToBoligsidenReply {
   bool success = 1;
 }
 
-message GetBoligsidenChainInfoRequest {
+message GetBoligsidenRealtorBranchRequest {
   string realtor_branch_provide_id = 1;
 }
 
-message GetBoligsidenChainInfoReply {
+message GetBoligsidenRealtorBranchReply {
   bool exists = 1;
 }
 
-message SendBoligsidenChainInfoRequest {
+message SendBoligsidenRealtorBranchRequest {
     string realtor_branch_provide_id = 1;
     string name = 2;
     string image_url = 3;
 }
 
-message SendBoligsidenChainInfoReply {
+message SendBoligsidenRealtorBranchReply {
   bool success = 1;
 }
 
