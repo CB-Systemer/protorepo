@@ -5,7 +5,7 @@ option csharp_namespace = "External.Integration.Api";
 
 import "google/protobuf/wrappers.proto";
 
-service ExternalIntegrationApi {  
+service ExternalIntegrationApi {
   rpc GetAddressByBFE (GetAddressByBFERequest) returns (GetAddressByBFEReply);
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
@@ -19,6 +19,8 @@ service ExternalIntegrationApi {
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
   rpc SendChainDataToBoligsiden (SendChainDataToBoligsidenRequest) returns (SendChainDataToBoligsidenReply);
   rpc SendStoreDataToBoligsiden (SendStoreDataToBoligsidenRequest) returns (SendStoreDataToBoligsidenReply);
+  rpc GetBoligsidenChainInfo (GetBoligsidenChainInfoRequest) returns (GetBoligsidenChainInfoReply);
+  rpc SendBoligsidenChainInfo (SendBoligsidenChainInfoRequest) returns (SendBoligsidenChainInfoReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
   rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
@@ -35,7 +37,7 @@ message GetEfktTextsRequest {
 }
 
 message GetEfktTextsReply {
-  repeated TextItemDto Texts = 1; 
+  repeated TextItemDto Texts = 1;
 }
 
 message TextItemDto {
@@ -93,7 +95,7 @@ message GetOwnershipTypeReply {
   bool success = 1;
   string namespace = 2;
   string displayName = 3;
-  int32 errorCode = 4; 
+  int32 errorCode = 4;
   string errorMessage = 5;
   google.protobuf.StringValue bfeNumber = 6;
   google.protobuf.StringValue parentBfeNumber = 7;
@@ -256,40 +258,40 @@ message GetAddressDetailsReply {
 
   google.protobuf.StringValue floor = 6;
   google.protobuf.StringValue door = 7;
-  
+
   google.protobuf.StringValue zip_code_id = 31;
   google.protobuf.StringValue zip_code_source = 32;
   google.protobuf.StringValue zip_code = 8;
   google.protobuf.StringValue city = 9; // zip_code_name / city_name
-  
+
   google.protobuf.StringValue municipality_id = 35;
   google.protobuf.StringValue municipality_source = 36;
   google.protobuf.StringValue municipality_code = 10;
   google.protobuf.StringValue municipality_name = 11;
-  
+
   double latitude = 12;
   double longitude = 13;
 
   google.protobuf.StringValue display_name = 14;
   bool is_validated = 15;
-  
+
   repeated AddressIdentifier identifiers = 16;
   google.protobuf.StringValue kvhx = 17;
-  
+
   google.protobuf.StringValue supplementary_city_id = 33;
   google.protobuf.StringValue supplementary_city_source = 34;
   google.protobuf.StringValue supplementary_city_name_code = 19;
   google.protobuf.StringValue supplementary_city_name = 20;
-  
+
   google.protobuf.StringValue district_code = 21;
   google.protobuf.StringValue district_name = 22;
-  
+
   google.protobuf.StringValue matrikel_number = 23;
   google.protobuf.StringValue property_number = 18;
-  
+
   google.protobuf.StringValue entrance_address_id = 26;
   google.protobuf.StringValue entrance_address_source = 28;
-    
+
   google.protobuf.StringValue region_id = 37;
   google.protobuf.StringValue region_source = 38;
   google.protobuf.StringValue region_code = 39;
@@ -354,7 +356,7 @@ message GetAddressByBFERequest{
 message GetAddressByBFEReply{
   bool success = 1;
   google.protobuf.StringValue errorMessage = 2;
-  
+
   google.protobuf.StringValue entrance_address_id = 3;
   google.protobuf.StringValue address_id = 4;
 }
@@ -372,6 +374,24 @@ message SendStoreDataToBoligsidenRequest {
 }
 
 message SendStoreDataToBoligsidenReply {
+  bool success = 1;
+}
+
+message GetBoligsidenChainInfoRequest {
+  string realtor_branch_provide_id = 1;
+}
+
+message GetBoligsidenChainInfoReply {
+  bool exists = 1;
+}
+
+message SendBoligsidenChainInfoRequest {
+    string realtor_branch_provide_id = 1;
+    string name = 2;
+    string image_url = 3;
+}
+
+message SendBoligsidenChainInfoReply {
   bool success = 1;
 }
 
