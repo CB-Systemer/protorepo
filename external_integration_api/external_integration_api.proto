@@ -362,7 +362,6 @@ message GetAddressByBFEReply{
 
 message GetBoligsidenRealtorBranchRequest {
   string resource_group_id = 1;
-  string realtor_branch_provider_id = 2;
 }
 
 message GetBoligsidenRealtorBranchReply {
@@ -371,9 +370,6 @@ message GetBoligsidenRealtorBranchReply {
 
 message SendBoligsidenRealtorBranchRequest {
   string resource_group_id = 1;
-  string realtor_branch_provider_id = 2;
-  string name = 3;
-  string image_url = 4;
 }
 
 message SendBoligsidenRealtorBranchReply {
