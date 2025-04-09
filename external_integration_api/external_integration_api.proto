@@ -362,6 +362,7 @@ message GetAddressByBFEReply{
 
 message GetBoligsidenRealtorBranchRequest {
   string resource_group_id = 1;
+  bool is_production = 2;
 }
 
 message GetBoligsidenRealtorBranchReply {
@@ -370,6 +371,7 @@ message GetBoligsidenRealtorBranchReply {
 
 message SendBoligsidenRealtorBranchRequest {
   string resource_group_id = 1;
+  bool is_production = 2;
 }
 
 message SendBoligsidenRealtorBranchReply {
@@ -378,6 +380,7 @@ message SendBoligsidenRealtorBranchReply {
 
 message GetBoligsidenRealtorRequest {
   string resource_group_id = 1;
+  bool is_production = 2;
 }
 
 message GetBoligsidenRealtorReply {
@@ -386,6 +389,7 @@ message GetBoligsidenRealtorReply {
 
 message SendBoligsidenRealtorRequest {
   string resource_group_id = 1;
+  bool is_production = 2;
 }
 
 message SendBoligsidenRealtorReply {
