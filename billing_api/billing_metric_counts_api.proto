@@ -112,11 +112,11 @@ message MetricCountGroupedByProviderDto {
 message GetMetricsRequest {
   google.protobuf.StringValue from = 1;
   google.protobuf.StringValue to = 2;
-  repeated string metric_namespaces = 3;
+  google.protobuf.StringValue metric_namespace = 3;
 }
 
 message GetMetricsResponse {
-  repeated FeatureActivationMetricDto list = 1;
+  repeated MetricDto list = 1;
 }
 
 message MetricDto {
