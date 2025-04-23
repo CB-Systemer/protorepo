@@ -132,7 +132,7 @@ message MetricDto {
 
   google.protobuf.StringValue case_id = 9;
   google.protobuf.StringValue actor_role_id = 10;
-  google.protobuf.StringValue actor_role_id = 11;
+  google.protobuf.StringValue document_id = 11;
 
   // Can be extended with other props if need be
   
