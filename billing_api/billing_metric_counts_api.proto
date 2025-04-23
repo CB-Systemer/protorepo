@@ -11,6 +11,9 @@ service BillingMetricCountsApi {
   rpc GetApiMetricCountsV2(GetApiMetricCountsRequest) returns (GetApiMetricCountsReply);
   rpc GetFeatureActivationMetrics(GetFeatureActivationsRequest) returns (GetFeatureActivationsResponse);
   rpc GetMetricCountsByProvider (GetMetricCountsByProviderRequest) returns (GetMetricCountsByProviderResponse);
+
+  rpc GetMetrics(GetMetricsRequest) returns (GetMetricsResponse);
+
 }
 
 message GetFeatureActivationsRequest {
@@ -102,4 +105,35 @@ message MetricCountGroupedByProviderDto {
   google.protobuf.StringValue case_id = 6;  
   
 //  reserved 3;
+}
+
+// Generic metrics endpoint. 
+
+message GetMetricsRequest {
+  google.protobuf.StringValue from = 1;
+  google.protobuf.StringValue to = 2;
+  repeated string metric_namespaces = 3;
+}
+
+message GetMetricsResponse {
+  repeated FeatureActivationMetricDto list = 1;
+}
+
+message MetricDto {
+  google.protobuf.StringValue metric = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  google.protobuf.StringValue user_id = 3;
+  google.protobuf.StringValue tenant_id = 4;
+  google.protobuf.StringValue resource_group_id = 5;
+ 
+  google.protobuf.StringValue reference_id = 6;
+  google.protobuf.StringValue reference_namespace = 7;
+  google.protobuf.StringValue reference_display_name = 8;
+
+  google.protobuf.StringValue case_id = 9;
+  google.protobuf.StringValue actor_role_id = 10;
+  google.protobuf.StringValue actor_role_id = 11;
+
+  // Can be extended with other props if need be
+  
 }
