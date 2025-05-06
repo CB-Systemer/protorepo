@@ -25,6 +25,22 @@ service ExternalIntegrationApi {
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
   rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
   rpc SendToEnettetTenderReceiver(SendToEnettetTenderReceiverRequest) returns (SendToEnettetTenderReceiverReply);
+
+  rpc GetServiceHealthStatus(GetHealthStatusRequest) returns (GetHealthStatusReply);
+}
+
+message GetHealthStatusRequest {
+  
+}
+
+message GetHealthStatusReply {
+  bool success = 1;
+  repeated ServiceHealthStatusDto services = 2;
+}
+
+message ServiceHealthStatusDto {
+  string service_name = 1;
+  string status = 2;
 }
 
 message GetEfktTextsRequest {
