@@ -112,6 +112,7 @@ message SendEmailMessageReply {
   int32 error_code = 4;
   string error_message = 5;
   string message = 6;
+  string sent_from_email = 7;
 }
 
 message SendAnonymousEmailRequest {
