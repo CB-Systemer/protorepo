@@ -597,14 +597,11 @@ message LinkDto{
 	string display_name = 2;
 }
 
-message ChangeOfOwnershipInsuranceRejectionDto{
-	string document_created_by_display_name = 1;
-	string company_display_name = 2;
-
-	google.protobuf.Timestamp report_creation_date = 3;
-	google.protobuf.Timestamp report_due_date = 4;
-
-	google.protobuf.StringValue rejection_type = 5;
+message ChangeOfOwnershipInsuranceRejectionDto{	
+	string company_display_name = 1;
+	google.protobuf.Timestamp report_creation_date = 2;
+	
+	google.protobuf.StringValue rejection_type = 3;
 }
 
 message ElectricalInstallationConditionReportDto{
