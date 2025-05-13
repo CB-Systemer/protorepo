@@ -9,791 +9,803 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/any.proto";
 
 service ProductOrderService {
-  // Referrals
-  rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
-  rpc GetReferralDetails (GetProductOrderDetailsRequest) returns (ReferralDtoDetails);
-  rpc GetReferralsForReferredActorAndIsSender (GetReferralsByReferredActorRequest) returns (ReferralList);
-  rpc GetReferralsForReferredActorAndIsReceiver (GetReferralsByReferredActorRequest) returns (ReferralList);
-  rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
-  rpc GetReferralsForProduct (GetProductOrdersByProductRequest) returns (ReferralList);
-  rpc GetReferralsForRecipient (GetProductOrdersByRecipientRequest) returns (ReferralList);
-  rpc GetReferralsForResourceGroup (GetProductOrdersByResourceGroupRequest) returns (ReferralList);
-  rpc GetReferralsForAssignedActor (GetProductOrdersByAssignedActorRequest) returns (ReferralList);
-  rpc GetReferralsForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (ReferralList);
-  rpc GetReferralsCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (ReferralList);
-  rpc GetReferralsCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (ReferralList);
+	// Referrals
+	rpc CreateReferral (CreateReferralRequest) returns (ReferralDto);
+	rpc GetReferralDetails (GetProductOrderDetailsRequest) returns (ReferralDtoDetails);
+	rpc GetReferralsForReferredActorAndIsSender (GetReferralsByReferredActorRequest) returns (ReferralList);
+	rpc GetReferralsForReferredActorAndIsReceiver (GetReferralsByReferredActorRequest) returns (ReferralList);
+	rpc GetReferralsForReferredActor (GetReferralsByReferredActorRequest) returns (ReferralList);
+	rpc GetReferralsForProduct (GetProductOrdersByProductRequest) returns (ReferralList);
+	rpc GetReferralsForRecipient (GetProductOrdersByRecipientRequest) returns (ReferralList);
+	rpc GetReferralsForResourceGroup (GetProductOrdersByResourceGroupRequest) returns (ReferralList);
+	rpc GetReferralsForAssignedActor (GetProductOrdersByAssignedActorRequest) returns (ReferralList);
+	rpc GetReferralsForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (ReferralList);
+	rpc GetReferralsCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (ReferralList);
+	rpc GetReferralsCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (ReferralList);
 
-  // ReferralCounts
-  rpc GetReferralsForReferredActorAndIsSenderCount (GetReferralsByReferredActorRequest) returns (CountDto);
-  rpc GetReferralsForReferredActorAndIsReceiverCount (GetReferralsByReferredActorRequest) returns (CountDto);
+	// ReferralCounts
+	rpc GetReferralsForReferredActorAndIsSenderCount (GetReferralsByReferredActorRequest) returns (CountDto);
+	rpc GetReferralsForReferredActorAndIsReceiverCount (GetReferralsByReferredActorRequest) returns (CountDto);
 
-  rpc GetReferralsForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
-  rpc GetReferralsForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
-  rpc GetReferralsCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
-  rpc GetReferralsCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
+	rpc GetReferralsForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
+	rpc GetReferralsForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
+	rpc GetReferralsCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
+	rpc GetReferralsCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
 
-  // Orders
-  rpc CreateOrder (CreateOrderRequest) returns (OrderDto);
-  rpc GetOrderDetails (GetProductOrderDetailsRequest) returns (OrderDtoDetails);
-  rpc GetOrdersForProduct (GetProductOrdersByProductRequest) returns (OrderList);
-  rpc GetOrdersForRecipient (GetProductOrdersByRecipientRequest) returns (OrderList);
-  rpc GetOrdersForResourceGroup (GetProductOrdersByResourceGroupRequest) returns (OrderList);
-  rpc GetOrdersForAssignedActor (GetProductOrdersByAssignedActorRequest) returns (OrderList);
-  rpc GetOrdersForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (OrderList);
-  rpc GetOrdersCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (OrderList);
-  rpc GetOrdersCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (OrderList);
+	// Orders
+	rpc CreateOrder (CreateOrderRequest) returns (OrderDto);
+	rpc GetOrderDetails (GetProductOrderDetailsRequest) returns (OrderDtoDetails);
+	rpc GetOrdersForProduct (GetProductOrdersByProductRequest) returns (OrderList);
+	rpc GetOrdersForRecipient (GetProductOrdersByRecipientRequest) returns (OrderList);
+	rpc GetOrdersForResourceGroup (GetProductOrdersByResourceGroupRequest) returns (OrderList);
+	rpc GetOrdersForAssignedActor (GetProductOrdersByAssignedActorRequest) returns (OrderList);
+	rpc GetOrdersForCaseReference (GetProductOrdersByCaseReferenceRequest) returns (OrderList);
+	rpc GetOrdersCreatedByActor (GetProductOrdersCreatedByActorRequest) returns (OrderList);
+	rpc GetOrdersCreatedFromResourceGroup (GetProductOrdersCreatedFromResourceGroupRequest) returns (OrderList);
 
-  // OrderCounts
-  rpc GetOrdersForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
-  rpc GetOrdersForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
-  rpc GetOrdersCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
-  rpc GetOrdersCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
+	// OrderCounts
+	rpc GetOrdersForResourceGroupCount (GetProductOrdersByResourceGroupRequest) returns (CountDto);
+	rpc GetOrdersForAssignedActorCount (GetProductOrdersByAssignedActorRequest) returns (CountDto);
+	rpc GetOrdersCreatedByActorCount (GetProductOrdersCreatedByActorRequest) returns (CountDto);
+	rpc GetOrdersCreatedFromResourceGroupCount (GetProductOrdersCreatedFromResourceGroupRequest) returns (CountDto);
 
-  rpc GetOrdersForCaseReferenceCount (GetProductOrdersByCaseReferenceRequest) returns (CountDto);
+	rpc GetOrdersForCaseReferenceCount (GetProductOrdersByCaseReferenceRequest) returns (CountDto);
 
-  // ProductOrder (shared)
-  rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
-  rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
-  rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
-  rpc SetSenderInternalNote(SetInternalNote) returns (google.protobuf.Empty);
-  rpc SetReceiverInternalNote(SetInternalNote) returns (google.protobuf.Empty);
+	// ProductOrder (shared)
+	rpc SetReceiverCaseReferenceId(SetReceiverCaseReferenceIdRequest) returns (google.protobuf.Empty);
+	rpc SetReceiverActorReferenceId(SetReceiverActorReferenceIdRequest) returns (google.protobuf.Empty);
+	rpc SetAssignedTo(SetAssignedToRequest) returns (google.protobuf.Empty);
+	rpc SetSenderInternalNote(SetInternalNote) returns (google.protobuf.Empty);
+	rpc SetReceiverInternalNote(SetInternalNote) returns (google.protobuf.Empty);
 
-  rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
-  rpc GetAvailableCustomStatuses(GetAvailableStatusesRequest) returns (GetAvailableStatusesReply);
+	rpc UpdateStatus(UpdateStatusRequest) returns (google.protobuf.Empty);
+	rpc GetAvailableCustomStatuses(GetAvailableStatusesRequest) returns (GetAvailableStatusesReply);
 
-  rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
-  rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadReply);
+	rpc AddAttachment (AddAttachmentRequest) returns (AddAttachmentReply);
+	rpc DownloadAttachment (DownloadAttachmentRequest) returns (DownloadReply);
 
-  rpc CreateDeliverable (CreateDeliverableRequest) returns (DeliverableDto);  
-  rpc DeleteDeliverable (DeleteDeliverableRequest) returns (google.protobuf.Empty);
-  rpc DownloadDeliverable (DownloadDeliverableRequest) returns (DownloadReply);
+	rpc CreateDeliverable (CreateDeliverableRequest) returns (DeliverableDto);
+	rpc DeleteDeliverable (DeleteDeliverableRequest) returns (google.protobuf.Empty);
+	rpc DownloadDeliverable (DownloadDeliverableRequest) returns (DownloadReply);
 
-  rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
-  rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
+	rpc GetActivityLog (GetProductOrderActivityLog) returns (ActivityLogList);
+	rpc CreateCustomLog (CreateCustomLogRequest) returns (ActivityLogDto);
 
-  rpc RegisterConsent (RegisterConsentRequest) returns (RegisterConsentReply);
-  
-  rpc DeleteActorId (DeleteActorIdRequest) returns (google.protobuf.Empty);
+	rpc RegisterConsent (RegisterConsentRequest) returns (RegisterConsentReply);
+
+	rpc DeleteActorId (DeleteActorIdRequest) returns (google.protobuf.Empty);
 }
 
 message ReferralDto{
-  OrderActorDto referred_actor = 1;
-  ProductOrderDto product_order = 2;
+	OrderActorDto referred_actor = 1;
+	ProductOrderDto product_order = 2;
 }
 
 message OrderDto{
-  ProductOrderDto product_order = 1;
-  repeated SubProductDto sub_products = 2;
+	ProductOrderDto product_order = 1;
+	repeated SubProductDto sub_products = 2;
 }
 
 message ProductOrderDto{
-  string id = 13;
+	string id = 13;
 
-  string product_package_id = 11;
-  int32 product_package_version = 40;
-  string product_package_datanode_id = 38;
+	string product_package_id = 11;
+	int32 product_package_version = 40;
+	string product_package_datanode_id = 38;
 
-  string product_id = 1;
-  int32 product_version = 2;
-  string product_datanode_id = 39;
+	string product_id = 1;
+	int32 product_version = 2;
+	string product_datanode_id = 39;
 
-  string product_namespace = 3;
-  string product_channel_namespace = 10;
-  string product_category_namespace = 47;
-  string display_name = 6;
-  string short_description = 7;
-  ProductStatusDto custom_status = 37;
-  google.type.Money price = 8;
-  google.protobuf.StringValue price_unit_namespace = 23;
-  google.protobuf.DoubleValue vat_rate = 21;
+	string product_namespace = 3;
+	string product_channel_namespace = 10;
+	string product_category_namespace = 47;
+	string display_name = 6;
+	string short_description = 7;
+	ProductStatusDto custom_status = 37;
+	google.type.Money price = 8;
+	google.protobuf.StringValue price_unit_namespace = 23;
+	google.protobuf.DoubleValue vat_rate = 21;
 
-  google.protobuf.StringValue case_payload_reference_id = 5;
-  google.protobuf.StringValue receiver_case_reference_id = 29;
-  google.protobuf.StringValue receiver_actor_reference_id = 32;
+	google.protobuf.StringValue case_payload_reference_id = 5;
+	google.protobuf.StringValue receiver_case_reference_id = 29;
+	google.protobuf.StringValue receiver_actor_reference_id = 32;
 
-  string status = 18;
-  repeated InformationFieldDto information_fields = 17;
+	string status = 18;
+	repeated InformationFieldDto information_fields = 17;
 
-  OrderPartyDto receiver_resource_group = 9;
-  OrderPartyDto receiver_order_party = 33;
-  OrderActorDto receiver_assigned_to = 48;
+	OrderPartyDto receiver_resource_group = 9;
+	OrderPartyDto receiver_order_party = 33;
+	OrderActorDto receiver_assigned_to = 48;
 
-  OrderPartyDto sender_order_resourceGroup = 34;
-  OrderPartyDto sender_order_party = 35;
+	OrderPartyDto sender_order_resourceGroup = 34;
+	OrderPartyDto sender_order_party = 35;
 
-  OrderActorDto sent_by = 22;
+	OrderActorDto sent_by = 22;
 
-  string created_by = 12;
-  google.protobuf.Timestamp created_at_utc = 14;
-  string updated_by = 15;
-  google.protobuf.Timestamp updated_at_utc = 16;
+	string created_by = 12;
+	google.protobuf.Timestamp created_at_utc = 14;
+	string updated_by = 15;
+	google.protobuf.Timestamp updated_at_utc = 16;
 
-  string referenceId = 19;
-  bool amount_set_on_delivery = 20;
+	string referenceId = 19;
+	bool amount_set_on_delivery = 20;
 
-  bool allow_sender_cancellation = 24;
-  bool show_status_to_sender = 26;
-  bool show_case_state_to_sender = 27;
+	bool allow_sender_cancellation = 24;
+	bool show_status_to_sender = 26;
+	bool show_case_state_to_sender = 27;
 
-  google.protobuf.StringValue receiver_internal_note = 30;
-  google.protobuf.StringValue sender_internal_note = 31;
+	google.protobuf.StringValue receiver_internal_note = 30;
+	google.protobuf.StringValue sender_internal_note = 31;
 
-  repeated AttachmentDto attachments = 36;  
+	repeated AttachmentDto attachments = 36;
 
-  string product_consent_mode = 41;
-  google.protobuf.StringValue product_custom_consent_text = 42;
-  google.protobuf.StringValue product_consent_template_namespace = 43;
+	string product_consent_mode = 41;
+	google.protobuf.StringValue product_custom_consent_text = 42;
+	google.protobuf.StringValue product_consent_template_namespace = 43;
 
-  google.protobuf.BoolValue require_case_when_completed = 44;
-  google.protobuf.BoolValue supplemental_state_required_when_completed = 45;
-  google.protobuf.BoolValue allow_messages = 46;
+	google.protobuf.BoolValue require_case_when_completed = 44;
+	google.protobuf.BoolValue supplemental_state_required_when_completed = 45;
+	google.protobuf.BoolValue allow_messages = 46;
 }
 
 message ReferralDtoDetails{
-  ReferralDto referral = 1;
-  ProductOrderDtoDetails product_order_details = 2;
+	ReferralDto referral = 1;
+	ProductOrderDtoDetails product_order_details = 2;
 }
 
 message OrderDtoDetails{
-  OrderDto order = 1;
-  ProductOrderDtoDetails product_order_details = 2;
-  repeated SubProductDto sub_products = 3;
+	OrderDto order = 1;
+	ProductOrderDtoDetails product_order_details = 2;
+	repeated SubProductDto sub_products = 3;
 }
 
 message ProductOrderDtoDetails{
-  google.protobuf.StringValue case_reference_payload = 3;
+	google.protobuf.StringValue case_reference_payload = 3;
 
-  OrderActorDto sent_by = 2;
-  OrderActorDto updated_by = 8;
-  OrderActorDto created_by = 13;
+	OrderActorDto sent_by = 2;
+	OrderActorDto updated_by = 8;
+	OrderActorDto created_by = 13;
 
-  OrderPartyDto receiver_resource_group = 9;
-  OrderPartyDto receiver_order_party = 10;
-  ReceiverCaseStatusDto receiver_case_reference_status = 14;
+	OrderPartyDto receiver_resource_group = 9;
+	OrderPartyDto receiver_order_party = 10;
+	ReceiverCaseStatusDto receiver_case_reference_status = 14;
 
-  OrderPartyDto sender_resourceGroup = 11;
-  OrderPartyDto sender_resourceGroup_primary_chain = 1;
-  OrderPartyDto sender_order_party = 12;
-  google.type.Money total_price = 15;
-  repeated DeliverableDto deliverables = 16;
+	OrderPartyDto sender_resourceGroup = 11;
+	OrderPartyDto sender_resourceGroup_primary_chain = 1;
+	OrderPartyDto sender_order_party = 12;
+	google.type.Money total_price = 15;
+	repeated DeliverableDto deliverables = 16;
 }
 
 message ReceiverCaseStatusDto{
-  string case_reference_id = 1;
-  string display_name = 2;
-  string case_number = 3;
-  string state_namespace = 4;
-  string state_reason_namespace = 5;
-  string state_flow_namespace = 6;
-  string state_category_namespace = 7;
-  repeated EndResultDto end_results = 8;
+	string case_reference_id = 1;
+	string display_name = 2;
+	string case_number = 3;
+	string state_namespace = 4;
+	string state_reason_namespace = 5;
+	string state_flow_namespace = 6;
+	string state_category_namespace = 7;
+	repeated EndResultDto end_results = 8;
 }
 
 message EndResultDto{
-  string end_result_namespace = 1;
-  string end_result_outcome_namespace = 2;
+	string end_result_namespace = 1;
+	string end_result_outcome_namespace = 2;
 }
 
 message OrderActorDto{
-  google.protobuf.StringValue id = 1; // optional. ex will be missing if an actor is referred from a bank into realequity. [Nicolaj]
-  google.protobuf.StringValue realEquityActorId = 9;
+	google.protobuf.StringValue id = 1; // optional. ex will be missing if an actor is referred from a bank into realequity. [Nicolaj]
+	google.protobuf.StringValue realEquityActorId = 9;
 
-  google.protobuf.StringValue display_name = 2;
-  google.protobuf.StringValue first_name = 3;
-  google.protobuf.StringValue last_name = 4;
-  google.protobuf.StringValue email = 5;
-  PhoneDto phone = 6;
-  AddressDto address = 7;
+	google.protobuf.StringValue display_name = 2;
+	google.protobuf.StringValue first_name = 3;
+	google.protobuf.StringValue last_name = 4;
+	google.protobuf.StringValue email = 5;
+	PhoneDto phone = 6;
+	AddressDto address = 7;
 }
 
 message OrderPartyDto{
-  string id = 1;
-  string display_name = 2;
-  string namespace = 3;
-  repeated NamespaceValuePairDto externalIdentifiers = 4;
+	string id = 1;
+	string display_name = 2;
+	string namespace = 3;
+	repeated NamespaceValuePairDto externalIdentifiers = 4;
 
-  google.protobuf.StringValue cvr = 5;
-  google.protobuf.StringValue external_id = 6;
+	google.protobuf.StringValue cvr = 5;
+	google.protobuf.StringValue external_id = 6;
 
-  google.protobuf.StringValue email = 7;
-  PhoneDto phone = 8;
-  AddressDto address = 9;
+	google.protobuf.StringValue email = 7;
+	PhoneDto phone = 8;
+	AddressDto address = 9;
 }
 
 message NamespaceValuePairDto{
-  string namespace = 1;
-  string value = 2;
+	string namespace = 1;
+	string value = 2;
 }
 
 message PhoneDto{
-  google.protobuf.StringValue number = 1;
-  google.protobuf.StringValue country_code = 2;
+	google.protobuf.StringValue number = 1;
+	google.protobuf.StringValue country_code = 2;
 }
 
 message AddressDto{
-  google.protobuf.StringValue display_name = 9;
-  google.protobuf.StringValue street = 1;
-  google.protobuf.StringValue street_number = 2;
-  google.protobuf.StringValue floor = 4;
-  google.protobuf.StringValue door = 5;
-  google.protobuf.StringValue city = 6;
-  google.protobuf.StringValue zip_code = 7;
-  google.protobuf.StringValue country = 8;
+	google.protobuf.StringValue display_name = 9;
+	google.protobuf.StringValue street = 1;
+	google.protobuf.StringValue street_number = 2;
+	google.protobuf.StringValue floor = 4;
+	google.protobuf.StringValue door = 5;
+	google.protobuf.StringValue city = 6;
+	google.protobuf.StringValue zip_code = 7;
+	google.protobuf.StringValue country = 8;
 }
 
 message ReferralList{
-  repeated ReferralDto referrals = 1;
-  google.protobuf.Int32Value total_count = 2;
+	repeated ReferralDto referrals = 1;
+	google.protobuf.Int32Value total_count = 2;
 }
 
 message OrderList{
-  repeated OrderDto orders = 1;
-  google.protobuf.Int32Value total_count = 2;
+	repeated OrderDto orders = 1;
+	google.protobuf.Int32Value total_count = 2;
 }
 
 message CreateReferralRequest{
-  OrderActorDto referred_actor = 1;
-  CreateProductOrderDto product_order = 2;
+	OrderActorDto referred_actor = 1;
+	CreateProductOrderDto product_order = 2;
 }
 
 message CreateOrderRequest{
-  repeated CreateSubProductDto sub_products = 1;
-  CreateProductOrderDto product_order = 2;
+	repeated CreateSubProductDto sub_products = 1;
+	CreateProductOrderDto product_order = 2;
 }
 
 message CreateSubProductDto{
-  string product_id = 1;
-  int32 product_version = 12;
-  string product_datanode_id = 11;
-  google.type.Money Price = 2;
-  int32 quantity = 3;
-  string display_name = 4;
-  google.protobuf.StringValue short_description = 5;
-  string product_namespace = 6;
-  string product_category = 7;
-  repeated InformationFieldDto information_fields = 8;
-  repeated CreateAttachmentDto AllowedAttachments = 9;
+	string product_id = 1;
+	int32 product_version = 12;
+	string product_datanode_id = 11;
+	google.type.Money Price = 2;
+	int32 quantity = 3;
+	string display_name = 4;
+	google.protobuf.StringValue short_description = 5;
+	string product_namespace = 6;
+	string product_category = 7;
+	repeated InformationFieldDto information_fields = 8;
+	repeated CreateAttachmentDto AllowedAttachments = 9;
 }
 
 message SubProductDto{
-  string id = 10;
-  string product_id = 1;
-  int32 product_version = 12;
-  string product_datanode_id = 11;
-  google.type.Money Price = 2;
-  int32 quantity = 3;
-  string display_name = 4;
-  google.protobuf.StringValue short_description = 5;
-  string product_namespace = 6;
-  string product_category = 7;
-  repeated InformationFieldDto information_fields = 8;
-  repeated AttachmentDto AllowedAttachments = 9;
+	string id = 10;
+	string product_id = 1;
+	int32 product_version = 12;
+	string product_datanode_id = 11;
+	google.type.Money Price = 2;
+	int32 quantity = 3;
+	string display_name = 4;
+	google.protobuf.StringValue short_description = 5;
+	string product_namespace = 6;
+	string product_category = 7;
+	repeated InformationFieldDto information_fields = 8;
+	repeated AttachmentDto AllowedAttachments = 9;
 }
 
 message CreateAttachmentDto{
-  bool required = 1;
-  bool allow_multiple = 2;
-  google.protobuf.StringValue description = 3;
-  string attachment_identifier = 4;
-  string attachment_name = 5;
-  string attachment_type = 6;
+	bool required = 1;
+	bool allow_multiple = 2;
+	google.protobuf.StringValue description = 3;
+	string attachment_identifier = 4;
+	string attachment_name = 5;
+	string attachment_type = 6;
 }
 
 message CreateProductOrderDto{
-  string product_id = 1;
-  int32 product_version = 2;
-  string product_datanode_id = 33;
+	string product_id = 1;
+	int32 product_version = 2;
+	string product_datanode_id = 33;
 
-  string product_package_id = 17;
-  int32 product_package_version = 34;
-  string product_package_datanode_id = 35;
+	string product_package_id = 17;
+	int32 product_package_version = 34;
+	string product_package_datanode_id = 35;
 
-  string product_namespace = 3;
-  string product_channel_namespace = 26;
-  string product_category = 31;
-  string display_name = 4;
-  string short_description = 5;
-  repeated ProductStatusDto product_statuses = 28;
-  google.type.Money price = 15;
-  google.protobuf.StringValue price_unit_namespace = 16;
-  google.protobuf.DoubleValue vat_rate = 23;
+	string product_namespace = 3;
+	string product_channel_namespace = 26;
+	string product_category = 31;
+	string display_name = 4;
+	string short_description = 5;
+	repeated ProductStatusDto product_statuses = 28;
+	google.type.Money price = 15;
+	google.protobuf.StringValue price_unit_namespace = 16;
+	google.protobuf.DoubleValue vat_rate = 23;
 
-  string executing_actor_id = 6;
-  google.protobuf.StringValue executing_resource_group_id = 39;
-  OrderActorDto custom_executing_actor = 25;
-  repeated string executing_actor_permissions = 14;
+	string executing_actor_id = 6;
+	google.protobuf.StringValue executing_resource_group_id = 39;
+	OrderActorDto custom_executing_actor = 25;
+	repeated string executing_actor_permissions = 14;
 
-  string recipient_resource_group_id = 9;
-  google.protobuf.StringValue recipient_order_party_id = 10;
-  google.protobuf.StringValue receiver_internal_note = 30;
+	string recipient_resource_group_id = 9;
+	google.protobuf.StringValue recipient_order_party_id = 10;
+	google.protobuf.StringValue receiver_internal_note = 30;
 
-  string sent_by_resource_group = 11;
-  google.protobuf.StringValue sender_order_party_id = 12;
-  OrderActorDto sent_by = 8;
-  google.protobuf.StringValue sender_internal_note = 29;
+	string sent_by_resource_group = 11;
+	google.protobuf.StringValue sender_order_party_id = 12;
+	OrderActorDto sent_by = 8;
+	google.protobuf.StringValue sender_internal_note = 29;
 
-  repeated InformationFieldDto information_fields = 13;
+	repeated InformationFieldDto information_fields = 13;
 
-  bool allow_sender_cancellation = 18;
-  bool show_status_to_sender = 20;
-  bool show_case_state_to_sender = 21;
+	bool allow_sender_cancellation = 18;
+	bool show_status_to_sender = 20;
+	bool show_case_state_to_sender = 21;
 
-  google.protobuf.StringValue case_payload_reference_id = 27;
-  bool amount_set_on_delivery = 24;
-  repeated CreateAttachmentDto allowed_attachments = 32;
+	google.protobuf.StringValue case_payload_reference_id = 27;
+	bool amount_set_on_delivery = 24;
+	repeated CreateAttachmentDto allowed_attachments = 32;
 
-  string product_consent_mode = 36;
-  google.protobuf.StringValue product_custom_consent_text = 37;
-  google.protobuf.StringValue product_consent_template_namespace = 38;
+	string product_consent_mode = 36;
+	google.protobuf.StringValue product_custom_consent_text = 37;
+	google.protobuf.StringValue product_consent_template_namespace = 38;
 
-  google.protobuf.BoolValue require_case_when_completed = 40;
-  google.protobuf.BoolValue supplemental_state_required_when_completed = 41;
-  google.protobuf.BoolValue allow_messages = 42;
+	google.protobuf.BoolValue require_case_when_completed = 40;
+	google.protobuf.BoolValue supplemental_state_required_when_completed = 41;
+	google.protobuf.BoolValue allow_messages = 42;
 }
 
 message SetReceiverCaseReferenceIdRequest{
-  string referral_id = 1;
-  string case_id = 6;
+	string referral_id = 1;
+	string case_id = 6;
 
-  string executing_actor_id = 2;
-  OrderActorDto custom_executing_actor = 3;
-  repeated string executing_actor_permissions = 4;
+	string executing_actor_id = 2;
+	OrderActorDto custom_executing_actor = 3;
+	repeated string executing_actor_permissions = 4;
 
-  repeated string resource_group_scopes = 5;
+	repeated string resource_group_scopes = 5;
 }
 
 message SetReceiverActorReferenceIdRequest{
-  string referral_id = 1;
-  string actor_id = 6;
+	string referral_id = 1;
+	string actor_id = 6;
 
-  string executing_actor_id = 2;
-  OrderActorDto custom_executing_actor = 3;
-  repeated string executing_actor_permissions = 4;
+	string executing_actor_id = 2;
+	OrderActorDto custom_executing_actor = 3;
+	repeated string executing_actor_permissions = 4;
 
-  repeated string resource_group_scopes = 5;
+	repeated string resource_group_scopes = 5;
 }
 
 message SetAssignedToRequest{
-  string referral_id = 1;
-  OrderActorDto assigned_to = 2;
+	string referral_id = 1;
+	OrderActorDto assigned_to = 2;
 
-  string executing_actor_id = 3;
-  OrderActorDto custom_executing_actor = 4;
-  repeated string executing_actor_permissions = 5;
+	string executing_actor_id = 3;
+	OrderActorDto custom_executing_actor = 4;
+	repeated string executing_actor_permissions = 5;
 
-  repeated string resource_group_scopes = 6;
+	repeated string resource_group_scopes = 6;
 }
 
 message SetInternalNote{
-  string referral_id = 1;
-  string internal_note = 2;
+	string referral_id = 1;
+	string internal_note = 2;
 
-  string executing_actor_id = 3;
-  OrderActorDto custom_executing_actor = 4;
-  repeated string executing_actor_permissions = 5;
+	string executing_actor_id = 3;
+	OrderActorDto custom_executing_actor = 4;
+	repeated string executing_actor_permissions = 5;
 
-  repeated string resource_group_scopes = 6;
+	repeated string resource_group_scopes = 6;
 }
 
 message InformationFieldDto{
-  string identifier = 1;
-  string type = 2;
-  google.protobuf.StringValue value = 3;
-  string name = 4;
+	string identifier = 1;
+	string type = 2;
+	google.protobuf.StringValue value = 3;
+	string name = 4;
 }
 
 message CancelReferralRequest{
-  string id = 1;
-  string executing_actor_id = 2;
-  string executing_resource_group_id = 3;
-  repeated string executing_actor_permissions = 4;
+	string id = 1;
+	string executing_actor_id = 2;
+	string executing_resource_group_id = 3;
+	repeated string executing_actor_permissions = 4;
 }
 
 message GetProductOrderDetailsRequest{
-  string id = 1;
-  repeated string resource_group_scopes = 2;
+	string id = 1;
+	repeated string resource_group_scopes = 2;
 }
 
 message GetProductOrdersByProductRequest{
-  string product_id = 1;
-  google.protobuf.Int32Value product_version = 2;
-  repeated string resource_group_scopes = 3;
+	string product_id = 1;
+	google.protobuf.Int32Value product_version = 2;
+	repeated string resource_group_scopes = 3;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message PagingFilterDto{
-  google.protobuf.Int32Value top = 1;
-  google.protobuf.Int32Value skip = 2;
-  repeated string status_filters = 3;
-  repeated string category_filters = 4;
-  google.protobuf.Timestamp updated_since = 5;
-  google.protobuf.StringValue query = 6;
-  repeated string assigned_to_actor_ids = 7;
+	google.protobuf.Int32Value top = 1;
+	google.protobuf.Int32Value skip = 2;
+	repeated string status_filters = 3;
+	repeated string category_filters = 4;
+	google.protobuf.Timestamp updated_since = 5;
+	google.protobuf.StringValue query = 6;
+	repeated string assigned_to_actor_ids = 7;
 }
 
 message GetReferralsByReferredActorRequest{
-  string referred_actor_id = 1;
-  repeated string resource_group_scopes = 2;
+	string referred_actor_id = 1;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByRecipientRequest{
-  string order_recipient_id = 1;
-  repeated string resource_group_scopes = 2;
+	string order_recipient_id = 1;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByResourceGroupRequest{
-  string resource_group_id = 1;
+	string resource_group_id = 1;
 
 
-  repeated string resource_group_scopes = 2;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByAssignedActorRequest{
-  string assigned_actor_id = 1;
-  repeated string resource_group_scopes = 2;
+	string assigned_actor_id = 1;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersCreatedByActorRequest{
-  string actor_id = 1;
-  repeated string resource_group_scopes = 2;
+	string actor_id = 1;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersCreatedFromResourceGroupRequest{
-  string resource_group_id = 1;
+	string resource_group_id = 1;
 
-  repeated string resource_group_scopes = 2;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message GetProductOrdersByCaseReferenceRequest{
-  string case_reference_id = 1;
-  repeated string resource_group_scopes = 2;
+	string case_reference_id = 1;
+	repeated string resource_group_scopes = 2;
 
-  PagingFilterDto paging_filter = 4;
+	PagingFilterDto paging_filter = 4;
 }
 
 message UpdateStatusRequest{
-  string product_order_id = 1;
-  google.protobuf.StringValue status = 2;
-  google.protobuf.StringValue custom_status = 7;
+	string product_order_id = 1;
+	google.protobuf.StringValue status = 2;
+	google.protobuf.StringValue custom_status = 7;
 
-  string executing_actor_id = 3;
-  OrderActorDto custom_executing_actor = 4;
-  repeated string executing_actor_permissions = 5;
+	string executing_actor_id = 3;
+	OrderActorDto custom_executing_actor = 4;
+	repeated string executing_actor_permissions = 5;
 
-  repeated string resource_group_scopes = 6;
-  ExecutingRole role = 8;
+	repeated string resource_group_scopes = 6;
+	ExecutingRole role = 8;
 }
 
 message AddAttachmentRequest {
-  string product_order_id = 1;
-  google.protobuf.StringValue sub_product_id = 9;
-  string attachmentIdentifier = 2;
-  string filename = 3;
-  string content_type = 4;
-  bytes content = 5;
+	string product_order_id = 1;
+	google.protobuf.StringValue sub_product_id = 9;
+	string attachmentIdentifier = 2;
+	string filename = 3;
+	string content_type = 4;
+	bytes content = 5;
 
-  repeated string resource_group_scopes = 10;
+	repeated string resource_group_scopes = 10;
 
-  string executing_actor_id = 6;
-  OrderActorDto custom_executing_actor = 7;
-  repeated string executing_actor_permissions = 8;
+	string executing_actor_id = 6;
+	OrderActorDto custom_executing_actor = 7;
+	repeated string executing_actor_permissions = 8;
 }
 
 message AddAttachmentReply {
-  AttachmentDto attachment = 1;
+	AttachmentDto attachment = 1;
 }
 
 message AttachmentDto {
-  string product_order_id = 1;
-  string attachment_id = 2;
+	string product_order_id = 1;
+	string attachment_id = 2;
 
-  bool required = 3;
-  bool allow_multiple = 4;
-  google.protobuf.StringValue description = 5;
+	bool required = 3;
+	bool allow_multiple = 4;
+	google.protobuf.StringValue description = 5;
 
-  string attachment_identifier = 6;
-  string attachment_name = 7;
-  string attachment_type = 8;
+	string attachment_identifier = 6;
+	string attachment_name = 7;
+	string attachment_type = 8;
 
-  repeated FileDto files = 9;
+	repeated FileDto files = 9;
 }
 
 message FileDto{
-  string id = 1;
-  string filename = 2;
-  google.protobuf.StringValue content_type = 3;
-  google.protobuf.StringValue url = 4;
-  int32 size = 5;
+	string id = 1;
+	string filename = 2;
+	google.protobuf.StringValue content_type = 3;
+	google.protobuf.StringValue url = 4;
+	int32 size = 5;
 }
 
 message CreateFileDto{
-  string file_name = 1;
-  string content_type = 2;  
-  bytes content = 3;
+	string file_name = 1;
+	string content_type = 2;
+	bytes content = 3;
 }
 
 message CreateDeliverableRequest {
-  string product_order_id = 1;
-  string deliverable_element_namespace = 13;
+	string product_order_id = 1;
+	string deliverable_element_namespace = 13;
 
-  oneof data {
-    ConditionReportDto condition_report = 2;
-    ElectricalInstallationConditionReportDto electrical_installation_condition_report = 3;
-    ImageFileDto image_file = 4;
-    ImageReferenceDto image_reference = 5;
-    EnergyLabelReportDto energy_label_report = 14;
-    LinkDto link = 15;
-  }
+	oneof data {
+		ConditionReportDto condition_report = 2;
+		ElectricalInstallationConditionReportDto electrical_installation_condition_report = 3;
+		ImageFileDto image_file = 4;
+		ImageReferenceDto image_reference = 5;
+		EnergyLabelReportDto energy_label_report = 14;
+		LinkDto link = 15;
+		ChangeOfOwnershipInsuranceRejectionDto change_of_ownership_insurance_rejection_ = 16;
+	}
 
-  CreateFileDto file = 6;
+	CreateFileDto file = 6;
 
-  repeated string resource_group_scopes = 12;
+	repeated string resource_group_scopes = 12;
 
-  string executing_actor_id = 9;
-  OrderActorDto custom_executing_actor = 10;
-  repeated string executing_actor_permissions = 11;
+	string executing_actor_id = 9;
+	OrderActorDto custom_executing_actor = 10;
+	repeated string executing_actor_permissions = 11;
 }
 
 message ConditionReportDto{
-  string document_created_by_display_name = 1;
-  string company_display_name = 2;
+	string document_created_by_display_name = 1;
+	string company_display_name = 2;
 
-  google.protobuf.Timestamp report_creation_date = 3;
-  google.protobuf.Timestamp report_due_date = 4;
+	google.protobuf.Timestamp report_creation_date = 3;
+	google.protobuf.Timestamp report_due_date = 4;
 
-  int32 critical_damages_count = 5;
-  int32 severe_damages_count = 6;
-  int32 less_severe_damages_count = 7;
-  int32 possible_damages_count = 8;
+	int32 critical_damages_count = 5;
+	int32 severe_damages_count = 6;
+	int32 less_severe_damages_count = 7;
+	int32 possible_damages_count = 8;
 }
 
 message EnergyLabelReportDto{
-  string document_created_by_display_name = 1;
-  string company_display_name = 2;
+	string document_created_by_display_name = 1;
+	string company_display_name = 2;
 
-  google.protobuf.Timestamp report_creation_date = 3;
-  google.protobuf.Timestamp report_due_date = 4;
-  string report_number = 6;
+	google.protobuf.Timestamp report_creation_date = 3;
+	google.protobuf.Timestamp report_due_date = 4;
+	string report_number = 6;
 
-  string energy_classification = 5;
+	string energy_classification = 5;
 }
 
 message LinkDto{
-  string url = 1;
-  string display_name = 2;
+	string url = 1;
+	string display_name = 2;
+}
+
+message ChangeOfOwnershipInsuranceRejectionDto{
+	string document_created_by_display_name = 1;
+	string company_display_name = 2;
+
+	google.protobuf.Timestamp report_creation_date = 3;
+	google.protobuf.Timestamp report_due_date = 4;
+
+	google.protobuf.StringValue rejection_type = 5;
 }
 
 message ElectricalInstallationConditionReportDto{
-  string document_created_by_display_name = 1;
-  string company_display_name = 2;
+	string document_created_by_display_name = 1;
+	string company_display_name = 2;
 
-  google.protobuf.Timestamp report_creation_date = 3;
-  google.protobuf.Timestamp report_due_date = 4;
+	google.protobuf.Timestamp report_creation_date = 3;
+	google.protobuf.Timestamp report_due_date = 4;
 
-  int32 fire_risk_count = 5;
-  int32 electric_shock_risk_count = 6;
-  int32 illegal_installation_count = 7;
-  int32 need_investigation_count = 8;
+	int32 fire_risk_count = 5;
+	int32 electric_shock_risk_count = 6;
+	int32 illegal_installation_count = 7;
+	int32 need_investigation_count = 8;
 }
 
 message ImageFileDto{
-  string type = 1;
-  int32 priority = 2;
-  google.protobuf.StringValue description = 3;
+	string type = 1;
+	int32 priority = 2;
+	google.protobuf.StringValue description = 3;
 }
 
 message ImageReferenceDto{
-  string type = 1;
-  int32 priority = 2;
-  google.protobuf.StringValue description = 3;
+	string type = 1;
+	int32 priority = 2;
+	google.protobuf.StringValue description = 3;
 
-  string x_s_url = 10;
-  string s_url = 11;
-  string m_url = 12;
-  string l_url = 13;
-  string x_l_url = 14;
-  string original_url = 15;
+	string x_s_url = 10;
+	string s_url = 11;
+	string m_url = 12;
+	string l_url = 13;
+	string x_l_url = 14;
+	string original_url = 15;
 
-  string referenced_file_name = 16;
-  int32 referenced_file_size = 17;
+	string referenced_file_name = 16;
+	int32 referenced_file_size = 17;
 }
 
 message DeleteDeliverableRequest{
-  string deliverable_id = 1;
-  string product_order_id = 2;
-  repeated string resource_group_scopes = 3;
+	string deliverable_id = 1;
+	string product_order_id = 2;
+	repeated string resource_group_scopes = 3;
 
-  string executing_actor_id = 9;
-  OrderActorDto custom_executing_actor = 10;
-  repeated string executing_actor_permissions = 11;
+	string executing_actor_id = 9;
+	OrderActorDto custom_executing_actor = 10;
+	repeated string executing_actor_permissions = 11;
 }
 
 message DeliverableDto {
-  string id = 1;
-  string product_order_id = 2;
-  string deliverable_element_namespace = 3;
+	string id = 1;
+	string product_order_id = 2;
+	string deliverable_element_namespace = 3;
 
-  oneof data {
-    ConditionReportDto condition_report = 4;
-    ElectricalInstallationConditionReportDto electrical_installation_condition_report = 5;
-    ImageFileDto image_file = 6;
-    ImageReferenceDto image_reference = 9;
-    EnergyLabelReportDto energy_label_report = 10;
-    LinkDto link = 11;
-    // VideoFileDto
-    // VideoReferenceDto
-  }
-  FileDto file = 7;
-  
-  google.protobuf.Timestamp created_at_utc = 8;
+	oneof data {
+		ConditionReportDto condition_report = 4;
+		ElectricalInstallationConditionReportDto electrical_installation_condition_report = 5;
+		ImageFileDto image_file = 6;
+		ImageReferenceDto image_reference = 9;
+		EnergyLabelReportDto energy_label_report = 10;
+		LinkDto link = 11;
+		ChangeOfOwnershipInsuranceRejectionDto change_of_ownership_insurance_rejection_ = 12;
+		// VideoFileDto
+		// VideoReferenceDto
+	}
+	FileDto file = 7;
+
+	google.protobuf.Timestamp created_at_utc = 8;
 }
 
 message DownloadAttachmentRequest {
-  string context_id = 1;
-  string attachment_id = 2;
-  repeated string resource_group_scopes = 3;
-  google.protobuf.StringValue file_id = 4;
+	string context_id = 1;
+	string attachment_id = 2;
+	repeated string resource_group_scopes = 3;
+	google.protobuf.StringValue file_id = 4;
 }
 
 message DownloadDeliverableRequest {
-  string product_order_id = 1;
-  string Deliverable_id = 2;
-  repeated string resource_group_scopes = 3;
+	string product_order_id = 1;
+	string Deliverable_id = 2;
+	repeated string resource_group_scopes = 3;
 }
 
 message DownloadReply {
-  repeated FileDto files = 1;
+	repeated FileDto files = 1;
 }
 
 message ProductStatusDto{
-  string identifier = 1;
-  string display_name = 2;
+	string identifier = 1;
+	string display_name = 2;
 }
 
 message GetAvailableStatusesRequest{
-  string product_order_id = 1;
-  repeated string resource_group_scopes = 6;
+	string product_order_id = 1;
+	repeated string resource_group_scopes = 6;
 }
 
 message GetAvailableStatusesReply{
-  repeated ProductStatusDto statuses = 1;
+	repeated ProductStatusDto statuses = 1;
 }
 
 
 message GetProductOrderActivityLog{
-  string product_order_id = 1;
-  repeated string resource_group_scopes = 2;
+	string product_order_id = 1;
+	repeated string resource_group_scopes = 2;
 }
 
 message ActivityLogList{
-  repeated ActivityLogDto logs = 1;
+	repeated ActivityLogDto logs = 1;
 }
 
 message ActivityLogDto{
-  string id = 1;
-  string product_order_id = 2;
-  google.protobuf.Timestamp created_at_utc = 4;
+	string id = 1;
+	string product_order_id = 2;
+	google.protobuf.Timestamp created_at_utc = 4;
 
-  string executing_actor_id = 5;
-  google.protobuf.StringValue executing_resource_group_id = 10;
+	string executing_actor_id = 5;
+	google.protobuf.StringValue executing_resource_group_id = 10;
 
-  OrderActorDto created_by_actor = 6;
-  google.protobuf.StringValue resource_group_id = 13;
-  google.protobuf.StringValue order_party_id = 11;
-  google.protobuf.StringValue order_party_display_name = 12;
+	OrderActorDto created_by_actor = 6;
+	google.protobuf.StringValue resource_group_id = 13;
+	google.protobuf.StringValue order_party_id = 11;
+	google.protobuf.StringValue order_party_display_name = 12;
 
-  oneof data {
-    CustomLogDataDto custom_log_data = 7;
-    StatusChangeDataDto status_change_data = 8;
-    CreatedLogDto created_log_data = 9;
-    CaseStateChangedDataDto case_state_changed_data = 14;
-    SmsLogDto sms_log = 15;
-    ManualConsentLogDto manual_consent_log = 16;
-  }
+	oneof data {
+		CustomLogDataDto custom_log_data = 7;
+		StatusChangeDataDto status_change_data = 8;
+		CreatedLogDto created_log_data = 9;
+		CaseStateChangedDataDto case_state_changed_data = 14;
+		SmsLogDto sms_log = 15;
+		ManualConsentLogDto manual_consent_log = 16;
+	}
 }
 
 message CreatedLogDto {
-  string initialStatus = 1;
+	string initialStatus = 1;
 }
 
 message StatusChangeDataDto{
-  string FromStatus = 1;
-  string ToStatus = 2;
-  google.protobuf.StringValue from_custom_status = 3;
-  google.protobuf.StringValue to_custom_status = 4;
+	string FromStatus = 1;
+	string ToStatus = 2;
+	google.protobuf.StringValue from_custom_status = 3;
+	google.protobuf.StringValue to_custom_status = 4;
 }
 
 message CustomLogDataDto {
-  string message = 1;
+	string message = 1;
 }
 
 message SmsLogDto {
-  string sms_body = 1;
-  SmsDirection direction = 2;
+	string sms_body = 1;
+	SmsDirection direction = 2;
 }
 
 enum SmsDirection {
-  Incoming = 0;
-  Outgoing = 1;
+	Incoming = 0;
+	Outgoing = 1;
 }
 
 message ManualConsentLogDto {
-  string description = 1;
+	string description = 1;
 }
 
 message CaseStateChangedDataDto {
-  string from_case_status = 1;
-  string to_case_status = 2;
-  string state_flow_namespace = 3;
+	string from_case_status = 1;
+	string to_case_status = 2;
+	string state_flow_namespace = 3;
 }
 
 message CreateCustomLogRequest{
-  string product_order_id = 1;
-  repeated string resource_group_scopes = 2;
-  string message = 3;
+	string product_order_id = 1;
+	repeated string resource_group_scopes = 2;
+	string message = 3;
 
-  string executing_actor_id = 4;
-  OrderActorDto custom_executing_actor = 5;
-  repeated string executing_actor_permissions = 6;
-  google.protobuf.StringValue resource_group_id = 7;
-  google.protobuf.StringValue order_party_id = 8;
-  ExecutingRole role = 9;
+	string executing_actor_id = 4;
+	OrderActorDto custom_executing_actor = 5;
+	repeated string executing_actor_permissions = 6;
+	google.protobuf.StringValue resource_group_id = 7;
+	google.protobuf.StringValue order_party_id = 8;
+	ExecutingRole role = 9;
 }
 
 enum ExecutingRole {
-  None = 0;
-  Sender = 1;
-  Receiver = 2;
+	None = 0;
+	Sender = 1;
+	Receiver = 2;
 }
 
 
 message CountDto{
-  int32 total_count = 1;
-  int32 active_count = 2;
+	int32 total_count = 1;
+	int32 active_count = 2;
 }
 
 message RegisterConsentRequest {
-  string product_order_id = 1;
-  string description = 2;
+	string product_order_id = 1;
+	string description = 2;
 
-  string executing_actor_id = 3;
-  repeated string executing_actor_permissions = 4;
+	string executing_actor_id = 3;
+	repeated string executing_actor_permissions = 4;
 
-  repeated string resource_group_scopes = 5;
-  string resource_group_id = 6;
+	repeated string resource_group_scopes = 5;
+	string resource_group_id = 6;
 }
 
 message DeleteActorIdRequest{
