@@ -36,6 +36,8 @@ message GetReferenceEstateDataRequest {
 
 message GetReferenceEstateDataReply {
   bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
 } 
 
 message GetHealthStatusRequest {
