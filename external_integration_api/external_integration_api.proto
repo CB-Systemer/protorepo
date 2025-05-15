@@ -31,7 +31,7 @@ service ExternalIntegrationApi {
 }
 
 message GetReferenceEstateDataRequest {
-    google.protobuf.StringValue executingActorId = 1;
+    string executingActorId = 1;
 }
 
 message GetReferenceEstateDataReply {
