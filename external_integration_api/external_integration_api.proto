@@ -27,7 +27,16 @@ service ExternalIntegrationApi {
   rpc SendToEnettetTenderReceiver(SendToEnettetTenderReceiverRequest) returns (SendToEnettetTenderReceiverReply);
 
   rpc GetServiceHealthStatus(GetHealthStatusRequest) returns (GetHealthStatusReply);
+  rpc GetReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
 }
+
+message GetReferenceEstateDataRequest {
+   
+}
+
+message GetReferenceEstateDataReply {
+  bool success = 1;
+} 
 
 message GetHealthStatusRequest {
   
