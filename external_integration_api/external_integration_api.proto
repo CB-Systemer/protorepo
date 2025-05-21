@@ -28,6 +28,15 @@ service ExternalIntegrationApi {
 
   rpc GetServiceHealthStatus(GetHealthStatusRequest) returns (GetHealthStatusReply);
   rpc GetReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
+  rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
+}
+
+message IndexReferenceEstateDataRequest{
+
+}
+
+message IndexReferenceEstateDataReply {
+  
 }
 
 message GetReferenceEstateDataRequest {
