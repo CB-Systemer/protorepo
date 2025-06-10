@@ -29,6 +29,15 @@ service ExternalIntegrationApi {
   rpc GetServiceHealthStatus(GetHealthStatusRequest) returns (GetHealthStatusReply);
   rpc GetReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
+  rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
+}
+
+message GetReferenceEstateExtendedDataRequest{
+  google.protobuf.StringValue bfeNumber = 1;
+}
+
+message GetReferenceEstateExtendedDataReply {
+   bool success = 1;
 }
 
 message IndexReferenceEstateDataRequest{
