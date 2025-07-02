@@ -41,6 +41,7 @@ message GetExternalReferenceEstateRequest {
 
 message GetExternalReferenceEstateReply {
    bool success = 1;
+   string errorMessage = 2;
 }
 
 message TriggerGetReferenceEstateExtendedDataRequest {
