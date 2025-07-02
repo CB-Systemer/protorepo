@@ -41,7 +41,9 @@ message GetExternalReferenceEstateRequest {
 
 message GetExternalReferenceEstateReply {
    bool success = 1;
-   string errorMessage = 2;
+   string processId = 2;
+   string processNamespace = 3;
+   string errorMessage = 4;
 }
 
 message TriggerGetReferenceEstateExtendedDataRequest {
