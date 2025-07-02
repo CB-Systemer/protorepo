@@ -37,6 +37,7 @@ service ExternalIntegrationApi {
 message GetExternalReferenceEstateRequest {
    string caseId = 1;
    string url = 2;
+   string executingActorId = 3;
 }
 
 message GetExternalReferenceEstateReply {
