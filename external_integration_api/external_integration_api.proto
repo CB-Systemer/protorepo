@@ -31,6 +31,16 @@ service ExternalIntegrationApi {
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
+  rpc GetExternalReferenceEstate(GetExternalReferenceEstateRequest) returns (GetExternalReferenceEstateReply);
+}
+
+message GetExternalReferenceEstateRequest {
+   string caseId = 1;
+   string url = 2;
+}
+
+message GetExternalReferenceEstateReply {
+   bool success = 1;
 }
 
 message TriggerGetReferenceEstateExtendedDataRequest {
