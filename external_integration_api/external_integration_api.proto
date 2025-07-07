@@ -38,6 +38,8 @@ message GetExternalReferenceEstateRequest {
    string caseId = 1;
    string url = 2;
    string executingActorId = 3;
+   string tenantId = 4;
+   string resourceGroupId = 5;
 }
 
 message GetExternalReferenceEstateReply {
