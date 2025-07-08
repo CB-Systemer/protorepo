@@ -661,9 +661,7 @@ message DeliverableDto {
 		ImageReferenceDto image_reference = 9;
 		EnergyLabelReportDto energy_label_report = 10;
 		LinkDto link = 11;
-		ChangeOfOwnershipInsuranceRejectionDto change_of_ownership_insurance_rejection_ = 12;
-		// VideoFileDto
-		// VideoReferenceDto
+		ChangeOfOwnershipInsuranceRejectionDto change_of_ownership_insurance_rejection_ = 12;		
 	}
 	FileDto file = 7;
 
