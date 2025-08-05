@@ -28,10 +28,12 @@ service ExternalIntegrationApi {
 
   rpc GetServiceHealthStatus(GetHealthStatusRequest) returns (GetHealthStatusReply);
   rpc GetReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
+  rpc GetDeltaReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
   rpc GetExternalReferenceEstate(GetExternalReferenceEstateRequest) returns (GetExternalReferenceEstateReply);
+  
 }
 
 message GetExternalReferenceEstateRequest {
