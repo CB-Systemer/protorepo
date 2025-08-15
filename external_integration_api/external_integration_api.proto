@@ -234,6 +234,7 @@ message IdeelAnpartDto {
    google.protobuf.StringValue id = 1;
    int32 anpartNumber = 2;
    repeated OwnerDto owners = 3;
+   google.protobuf.StringValue anpartIdentifier = 4;
 }
 
 message GetRegisteredOwnersRequest {
