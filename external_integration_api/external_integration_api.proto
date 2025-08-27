@@ -431,6 +431,7 @@ message GetAddressByBFEReply{
   google.protobuf.StringValue errorMessage = 2;
   google.protobuf.StringValue entrance_address_id = 3;
   google.protobuf.StringValue address_id = 4;
+  bool hasAddress = 5;
 }
 
 message GetBoligsidenRealtorBranchRequest {
