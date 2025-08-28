@@ -432,6 +432,8 @@ message GetAddressByBFEReply{
   google.protobuf.StringValue entrance_address_id = 3;
   google.protobuf.StringValue address_id = 4;
   bool hasAddress = 5;
+  google.protobuf.StringValue description = 6;
+  google.protobuf.StringValue municipality_code = 7;
 }
 
 message GetBoligsidenRealtorBranchRequest {
