@@ -8,6 +8,7 @@ import "google/protobuf/wrappers.proto";
 
 service GrpcDataStoreApi {
 	rpc IndexDataNode (IndexDataNodeRequest) returns (IndexDataNodeReply);
+    rpc GetTheme(GetThemeRequest) returns (GetThemeResponse);
 }
 
 message IndexDataNodeRequest {
@@ -17,4 +18,14 @@ message IndexDataNodeRequest {
 }
 
 message IndexDataNodeReply {	
+}
+
+message GetThemeRequest {
+	string resourceGroupId = 1;
+	string applicationId = 2;
+	string theme_namespace = 3;
+}
+
+message GetThemeResponse { 
+	string json = 1;
 }
