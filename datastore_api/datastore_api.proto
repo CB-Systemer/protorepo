@@ -1,0 +1,21 @@
+// ***************************** SHOULD ONLY BE UPDATED/CHANGED TROUGH OUR PROTOREPO **********************************
+
+syntax = "proto3";
+option csharp_namespace = "Cbs.DataStore.Api";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service DataStoreApi {
+	rpc IndexDataNode (IndexDataNodeRequest) returns (IndexDataNodeReply);
+}
+
+
+message IndexDataNodeRequest {
+	string data_node_id = 1;
+	bool update = 2;
+	bool instant_indexing = 3;
+}
+
+message IndexDataNodeReply {	
+}
