@@ -6,10 +6,9 @@ option csharp_namespace = "Cbs.DataStore.Api";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-service DataStoreApi {
+service GrpcDataStoreApi {
 	rpc IndexDataNode (IndexDataNodeRequest) returns (IndexDataNodeReply);
 }
-
 
 message IndexDataNodeRequest {
 	string data_node_id = 1;
