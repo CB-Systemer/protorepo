@@ -11,6 +11,7 @@ service GrpcDataStoreApi {
     rpc GetTheme(GetThemeRequest) returns (GetThemeResponse);
     rpc GetContent(GetContentRequest) returns (GetContentResponse);
 	rpc GetIdentityContent(GetIdentityContentRequest) returns (GetContentResponse);
+	rpc LoadDnHierarchy (LoadDnHierarchyRequest) returns (LoadDnHierarchyReply);
 }
 
 message IndexDataNodeRequest {
@@ -46,4 +47,14 @@ message GetIdentityContentRequest {
 
 message GetContentResponse { 
 	string json = 1;
+}
+
+message LoadDnHierarchyRequest {
+  string resourceGroupId = 1;
+  string actorId = 2;
+  string namespace = 3;
+}
+
+message LoadDnHierarchyReply {
+  string result = 1;
 }
