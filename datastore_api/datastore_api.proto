@@ -66,6 +66,12 @@ message GetDbActorRequest {
 }
 
 message GetDbActorReply {
+	bool success = 1;
+	string errorMessage = 2;
+	ActorDto actor = 3;
+}
+
+message ActorDto {
 	string id = 1;
 	string resourceGroupId = 2;
 	string displayName = 3;
