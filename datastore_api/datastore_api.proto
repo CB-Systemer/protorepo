@@ -74,13 +74,13 @@ message GetDbActorReply {
 	string roleStatus = 6;
 	string namespace = 7;
 	string imageUrl = 8;
-	repeated EmailSearchModel emails = 9;
-	repeated ActorIdentitySearchModel identities = 10;
-	repeated PhoneSearchModel phones = 11;
+	repeated ActorEmailDto emails = 9;
+	repeated ActorIdentityDto identities = 10;
+	repeated ActorPhoneDto phones = 11;
 	string dataStoreId = 12;
 }
 
-message ActorIdentitySearchModel {
+message ActorIdentityDto {
 	string identityId = 1;
 	string createdById = 2;
 	string createdAt = 3;
@@ -88,7 +88,7 @@ message ActorIdentitySearchModel {
 	string deletedAt = 5;
 	string flowType = 6;
 }
-message PhoneSearchModel {
+message ActorPhoneDto {
 	string phoneInformationElementId = 1;
 	string prefix = 2;
 	string number = 3;
@@ -98,7 +98,7 @@ message PhoneSearchModel {
 	bool isVerified = 7;
 	string phoneInformationElementNamespace = 8;
 }
-message EmailSearchModel{
+message ActorEmailDto{
 	string address = 1;
 	string emailInformationElementId = 2;
 	bool primary = 3;
