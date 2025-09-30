@@ -12,6 +12,7 @@ service GrpcDataStoreApi {
     rpc GetContent(GetContentRequest) returns (GetContentResponse);
 	rpc GetIdentityContent(GetIdentityContentRequest) returns (GetContentResponse);
 	rpc LoadDnHierarchy (LoadDnHierarchyRequest) returns (LoadDnHierarchyReply);
+	rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
 }
 
 message IndexDataNodeRequest {
@@ -57,4 +58,50 @@ message LoadDnHierarchyRequest {
 
 message LoadDnHierarchyReply {
   string result = 1;
+}
+
+message GetDbActorRequest {
+  string actorId = 1;
+  reserved 2,3;
+}
+
+message GetDbActorReply {
+	string id = 1;
+	string resourceGroupId = 2;
+	string displayName = 3;
+	string timezoneId = 4;
+	string role = 5;
+	string roleStatus = 6;
+	string namespace = 7;
+	string imageUrl = 8;
+	repeated EmailSearchModel emails = 9;
+	repeated ActorIdentitySearchModel identities = 10;
+	repeated PhoneSearchModel phones = 11;
+	string dataStoreId = 12;
+}
+
+message ActorIdentitySearchModel {
+	string identityId = 1;
+	string createdById = 2;
+	string createdAt = 3;
+	string deletedById = 4;
+	string deletedAt = 5;
+	string flowType = 6;
+}
+message PhoneSearchModel {
+	string phoneInformationElementId = 1;
+	string prefix = 2;
+	string number = 3;
+	string internationalNumber = 4;
+	string phoneType = 5;
+	bool primary = 6;
+	bool isVerified = 7;
+	string phoneInformationElementNamespace = 8;
+}
+message EmailSearchModel{
+	string address = 1;
+	string emailInformationElementId = 2;
+	bool primary = 3;
+	bool isVerified = 4;
+	string emailInformationElementNamespace = 5;
 }
