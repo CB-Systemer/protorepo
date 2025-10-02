@@ -13,6 +13,8 @@ service GrpcDataStoreApi {
 	rpc GetIdentityContent(GetIdentityContentRequest) returns (GetContentResponse);
 	rpc LoadDnHierarchy (LoadDnHierarchyRequest) returns (LoadDnHierarchyReply);
 	rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
+	rpc GetDataSharings (GetDataSharingsRequest) returns (GetDataSharingsReply);
+    rpc GetSharedResourceGroups (GetSharedResourceGroupsRequest) returns (GetSharedResourceGroupsReply);
 }
 
 message IndexDataNodeRequest {
@@ -94,6 +96,7 @@ message ActorIdentityDto {
 	string deletedAt = 5;
 	string flowType = 6;
 }
+
 message ActorPhoneDto {
 	string phoneInformationElementId = 1;
 	string prefix = 2;
@@ -104,6 +107,7 @@ message ActorPhoneDto {
 	bool isVerified = 7;
 	string phoneInformationElementNamespace = 8;
 }
+
 message ActorEmailDto{
 	string address = 1;
 	string emailInformationElementId = 2;
@@ -111,3 +115,34 @@ message ActorEmailDto{
 	bool isVerified = 4;
 	string emailInformationElementNamespace = 5;
 }
+
+message GetDataSharingsRequest {
+  string resourceGroupId = 1;
+}
+
+message GetDataSharingsReply {
+  repeated DataSharingDto dataSharings = 1;
+}
+
+message DataSharingDto {
+	string id = 1;
+	string actorId = 2;
+	string resourceGroupId = 3;
+	string actorDisplayName = 4;
+	google.protobuf.Timestamp createdAt = 5;
+	string createdById = 6;
+	google.protobuf.Timestamp sharingFromDate = 7;
+	google.protobuf.Timestamp sharingToDate = 8;
+	bool isDeleted = 9;
+}
+
+
+message GetSharedResourceGroupsRequest {
+	string actorId = 1;
+}
+
+message GetSharedResourceGroupsReply{
+	repeated string resourceGroupIds = 1;
+}
+
+
