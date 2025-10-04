@@ -159,6 +159,8 @@ message ArchiveEmailRequest {
 	string templateId = 9;
 	string templateDisplayName = 10;
 	string relatedCaseId = 11;
+
+	ExecutingActorContext executingActorContext = 12;
 }
 
 message ArchiveEmailReply {
@@ -174,6 +176,8 @@ message ArchiveSmsRequest {
 	string templateId = 6;
 	string templateTypeDisplayName = 7;
 	string relatedCaseId = 8;
+
+	ExecutingActorContext executingActorContext = 9;
 }
 
 message ArchiveSmsReply {
@@ -190,6 +194,14 @@ message ArchiveOnDto {
 	string resourceGroupId = 2;
 	string parentId = 3;
 	string parentNamespace = 4;
+}
+
+message ExecutingActorContext {
+	string actorId = 1;
+	string actorNamespace = 2;
+	string executingTenantId = 3;
+	string executingResourceGroupId = 4;
+	bool hasRootAccess = 5;
 }
 
 
