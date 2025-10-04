@@ -180,10 +180,6 @@ message ArchiveSmsReply {
 	repeated string archives = 1;
 }
 
-message ArchiveEmailReply {
-	repeated string archives = 1;
-}
-
 message RecipientDto {
 	string email = 1;
 	string displayName = 2;
