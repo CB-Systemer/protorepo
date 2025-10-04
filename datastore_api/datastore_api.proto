@@ -158,7 +158,7 @@ message ArchiveEmailRequest {
 	string subject = 8;
 	string templateId = 9;
 	string templateDisplayName = 10;
-	string relatedCaseId = 11
+	string relatedCaseId = 11;
 }
 
 message ArchiveEmailReply {
