@@ -214,6 +214,7 @@ message ExecutingActorContext {
 message GetCaseActorRolesRequest {
 	string caseId = 1;
 	repeated string roles = 2;
+	bool onlyEmployees = 3;
 }
 
 message GetCaseActorRolesReply {
