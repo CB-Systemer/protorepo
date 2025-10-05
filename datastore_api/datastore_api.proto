@@ -8,15 +8,22 @@ import "google/protobuf/wrappers.proto";
 
 service GrpcDataStoreApi {
 	rpc IndexDataNode (IndexDataNodeRequest) returns (IndexDataNodeReply);
+
     rpc GetTheme(GetThemeRequest) returns (GetThemeResponse);
     rpc GetContent(GetContentRequest) returns (GetContentResponse);
 	rpc GetIdentityContent(GetIdentityContentRequest) returns (GetContentResponse);
+
 	rpc LoadDnHierarchy (LoadDnHierarchyRequest) returns (LoadDnHierarchyReply);
+
 	rpc GetDbActor (GetDbActorRequest) returns (GetDbActorReply);
+
 	rpc GetDataSharings (GetDataSharingsRequest) returns (GetDataSharingsReply);
     rpc GetSharedResourceGroups (GetSharedResourceGroupsRequest) returns (GetSharedResourceGroupsReply);
+
 	rpc ArchiveEmail (ArchiveEmailRequest) returns (ArchiveEmailReply);
 	rpc ArchiveSms (ArchiveSmsRequest) returns (ArchiveSmsReply);
+
+	rpc GetCaseActorRoleActorIds (GetCaseActorRolesRequest) returns (GetCaseActorRolesReply);
 }
 
 message IndexDataNodeRequest {
@@ -204,4 +211,11 @@ message ExecutingActorContext {
 	bool hasRootAccess = 5;
 }
 
+message GetCaseActorRolesRequest {
+	string caseId = 1;
+	repeated string roles = 2;
+}
 
+message GetCaseActorRolesReply {
+	repeated string actorIds = 1;
+}
