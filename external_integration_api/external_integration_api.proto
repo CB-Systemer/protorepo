@@ -33,6 +33,8 @@ service ExternalIntegrationApi {
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
   rpc GetExternalReferenceEstate(GetExternalReferenceEstateRequest) returns (GetExternalReferenceEstateReply);
+
+  rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
   
 }
 
@@ -73,6 +75,14 @@ message IndexReferenceEstateDataRequest {
 
 message IndexReferenceEstateDataReply {
   
+}
+
+message IndexAddressDataRequest {
+
+}
+
+message IndexAddressDataReply {
+  bool success = 1;
 }
 
 message GetReferenceEstateDataRequest {
