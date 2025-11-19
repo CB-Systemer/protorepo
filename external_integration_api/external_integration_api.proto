@@ -35,7 +35,17 @@ service ExternalIntegrationApi {
   rpc GetExternalReferenceEstate(GetExternalReferenceEstateRequest) returns (GetExternalReferenceEstateReply);
 
   rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
+
+  rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   
+}
+
+message GetConsentTemplatesRequest {
+   string creditorCvrNumber = 1;
+}
+
+message GetConsentTemplatesReply {
+   bool success = 1;
 }
 
 message GetExternalReferenceEstateRequest {
