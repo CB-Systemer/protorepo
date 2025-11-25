@@ -37,11 +37,13 @@ service ExternalIntegrationApi {
   rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
-  rpc SendConsent(SendConsentRequest) returns (SendConsentReply);
+  rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
+  rpc GetRequestForConsent(GetRequestForConsentRequest) returns (GetRequestForConsentReply);
+  rpc GetConsent(GetConsentRequest) returns (GetConsentReply);
   
 }
 
-message SendConsentRequest {
+message SendRequestForConsentRequest {
    string customer_name = 1;
    string customer_email = 2;
    string customer_country_code = 3;
@@ -56,14 +58,44 @@ message SendConsentRequest {
    bool is_person = 12;
 }
 
-message SendConsentReply {
+message SendRequestForConsentReply {
    bool success = 1;
-   string request_for_consent_id = 2;
-   string consent_id = 3;
-   string state = 4;
-   string activation_code = 5;
-   string valid_to = 6;
-   string error_message = 7;
+   string error_message = 2;
+   RequestForConsentDto dto = 3;
+}
+
+message GetRequestForConsentRequest {
+   string request_for_consent_id = 1;
+}
+
+message GetRequestForConsentReply {
+   bool success = 1;
+   string error_message = 2;
+   RequestForConsentDto dto = 3;
+}
+
+message RequestForConsentDto {
+   string request_for_consent_id = 1;
+   string consent_id = 2;
+   string state = 3;
+   string activation_code = 4;
+   string valid_to = 5;
+}
+
+message GetConsentRequest {
+   string consent_id = 1;
+}
+
+message GetConsentReply {
+   bool success = 1;
+   string error_message = 2;
+   ConsentDto dto = 3;
+}
+
+message ConsentDto {
+   string consent_id = 1;
+   string state = 2;
+   string valid_to = 3;
 }
 
 message GetConsentTemplatesRequest {
