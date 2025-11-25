@@ -59,9 +59,11 @@ message SendConsentRequest {
 message SendConsentReply {
    bool success = 1;
    string consent_request_id = 2;
-   string state = 3;
-   string activation_code = 4;
-   string error_message = 5;
+   string consent_id = 3;
+   string state = 4;
+   string activation_code = 5;
+   string valid_to = 6;
+   string error_message = 7;
 }
 
 message GetConsentTemplatesRequest {
