@@ -58,7 +58,7 @@ message SendConsentRequest {
 
 message SendConsentReply {
    bool success = 1;
-   string consent_request_id = 2;
+   string request_for_consent_id = 2;
    string consent_id = 3;
    string state = 4;
    string activation_code = 5;
