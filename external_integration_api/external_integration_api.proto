@@ -60,7 +60,7 @@ message SendConsentReply {
    bool success = 1;
    string consent_request_id = 2;
    string state = 3;
-   string activation_code = 3;
+   string activation_code = 4;
 }
 
 message GetConsentTemplatesRequest {
