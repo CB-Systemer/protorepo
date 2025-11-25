@@ -37,7 +37,30 @@ service ExternalIntegrationApi {
   rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
+  rpc SendConsent(SendConsentRequest) returns (SendConsentReply);
   
+}
+
+message SendConsentRequest {
+   string customer_name = 1;
+   string customer_email = 2;
+   string customer_country_code = 3;
+   string customer_phone = 4;
+   string resource_group_cvr_number = 5;
+   string data_owner_cvr_number = 6;
+   string cadastral_district_identifier = 7;
+   string cadastral_district_name = 8;
+   string cadastral_id = 9;
+   string property_id = 10;
+   string presentation_value = 11;
+   bool is_person = 12;
+}
+
+message SendConsentReply {
+   bool success = 1;
+   string consent_request_id = 2;
+   string state = 3;
+   string activation_code = 3;
 }
 
 message GetConsentTemplatesRequest {
