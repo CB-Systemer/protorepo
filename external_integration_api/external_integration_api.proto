@@ -136,12 +136,56 @@ message GetLoanRedemptionsRequest {
 message GetLoanRedemptionsReply {
    bool success = 1;
    string error_message = 2;
-   repeated LoanRedemptionDto dto = 3;
+   repeated LoanRedemptionCalculationDto dto = 3;
 }
 
-message LoanRedemptionDto {
-   string loan_redemption_id = 1;
-   string lender_cvr_number = 2;
+message MoneyAmount {
+  double value = 1;
+  string currency = 2;
+}
+
+message FundingInformation {
+  MoneyAmount fundingPrincipalAmountOutstanding = 1;
+  string fundingPrincipalAmountOutstandingDate = 2;
+  double bondPrice = 3;
+  string averagePriceLatestDate = 4;
+  bool callable = 5;
+  double interestRate = 6;
+  double redemptionRate = 7;
+  int32 yearlyPayments = 8;
+  double usedPrice = 9;
+  MoneyAmount partialRedemptionAmount = 10;
+  string ISIN = 11;
+}
+
+message Phrase {
+  string phraseType = 1;
+  string phraseText = 2;
+  string phraseOrigin = 3;
+}
+
+message LoanRedemptionCalculationDto {
+  string lender = 1;
+  string lenderName = 2;
+  string propertyID = 3;
+  string loanID = 4;
+  string product = 5;
+  string standardRedemptionType = 6;
+  string calculationTime = 7;
+  string calcAlgorithmVersion = 8;
+  MoneyAmount redemptionAmountTotal = 9;
+  MoneyAmount grossInterest = 10;
+  MoneyAmount principalAmountOutstanding = 11;
+  string principalAmountOutstandingDate = 12;
+  repeated FundingInformation fundingInformation = 13;
+  MoneyAmount accumulatedRefinanceAmount = 14;
+  MoneyAmount redemptionOfferFee = 15;
+  MoneyAmount redemptionFee = 16;
+  double commissionRate = 17;
+  double bondPriceMarginRate = 18;
+  MoneyAmount totalAmountStandardFeesAndRates = 19;
+  double prepaymentInterestRate = 20;
+  repeated Phrase phrases = 21;
 }
 
 
