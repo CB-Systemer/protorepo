@@ -145,12 +145,6 @@ message LoanRedemptionDto {
 }
 
 
-message MortgageDto {
-   string mortgage_id = 1;
-   string lender_cvr_number = 2;
-}
-
-
 message GetExternalReferenceEstateRequest {
    string caseId = 1;
    string url = 2;
