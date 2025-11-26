@@ -41,6 +41,7 @@ service ExternalIntegrationApi {
   rpc GetRequestForConsent(GetRequestForConsentRequest) returns (GetRequestForConsentReply);
   rpc GetConsent(GetConsentRequest) returns (GetConsentReply);
   rpc GetMortgages(GetMortgagesRequest) returns (GetMortgagesReply);
+  rpc GetLoanRedemptions(GetLoanRedemptionsRequest) returns (GetLoanRedemptionsReply);
   
 }
 
@@ -119,6 +120,30 @@ message GetMortgagesReply {
    string error_message = 2;
    repeated MortgageDto dto = 3;
 }
+
+message MortgageDto {
+   string mortgage_id = 1;
+   string lender_cvr_number = 2;
+}
+
+message GetLoanRedemptionsRequest {
+   string lender_cvr_number = 1;
+   string consent_id = 2;
+   string property_id = 3;
+   string loan_id = 4;
+}
+
+message GetLoanRedemptionsReply {
+   bool success = 1;
+   string error_message = 2;
+   repeated LoanRedemptionDto dto = 3;
+}
+
+message LoanRedemptionDto {
+   string loan_redemption_id = 1;
+   string lender_cvr_number = 2;
+}
+
 
 message MortgageDto {
    string mortgage_id = 1;
