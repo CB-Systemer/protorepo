@@ -56,6 +56,7 @@ message SendRequestForConsentRequest {
    string property_id = 10;
    string presentation_value = 11;
    bool is_person = 12;
+   string label = 13;
 }
 
 message SendRequestForConsentReply {
@@ -80,6 +81,7 @@ message RequestForConsentDto {
    string state = 3;
    string activation_code = 4;
    string valid_to = 5;
+   string label = 6;
 }
 
 message GetConsentRequest {
