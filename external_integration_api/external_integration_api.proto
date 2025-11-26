@@ -122,7 +122,7 @@ message GetMortgagesReply {
 
 message MortgageDto {
    string mortgage_id = 1;
-   string lender_cvr_number = 2
+   string lender_cvr_number = 2;
 }
 
 
