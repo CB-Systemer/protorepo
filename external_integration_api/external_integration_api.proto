@@ -45,6 +45,13 @@ service ExternalIntegrationApi {
   
 }
 
+message ErrorDto {
+   int32 error_type = 1;
+   string error_code = 2;
+   string error_description = 3;
+   bool is_transient = 4;
+}
+
 message SendRequestForConsentRequest {
    string customer_name = 1;
    string customer_email = 2;
@@ -63,7 +70,7 @@ message SendRequestForConsentRequest {
 
 message SendRequestForConsentReply {
    bool success = 1;
-   string error_message = 2;
+   ErrorDto error = 2;
    RequestForConsentDto dto = 3;
 }
 
@@ -73,7 +80,7 @@ message GetRequestForConsentRequest {
 
 message GetRequestForConsentReply {
    bool success = 1;
-   string error_message = 2;
+   ErrorDto error = 2;
    RequestForConsentDto dto = 3;
 }
 
@@ -92,7 +99,7 @@ message GetConsentRequest {
 
 message GetConsentReply {
    bool success = 1;
-   string error_message = 2;
+   ErrorDto error = 2;
    ConsentDto dto = 3;
 }
 
@@ -117,7 +124,7 @@ message GetMortgagesRequest {
 
 message GetMortgagesReply {
    bool success = 1;
-   string error_message = 2;
+   ErrorDto error = 2;
    repeated MortgageDto dto = 3;
 }
 
@@ -135,7 +142,7 @@ message GetLoanRedemptionsRequest {
 
 message GetLoanRedemptionsReply {
    bool success = 1;
-   string error_message = 2;
+   ErrorDto error = 2;
    LoanRedemptionCalculationDto dto = 3;
 }
 
