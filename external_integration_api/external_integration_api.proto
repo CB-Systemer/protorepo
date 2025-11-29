@@ -132,20 +132,20 @@ message ConsentDto {
    string consent_type = 2;
    ConsentApprovalDto approval = 3;
    ConsentCustomerDto customer = 4;
-   repeated ConsentActor data_requesters = 5;
-   ConsentActor data_owner = 6;
+   repeated ConsentActorDto data_requesters = 5;
+   ConsentActorDto data_owner = 6;
    string label = 7;
    string consent_state = 8;
    string request_time = 9;
    string valid_to = 10;
    string consent_text = 11;
-   ConsentActor consent_requester = 12;
+   ConsentActorDto consent_requester = 12;
    string replaces_uuid = 13;
    string replaced_by_uuid = 14;
-   repeated ConsentAction actions = 15;
+   repeated ConsentActionDto actions = 15;
 }
 
-message ConsentAction {
+message ConsentActionDto {
   string action = 1;
   string time = 2;
   string by = 3;
@@ -154,7 +154,7 @@ message ConsentAction {
   string user_id = 6;
 }
 
-message ConsentActor {
+message ConsentActorDto {
     string cvr = 1;
     string name = 2;
 }
