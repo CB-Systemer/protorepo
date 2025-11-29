@@ -39,6 +39,7 @@ service ExternalIntegrationApi {
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
   rpc GetRequestForConsent(GetRequestForConsentRequest) returns (GetRequestForConsentReply);
+  rpc SendConsent(SendConsentRequest) returns (SendConsentReply);
   rpc GetConsent(GetConsentRequest) returns (GetConsentReply);
   rpc GetMortgages(GetMortgagesRequest) returns (GetMortgagesReply);
   rpc GetLoanRedemptions(GetLoanRedemptionsRequest) returns (GetLoanRedemptionsReply);
@@ -74,6 +75,29 @@ message SendRequestForConsentReply {
    RequestForConsentDto dto = 3;
 }
 
+message SendConsentRequest {
+   string customer_name = 1;
+   string customer_email = 2;
+   string customer_country_code = 3;
+   string customer_phone = 4;
+   string resource_group_cvr_number = 5;
+   string data_owner_cvr_number = 6;
+   string cadastral_district_identifier = 7;
+   string cadastral_district_name = 8;
+   string cadastral_id = 9;
+   string property_id = 10;
+   string presentation_value = 11;
+   bool is_person = 12;
+   string label = 13;
+   ConsentDocumentationDto documentation = 14;
+}
+
+message SendConsentReply {
+    bool success = 1;
+    ErrorDto error = 2;
+    ConsentDto dto = 3;
+}
+
 message GetRequestForConsentRequest {
    string request_for_consent_id = 1;
 }
@@ -105,8 +129,51 @@ message GetConsentReply {
 
 message ConsentDto {
    string consent_id = 1;
-   string state = 2;
-   string valid_to = 3;
+   string consent_type = 2;
+   ConsentApprovalDto approval = 3;
+   ConsentCustomerDto customer = 4;
+   repeated ConsentActor data_requesters = 5;
+   ConsentActor data_owner = 6;
+   string label = 7;
+   string consent_state = 8;
+   string request_time = 9;
+   string valid_to = 10;
+   string consent_text = 11;
+   ConsentActor consent_requester = 12;
+   string replaces_uuid = 13;
+   string replaced_by_uuid = 14;
+   repeated ConsentAction actions = 15;
+}
+
+message ConsentAction {
+  string action = 1;
+  string time = 2;
+  string by = 3;
+  string comment = 4;
+  string user_name = 5;
+  string user_id = 6;
+}
+
+message ConsentActor {
+    string cvr = 1;
+    string name = 2;
+}
+
+message ConsentCustomerDto {
+   string customer_id = 1;
+   string name = 2;
+   string customer_type = 4;
+}
+
+message ConsentApprovalDto {
+    string type = 1;
+    string authorized_to_sign = 2;
+    ConsentDocumentationDto documentation = 3;
+}
+
+message ConsentDocumentationDto {
+    string document = 1;
+    string format = 2;
 }
 
 message GetConsentTemplatesRequest {
