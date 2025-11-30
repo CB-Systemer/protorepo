@@ -77,7 +77,7 @@ message SendRequestForConsentReply {
 
 message SendConsentRequest {
    string consent_approval_type = 1;
-   string consent_is_proxy = 2;
+   bool consent_is_proxy = 2;
    string consent_is_approved_to_sign = 3;
    string customer_name = 4;
    string customer_id = 5;
