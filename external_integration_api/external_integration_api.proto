@@ -76,21 +76,22 @@ message SendRequestForConsentReply {
 }
 
 message SendConsentRequest {
-   string customer_name = 1;
-   string customer_id = 2;
-   string customer_email = 3;
-   string customer_country_code = 4;
-   string customer_phone = 5;
-   string resource_group_cvr_number = 6;
-   string data_owner_cvr_number = 7;
-   string cadastral_district_identifier = 8;
-   string cadastral_district_name = 9;
-   string cadastral_id = 10;
-   string property_id = 11;
-   string presentation_value = 12;
-   bool is_person = 13;
-   string label = 14;
-   ConsentDocumentationDto documentation = 15;
+   string consent_approval_type = 1;
+   string customer_name = 2;
+   string customer_id = 3;
+   string customer_email = 4;
+   string customer_country_code = 5;
+   string customer_phone = 6;
+   string resource_group_cvr_number = 7;
+   string data_owner_cvr_number = 8;
+   string cadastral_district_identifier = 9;
+   string cadastral_district_name = 10;
+   string cadastral_id = 11;
+   string property_id = 12;
+   string presentation_value = 13;
+   bool is_person = 14;
+   string label = 15;
+   ConsentDocumentationDto documentation = 16;
 }
 
 message SendConsentReply {
