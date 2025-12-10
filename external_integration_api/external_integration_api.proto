@@ -503,6 +503,12 @@ message OwnerDto {
    google.protobuf.StringValue birthDay = 2;
    google.protobuf.StringValue cvrNumber = 3;
    google.protobuf.StringValue status = 4;
+   google.protobuf.StringValue kommunekode = 5;
+   google.protobuf.StringValue kommunenavn = 6;
+   google.protobuf.StringValue postnummer = 7;
+   google.protobuf.StringValue postdistrikt = 8;
+   google.protobuf.StringValue vejnavn = 9;
+   google.protobuf.StringValue husnummer = 10;
 }
 
 message GetIdeelAnpartDetailsReply {
