@@ -509,6 +509,10 @@ message OwnerDto {
    google.protobuf.StringValue postdistrikt = 8;
    google.protobuf.StringValue vejnavn = 9;
    google.protobuf.StringValue husnummer = 10;
+   google.protobuf.StringValue etage = 11;
+   google.protobuf.StringValue sidedoer = 12;
+   google.protobuf.StringValue bynavn = 13;
+   google.protobuf.StringValue fullAddress = 14;
 }
 
 message GetIdeelAnpartDetailsReply {
