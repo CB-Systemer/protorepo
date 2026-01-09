@@ -114,6 +114,11 @@ message GetEBolighandelCaseDetailsRequest {
     ResourceGroupDto resource_group = 5;
 }
 
+message CreateAndStartEBolighandelProcessReply {
+  string e_bolighandel_process_id = 1;
+  string status = 2;
+}
+
 message ResourceGroupDto {
     string id = 1;
     string tenant_id = 2;
