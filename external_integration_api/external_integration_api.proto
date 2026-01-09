@@ -43,7 +43,136 @@ service ExternalIntegrationApi {
   rpc GetConsent(GetConsentRequest) returns (GetConsentReply);
   rpc GetMortgages(GetMortgagesRequest) returns (GetMortgagesReply);
   rpc GetLoanRedemptions(GetLoanRedemptionsRequest) returns (GetLoanRedemptionsReply);
+
+  rpc GetEBolighandelCaseDetails(GetEBolighandelCaseDetailsRequest) returns (GetEBolighandelCaseDetailsReply);
   
+}
+
+
+message GetEBolighandelCaseDetailsRequest {
+    string case_id = 1;
+    string e_bolighandel_case_id = 2;
+    string e_bolighandel_process_id = 3;
+    string bid_id = 4;
+    ResourceGroupDto resource_group = 5;
+}
+
+message ResourceGroupDto {
+    string id = 1;
+    string tenant_id = 2;
+    string name = 3;
+    string cvr_number = 2;
+
+    AddressDto address = 3;
+    
+    string phone_number = 8;
+    string email = 9;
+
+    repeated ResourceGroupContactDto contacts = 10;
+    
+}
+
+message ResourceGroupContactDto {
+    string email_address = 1;
+    bool is_mobile = 2;
+    string phone_number = 3;
+    string display_name = 4;
+    string first_name = 5;
+    string middle_name = 6;
+    string last_name = 7;
+}
+
+message AddressDto {
+  string municipality_code = 1;
+  string street_code = 2;
+  string street_number = 3;
+  string street_name = 4;
+  string postal_code = 5;
+  string district_name = 6;
+  string city_name = 7;
+  string country = 8;
+  string floor = 9;
+  string door = 10;
+}
+
+message GetEBolighandelCaseDetailsReply {
+    bool success = 1;
+    string error_message = 2;
+    string request_json = 3;
+    string response_json = 4;
+    CaseDto case = 5;
+    ProcessDto process = 6;
+    repeated ProcessHistoryItemDto history = 7;
+}
+
+message ProcessHistoryItemDto {
+  string message = 1;
+  string timestamp = 2;
+  string actor_id = 3;
+}
+
+message CaseDto {
+    string e_bolighandel_case_id = 1;
+    string status = 2;
+    string type = 3;
+    string initiated_by = 4;
+}
+
+message ProcessDto {
+   string status = 1;
+   string type = 2;
+   repeatedProcessDocumentDto documents = 3;
+   repeated ProcessActorDto actors = 4;
+
+}
+
+message ProcessActorDto {
+  bool is_active = 1;
+  ProcessCompanyActorDto Company = 2;
+  ProcessPersonActorDto Person = 3;
+  ProcessActorRoleDto Role = 4;
+  repeated ActorContactInfoDto contacts = 5;
+}
+
+message ProcessCompanyActorDto {
+    string cvr_number = 1;
+    string name = 2;
+}
+
+message ProcessPersonActorDto {
+    string cpr_number = 1;
+    string first_name = 2;
+    string last_name = 3;
+}
+
+message ActorContactInfoDto {
+    string display_name = 1;
+    string email = 2;
+    string phone = 3;
+    repeated EmployeeDto employees = 4;
+}
+
+message EmployeeDto {
+    string first_name = 1;
+    string middle_name = 2;
+    string last_name = 3;
+    string email = 4;
+    string phone = 5;
+}
+
+message ProcessActorRoleDto {
+  string role_actor = 1;
+  string role_type = 2;
+}
+
+message ProcessDocumentDto {
+  string id = 1;
+  string description = 2;
+  string type = 3;
+  int32 size_in_bytes = 4;
+  string timestamp = 5;
+  string status = 6;
+  string comment = 7;
 }
 
 message ErrorDto {
