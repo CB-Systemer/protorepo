@@ -45,9 +45,66 @@ service ExternalIntegrationApi {
   rpc GetLoanRedemptions(GetLoanRedemptionsRequest) returns (GetLoanRedemptionsReply);
 
   rpc GetEBolighandelCaseDetails(GetEBolighandelCaseDetailsRequest) returns (GetEBolighandelCaseDetailsReply);
+  rpc CreateAndStartEBolighandelCase(CreateAndStartEBolighandelCaseRequest) returns (CreateAndStartEBolighandelCaseReply);
+  rpc CreateAndStartEBolighandelProcess(CreateAndStartEBolighandelProcessRequest) returns (CreateAndStartEBolighandelProcessReply);
+  rpc SendDataToEBolighandel(SendDataToEBolighandelRequest) returns (SendDataToEBolighandelReply);
+  rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
   
 }
 
+message CloseEBolighandelProcessRequest {
+  string e_bolighandel_process_id = 1;
+  string bid_id = 2;
+  ResourceGroupDto resource_group = 3;
+}
+
+message CloseEBolighandelProcessReply {
+  bool success = 1;
+  string error_message = 2;
+  string status = 3;
+}
+
+message SendDataToEBolighandelRequest {
+  string e_bolighandel_process_id = 1;
+  string e_bolighandel_case_id = 2;
+  string case_id = 3;
+  string bid_id = 4;
+  string bid_namespace = 5;
+  string bid_display_name = 6;
+  string process_data_node_id = 7;
+  string process_data_node_namespace = 8;
+  string process_data_node_parent_id = 9;
+  string process_data_node_scope_id = 10;
+  string process_data_node_root_id = 11;
+  string resource_group_id = 12;
+}
+
+message SendDataToEBolighandelReply {
+  bool success = 1;
+  string error_message = 2;
+  string process_id = 3;
+  string process_namespace = 4;
+}
+
+message CreateAndStartEBolighandelProcessRequest {
+  string e_bolighandel_case_id = 1;
+  string bid_id = 2;
+  ResourceGroupDto real_estate_agent_details = 3;
+}
+
+
+message CreateAndStartEBolighandelCaseRequest{
+  string case_id = 1;
+  string estate_type_display_name = 2;
+}
+
+message CreateAndStartEBolighandelCaseReply {
+   bool success = 1;
+   string error_message = 2;
+   string request_json = 3;
+   string response_json = 4;
+   string e_bolighandel_case_id = 5;
+}
 
 message GetEBolighandelCaseDetailsRequest {
     string case_id = 1;
