@@ -98,7 +98,6 @@ message GetEBolighandelCaseDetailsReply {
     string response_json = 4;
     CaseDto case = 5;
     ProcessDto process = 6;
-    repeated ProcessHistoryItemDto history = 7;
 }
 
 message ProcessHistoryItemDto {
@@ -119,6 +118,7 @@ message ProcessDto {
    string type = 2;
    repeated ProcessDocumentDto documents = 3;
    repeated ProcessActorDto actors = 4;
+   repeated ProcessHistoryItemDto history = 5;
 
 }
 
