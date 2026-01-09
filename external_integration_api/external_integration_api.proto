@@ -61,15 +61,11 @@ message ResourceGroupDto {
     string id = 1;
     string tenant_id = 2;
     string name = 3;
-    string cvr_number = 2;
-
-    AddressDto address = 3;
-    
-    string phone_number = 8;
-    string email = 9;
-
-    repeated ResourceGroupContactDto contacts = 10;
-    
+    string cvr_number = 4;
+    AddressDto address = 5;
+    string phone_number = 6;
+    string email = 7;
+    repeated ResourceGroupContactDto contacts = 8;
 }
 
 message ResourceGroupContactDto {
@@ -121,7 +117,7 @@ message CaseDto {
 message ProcessDto {
    string status = 1;
    string type = 2;
-   repeatedProcessDocumentDto documents = 3;
+   repeated ProcessDocumentDto documents = 3;
    repeated ProcessActorDto actors = 4;
 
 }
