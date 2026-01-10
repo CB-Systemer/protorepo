@@ -92,6 +92,14 @@ message CreateAndStartEBolighandelProcessRequest {
   ResourceGroupDto real_estate_agent_details = 3;
 }
 
+message CreateAndStartEBolighandelProcessReply {
+  bool success = 1;
+  string error_message = 2;
+  string request_json = 3;
+  string response_json = 4;
+  string e_bolighandel_process_id = 5;
+  string status = 6;
+}
 
 message CreateAndStartEBolighandelCaseRequest{
   string case_id = 1;
@@ -112,11 +120,6 @@ message GetEBolighandelCaseDetailsRequest {
     string e_bolighandel_process_id = 3;
     string bid_id = 4;
     ResourceGroupDto resource_group = 5;
-}
-
-message CreateAndStartEBolighandelProcessReply {
-  string e_bolighandel_process_id = 1;
-  string status = 2;
 }
 
 message ResourceGroupDto {
