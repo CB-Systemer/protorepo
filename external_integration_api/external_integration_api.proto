@@ -234,6 +234,7 @@ message ProcessDocumentDto {
   string timestamp = 5;
   string status = 6;
   string comment = 7;
+  string sent_by = 8;
 }
 
 message ErrorDto {
