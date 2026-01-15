@@ -77,6 +77,14 @@ message SendDataToEBolighandelRequest {
   string process_data_node_scope_id = 10;
   string process_data_node_root_id = 11;
   string resource_group_id = 12;
+  repeated ProcessTrackedDocumentDto tracked_documents = 13;
+}
+
+message ProcessTrackedDocumentDto {
+  string datanode_id = 1;
+  string document_id = 2;
+  string document_category = 3;
+  string sent_by = 4;
 }
 
 message SendDataToEBolighandelReply {
