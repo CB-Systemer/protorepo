@@ -82,9 +82,11 @@ message SendDataToEBolighandelRequest {
 
 message ProcessTrackedDocumentDto {
   string datanode_id = 1;
-  string document_id = 2;
-  string document_category = 3;
-  string sent_by = 4;
+  string datanode_namespace = 2;
+  string datanode_display_name = 3;
+  string document_id = 4;
+  string document_category = 5;
+  string sent_by = 6;
 }
 
 message SendDataToEBolighandelReply {
