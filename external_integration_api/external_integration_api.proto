@@ -49,7 +49,20 @@ service ExternalIntegrationApi {
   rpc CreateAndStartEBolighandelProcess(CreateAndStartEBolighandelProcessRequest) returns (CreateAndStartEBolighandelProcessReply);
   rpc SendDataToEBolighandel(SendDataToEBolighandelRequest) returns (SendDataToEBolighandelReply);
   rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
+  rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
   
+}
+
+message GetEberigtigelseLinkRequest {
+  string e_bolighandel_process_id = 1;
+  string bid_id = 2;
+  ResourceGroupDto resource_group = 3;
+}
+
+message GetEberigtigelseLinkResponse {
+  bool success = 1;
+  string error_message = 2;
+  string link = 3;
 }
 
 message CloseEBolighandelProcessRequest {
