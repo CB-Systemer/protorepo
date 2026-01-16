@@ -91,6 +91,7 @@ message SendDataToEBolighandelRequest {
   string process_data_node_root_id = 11;
   string resource_group_id = 12;
   repeated ProcessTrackedDocumentDto tracked_documents = 13;
+  bool buyer_has_outstanding_conditions = 14;
 }
 
 message ProcessTrackedDocumentDto {
