@@ -50,7 +50,23 @@ service ExternalIntegrationApi {
   rpc SendDataToEBolighandel(SendDataToEBolighandelRequest) returns (SendDataToEBolighandelReply);
   rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
   rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
+  rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   
+}
+
+message ApproveOrRejectDeadlineExtensionRequestRequest {
+  string e_bolighandel_process_id = 1;
+  string bid_id = 2;
+  ResourceGroupDto resource_group = 3;
+  string new_deadline = 4;
+  string type = 5;
+  string reason = 6;
+  bool accepted = 7;
+}
+
+message ApproveOrRejectDeadlineExtensionRequestResponse {
+  bool success = 1;
+  string error_message = 2;
 }
 
 message GetEberigtigelseLinkRequest {
