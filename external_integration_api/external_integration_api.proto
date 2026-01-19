@@ -208,7 +208,9 @@ message ProcessDto {
    repeated ProcessDocumentDto documents = 3;
    repeated ProcessActorDto actors = 4;
    repeated ProcessHistoryItemDto history = 5;
-   bool buyer_has_outstanding_conditions = 14;
+   bool buyer_has_outstanding_conditions = 6;
+   string sellers_bank_account_id = 7;
+   string sellers_bank_account_registration = 8;
 }
 
 message ProcessActorDto {
