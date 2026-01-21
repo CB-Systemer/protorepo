@@ -227,6 +227,9 @@ message ProcessDto {
    bool buyer_has_outstanding_conditions = 6;
    string sellers_bank_account_id = 7;
    string sellers_bank_account_registration = 8;
+   string guarantee_process_id = 9;
+   string guarantee_amount = 10;
+   string guarantee_created_at = 11;
 }
 
 message ProcessActorDto {
