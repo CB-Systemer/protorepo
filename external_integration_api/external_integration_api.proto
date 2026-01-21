@@ -61,7 +61,7 @@ message ApproveOrRejectDeadlineExtensionRequestRequest {
   string new_deadline = 4;
   string type = 5;
   string reason = 6;
-  bool accepted = 7;
+  bool approved = 7;
 }
 
 message ApproveOrRejectDeadlineExtensionRequestResponse {
