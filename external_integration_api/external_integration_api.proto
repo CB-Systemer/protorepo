@@ -73,6 +73,7 @@ message GetEberigtigelseLinkRequest {
   string e_bolighandel_process_id = 1;
   string bid_id = 2;
   ResourceGroupDto resource_group = 3;
+  string process_data_node_id = 4;
 }
 
 message GetEberigtigelseLinkResponse {
