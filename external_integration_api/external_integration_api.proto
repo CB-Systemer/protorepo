@@ -249,6 +249,7 @@ message ProcessDto {
    string guarantee_process_id = 9;
    string guarantee_amount = 10;
    string guarantee_created_at = 11;
+   bool guarantee_is_withdrawn = 12;
 }
 
 message ProcessActorDto {
