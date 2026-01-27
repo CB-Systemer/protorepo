@@ -74,7 +74,7 @@ message GetEberigtigelseLinkRequest {
   string bid_id = 2;
   ResourceGroupDto resource_group = 3;
   string process_data_node_id = 4;
-  string requesting_rsg_id = 5;
+  ResourceGroupDto requesting_resouce_group = 5;
   string requesting_sap_id = 6;
 }
 
