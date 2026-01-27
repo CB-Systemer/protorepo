@@ -51,7 +51,23 @@ service ExternalIntegrationApi {
   rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
   rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
+  rpc GetAllActorsInfo(GetAllActorsInfoRequest) returns (GetAllActorsInfoResponse);
   
+}
+
+message GetAllActorsInfoRequest {
+}
+
+message GetAllActorsInfoResponse {
+  repeated ActorInfo actors = 1;
+  bool success = 2;
+  string error_message = 3;
+}
+
+message ActorInfo {
+  string id = 1;
+  string name = 2;
+  int32 process_count = 3;
 }
 
 message ApproveOrRejectDeadlineExtensionRequestRequest {
