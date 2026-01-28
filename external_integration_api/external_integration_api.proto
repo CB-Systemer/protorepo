@@ -51,14 +51,15 @@ service ExternalIntegrationApi {
   rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
   rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
-  rpc GetAllActorsInfo(GetAllActorsInfoRequest) returns (GetAllActorsInfoResponse);
+  rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
   
 }
 
-message GetAllActorsInfoRequest {
+message GetAllActorsInfoBySapIdRequest {
+  string sap_id = 1;
 }
 
-message GetAllActorsInfoResponse {
+message GetAllActorsInfoBySapIdResponse {
   repeated ActorInfo actors = 1;
   bool success = 2;
   string error_message = 3;
