@@ -105,6 +105,7 @@ message CloseEBolighandelProcessRequest {
   string e_bolighandel_process_id = 1;
   string bid_id = 2;
   ResourceGroupDto resource_group = 3;
+  string reason = 4;
 }
 
 message CloseEBolighandelProcessReply {
