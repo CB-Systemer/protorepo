@@ -56,17 +56,16 @@ service ExternalIntegrationApi {
 }
 
 message ImportEBolighandelDocumentRequest {
-  string sap_id = 1;
-  string bid_id = 2;
-  string bid_namespace = 3;
-  string e_bolighandel_process_id = 4;
-  string process_data_node_id = 5;
-  string document_id = 6;
-  string document_namespace = 7;
-  string document_category = 8;
-  string document_display_name = 9;
-  string document_sent_by = 10;
-  ResourceGroupDto resource_group = 11;
+  string bid_id = 1;
+  string bid_namespace = 2;
+  string e_bolighandel_process_id = 3;
+  string process_data_node_id = 4;
+  string document_id = 5;
+  string document_namespace = 6;
+  string document_category = 7;
+  string document_display_name = 8;
+  string document_sent_by = 9;
+  ResourceGroupDto resource_group = 10;
 }
 
 message ImportEBolighandelDocumentResponse {
