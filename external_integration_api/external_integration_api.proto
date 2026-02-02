@@ -52,7 +52,27 @@ service ExternalIntegrationApi {
   rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
-  
+  rpc ImportEBolighandelDocument(ImportEBolighandelDocumentRequest) returns (ImportEBolighandelDocumentResponse);
+}
+
+message ImportEBolighandelDocumentRequest {
+  string sap_id = 1;
+  string bid_id = 2;
+  string bid_namespace = 3;
+  string e_bolighandel_process_id = 4;
+  string process_data_node_id = 5;
+  string document_id = 6;
+  string document_namespace = 7;
+  string document_category = 8;
+  string document_display_name = 9;
+  string document_sent_by = 10;
+  ResourceGroupDto resource_group = 11;
+}
+
+message ImportEBolighandelDocumentResponse {
+  string document_data_node_id = 1;
+  bool success = 2;
+  string error_message = 3;
 }
 
 message GetAllActorsInfoBySapIdRequest {
