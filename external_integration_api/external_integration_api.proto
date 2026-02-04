@@ -344,7 +344,6 @@ message SendRequestForConsentRequest {
    string presentation_value = 11;
    bool is_person = 12;
    string label = 13;
-   string sap_id = 14;
 }
 
 message SendRequestForConsentReply {
@@ -372,7 +371,6 @@ message SendConsentRequest {
    bool is_person = 16;
    string label = 17;
    ConsentDocumentationDto documentation = 18;
-   string sap_id = 19;
 }
 
 message SendConsentReply {
@@ -383,7 +381,6 @@ message SendConsentReply {
 
 message GetRequestForConsentRequest {
    string request_for_consent_id = 1;
-   string sap_id = 2;
 }
 
 message GetRequestForConsentReply {
@@ -403,7 +400,6 @@ message RequestForConsentDto {
 
 message GetConsentRequest {
    string consent_id = 1;
-   string sap_id = 2;
 }
 
 message GetConsentReply {
@@ -463,7 +459,6 @@ message ConsentDocumentationDto {
 
 message GetConsentTemplatesRequest {
    string creditorCvrNumber = 1;
-   string sap_id = 2;
 }
 
 message GetConsentTemplatesReply {
@@ -473,7 +468,6 @@ message GetConsentTemplatesReply {
 message GetMortgagesRequest {
   string lender_cvr_number = 1;
   string consent_id = 2;
-  string sap_id = 3;
 }
 
 message GetMortgagesReply {
@@ -502,7 +496,6 @@ message GetLoanRedemptionsRequest {
    string consent_id = 2;
    string property_id = 3;
    string loan_id = 4;
-   string sap_id = 5;
 }
 
 message GetLoanRedemptionsReply {
