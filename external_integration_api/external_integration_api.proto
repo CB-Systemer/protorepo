@@ -210,6 +210,7 @@ message ResourceGroupDto {
     string phone_number = 6;
     string email = 7;
     repeated ResourceGroupContactDto contacts = 8;
+    string store_identifier = 9;
 }
 
 message ResourceGroupContactDto {
