@@ -328,6 +328,8 @@ message ErrorDto {
    string error_code = 2;
    string error_description = 3;
    bool is_transient = 4;
+   string correlation_id = 5;
+   string message_id = 6;
 }
 
 message SendRequestForConsentRequest {
