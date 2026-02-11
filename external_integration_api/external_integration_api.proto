@@ -44,6 +44,8 @@ service ExternalIntegrationApi {
   rpc GetMortgages(GetMortgagesRequest) returns (GetMortgagesReply);
   rpc GetLoanRedemptions(GetLoanRedemptionsRequest) returns (GetLoanRedemptionsReply);
 
+  rpc ValidateENettetCredentials(ValidateENettetCredentialsRequest) returns (ValidateENettetCredentialsReply);
+
   rpc GetEBolighandelCaseDetails(GetEBolighandelCaseDetailsRequest) returns (GetEBolighandelCaseDetailsReply);
   rpc CreateAndStartEBolighandelCase(CreateAndStartEBolighandelCaseRequest) returns (CreateAndStartEBolighandelCaseReply);
   rpc CreateAndStartEBolighandelProcess(CreateAndStartEBolighandelProcessRequest) returns (CreateAndStartEBolighandelProcessReply);
@@ -53,6 +55,16 @@ service ExternalIntegrationApi {
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
   rpc ImportEBolighandelDocument(ImportEBolighandelDocumentRequest) returns (ImportEBolighandelDocumentResponse);
+}
+
+message ValidateENettetCredentialsRequest {
+  string sap_id = 1;
+  string cvr_number = 2;
+}
+
+message ValidateENettetCredentialsReply {
+  bool success = 1;
+  string error_message = 2;
 }
 
 message ImportEBolighandelDocumentRequest {
