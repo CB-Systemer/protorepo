@@ -46,6 +46,7 @@ service ExternalIntegrationApi {
 
   rpc ValidateENettetCredentials(ValidateENettetCredentialsRequest) returns (ValidateENettetCredentialsReply);
   rpc GetRepresentativeRelations(GetRepresentativeRelationsRequest) returns (GetRepresentativeRelationsReply);
+  rpc GetRepresentables(GetRepresentablesRequest) returns (GetRepresentablesReply);
 
   rpc GetEBolighandelCaseDetails(GetEBolighandelCaseDetailsRequest) returns (GetEBolighandelCaseDetailsReply);
   rpc CreateAndStartEBolighandelCase(CreateAndStartEBolighandelCaseRequest) returns (CreateAndStartEBolighandelCaseReply);
@@ -56,6 +57,28 @@ service ExternalIntegrationApi {
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
   rpc ImportEBolighandelDocument(ImportEBolighandelDocumentRequest) returns (ImportEBolighandelDocumentResponse);
+}
+
+message GetRepresentablesRequest {
+  
+}
+
+message GetRepresentablesReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated RepresentableDto items = 3;
+}
+
+message RepresentableDto {
+  string representable_id = 1;
+  string representable_cvr = 2;
+  string representable_common_name = 3;
+}
+
+message GetRepresentativeRelationsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated RepresentativeRelationDto items = 3;
 }
 
 message GetRepresentativeRelationsRequest {
