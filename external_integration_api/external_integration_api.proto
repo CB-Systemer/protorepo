@@ -45,6 +45,7 @@ service ExternalIntegrationApi {
   rpc GetLoanRedemptions(GetLoanRedemptionsRequest) returns (GetLoanRedemptionsReply);
 
   rpc ValidateENettetCredentials(ValidateENettetCredentialsRequest) returns (ValidateENettetCredentialsReply);
+  rpc GetRepresentativeRelations(GetRepresentativeRelationsRequest) returns (GetRepresentativeRelationsReply);
 
   rpc GetEBolighandelCaseDetails(GetEBolighandelCaseDetailsRequest) returns (GetEBolighandelCaseDetailsReply);
   rpc CreateAndStartEBolighandelCase(CreateAndStartEBolighandelCaseRequest) returns (CreateAndStartEBolighandelCaseReply);
@@ -55,6 +56,28 @@ service ExternalIntegrationApi {
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
   rpc ImportEBolighandelDocument(ImportEBolighandelDocumentRequest) returns (ImportEBolighandelDocumentResponse);
+}
+
+message GetRepresentativeRelationsRequest {
+  
+}
+
+message GetRepresentativeRelationsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated RepresentativeRelationDto items = 3;
+}
+
+message RepresentativeRelationDto {
+    string domain_id = 1;
+    string representative_id = 2;
+    string representative_cvr = 3;
+    string representative_common_name = 4;
+    string representable_id = 5;
+    string representable_cvr = 6;
+    string representable_common_name = 7;
+    string updated_time = 8;
+    bool integrity_check_passed = 9;
 }
 
 message ValidateENettetCredentialsRequest {
