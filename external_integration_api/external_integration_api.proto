@@ -75,12 +75,6 @@ message RepresentableDto {
   string representable_common_name = 3;
 }
 
-message GetRepresentativeRelationsReply {
-  bool success = 1;
-  string error_message = 2;
-  repeated RepresentativeRelationDto items = 3;
-}
-
 message GetRepresentativeRelationsRequest {
   
 }
