@@ -167,7 +167,7 @@ message ArchiveEmailRequest {
 	string templateDisplayName = 10;
 	string relatedCaseId = 11;
 	ExecutingActorContext executingActorContext = 12;
-	string sender_display_name = 13;
+	google.protobuf.StringValue sender_display_name = 13;
 	google.protobuf.Timestamp email_sent_at = 14;
 }
 
