@@ -32,7 +32,7 @@ message IndexDataNodeRequest {
 	bool instant_indexing = 3;
 }
 
-message IndexDataNodeReply {	
+message IndexDataNodeReply {
 }
 
 message GetThemeRequest {
@@ -41,7 +41,7 @@ message GetThemeRequest {
 	string theme_namespace = 3;
 }
 
-message GetThemeResponse { 
+message GetThemeResponse {
 	string json = 1;
 }
 
@@ -57,7 +57,7 @@ message GetIdentityContentRequest {
 	string application_namespace = 3;
 }
 
-message GetContentResponse { 
+message GetContentResponse {
 	string json = 1;
 }
 
@@ -166,6 +166,7 @@ message ArchiveEmailRequest {
 	string templateId = 9;
 	string templateDisplayName = 10;
 	string relatedCaseId = 11;
+	string sender_display_name = 12;
 
 	ExecutingActorContext executingActorContext = 12;
 }
