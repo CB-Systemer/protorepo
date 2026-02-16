@@ -166,9 +166,8 @@ message ArchiveEmailRequest {
 	string templateId = 9;
 	string templateDisplayName = 10;
 	string relatedCaseId = 11;
-	string sender_display_name = 12;
-
 	ExecutingActorContext executingActorContext = 12;
+	string sender_display_name = 13;
 }
 
 message ArchiveEmailReply {
