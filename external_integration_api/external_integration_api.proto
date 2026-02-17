@@ -398,6 +398,8 @@ message SendRequestForConsentRequest {
    string presentation_value = 11;
    bool is_person = 12;
    string label = 13;
+   string apartment_number = 14;
+   string ideel_anpart_number = 15;
 }
 
 message SendRequestForConsentReply {
@@ -425,6 +427,8 @@ message SendConsentRequest {
    bool is_person = 16;
    string label = 17;
    ConsentDocumentationDto documentation = 18;
+   string apartment_number = 19;
+   string ideel_anpart_number = 20;
 }
 
 message SendConsentReply {
