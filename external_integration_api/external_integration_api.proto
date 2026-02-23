@@ -401,6 +401,7 @@ message SendRequestForConsentRequest {
    string apartment_number = 14;
    string ideel_anpart_number = 15;
    string building_number = 16;
+   string customer_actor_role_id = 17;
 }
 
 message SendRequestForConsentReply {
@@ -431,6 +432,7 @@ message SendConsentRequest {
    string apartment_number = 19;
    string ideel_anpart_number = 20;
    string building_number = 21;
+   string customer_actor_role_id = 22;
 }
 
 message SendConsentReply {
@@ -528,6 +530,7 @@ message GetConsentTemplatesReply {
 message GetMortgagesRequest {
   string lender_cvr_number = 1;
   string consent_id = 2;
+  string customer_actor_role_id = 3;
 }
 
 message GetMortgagesReply {
@@ -556,6 +559,7 @@ message GetLoanRedemptionsRequest {
    string consent_id = 2;
    string property_id = 3;
    string loan_id = 4;
+   string customer_actor_role_id = 5;
 }
 
 message GetLoanRedemptionsReply {
