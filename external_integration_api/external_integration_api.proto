@@ -331,6 +331,7 @@ message ProcessActorDto {
   ProcessPersonActorDto Person = 3;
   ProcessActorRoleDto Role = 4;
   repeated ActorContactInfoDto contacts = 5;
+  string case_reference = 6;
 }
 
 message ProcessCompanyActorDto {
