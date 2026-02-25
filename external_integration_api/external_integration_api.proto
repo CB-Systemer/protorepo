@@ -459,6 +459,7 @@ message RequestForConsentDto {
    string activation_code = 4;
    string valid_to = 5;
    string label = 6;
+   string json_response = 7;
 }
 
 message GetConsentRequest {
@@ -487,6 +488,7 @@ message ConsentDto {
    string replaces_uuid = 13;
    string replaced_by_uuid = 14;
    repeated ConsentActionDto actions = 15;
+   string json_response = 16;
 }
 
 message ConsentActionDto {
