@@ -534,6 +534,7 @@ message GetMortgagesRequest {
   string lender_cvr_number = 1;
   string consent_id = 2;
   string customer_actor_role_id = 3;
+  string bfe_number = 4;
 }
 
 message GetMortgagesReply {
