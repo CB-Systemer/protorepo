@@ -91,6 +91,7 @@ message SendEmailMessageRequest {
   repeated Tag tags = 16;
   string callbackQueueName = 17;
   google.protobuf.StringValue related_case_id = 18;
+  google.protobuf.StringValue context_chain_id = 19;
 }
 
 message ActorRecipient {
@@ -157,6 +158,7 @@ message SendMessageRequest {
   google.protobuf.StringValue related_case_id = 25;
   google.protobuf.StringValue content = 26;
   google.protobuf.StringValue subject = 27;
+  google.protobuf.StringValue context_chain_id = 28;
 }
 
 message SendMessageReply {
