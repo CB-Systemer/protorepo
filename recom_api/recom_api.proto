@@ -130,6 +130,7 @@ message SendAnonymousEmailRequest {
   string callbackQueueName = 11;
   string fromEmailPrefix = 12;
   string fromEmailDisplayName = 13;
+  google.protobuf.StringValue context_chain_id = 14;
 }
 
 message SendMessageRequest {
