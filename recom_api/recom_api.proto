@@ -178,6 +178,7 @@ message ActorContext {
   string actor_namespace = 4;
   string resource_group_id = 5;
   repeated string permissions = 6;
+  google.protobuf.StringValue chain_id = 7;
 }
 
 message BillingContext {
