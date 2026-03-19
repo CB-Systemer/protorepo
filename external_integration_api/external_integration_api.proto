@@ -6,11 +6,17 @@ option csharp_namespace = "External.Integration.Api";
 import "google/protobuf/wrappers.proto";
 
 service ExternalIntegrationApi {
+
   rpc GetAddressByBFE (GetAddressByBFERequest) returns (GetAddressByBFEReply);
+
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
+  rpc SearchMunicipality (SearchMunicipalityRequest) returns (SearchMunicipalityReply);
+
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
   rpc ResolvePolygon (ResolvePolygonRequest) returns (ResolvePolygonReply);
+
+
   rpc GetEstateData(GetEstateDataRequest) returns (GetEstateDataReply);
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
   rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
@@ -906,6 +912,23 @@ message SearchAddressReply {
 }
 
 message SearchAddressDto {
+  string id = 1;
+  string display_name = 2;
+  string country_code = 3;
+}
+
+message SearchMunicipalityRequest {
+  string lookup_service = 1;
+  string country_code = 2;
+  string query = 3;
+  int32 max_results = 4;
+}
+
+message SearchMunicipalityReply {
+  repeated SearchMunicipalityDto municipalities = 1;
+}
+
+message SearchMunicipalityDto {
   string id = 1;
   string display_name = 2;
   string country_code = 3;
