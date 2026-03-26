@@ -1112,4 +1112,5 @@ message SendToEnettetTenderReceiverReply {
   bool success = 4;
   google.protobuf.StringValue request_data = 5;
   google.protobuf.StringValue response_data = 6;
+  bool transient_error = 7;
 }
