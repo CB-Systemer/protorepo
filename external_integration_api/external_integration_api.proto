@@ -11,7 +11,7 @@ service ExternalIntegrationApi {
 
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc SearchMunicipality (SearchMunicipalityRequest) returns (SearchMunicipalityReply);
-  rpc GetMunicipality (GetMunicipalityRequest) returns (GetMunicipalityResponse);
+  rpc GetMunicipality (GetMunicipalityRequest) returns (GetMunicipalityReply);
 
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
