@@ -11,6 +11,7 @@ service ExternalIntegrationApi {
 
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc SearchMunicipality (SearchMunicipalityRequest) returns (SearchMunicipalityReply);
+  rpc GetMunicipality (GetMunicipalityRequest) returns (GetMunicipalityResponse);
 
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
@@ -925,13 +926,23 @@ message SearchMunicipalityRequest {
 }
 
 message SearchMunicipalityReply {
-  repeated SearchMunicipalityDto municipalities = 1;
+  repeated MunicipalityDto municipalities = 1;
 }
 
-message SearchMunicipalityDto {
+message MunicipalityDto {
   string id = 1;
   string display_name = 2;
   string country_code = 3;
+  string region_id = 4;
+  string region_display_name = 5;
+}
+
+message GetMunicipalityRequest {
+  string municipality_code = 1;
+}
+
+message GetMunicipalityResponse {
+  MunicipalityDto dto = 1;
 }
 
 message GetAddressDetailsRequest {
