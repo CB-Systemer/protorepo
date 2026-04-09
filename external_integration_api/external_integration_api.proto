@@ -941,8 +941,9 @@ message GetMunicipalityRequest {
   string municipality_code = 1;
 }
 
-message GetMunicipalityResponse {
-  MunicipalityDto dto = 1;
+message GetMunicipalityReply {
+  bool success = 1;
+  MunicipalityDto dto = 2;
 }
 
 message GetAddressDetailsRequest {
