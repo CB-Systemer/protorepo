@@ -24,6 +24,8 @@ service GrpcDataStoreApi {
 	rpc ArchiveSms (ArchiveSmsRequest) returns (ArchiveSmsReply);
 
 	rpc GetCaseActorRoleActorIds (GetCaseActorRolesRequest) returns (GetCaseActorRolesReply);
+
+	rpc StartGetEstateDataProcess (StartGetEstateDataProcessRequest) returns (StartGetEstateDataProcessReply);
 }
 
 message IndexDataNodeRequest {
@@ -220,4 +222,16 @@ message GetCaseActorRolesRequest {
 
 message GetCaseActorRolesReply {
 	repeated string actorIds = 1;
+}
+
+message StartGetEstateDataProcessRequest {
+	string caseId = 1;
+	string actorId = 2;
+}
+
+message StartGetEstateDataProcessReply {
+	bool success = 1;
+	string processId = 2;
+	string processNamespace = 3;
+	string errorMessage = 4;
 }
