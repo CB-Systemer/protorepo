@@ -799,6 +799,7 @@ message GetEstateDataRequest {
   google.protobuf.StringValue resource_group_id = 22;
   google.protobuf.StringValue estateLocationDataNodeId = 23;
   google.protobuf.BoolValue validate_address = 24;
+  repeated string taskNamespaces = 25;
 }
 
 message GetEstateDataReply {
