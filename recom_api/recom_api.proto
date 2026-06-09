@@ -131,6 +131,14 @@ message SendAnonymousEmailRequest {
   string fromEmailPrefix = 12;
   string fromEmailDisplayName = 13;
   google.protobuf.StringValue context_chain_id = 14;
+  repeated EmailAttachmentInput attachments = 15;
+}
+
+message EmailAttachmentInput {
+  bytes content = 1;
+  string file_name = 2;
+  string content_type = 3;
+  string content_id = 4;
 }
 
 message SendMessageRequest {
