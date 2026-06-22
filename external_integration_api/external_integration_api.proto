@@ -1009,7 +1009,12 @@ message GetAddressDetailsReply {
   google.protobuf.StringValue region_source = 38;
   google.protobuf.StringValue region_code = 39;
   google.protobuf.StringValue region_name = 40;
-  repeated google.protobuf.StringValue address_ids = 41;
+  repeated AddressReference address_ids = 41;
+}
+
+message AddressReference {
+    string id = 1;
+    string display_name = 2;
 }
 
 message AddressIdentifier {
