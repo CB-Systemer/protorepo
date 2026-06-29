@@ -23,6 +23,8 @@ service ExternalIntegrationApi {
   rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
+  rpc FindEstateCandidates (FindEstateCandidatesRequest) returns (FindEstateCandidatesReply);
+  rpc SearchCombinedAddress (SearchCombinedAddressRequest) returns (SearchCombinedAddressReply);
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
   rpc GetBoligsidenRealtorBranch (GetBoligsidenRealtorBranchRequest) returns (GetBoligsidenRealtorBranchReply);
   rpc SendBoligsidenRealtorBranch (SendBoligsidenRealtorBranchRequest) returns (SendBoligsidenRealtorBranchReply);
@@ -1132,4 +1134,54 @@ message SendToEnettetTenderReceiverReply {
   google.protobuf.StringValue request_data = 5;
   google.protobuf.StringValue response_data = 6;
   bool transient_error = 7;
+}
+
+message FindEstateCandidatesRequest {
+  string address_id = 1;            // optional, GUID
+  string entrance_address_id = 2;   // optional, GUID
+  string bfe_number = 3;            // optional
+  string case_type_namespace = 4;   // e.g. dk.realequity.case.cooperativehousing.sale
+  string assignment_type = 5;       // Opdrag, e.g. "udlejning"
+  string country_code = 6;
+}
+
+message FindEstateCandidatesReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated EstateCandidateDto candidates = 3;
+}
+
+message EstateCandidateDto {
+  string ejerform_namespace = 1;
+  string ejerform_display_name = 2;
+  string bfe_number = 3;
+  string parent_bfe_number = 4;
+  string address_label = 5;
+  string bbr_anvendelse_kode = 6;
+  string bbr_anvendelse = 7;
+  string estate_type = 8;
+  int32 bolig_areal = 9;
+  int32 erhvervs_areal = 10;
+  int32 kaelder_areal = 11;
+  int32 grund_areal = 12;
+  repeated OwnerDto owners = 13;
+}
+
+message SearchCombinedAddressRequest {
+  string country_code = 1;
+  string query = 2;
+  int32 max_results = 3;
+}
+
+message SearchCombinedAddressReply {
+  repeated CombinedAddressDto results = 1;
+}
+
+message CombinedAddressDto {
+  string id = 1;
+  bool is_entrance_address = 2;
+  bool is_combined = 3;
+  string entrance_address_id = 4;
+  string display_name = 5;
+  repeated CombinedAddressDto children = 6;
 }
