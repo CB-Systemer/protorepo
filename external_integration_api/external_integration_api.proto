@@ -36,8 +36,9 @@ service ExternalIntegrationApi {
   rpc SendToEnettetTenderReceiver(SendToEnettetTenderReceiverRequest) returns (SendToEnettetTenderReceiverReply);
 
   rpc GetServiceHealthStatus(GetHealthStatusRequest) returns (GetHealthStatusReply);
-  rpc GetReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
-  rpc GetDeltaReferenceEstateData(GetReferenceEstateDataRequest) returns (GetReferenceEstateDataReply);
+  rpc GetEstateAddressData(GetEstateAddressDataRequest) returns (GetEstateAddressDataReply);
+  rpc GetDeltaEstateAddressData(GetEstateAddressDataRequest) returns (GetEstateAddressDataReply);
+  rpc GetEstateReferenceData(GetEstateReferenceDataRequest) returns (GetEstateReferenceDataReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
@@ -678,15 +679,26 @@ message IndexAddressDataReply {
   bool success = 1;
 }
 
-message GetReferenceEstateDataRequest {
+message GetEstateAddressDataRequest {
     string executingActorId = 1;
 }
 
-message GetReferenceEstateDataReply {
+message GetEstateAddressDataReply {
   bool success = 1;
   google.protobuf.StringValue processId = 2;
   google.protobuf.StringValue processNamespace = 3;
-} 
+}
+
+message GetEstateReferenceDataRequest {
+    string executingActorId = 1;
+    repeated string municipalityCodes = 2;
+}
+
+message GetEstateReferenceDataReply {
+  bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
+}
 
 message GetHealthStatusRequest {
   
