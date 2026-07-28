@@ -42,8 +42,8 @@ message CreateTenantRequest {
 	string elasticPoolName = 3;
 	bool isProduction = 4;
 	string dataStoreDisplayName = 5;
-	string resourceGroupDisplayName = 6;
-	string storagePoolName = 7;
+	string resourceGroupDisplayName = 6;	
+    reserved 7;
 }
 
 message CreateTenantReply {

@@ -85,7 +85,7 @@ message TenantDto {
 	int32 dataStoreCount = 8;
 	string elasticPoolName = 9;
 	repeated WhiteListingDto whiteListings = 10;
-	string storagePoolName = 11;
+    reserved 11;
 }
 
 message DataStoreDto {
