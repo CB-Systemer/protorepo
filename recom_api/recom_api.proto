@@ -12,6 +12,7 @@ service RecomApi {
   rpc SendAnonymousEmailMessage(SendAnonymousEmailRequest) returns (SendEmailMessageReply);
   rpc GetRecipientsInfoMessage(GetRecipientsInfoMessageRequest) returns (GetRecipientsInfoMessageReply);
   rpc GetPhoneNumberPool(GetPhoneNumberPoolRequest) returns (GetPhoneNumberPoolReply);
+  rpc GetOutboundEmailSenderEligibility(GetOutboundEmailSenderEligibilityRequest) returns (GetOutboundEmailSenderEligibilityReply);
   rpc TestSmtp(TestSmtpEmailSendRequest) returns (SendEmailMessageReply);
 }
 
@@ -21,6 +22,17 @@ message GetPhoneNumberPoolRequest {
 
 message GetPhoneNumberPoolReply {
   repeated string numbers = 1;
+}
+
+message GetOutboundEmailSenderEligibilityRequest {
+  string resource_group_id = 1;
+  string chain_id = 2;
+}
+
+message GetOutboundEmailSenderEligibilityReply {
+  bool eligible = 1;
+  string domain = 2;
+  bool inherited_from_chain = 3;
 }
 
 message GetRecipientsInfoMessageRequest {
