@@ -12,6 +12,7 @@ service ExternalIntegrationApi {
   rpc SearchAddress (SearchAddressRequest) returns (SearchAddressReply);
   rpc SearchMunicipality (SearchMunicipalityRequest) returns (SearchMunicipalityReply);
   rpc GetMunicipality (GetMunicipalityRequest) returns (GetMunicipalityReply);
+  rpc GetMunicipalities (GetMunicipalitiesRequest) returns (GetMunicipalitiesReply);
 
   rpc GetAddressDetails (GetAddressDetailsRequest) returns (GetAddressDetailsReply);
   rpc SearchPlace (SearchLocationRequest) returns (SearchLocationReply);
@@ -39,6 +40,7 @@ service ExternalIntegrationApi {
   rpc GetEstateAddressData(GetEstateAddressDataRequest) returns (GetEstateAddressDataReply);
   rpc GetDeltaEstateAddressData(GetEstateAddressDataRequest) returns (GetEstateAddressDataReply);
   rpc GetEstateReferenceData(GetEstateReferenceDataRequest) returns (GetEstateReferenceDataReply);
+  rpc GetEstateReferencePhotos(GetEstateReferencePhotosRequest) returns (GetEstateReferencePhotosReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
@@ -700,6 +702,17 @@ message GetEstateReferenceDataReply {
   google.protobuf.StringValue processNamespace = 3;
 }
 
+message GetEstateReferencePhotosRequest {
+    string executingActorId = 1;
+    repeated string municipalityCodes = 2;
+}
+
+message GetEstateReferencePhotosReply {
+  bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
+}
+
 message GetHealthStatusRequest {
   
 }
@@ -959,6 +972,14 @@ message GetMunicipalityRequest {
 message GetMunicipalityReply {
   bool success = 1;
   MunicipalityDto dto = 2;
+}
+
+message GetMunicipalitiesRequest {
+}
+
+message GetMunicipalitiesReply {
+  bool success = 1;
+  repeated MunicipalityDto municipalities = 2;
 }
 
 message GetAddressDetailsRequest {
