@@ -41,6 +41,7 @@ service ExternalIntegrationApi {
   rpc GetDeltaEstateAddressData(GetEstateAddressDataRequest) returns (GetEstateAddressDataReply);
   rpc GetEstateReferenceData(GetEstateReferenceDataRequest) returns (GetEstateReferenceDataReply);
   rpc GetGeoDanmarkData(GetGeoDanmarkDataRequest) returns (GetGeoDanmarkDataReply);
+  rpc GetGeoDanmarkFeatureTypes(GetGeoDanmarkFeatureTypesRequest) returns (GetGeoDanmarkFeatureTypesReply);
   rpc GetEstateReferencePhotos(GetEstateReferencePhotosRequest) returns (GetEstateReferencePhotosReply);
   rpc GetEstateNearestFeatures(GetEstateNearestFeaturesRequest) returns (GetEstateNearestFeaturesReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
@@ -706,12 +707,23 @@ message GetEstateReferenceDataReply {
 
 message GetGeoDanmarkDataRequest {
     string executingActorId = 1;
+    // Empty => whatever GeoDanmarkData:Entities is configured to, which defaults to every
+    // published feature type. A non-empty selection overrides that config for this run only.
+    repeated string featureTypes = 2;
 }
 
 message GetGeoDanmarkDataReply {
   bool success = 1;
   google.protobuf.StringValue processId = 2;
   google.protobuf.StringValue processNamespace = 3;
+}
+message GetGeoDanmarkFeatureTypesRequest {
+}
+message GetGeoDanmarkFeatureTypesReply {
+  bool success = 1;
+  // What GEODKV actually publishes, minus the non-feature entities. Names only: a
+  // GeoDanmark entity name is its own label, unlike a municipality code.
+  repeated string featureTypes = 2;
 }
 
 message GetEstateReferencePhotosRequest {
