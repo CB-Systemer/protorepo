@@ -42,6 +42,7 @@ service ExternalIntegrationApi {
   rpc GetEstateReferenceData(GetEstateReferenceDataRequest) returns (GetEstateReferenceDataReply);
   rpc GetGeoDanmarkData(GetGeoDanmarkDataRequest) returns (GetGeoDanmarkDataReply);
   rpc GetEstateReferencePhotos(GetEstateReferencePhotosRequest) returns (GetEstateReferencePhotosReply);
+  rpc GetEstateNearestFeatures(GetEstateNearestFeaturesRequest) returns (GetEstateNearestFeaturesReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
@@ -719,6 +720,16 @@ message GetEstateReferencePhotosRequest {
 }
 
 message GetEstateReferencePhotosReply {
+  bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
+}
+
+message GetEstateNearestFeaturesRequest {
+    string executingActorId = 1;
+    repeated string municipalityCodes = 2;
+}
+message GetEstateNearestFeaturesReply {
   bool success = 1;
   google.protobuf.StringValue processId = 2;
   google.protobuf.StringValue processNamespace = 3;
