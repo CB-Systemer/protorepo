@@ -24,6 +24,7 @@ service Email {
 	rpc GetDomainsRaw(GetDomainsRawRequest) returns (DomainsReply);
 	rpc GetClientSecretExpirationDate(GetDomainsRawRequest) returns (GetClientSecretExpirationDateReply);
 	rpc MarkAsRead(MarkAsReadRequest) returns (EmptyReply);
+	rpc CategorizeAsArchived(CategorizeAsArchivedRequest) returns (EmptyReply);
 	rpc ResolveMenu(ResolveMenuRequest) returns (ContextMenuReply);
 
 	// Accounts
@@ -140,6 +141,7 @@ message EmailDto{
 	string id = 10;
 	bool isRead = 11;
 	string bodyPreview = 12;
+	repeated string categories = 13;
 }
 
 message EmailAddressDto{
@@ -165,6 +167,16 @@ message MarkAsReadRequest{
 	repeated string parentInstallationIds = 4;
 	string actorId = 5;
 	string resourceGroupId = 6;
+}
+
+// The category name is fixed by the service, so there is no field for it.
+message CategorizeAsArchivedRequest{
+	string emailId = 1;
+	string accountId = 2;
+
+	repeated string parentInstallationIds = 3;
+	string actorId = 4;
+	string resourceGroupId = 5;
 }
 
 message GetDomainsForTenantRequest {
