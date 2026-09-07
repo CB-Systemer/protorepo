@@ -177,6 +177,7 @@ message CategorizeAsArchivedRequest{
 	repeated string parentInstallationIds = 3;
 	string actorId = 4;
 	string resourceGroupId = 5;
+	bool showInMailbox = 6;
 }
 
 message GetDomainsForTenantRequest {
