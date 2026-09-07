@@ -1,0 +1,118 @@
+syntax = "proto3";
+option csharp_namespace = "Cbs.Communication.Calendar";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+service Calendar {
+  rpc GetCalendars(GetCalendarsRequest) returns (GetCalendarsReply);
+  rpc UpsertSelectedCalendar(UpsertCalendarRequest) returns (google.protobuf.Empty);
+  rpc GetEvents (GetEventsRequest) returns (GetEventsReply);
+  rpc GetEventsForAccount (GetEventsForAccountRequest) returns (GetEventsReply);
+
+  rpc SyncEvent (SyncEventRequest) returns (EventDto);
+  rpc RemoveEvent (RemoveEventRequest) returns (google.protobuf.Empty);
+}
+
+message GetCalendarsRequest {
+  string accountId = 1;
+
+  string resourceGroupId = 2;
+  string actorId = 3;
+  repeated string parentInstallationIds = 4;
+}
+
+message GetCalendarsReply{
+  repeated CalendarModel calendars = 1;
+}
+
+message CalendarModel{
+  string id = 1;
+  string name = 2;
+  string accountName = 3;
+}
+
+message GetEventsRequest{
+  string accountId = 2;
+  google.protobuf.Timestamp start = 1;
+  google.protobuf.Timestamp end = 3;
+  string offset = 4;
+
+  string resourceGroupId = 5;
+  string actorId = 6;
+  repeated string parentInstallationIds = 7;
+}
+
+message GetEventsReply{
+  repeated EventDto Events = 1;
+}
+
+message EventDto{
+  string title = 1;
+  string description = 2;
+  string start = 3;
+  string end = 4;
+  bool isAllDay = 5;
+  string location = 6;
+  string reId = 7;
+  string id = 8;
+  google.protobuf.Int32Value reminderMinutesBeforeStart = 9;
+  AppointmentStatusTypeDto status = 10;
+  bool isPrivate = 11;
+}
+
+enum AppointmentStatusTypeDto{
+  Free = 0;
+  Tentative = 1;
+  Busy = 2;
+  OutOfOffice = 3;
+}
+
+message UpsertCalendarRequest{
+  string accountId = 1;
+  string calendarId = 2;
+  string actorId = 3;
+}
+
+message GetEventsForAccountRequest{
+  string onbehalfAccountId = 1;
+  string accountId = 2;
+  google.protobuf.Timestamp start = 4;
+  google.protobuf.Timestamp end = 3;
+  string offset = 5;
+
+  string resourceGroupId = 6;
+  string actorId = 7;
+  repeated string parentInstallationIds = 8;
+}
+
+message SyncEventRequest{
+  string executingAccountId = 1;
+  string accountId = 3;
+  EventDto Event = 2;
+
+  string resourceGroupId = 4;
+  string actorId = 5;
+  repeated string parentInstallationIds = 6;
+}
+
+message SyncEventDto{
+  string title = 2;
+  string description = 3;
+  string start = 4;
+  string end = 5;
+  string location = 6;
+  string reId = 7;
+  bool isAllDay = 8;
+}
+
+message RemoveEventRequest{
+  string reId = 1;
+  string accountId = 2;
+  string executingAccountId = 3;
+
+  string resourceGroupId = 4;
+  string actorId = 5;
+  repeated string parentInstallationIds = 6;
+}
