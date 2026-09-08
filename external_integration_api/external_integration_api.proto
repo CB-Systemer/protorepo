@@ -669,11 +669,14 @@ message GetReferenceEstateExtendedDataReply {
 }
 
 message IndexReferenceEstateDataRequest {
-
+    string executingActorId = 1;
+    repeated string municipalityCodes = 2;
 }
 
 message IndexReferenceEstateDataReply {
-  
+  bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
 }
 
 message IndexAddressDataRequest {
