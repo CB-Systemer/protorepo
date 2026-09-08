@@ -51,6 +51,8 @@ service ExternalIntegrationApi {
 
   rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
 
+  rpc GetAddressDataCounts(GetAddressDataCountsRequest) returns (GetAddressDataCountsReply);
+
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
   rpc GetRequestForConsent(GetRequestForConsentRequest) returns (GetRequestForConsentReply);
@@ -1254,4 +1256,25 @@ message CombinedAddressDto {
   string entrance_address_id = 4;
   string display_name = 5;
   repeated CombinedAddressDto children = 6;
+}
+
+message GetAddressDataCountsRequest {
+  bool refresh = 1;
+}
+
+message AddressDataCount {
+  string entityKey = 1;
+  string displayName = 2;
+  string indexName = 3;
+  int64 databaseRowCount = 4;
+  int64 expectedDocumentCount = 5;
+  google.protobuf.Int64Value indexDocumentCount = 6;
+  google.protobuf.StringValue errorMessage = 7;
+}
+
+message GetAddressDataCountsReply {
+  bool success = 1;
+  repeated AddressDataCount counts = 2;
+  google.protobuf.StringValue errorMessage = 3;
+  google.protobuf.StringValue measuredAt = 4;
 }
