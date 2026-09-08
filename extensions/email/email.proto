@@ -123,10 +123,12 @@ message GetEmailsRequest{
 	string actorId = 5;
 	string resourceGroupId = 6;
 	google.protobuf.StringValue search = 7;
+	google.protobuf.StringValue continuationToken = 8;
 }
 
 message EmailsReply{
 	repeated EmailDto emails = 1;
+	google.protobuf.StringValue continuationToken = 2;
 }
 
 message EmailDto{
