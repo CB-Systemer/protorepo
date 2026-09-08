@@ -122,6 +122,7 @@ message GetEmailsRequest{
 	repeated string parentInstallationIds = 4;
 	string actorId = 5;
 	string resourceGroupId = 6;
+	google.protobuf.StringValue search = 7;
 }
 
 message EmailsReply{
