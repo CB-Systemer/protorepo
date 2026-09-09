@@ -52,6 +52,7 @@ service ExternalIntegrationApi {
   rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
 
   rpc GetAddressDataCounts(GetAddressDataCountsRequest) returns (GetAddressDataCountsReply);
+  rpc GetReferenceEstateDataCounts(GetReferenceEstateDataCountsRequest) returns (GetReferenceEstateDataCountsReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1275,6 +1276,30 @@ message AddressDataCount {
 message GetAddressDataCountsReply {
   bool success = 1;
   repeated AddressDataCount counts = 2;
+  google.protobuf.StringValue errorMessage = 3;
+  google.protobuf.StringValue measuredAt = 4;
+}
+
+message GetReferenceEstateDataCountsRequest {
+  bool refresh = 1;
+}
+
+// The reference estate documents live in core-apps' own index, so external-integration answers only
+// for what it owns: the row counts, and the index count of the geodanmarkfeatures index it does own.
+// indexName and indexDocumentCount are therefore unset on the estate rows and core-apps fills them in.
+message ReferenceEstateDataCount {
+  string entityKey = 1;
+  string displayName = 2;
+  google.protobuf.StringValue indexName = 3;
+  int64 databaseRowCount = 4;
+  int64 expectedDocumentCount = 5;
+  google.protobuf.Int64Value indexDocumentCount = 6;
+  google.protobuf.StringValue errorMessage = 7;
+}
+
+message GetReferenceEstateDataCountsReply {
+  bool success = 1;
+  repeated ReferenceEstateDataCount counts = 2;
   google.protobuf.StringValue errorMessage = 3;
   google.protobuf.StringValue measuredAt = 4;
 }
