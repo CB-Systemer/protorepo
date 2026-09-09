@@ -117,7 +117,6 @@ message ResolveSecretEndDateCountReply{
 message GetEmailsRequest{
 	string accountId = 1;
 	string mailFolderId = 2;
-	int32 skip = 3;
 
 	repeated string parentInstallationIds = 4;
 	string actorId = 5;
@@ -149,7 +148,8 @@ message EmailDto{
 
 message ArchivedOnDto{
 	string caseId = 1;
-	string correspondenceId = 2;
+	string archivedEmailId = 2;
+	string journalizedContextDatanodeId = 3;
 }
 
 message EmailAddressDto{
@@ -185,7 +185,8 @@ message MarkAsArchivedRequest{
 	string actorId = 4;
 	string resourceGroupId = 5;
 	string caseId = 7;
-	string correspondenceId = 8;
+	string archivedEmailId = 8;
+	string journalizedContextDatanodeId = 9;
 }
 
 message GetDomainsForTenantRequest {
