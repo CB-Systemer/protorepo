@@ -183,7 +183,7 @@ message StoreDto{
 	string status = 5;
 	google.protobuf.StringValue external_id = 6;
 	google.protobuf.StringValue cvr = 7;
-	google.protobuf.StringValue insurance_mediation_namespace = 8;
+	reserved 8;
 }
 
 message MoveEmployeeToResourceGroupRequest {

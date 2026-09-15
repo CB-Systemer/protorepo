@@ -89,11 +89,18 @@ message BasicDataNodeDto {
 	string state_reason_namespace = 36;
 	google.protobuf.StringValue created_from_source = 32;
 	repeated DataNodeExternalReferenceSearchModel external_references = 35;
+	repeated TaxonModel taxons = 37;
 }
 
 message DataNodeExternalReferenceSearchModel {
 	string external_id = 1;
 	string external_system_namespace = 2;
+}
+
+message TaxonModel {
+	bool value = 1;
+	google.protobuf.StringValue taxon_namespace = 2;
+	google.protobuf.StringValue taxonomy_namespace = 3;
 }
 
 message DataNodeContactInfo{
