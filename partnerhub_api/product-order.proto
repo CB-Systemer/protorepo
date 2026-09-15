@@ -218,7 +218,8 @@ message OrderPartyDto{
 	google.protobuf.StringValue email = 7;
 	PhoneDto phone = 8;
 	AddressDto address = 9;
-	google.protobuf.StringValue insurance_mediation_namespace = 10;
+	reserved 10;
+	repeated NamespaceValuePairDto taxons = 11;
 }
 
 message NamespaceValuePairDto{
