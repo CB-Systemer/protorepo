@@ -43,6 +43,7 @@ service ExternalIntegrationApi {
   rpc GetGeoDanmarkData(GetGeoDanmarkDataRequest) returns (GetGeoDanmarkDataReply);
   rpc GetGeoDanmarkFeatureTypes(GetGeoDanmarkFeatureTypesRequest) returns (GetGeoDanmarkFeatureTypesReply);
   rpc GetEstateReferencePhotos(GetEstateReferencePhotosRequest) returns (GetEstateReferencePhotosReply);
+  rpc GetEstateReferencePriceHistory(GetEstateReferencePriceHistoryRequest) returns (GetEstateReferencePriceHistoryReply);
   rpc GetEstateNearestFeatures(GetEstateNearestFeaturesRequest) returns (GetEstateNearestFeaturesReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
@@ -743,6 +744,17 @@ message GetEstateReferencePhotosReply {
   google.protobuf.StringValue processNamespace = 3;
 }
 
+message GetEstateReferencePriceHistoryRequest {
+    string executingActorId = 1;
+    repeated string municipalityCodes = 2;
+}
+
+message GetEstateReferencePriceHistoryReply {
+  bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
+}
+
 message GetEstateNearestFeaturesRequest {
     string executingActorId = 1;
     repeated string municipalityCodes = 2;
@@ -1297,9 +1309,25 @@ message ReferenceEstateDataCount {
   google.protobuf.StringValue errorMessage = 7;
 }
 
+// One municipality the price history download has already run to completion for. The process writes
+// this row when a municipality task finishes, so a municipality missing from the list has never been
+// downloaded - unlike the counts above, which are measured from the data and cannot say which
+// municipalities they came from.
+message ReferenceEstatePriceHistoryCoverage {
+  string municipalityCode = 1;
+  // ISO-8601. When the most recent completed run for this municipality finished.
+  string downloadedAt = 2;
+  // How many estates that run looked at, and how many of them the register had a sale for. A
+  // municipality can legitimately be fully downloaded with only a fraction carrying price history.
+  int32 estateCount = 3;
+  int32 withPriceHistoryCount = 4;
+  int32 failedCount = 5;
+}
+
 message GetReferenceEstateDataCountsReply {
   bool success = 1;
   repeated ReferenceEstateDataCount counts = 2;
   google.protobuf.StringValue errorMessage = 3;
   google.protobuf.StringValue measuredAt = 4;
+  repeated ReferenceEstatePriceHistoryCoverage priceHistoryCoverage = 5;
 }
