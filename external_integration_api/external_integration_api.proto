@@ -44,6 +44,7 @@ service ExternalIntegrationApi {
   rpc GetGeoDanmarkFeatureTypes(GetGeoDanmarkFeatureTypesRequest) returns (GetGeoDanmarkFeatureTypesReply);
   rpc GetEstateReferencePhotos(GetEstateReferencePhotosRequest) returns (GetEstateReferencePhotosReply);
   rpc GetEstateReferencePriceHistory(GetEstateReferencePriceHistoryRequest) returns (GetEstateReferencePriceHistoryReply);
+  rpc GetEstateMarketData(GetEstateMarketDataRequest) returns (GetEstateMarketDataReply);
   rpc GetEstateNearestFeatures(GetEstateNearestFeaturesRequest) returns (GetEstateNearestFeaturesReply);
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
@@ -750,6 +751,18 @@ message GetEstateReferencePriceHistoryRequest {
 }
 
 message GetEstateReferencePriceHistoryReply {
+  bool success = 1;
+  google.protobuf.StringValue processId = 2;
+  google.protobuf.StringValue processNamespace = 3;
+}
+
+// The run is national by design: reconciliation is only correct over a complete result set, so there is
+// deliberately no municipality selector here.
+message GetEstateMarketDataRequest {
+    string executingActorId = 1;
+}
+
+message GetEstateMarketDataReply {
   bool success = 1;
   google.protobuf.StringValue processId = 2;
   google.protobuf.StringValue processNamespace = 3;
