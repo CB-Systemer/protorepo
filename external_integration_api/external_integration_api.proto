@@ -25,6 +25,7 @@ service ExternalIntegrationApi {
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc FindEstateCandidates (FindEstateCandidatesRequest) returns (FindEstateCandidatesReply);
+  rpc GetPropertyUnits (GetPropertyUnitsRequest) returns (GetPropertyUnitsReply);
   rpc SearchCombinedAddress (SearchCombinedAddressRequest) returns (SearchCombinedAddressReply);
   rpc GetRepresentativeAddress (GetRepresentativeAddressRequest) returns (GetRepresentativeAddressReply);
   rpc GetBoligsidenRealtorBranch (GetBoligsidenRealtorBranchRequest) returns (GetBoligsidenRealtorBranchReply);
@@ -1263,6 +1264,49 @@ message EstateCandidateDto {
   int32 kaelder_areal = 11;
   int32 grund_areal = 12;
   repeated OwnerDto owners = 13;
+}
+
+message GetPropertyUnitsRequest {
+  google.protobuf.StringValue addressId = 1;
+  google.protobuf.StringValue entranceAddressId = 2;
+  google.protobuf.StringValue bfeNumber = 3;
+}
+
+message GetPropertyUnitsReply {
+  bool success = 1;
+  google.protobuf.StringValue errorMessage = 2;
+  string bfeNumber = 3;
+  repeated string matrikler = 4;
+  string ownershipNamespace = 5;
+  repeated PropertyBuildingDto buildings = 6;
+}
+
+message PropertyBuildingDto {
+  string buildingId = 1;
+  string buildingNumber = 2;
+  string anvendelseKode = 3;
+  string anvendelse = 4;
+  int32 floorCount = 5;
+  repeated PropertyEntranceDto entrances = 6;
+}
+
+message PropertyEntranceDto {
+  string entranceAddressId = 1;
+  string label = 2;
+  repeated PropertyUnitDto units = 3;
+}
+
+message PropertyUnitDto {
+  string unitId = 1;
+  google.protobuf.StringValue addressId = 2;
+  string floor = 3;
+  string door = 4;
+  string label = 5;
+  google.protobuf.StringValue bfeNumber = 6;
+  string anvendelseKode = 7;
+  string anvendelse = 8;
+  google.protobuf.Int32Value rooms = 9;
+  google.protobuf.Int32Value area = 10;
 }
 
 message SearchCombinedAddressRequest {
