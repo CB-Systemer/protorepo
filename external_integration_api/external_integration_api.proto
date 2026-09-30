@@ -1288,6 +1288,7 @@ message PropertyBuildingDto {
   string anvendelse = 4;
   int32 floorCount = 5;
   repeated PropertyEntranceDto entrances = 6;
+  string lifecycleStatusCode = 7;
 }
 
 message PropertyEntranceDto {
@@ -1313,6 +1314,7 @@ message PropertyUnitDto {
   string anvendelse = 8;
   google.protobuf.Int32Value rooms = 9;
   google.protobuf.Int32Value area = 10;
+  string lifecycleStatusCode = 11;
 }
 
 message SearchCombinedAddressRequest {
