@@ -1294,6 +1294,12 @@ message PropertyEntranceDto {
   string entranceAddressId = 1;
   string label = 2;
   repeated PropertyUnitDto units = 3;
+  string streetName = 4;
+  string streetNumber = 5;
+  string zipCode = 6;
+  string city = 7;
+  string municipalityCode = 8;
+  string municipalityName = 9;
 }
 
 message PropertyUnitDto {
