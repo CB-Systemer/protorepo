@@ -1337,17 +1337,22 @@ message CombinedAddressDto {
 }
 
 message GetAddressDataCountsRequest {
-  bool refresh = 1;
+  reserved 1;
+  reserved "refresh";
+  // Empty means every entity.
+  repeated string entityKeys = 2;
 }
 
 message AddressDataCount {
   string entityKey = 1;
   string displayName = 2;
   string indexName = 3;
-  int64 databaseRowCount = 4;
-  int64 expectedDocumentCount = 5;
+  reserved 4, 5;
   google.protobuf.Int64Value indexDocumentCount = 6;
   google.protobuf.StringValue errorMessage = 7;
+  // Unset when the entity is deliberately not counted in Postgres (geodanmarkfeatures).
+  google.protobuf.Int64Value databaseRowCount = 8;
+  google.protobuf.Int64Value expectedDocumentCount = 9;
 }
 
 message GetAddressDataCountsReply {
@@ -1358,11 +1363,14 @@ message GetAddressDataCountsReply {
 }
 
 message GetReferenceEstateDataCountsRequest {
-  bool refresh = 1;
+  reserved 1;
+  reserved "refresh";
+  // Empty means every entity.
+  repeated string entityKeys = 2;
 }
 
 // The reference estate documents live in core-apps' own index, so external-integration answers only
-// for what it owns: the row counts, and the index count of the geodanmarkfeatures index it does own.
+// for what it owns: the row counts only.
 // indexName and indexDocumentCount are therefore unset on the estate rows and core-apps fills them in.
 message ReferenceEstateDataCount {
   string entityKey = 1;
