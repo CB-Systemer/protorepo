@@ -65,6 +65,7 @@ service ExternalIntegrationApi {
   rpc RunMarketCrawlTargetNow(RunMarketCrawlTargetNowRequest) returns (RunMarketCrawlTargetNowReply);
   rpc ListMarketCrawledListings(ListMarketCrawledListingsRequest) returns (ListMarketCrawledListingsReply);
   rpc ResolveMarketCrawledListing(ResolveMarketCrawledListingRequest) returns (ResolveMarketCrawledListingReply);
+  rpc AnalyzeMarketCrawlSite(AnalyzeMarketCrawlSiteRequest) returns (AnalyzeMarketCrawlSiteReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1432,6 +1433,11 @@ message MarketCrawlTarget {
   // Listings on the market whose address an operator has to resolve (Ambiguous or Unmatched), on list and
   // get replies. Ignored on an upsert.
   int32 unresolved_count = 20;
+  // When the robots.txt verdict below was given; unset when it never was. Ignored on an upsert.
+  google.protobuf.Timestamp robots_checked_at = 21;
+  // Whether the site's robots.txt lets the crawler in, as AnalyzeMarketCrawlSite found it. Set on an upsert,
+  // it is stored with the time of the upsert; unset on an upsert, the stored verdict is kept.
+  google.protobuf.BoolValue robots_allowed = 22;
 }
 
 // One crawl of a target, executed as a process. trigger: Schedule|Manual; status: Running|Succeeded|Failed.
@@ -1568,4 +1574,34 @@ message ResolveMarketCrawledListingReply {
   string error_message = 2;
   string outcome = 3;
   MarketCrawledListing listing = 4;
+}
+
+// Reads the domain's robots.txt with the crawler's own user agent, its sitemaps and its home page, while the
+// caller waits; it takes seconds. domain is a host or a URL, normalised as a target's domain is.
+message AnalyzeMarketCrawlSiteRequest {
+  string domain = 1;
+}
+
+// A page that looks like an overview of listings. link_count is how many links it holds that its site's
+// home page does not, so a page of listings counts its listings and a content page counts close to none.
+message MarketCrawlCandidateListPage {
+  string url = 1;
+  int32 link_count = 2;
+}
+
+// outcome: Analyzed | Refused (error_message says why: not a domain) | Failed (the crawler could not be
+// asked). success is true for Analyzed only. An analysed site that could not be read is still Analyzed:
+// analysis_error says what went wrong, and robots_allowed is false unless robots.txt was read and lets us in.
+// disallowed_paths are the robots.txt rules that apply to the crawler; candidate_list_pages leave out any
+// page they disallow, and come best first.
+message AnalyzeMarketCrawlSiteReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string domain = 4;
+  bool robots_allowed = 5;
+  repeated string disallowed_paths = 6;
+  repeated string sitemaps = 7;
+  repeated MarketCrawlCandidateListPage candidate_list_pages = 8;
+  google.protobuf.StringValue analysis_error = 9;
 }
