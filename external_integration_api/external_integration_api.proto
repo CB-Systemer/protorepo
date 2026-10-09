@@ -4,6 +4,7 @@ syntax = "proto3";
 option csharp_namespace = "External.Integration.Api";
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 service ExternalIntegrationApi {
 
@@ -56,6 +57,10 @@ service ExternalIntegrationApi {
 
   rpc GetAddressDataCounts(GetAddressDataCountsRequest) returns (GetAddressDataCountsReply);
   rpc GetReferenceEstateDataCounts(GetReferenceEstateDataCountsRequest) returns (GetReferenceEstateDataCountsReply);
+
+  rpc ListMarketCrawlTargets(ListMarketCrawlTargetsRequest) returns (ListMarketCrawlTargetsReply);
+  rpc UpsertMarketCrawlTarget(UpsertMarketCrawlTargetRequest) returns (UpsertMarketCrawlTargetReply);
+  rpc DeleteMarketCrawlTarget(DeleteMarketCrawlTargetRequest) returns (DeleteMarketCrawlTargetReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1391,4 +1396,64 @@ message GetReferenceEstateDataCountsReply {
   // the reference estates search index, so nothing crosses this boundary for it.
   reserved 5;
   reserved "priceHistoryCoverage";
+}
+
+// A realtor site crawled for asking prices, one per domain. The enum-valued fields carry the member
+// name (pagination_mode: None|NextLink|LoadMoreButton|InfiniteScroll, protection: None|Stealth|
+// StealthProxy|StealthProxyCaptcha, schedule: Daily|TwiceDaily|Weekly); run_at_local_time is "HH:mm"
+// in Europe/Copenhagen.
+message MarketCrawlTarget {
+  string id = 1;
+  string name = 2;
+  string realtor_name = 3;
+  string domain = 4;
+  bool is_active = 5;
+  repeated string list_page_urls = 6;
+  string list_schema_json = 7;
+  string detail_schema_json = 8;
+  string pagination_mode = 9;
+  google.protobuf.StringValue pagination_selector = 10;
+  int32 max_list_pages = 11;
+  string protection = 12;
+  string schedule = 13;
+  string run_at_local_time = 14;
+  google.protobuf.Timestamp next_run_at = 15;
+  google.protobuf.Timestamp create_date = 16;
+  google.protobuf.Timestamp update_date = 17;
+  // Created by the smoke tests (core's x-realequity-smoke-test header). Set when the target is created and
+  // never changed by an update; such targets are left out of a list unless it asks for them.
+  bool is_smoke_test = 18;
+}
+
+message ListMarketCrawlTargetsRequest {
+  bool include_smoke_tests = 1;
+}
+
+message ListMarketCrawlTargetsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated MarketCrawlTarget targets = 3;
+}
+
+// An empty target.id creates a target; otherwise the target with that id is replaced. create_date,
+// update_date and next_run_at on the request are ignored.
+message UpsertMarketCrawlTargetRequest {
+  MarketCrawlTarget target = 1;
+  string executing_actor_id = 2;
+}
+
+message UpsertMarketCrawlTargetReply {
+  bool success = 1;
+  string error_message = 2;
+  MarketCrawlTarget target = 3;
+}
+
+// Idempotent: deleting a target that does not exist succeeds.
+message DeleteMarketCrawlTargetRequest {
+  string id = 1;
+}
+
+message DeleteMarketCrawlTargetReply {
+  bool success = 1;
+  string error_message = 2;
 }
