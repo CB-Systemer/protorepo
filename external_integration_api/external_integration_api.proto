@@ -63,6 +63,8 @@ service ExternalIntegrationApi {
   rpc DeleteMarketCrawlTarget(DeleteMarketCrawlTargetRequest) returns (DeleteMarketCrawlTargetReply);
   rpc GetMarketCrawlTarget(GetMarketCrawlTargetRequest) returns (GetMarketCrawlTargetReply);
   rpc RunMarketCrawlTargetNow(RunMarketCrawlTargetNowRequest) returns (RunMarketCrawlTargetNowReply);
+  rpc ListMarketCrawledListings(ListMarketCrawledListingsRequest) returns (ListMarketCrawledListingsReply);
+  rpc ResolveMarketCrawledListing(ResolveMarketCrawledListingRequest) returns (ResolveMarketCrawledListingReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1427,6 +1429,9 @@ message MarketCrawlTarget {
   bool is_smoke_test = 18;
   // The newest run, on list and get replies; unset when the target has never run. Ignored on an upsert.
   MarketCrawlRun last_run = 19;
+  // Listings on the market whose address an operator has to resolve (Ambiguous or Unmatched), on list and
+  // get replies. Ignored on an upsert.
+  int32 unresolved_count = 20;
 }
 
 // One crawl of a target, executed as a process. trigger: Schedule|Manual; status: Running|Succeeded|Failed.
@@ -1509,4 +1514,58 @@ message RunMarketCrawlTargetNowReply {
   string outcome = 3;
   string run_id = 4;
   google.protobuf.StringValue process_id = 5;
+}
+
+// A detail page a target's crawls found. resolution: Pending|Resolved|Ambiguous|Unmatched|ManuallyResolved;
+// bfe_number is set when it is Resolved or ManuallyResolved. price is in whole kroner, unset when price_text
+// holds no price.
+message MarketCrawledListing {
+  string id = 1;
+  string target_id = 2;
+  string target_name = 3;
+  string url = 4;
+  string address_text = 5;
+  string price_text = 6;
+  google.protobuf.Int64Value price = 7;
+  google.protobuf.StringValue realtor_name = 8;
+  string resolution = 9;
+  google.protobuf.StringValue bfe_number = 10;
+  google.protobuf.Timestamp first_seen_at = 11;
+  google.protobuf.Timestamp last_seen_at = 12;
+}
+
+// Listings still on the market, newest sighting first; a delisted listing is left out. An empty target_id
+// lists every target's, empty resolutions every resolution. query matches the address text or the URL,
+// ignoring case. page is 0-based; a page_size of 0 takes the default of 20.
+message ListMarketCrawledListingsRequest {
+  string target_id = 1;
+  repeated string resolutions = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  string query = 5;
+}
+
+message ListMarketCrawledListingsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated MarketCrawledListing listings = 3;
+  int32 total = 4;
+}
+
+// Matches the listing to bfe_number for good: it stays ManuallyResolved until a crawl finds its address text
+// changed. The listing's last price is then logged on that estate, after any estate it was logged on before
+// has been closed; that happens asynchronously, after the reply.
+message ResolveMarketCrawledListingRequest {
+  string listing_id = 1;
+  string bfe_number = 2;
+  string executing_actor_id = 3;
+}
+
+// outcome: Resolved | NotFound | Refused (error_message says why, e.g. a BFE the estate register does not
+// hold) | Failed. success is true for Resolved only.
+message ResolveMarketCrawledListingReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  MarketCrawledListing listing = 4;
 }
