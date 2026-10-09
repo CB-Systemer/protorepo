@@ -61,6 +61,8 @@ service ExternalIntegrationApi {
   rpc ListMarketCrawlTargets(ListMarketCrawlTargetsRequest) returns (ListMarketCrawlTargetsReply);
   rpc UpsertMarketCrawlTarget(UpsertMarketCrawlTargetRequest) returns (UpsertMarketCrawlTargetReply);
   rpc DeleteMarketCrawlTarget(DeleteMarketCrawlTargetRequest) returns (DeleteMarketCrawlTargetReply);
+  rpc GetMarketCrawlTarget(GetMarketCrawlTargetRequest) returns (GetMarketCrawlTargetReply);
+  rpc RunMarketCrawlTargetNow(RunMarketCrawlTargetNowRequest) returns (RunMarketCrawlTargetNowReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1423,6 +1425,24 @@ message MarketCrawlTarget {
   // Created by the smoke tests (core's x-realequity-smoke-test header). Set when the target is created and
   // never changed by an update; such targets are left out of a list unless it asks for them.
   bool is_smoke_test = 18;
+  // The newest run, on list and get replies; unset when the target has never run. Ignored on an upsert.
+  MarketCrawlRun last_run = 19;
+}
+
+// One crawl of a target, executed as a process. trigger: Schedule|Manual; status: Running|Succeeded|Failed.
+// The counts grow while the run is Running.
+message MarketCrawlRun {
+  string id = 1;
+  string target_id = 2;
+  google.protobuf.StringValue process_id = 3;
+  string trigger = 4;
+  string status = 5;
+  google.protobuf.Timestamp started_at = 6;
+  google.protobuf.Timestamp finished_at = 7;
+  int32 list_pages_crawled = 8;
+  int32 listings_found = 9;
+  int32 listings_published = 10;
+  google.protobuf.StringValue error_message = 11;
 }
 
 message ListMarketCrawlTargetsRequest {
@@ -1456,4 +1476,37 @@ message DeleteMarketCrawlTargetRequest {
 message DeleteMarketCrawlTargetReply {
   bool success = 1;
   string error_message = 2;
+}
+
+// Includes smoke-test targets: only a caller that could list one knows its id. runs_page is 0-based;
+// a runs_page_size of 0 takes the default of 20.
+message GetMarketCrawlTargetRequest {
+  string id = 1;
+  int32 runs_page = 2;
+  int32 runs_page_size = 3;
+}
+
+// target is unset when no target has the id. runs is one page of the target's runs, newest first.
+message GetMarketCrawlTargetReply {
+  bool success = 1;
+  string error_message = 2;
+  MarketCrawlTarget target = 3;
+  repeated MarketCrawlRun runs = 4;
+  int32 total_runs = 5;
+}
+
+message RunMarketCrawlTargetNowRequest {
+  string id = 1;
+  string executing_actor_id = 2;
+}
+
+// outcome: Started | AlreadyRunning (run_id is the run in progress, nothing new started) | NotFound |
+// Refused (error_message says why: a smoke-test target, or one with nothing to crawl) | Failed.
+// success is true for Started and AlreadyRunning.
+message RunMarketCrawlTargetNowReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string run_id = 4;
+  google.protobuf.StringValue process_id = 5;
 }
