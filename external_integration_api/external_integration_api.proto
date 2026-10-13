@@ -23,6 +23,7 @@ service ExternalIntegrationApi {
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
   rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
+  rpc GetScannedActDetails (GetScannedActDetailsRequest) returns (GetScannedActDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc FindEstateCandidates (FindEstateCandidatesRequest) returns (FindEstateCandidatesReply);
   rpc GetPropertyUnits (GetPropertyUnitsRequest) returns (GetPropertyUnitsReply);
@@ -965,6 +966,19 @@ message GetIdeelAnpartDetailsReply {
     bool success = 1;
     google.protobuf.StringValue errorMessage = 2;
     repeated IdeelAnpartDto items = 3;
+}
+
+message GetScannedActDetailsRequest {
+    string actNumber = 1;
+}
+
+message GetScannedActDetailsReply {
+    bool success = 1;
+    google.protobuf.StringValue errorMessage = 2;
+    bool found = 3;
+    string uuid = 4;
+    string databaseTable = 5;
+    string fileName = 6;
 }
 
 message GetRepresentativeAddressRequest {
