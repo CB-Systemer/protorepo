@@ -75,6 +75,7 @@ service ExternalIntegrationApi {
   rpc CreateAndStartEBolighandelProcess(CreateAndStartEBolighandelProcessRequest) returns (CreateAndStartEBolighandelProcessReply);
   rpc SendDataToEBolighandel(SendDataToEBolighandelRequest) returns (SendDataToEBolighandelReply);
   rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
+  rpc UpdateEBolighandelContactInformation(UpdateEBolighandelContactInformationRequest) returns (UpdateEBolighandelContactInformationReply);
   rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
@@ -204,6 +205,19 @@ message CloseEBolighandelProcessReply {
   bool success = 1;
   string error_message = 2;
   string status = 3;
+}
+
+message UpdateEBolighandelContactInformationRequest {
+  string e_bolighandel_process_id = 1;
+  string bid_id = 2;
+  string process_data_node_id = 3;
+  string case_number = 4;
+  ResourceGroupDto resource_group = 5;
+}
+
+message UpdateEBolighandelContactInformationReply {
+  bool success = 1;
+  string error_message = 2;
 }
 
 message SendDataToEBolighandelRequest {
