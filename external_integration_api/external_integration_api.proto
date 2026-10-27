@@ -917,6 +917,10 @@ message GetEstateDataRequest {
   google.protobuf.StringValue estateLocationDataNodeId = 23;
   google.protobuf.BoolValue validate_address = 24;
   repeated string taskNamespaces = 25;
+  // The case's Opdrag taxon (dk.realequity.taxonomy.opdrag.*). Unset means unknown: the Tingbog import then loads everything, as before this field existed.
+  google.protobuf.StringValue assignment_taxon_namespace = 26;
+  // The estate's Kategori taxon (dk.realequity.taxonomy.kategori.*).
+  google.protobuf.StringValue category_taxon_namespace = 27;
 }
 
 message GetEstateDataReply {
