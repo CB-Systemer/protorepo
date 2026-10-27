@@ -24,6 +24,7 @@ service ExternalIntegrationApi {
   rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
   rpc GetScannedActDetails (GetScannedActDetailsRequest) returns (GetScannedActDetailsReply);
+  rpc GetScannedActDocument (GetScannedActDocumentRequest) returns (GetScannedActDocumentReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc FindEstateCandidates (FindEstateCandidatesRequest) returns (FindEstateCandidatesReply);
   rpc GetPropertyUnits (GetPropertyUnitsRequest) returns (GetPropertyUnitsReply);
@@ -1006,6 +1007,26 @@ message GetScannedActDetailsReply {
     string uuid = 4;
     string databaseTable = 5;
     string fileName = 6;
+}
+
+message GetScannedActDocumentRequest {
+    string tenant_id = 1;
+    string resource_group_id = 2;
+    string case_id = 3;
+    // The scanned act's file name as GetScannedActDetailsReply.fileName returns it, e.g. "23_S_242".
+    string file_name = 4;
+}
+
+message GetScannedActDocumentReply {
+    bool success = 1;
+    google.protobuf.StringValue error_message = 2;
+    bool found = 3;
+    // Core temp file for case_id: read it with POST cases/{case_id}/files/uploads/{upload_id}/download-url
+    // and body { fileName: file_name }, or BlobRouteRequest.ForTempFile(case_id, "{case_id}/{upload_id}").
+    string upload_id = 4;
+    string file_name = 5;
+    string content_type = 6;
+    int64 size_bytes = 7;
 }
 
 message GetRepresentativeAddressRequest {
