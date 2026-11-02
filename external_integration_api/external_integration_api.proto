@@ -33,6 +33,7 @@ service ExternalIntegrationApi {
   rpc SendBoligsidenRealtorBranch (SendBoligsidenRealtorBranchRequest) returns (SendBoligsidenRealtorBranchReply);
   rpc GetBoligsidenRealtor (GetBoligsidenRealtorRequest) returns (GetBoligsidenRealtorReply);
   rpc SendBoligsidenRealtor (SendBoligsidenRealtorRequest) returns (SendBoligsidenRealtorReply);
+  rpc SendEjendomstorvetAccount (SendEjendomstorvetAccountRequest) returns (SendEjendomstorvetAccountReply);
   rpc SyncMediaProvider(SyncMediaProviderRequest) returns (SyncMediaProviderReply);
   rpc GetMediaProviderCount(GetMediaProviderCountRequest) returns (GetMediaProviderCountReply);
   rpc GetEfktTexts(GetEfktTextsRequest) returns (GetEfktTextsReply);
@@ -1258,6 +1259,19 @@ message SendBoligsidenRealtorRequest {
 
 message SendBoligsidenRealtorReply {
   bool success = 1;
+}
+
+message SendEjendomstorvetAccountRequest {
+  string resource_group_id = 1;
+  bool is_production = 2;
+}
+
+message SendEjendomstorvetAccountReply {
+  bool success = 1;
+  google.protobuf.StringValue error_message = 2;
+  google.protobuf.StringValue account_id = 3;
+  google.protobuf.StringValue logo_url = 4;
+  google.protobuf.StringValue logo_source_url = 5;
 }
 
 message SendToEnettetTenderReceiverRequest {
