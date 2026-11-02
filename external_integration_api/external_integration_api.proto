@@ -67,6 +67,8 @@ service ExternalIntegrationApi {
   rpc ListMarketCrawledListings(ListMarketCrawledListingsRequest) returns (ListMarketCrawledListingsReply);
   rpc ResolveMarketCrawledListing(ResolveMarketCrawledListingRequest) returns (ResolveMarketCrawledListingReply);
   rpc AnalyzeMarketCrawlSite(AnalyzeMarketCrawlSiteRequest) returns (AnalyzeMarketCrawlSiteReply);
+  rpc StartMarketCrawlExtraction(StartMarketCrawlExtractionRequest) returns (StartMarketCrawlExtractionReply);
+  rpc GetMarketCrawlExtraction(GetMarketCrawlExtractionRequest) returns (GetMarketCrawlExtractionReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1645,4 +1647,65 @@ message AnalyzeMarketCrawlSiteReply {
   repeated string sitemaps = 7;
   repeated MarketCrawlCandidateListPage candidate_list_pages = 8;
   google.protobuf.StringValue analysis_error = 9;
+}
+
+// The wizard's working copy of a target: the site, the list page to try, and the schemas to try it with.
+// Both schemas are Crawl4AI extraction schemas as a target stores them; a Generate extraction ignores them.
+message MarketCrawlExtractionDraft {
+  string domain = 1;
+  string list_page_url = 2;
+  string list_schema_json = 3;
+  string detail_schema_json = 4;
+}
+
+// mode: Generate (the crawler proposes both schemas with an LLM, then the preview crawl runs with them) |
+// PreviewOnly (the preview crawl runs with the draft's own schemas; no LLM). The preview crawls one list page
+// and the first five listings it links to, while the caller polls GetMarketCrawlExtraction.
+message StartMarketCrawlExtractionRequest {
+  MarketCrawlExtractionDraft draft = 1;
+  string mode = 2;
+}
+
+// outcome: Started | Refused (error_message says why: not a domain, a list page off the domain, a PreviewOnly
+// draft without schemas) | Failed (the extraction could not be queued). success is true for Started only.
+// Extractions older than 24 hours are deleted when a new one starts.
+message StartMarketCrawlExtractionReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string extraction_id = 4;
+}
+
+message GetMarketCrawlExtractionRequest {
+  string id = 1;
+}
+
+// One page of the preview crawl as the schemas read it; address and price are unset when the schema found none.
+// error is set when the page could not be read at all.
+message MarketCrawlPreviewListing {
+  string url = 1;
+  google.protobuf.StringValue address = 2;
+  google.protobuf.StringValue price = 3;
+  google.protobuf.StringValue realtor_name = 4;
+  google.protobuf.StringValue error = 5;
+}
+
+// outcome: Found | NotFound (no extraction has the id, or it has been deleted) | Failed. success is true for
+// Found only. status: Pending | Running | Completed | Failed. The rest is set once status is Completed:
+// list_schema_json and detail_schema_json are the schemas the preview used (proposed ones for Generate),
+// and blocked says the site turned the crawler away with an anti-bot response (HTTP 403, 429 or 503), so the
+// preview is empty and the target's bot protection may have to be raised. extraction_error says why a Failed
+// extraction failed.
+message GetMarketCrawlExtractionReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string id = 4;
+  string mode = 5;
+  string status = 6;
+  string list_schema_json = 7;
+  string detail_schema_json = 8;
+  repeated MarketCrawlPreviewListing preview = 9;
+  bool blocked = 10;
+  google.protobuf.StringValue extraction_error = 11;
 }
