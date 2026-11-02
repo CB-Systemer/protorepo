@@ -24,6 +24,7 @@ service ExternalIntegrationApi {
   rpc GetOwnershipType(GetOwnershipTypeRequest) returns (GetOwnershipTypeReply);
   rpc GetPropertyDetails (GetPropertyDetailsRequest) returns (GetPropertyDetailsReply);
   rpc GetIdeelAnpartDetails (GetIdeelAnpartDetailsRequest) returns (GetIdeelAnpartDetailsReply);
+  rpc GetScannedActDetails (GetScannedActDetailsRequest) returns (GetScannedActDetailsReply);
   rpc GetRegisteredOwners (GetRegisteredOwnersRequest) returns (GetRegisteredOwnersReply);
   rpc FindEstateCandidates (FindEstateCandidatesRequest) returns (FindEstateCandidatesReply);
   rpc GetPropertyUnits (GetPropertyUnitsRequest) returns (GetPropertyUnitsReply);
@@ -84,6 +85,7 @@ service ExternalIntegrationApi {
   rpc CreateAndStartEBolighandelProcess(CreateAndStartEBolighandelProcessRequest) returns (CreateAndStartEBolighandelProcessReply);
   rpc SendDataToEBolighandel(SendDataToEBolighandelRequest) returns (SendDataToEBolighandelReply);
   rpc CloseEBolighandelProcess(CloseEBolighandelProcessRequest) returns (CloseEBolighandelProcessReply);
+  rpc UpdateEBolighandelContactInformation(UpdateEBolighandelContactInformationRequest) returns (UpdateEBolighandelContactInformationReply);
   rpc GetEberigtigelseLink(GetEberigtigelseLinkRequest) returns (GetEberigtigelseLinkResponse);
   rpc ApproveOrRejectDeadlineExtensionRequest(ApproveOrRejectDeadlineExtensionRequestRequest) returns (ApproveOrRejectDeadlineExtensionRequestResponse);
   rpc GetAllActorsInfoBySapId(GetAllActorsInfoBySapIdRequest) returns (GetAllActorsInfoBySapIdResponse);
@@ -215,6 +217,19 @@ message CloseEBolighandelProcessReply {
   string status = 3;
 }
 
+message UpdateEBolighandelContactInformationRequest {
+  string e_bolighandel_process_id = 1;
+  string bid_id = 2;
+  string process_data_node_id = 3;
+  string case_number = 4;
+  ResourceGroupDto resource_group = 5;
+}
+
+message UpdateEBolighandelContactInformationReply {
+  bool success = 1;
+  string error_message = 2;
+}
+
 message SendDataToEBolighandelRequest {
   string e_bolighandel_process_id = 1;
   string e_bolighandel_case_id = 2;
@@ -229,7 +244,8 @@ message SendDataToEBolighandelRequest {
   string process_data_node_root_id = 11;
   string resource_group_id = 12;
   repeated ProcessTrackedDocumentDto tracked_documents = 13;
-  bool buyer_has_outstanding_conditions = 14;
+  reserved 14;
+  reserved "buyer_has_outstanding_conditions";
 }
 
 message ProcessTrackedDocumentDto {
@@ -296,6 +312,12 @@ message ResourceGroupDto {
     string store_identifier = 9;
 }
 
+enum ResourceGroupContactRole {
+    RESOURCE_GROUP_CONTACT_ROLE_UNSPECIFIED = 0;
+    RESOURCE_GROUP_CONTACT_ROLE_REAL_ESTATE_AGENT = 1;
+    RESOURCE_GROUP_CONTACT_ROLE_CASE_HANDLER = 2;
+}
+
 message ResourceGroupContactDto {
     string email_address = 1;
     bool is_mobile = 2;
@@ -304,6 +326,7 @@ message ResourceGroupContactDto {
     string first_name = 5;
     string middle_name = 6;
     string last_name = 7;
+    ResourceGroupContactRole role = 8;
 }
 
 message AddressDto {
@@ -347,7 +370,8 @@ message ProcessDto {
    repeated ProcessDocumentDto documents = 3;
    repeated ProcessActorDto actors = 4;
    repeated ProcessHistoryItemDto history = 5;
-   bool buyer_has_outstanding_conditions = 6;
+   reserved 6;
+   reserved "buyer_has_outstanding_conditions";
    string sellers_bank_account_id = 7;
    string sellers_bank_account_registration = 8;
    string guarantee_process_id = 9;
@@ -903,6 +927,10 @@ message GetEstateDataRequest {
   google.protobuf.StringValue estateLocationDataNodeId = 23;
   google.protobuf.BoolValue validate_address = 24;
   repeated string taskNamespaces = 25;
+  // The case's Opdrag taxon (dk.realequity.taxonomy.opdrag.*). Unset means unknown: the Tingbog import then loads everything, as before this field existed.
+  google.protobuf.StringValue assignment_taxon_namespace = 26;
+  // The estate's Kategori taxon (dk.realequity.taxonomy.kategori.*).
+  google.protobuf.StringValue category_taxon_namespace = 27;
 }
 
 message GetEstateDataReply {
@@ -975,6 +1003,19 @@ message GetIdeelAnpartDetailsReply {
     bool success = 1;
     google.protobuf.StringValue errorMessage = 2;
     repeated IdeelAnpartDto items = 3;
+}
+
+message GetScannedActDetailsRequest {
+    string actNumber = 1;
+}
+
+message GetScannedActDetailsReply {
+    bool success = 1;
+    google.protobuf.StringValue errorMessage = 2;
+    bool found = 3;
+    string uuid = 4;
+    string databaseTable = 5;
+    string fileName = 6;
 }
 
 message GetRepresentativeAddressRequest {
