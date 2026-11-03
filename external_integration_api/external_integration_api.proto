@@ -1495,6 +1495,16 @@ message MarketCrawlTarget {
   // Whether the site's robots.txt lets the crawler in, as AnalyzeMarketCrawlSite found it. Set on an upsert,
   // it is stored with the time of the upsert; unset on an upsert, the stored verdict is kept.
   google.protobuf.BoolValue robots_allowed = 22;
+  // Where a run finds the listing URLs: ListPages (the list pages and list schema above) | Sitemap (the
+  // sitemap files below; the list page URLs, list schema and pagination are then unused and stored as sent).
+  // Empty on an upsert is ListPages.
+  string listing_source = 23;
+  // The sitemap files a Sitemap target reads, each an absolute http(s) URL on the target's domain. An index
+  // among them is followed into its child files while the run reads, so it need not list the children.
+  repeated string sitemap_urls = 24;
+  // Narrows a Sitemap target to the URLs of one shape, e.g. /bolig/*/*/*/*, where * is any one path segment.
+  // Unset reads every on-site URL the sitemap files name.
+  google.protobuf.StringValue sitemap_url_pattern = 25;
 }
 
 // One crawl of a target, executed as a process. trigger: Schedule|Manual; status: Running|Succeeded|Failed.
@@ -1646,11 +1656,28 @@ message MarketCrawlCandidateListPage {
   int32 link_count = 2;
 }
 
+// A group of pages in the site's sitemaps that share one URL shape and each name a different page, which
+// is what a realtor's listings look like there; the file names are not used to tell. url_pattern is that
+// shape (* is any one path segment) and sitemap_urls are the files that hold it. sample_urls are up to
+// three of its URLs. The crawler fetched samples_checked of the group's pages over plain HTTP and
+// listing_samples of them showed a price and a sale term (kontantpris, udbetaling, ejerudgift or
+// udbudspris). Zero listing_samples is "not confirmed", not "not listings": a page that renders in the
+// browser shows neither.
+message MarketCrawlCandidateSitemap {
+  string url_pattern = 1;
+  repeated string sitemap_urls = 2;
+  int32 url_count = 3;
+  repeated string sample_urls = 4;
+  int32 listing_samples = 5;
+  int32 samples_checked = 6;
+}
+
 // outcome: Analyzed | Refused (error_message says why: not a domain) | Failed (the crawler could not be
 // asked). success is true for Analyzed only. An analysed site that could not be read is still Analyzed:
 // analysis_error says what went wrong, and robots_allowed is false unless robots.txt was read and lets us in.
 // disallowed_paths are the robots.txt rules that apply to the crawler; candidate_list_pages leave out any
-// page they disallow, and come best first.
+// page they disallow, and come best first. candidate_sitemaps likewise leave out any sitemap robots.txt
+// disallows, and come best first: most confirmed samples, then most URLs.
 message AnalyzeMarketCrawlSiteReply {
   bool success = 1;
   string error_message = 2;
@@ -1661,27 +1688,37 @@ message AnalyzeMarketCrawlSiteReply {
   repeated string sitemaps = 7;
   repeated MarketCrawlCandidateListPage candidate_list_pages = 8;
   google.protobuf.StringValue analysis_error = 9;
+  // Sitemaps that name many pages of one shape, best first, at most five; empty when the site has none.
+  repeated MarketCrawlCandidateSitemap candidate_sitemaps = 10;
 }
 
-// The wizard's working copy of a target: the site, the list page to try, and the schemas to try it with.
-// Both schemas are Crawl4AI extraction schemas as a target stores them; a Generate extraction ignores them.
+// The wizard's working copy of a target: the site, where its listings come from, and the schemas to try
+// it with. Both schemas are Crawl4AI extraction schemas as a target stores them; a Generate extraction
+// ignores them. listing_source is ListPages (list_page_url is tried, as before) or Sitemap (the first of
+// sitemap_urls is read, narrowed by sitemap_url_pattern, and list_page_url and list_schema_json are
+// ignored); empty is ListPages. A Sitemap extraction proposes and previews the detail schema only.
 message MarketCrawlExtractionDraft {
   string domain = 1;
   string list_page_url = 2;
   string list_schema_json = 3;
   string detail_schema_json = 4;
+  string listing_source = 5;
+  repeated string sitemap_urls = 6;
+  google.protobuf.StringValue sitemap_url_pattern = 7;
 }
 
 // mode: Generate (the crawler proposes both schemas with an LLM, then the preview crawl runs with them) |
 // PreviewOnly (the preview crawl runs with the draft's own schemas; no LLM). The preview crawls one list page
-// and the first five listings it links to, while the caller polls GetMarketCrawlExtraction.
+// and the first five listings it links to (a Sitemap draft: the first five URLs of its sitemap), while the
+// caller polls GetMarketCrawlExtraction.
 message StartMarketCrawlExtractionRequest {
   MarketCrawlExtractionDraft draft = 1;
   string mode = 2;
 }
 
-// outcome: Started | Refused (error_message says why: not a domain, a list page off the domain, a PreviewOnly
-// draft without schemas) | Failed (the extraction could not be queued). success is true for Started only.
+// outcome: Started | Refused (error_message says why: not a domain, a list page or sitemap off the domain,
+// a Sitemap draft without a sitemap URL, a PreviewOnly draft without schemas) | Failed (the extraction
+// could not be queued). success is true for Started only.
 // Extractions older than 24 hours are deleted when a new one starts.
 message StartMarketCrawlExtractionReply {
   bool success = 1;
