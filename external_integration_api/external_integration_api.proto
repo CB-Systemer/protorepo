@@ -4,6 +4,7 @@ syntax = "proto3";
 option csharp_namespace = "External.Integration.Api";
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 service ExternalIntegrationApi {
 
@@ -58,6 +59,17 @@ service ExternalIntegrationApi {
 
   rpc GetAddressDataCounts(GetAddressDataCountsRequest) returns (GetAddressDataCountsReply);
   rpc GetReferenceEstateDataCounts(GetReferenceEstateDataCountsRequest) returns (GetReferenceEstateDataCountsReply);
+
+  rpc ListMarketCrawlTargets(ListMarketCrawlTargetsRequest) returns (ListMarketCrawlTargetsReply);
+  rpc UpsertMarketCrawlTarget(UpsertMarketCrawlTargetRequest) returns (UpsertMarketCrawlTargetReply);
+  rpc DeleteMarketCrawlTarget(DeleteMarketCrawlTargetRequest) returns (DeleteMarketCrawlTargetReply);
+  rpc GetMarketCrawlTarget(GetMarketCrawlTargetRequest) returns (GetMarketCrawlTargetReply);
+  rpc RunMarketCrawlTargetNow(RunMarketCrawlTargetNowRequest) returns (RunMarketCrawlTargetNowReply);
+  rpc ListMarketCrawledListings(ListMarketCrawledListingsRequest) returns (ListMarketCrawledListingsReply);
+  rpc ResolveMarketCrawledListing(ResolveMarketCrawledListingRequest) returns (ResolveMarketCrawledListingReply);
+  rpc AnalyzeMarketCrawlSite(AnalyzeMarketCrawlSiteRequest) returns (AnalyzeMarketCrawlSiteReply);
+  rpc StartMarketCrawlExtraction(StartMarketCrawlExtractionRequest) returns (StartMarketCrawlExtractionReply);
+  rpc GetMarketCrawlExtraction(GetMarketCrawlExtractionRequest) returns (GetMarketCrawlExtractionReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1446,4 +1458,270 @@ message GetReferenceEstateDataCountsReply {
   // the reference estates search index, so nothing crosses this boundary for it.
   reserved 5;
   reserved "priceHistoryCoverage";
+}
+
+// A realtor site crawled for asking prices, one per domain. The enum-valued fields carry the member
+// name (pagination_mode: None|NextLink|LoadMoreButton|InfiniteScroll, protection: None|Stealth|
+// StealthProxy|StealthProxyCaptcha, schedule: Daily|TwiceDaily|Weekly); run_at_local_time is "HH:mm"
+// in Europe/Copenhagen.
+message MarketCrawlTarget {
+  string id = 1;
+  string name = 2;
+  string realtor_name = 3;
+  string domain = 4;
+  bool is_active = 5;
+  repeated string list_page_urls = 6;
+  string list_schema_json = 7;
+  string detail_schema_json = 8;
+  string pagination_mode = 9;
+  google.protobuf.StringValue pagination_selector = 10;
+  int32 max_list_pages = 11;
+  string protection = 12;
+  string schedule = 13;
+  string run_at_local_time = 14;
+  google.protobuf.Timestamp next_run_at = 15;
+  google.protobuf.Timestamp create_date = 16;
+  google.protobuf.Timestamp update_date = 17;
+  // Created by the smoke tests (core's x-realequity-smoke-test header). Set when the target is created and
+  // never changed by an update; such targets are left out of a list unless it asks for them.
+  bool is_smoke_test = 18;
+  // The newest run, on list and get replies; unset when the target has never run. Ignored on an upsert.
+  MarketCrawlRun last_run = 19;
+  // Listings on the market whose address an operator has to resolve (Ambiguous or Unmatched), on list and
+  // get replies. Ignored on an upsert.
+  int32 unresolved_count = 20;
+  // When the robots.txt verdict below was given; unset when it never was. Ignored on an upsert.
+  google.protobuf.Timestamp robots_checked_at = 21;
+  // Whether the site's robots.txt lets the crawler in, as AnalyzeMarketCrawlSite found it. Set on an upsert,
+  // it is stored with the time of the upsert; unset on an upsert, the stored verdict is kept.
+  google.protobuf.BoolValue robots_allowed = 22;
+}
+
+// One crawl of a target, executed as a process. trigger: Schedule|Manual; status: Running|Succeeded|Failed.
+// The counts grow while the run is Running.
+message MarketCrawlRun {
+  string id = 1;
+  string target_id = 2;
+  google.protobuf.StringValue process_id = 3;
+  string trigger = 4;
+  string status = 5;
+  google.protobuf.Timestamp started_at = 6;
+  google.protobuf.Timestamp finished_at = 7;
+  int32 list_pages_crawled = 8;
+  int32 listings_found = 9;
+  int32 listings_published = 10;
+  google.protobuf.StringValue error_message = 11;
+}
+
+message ListMarketCrawlTargetsRequest {
+  bool include_smoke_tests = 1;
+}
+
+message ListMarketCrawlTargetsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated MarketCrawlTarget targets = 3;
+}
+
+// An empty target.id creates a target; otherwise the target with that id is replaced. create_date,
+// update_date and next_run_at on the request are ignored.
+message UpsertMarketCrawlTargetRequest {
+  MarketCrawlTarget target = 1;
+  string executing_actor_id = 2;
+}
+
+message UpsertMarketCrawlTargetReply {
+  bool success = 1;
+  string error_message = 2;
+  MarketCrawlTarget target = 3;
+}
+
+// Idempotent: deleting a target that does not exist succeeds.
+message DeleteMarketCrawlTargetRequest {
+  string id = 1;
+}
+
+message DeleteMarketCrawlTargetReply {
+  bool success = 1;
+  string error_message = 2;
+}
+
+// Includes smoke-test targets: only a caller that could list one knows its id. runs_page is 0-based;
+// a runs_page_size of 0 takes the default of 20.
+message GetMarketCrawlTargetRequest {
+  string id = 1;
+  int32 runs_page = 2;
+  int32 runs_page_size = 3;
+}
+
+// target is unset when no target has the id. runs is one page of the target's runs, newest first.
+message GetMarketCrawlTargetReply {
+  bool success = 1;
+  string error_message = 2;
+  MarketCrawlTarget target = 3;
+  repeated MarketCrawlRun runs = 4;
+  int32 total_runs = 5;
+}
+
+message RunMarketCrawlTargetNowRequest {
+  string id = 1;
+  string executing_actor_id = 2;
+}
+
+// outcome: Started | AlreadyRunning (run_id is the run in progress, nothing new started) | NotFound |
+// Refused (error_message says why: a smoke-test target, or one with nothing to crawl) | Failed.
+// success is true for Started and AlreadyRunning.
+message RunMarketCrawlTargetNowReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string run_id = 4;
+  google.protobuf.StringValue process_id = 5;
+}
+
+// A detail page a target's crawls found. resolution: Pending|Resolved|Ambiguous|Unmatched|ManuallyResolved;
+// bfe_number is set when it is Resolved or ManuallyResolved. price is in whole kroner, unset when price_text
+// holds no price.
+message MarketCrawledListing {
+  string id = 1;
+  string target_id = 2;
+  string target_name = 3;
+  string url = 4;
+  string address_text = 5;
+  string price_text = 6;
+  google.protobuf.Int64Value price = 7;
+  google.protobuf.StringValue realtor_name = 8;
+  string resolution = 9;
+  google.protobuf.StringValue bfe_number = 10;
+  google.protobuf.Timestamp first_seen_at = 11;
+  google.protobuf.Timestamp last_seen_at = 12;
+}
+
+// Listings still on the market, newest sighting first; a delisted listing is left out. An empty target_id
+// lists every target's, empty resolutions every resolution. query matches the address text or the URL,
+// ignoring case. page is 0-based; a page_size of 0 takes the default of 20.
+message ListMarketCrawledListingsRequest {
+  string target_id = 1;
+  repeated string resolutions = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+  string query = 5;
+}
+
+message ListMarketCrawledListingsReply {
+  bool success = 1;
+  string error_message = 2;
+  repeated MarketCrawledListing listings = 3;
+  int32 total = 4;
+}
+
+// Matches the listing to bfe_number for good: it stays ManuallyResolved until a crawl finds its address text
+// changed. The listing's last price is then logged on that estate, after any estate it was logged on before
+// has been closed; that happens asynchronously, after the reply.
+message ResolveMarketCrawledListingRequest {
+  string listing_id = 1;
+  string bfe_number = 2;
+  string executing_actor_id = 3;
+}
+
+// outcome: Resolved | NotFound | Refused (error_message says why, e.g. a BFE the estate register does not
+// hold) | Failed. success is true for Resolved only.
+message ResolveMarketCrawledListingReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  MarketCrawledListing listing = 4;
+}
+
+// Reads the domain's robots.txt with the crawler's own user agent, its sitemaps and its home page, while the
+// caller waits; it takes seconds. domain is a host or a URL, normalised as a target's domain is.
+message AnalyzeMarketCrawlSiteRequest {
+  string domain = 1;
+}
+
+// A page that looks like an overview of listings. link_count is how many links it holds that its site's
+// home page does not, so a page of listings counts its listings and a content page counts close to none.
+message MarketCrawlCandidateListPage {
+  string url = 1;
+  int32 link_count = 2;
+}
+
+// outcome: Analyzed | Refused (error_message says why: not a domain) | Failed (the crawler could not be
+// asked). success is true for Analyzed only. An analysed site that could not be read is still Analyzed:
+// analysis_error says what went wrong, and robots_allowed is false unless robots.txt was read and lets us in.
+// disallowed_paths are the robots.txt rules that apply to the crawler; candidate_list_pages leave out any
+// page they disallow, and come best first.
+message AnalyzeMarketCrawlSiteReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string domain = 4;
+  bool robots_allowed = 5;
+  repeated string disallowed_paths = 6;
+  repeated string sitemaps = 7;
+  repeated MarketCrawlCandidateListPage candidate_list_pages = 8;
+  google.protobuf.StringValue analysis_error = 9;
+}
+
+// The wizard's working copy of a target: the site, the list page to try, and the schemas to try it with.
+// Both schemas are Crawl4AI extraction schemas as a target stores them; a Generate extraction ignores them.
+message MarketCrawlExtractionDraft {
+  string domain = 1;
+  string list_page_url = 2;
+  string list_schema_json = 3;
+  string detail_schema_json = 4;
+}
+
+// mode: Generate (the crawler proposes both schemas with an LLM, then the preview crawl runs with them) |
+// PreviewOnly (the preview crawl runs with the draft's own schemas; no LLM). The preview crawls one list page
+// and the first five listings it links to, while the caller polls GetMarketCrawlExtraction.
+message StartMarketCrawlExtractionRequest {
+  MarketCrawlExtractionDraft draft = 1;
+  string mode = 2;
+}
+
+// outcome: Started | Refused (error_message says why: not a domain, a list page off the domain, a PreviewOnly
+// draft without schemas) | Failed (the extraction could not be queued). success is true for Started only.
+// Extractions older than 24 hours are deleted when a new one starts.
+message StartMarketCrawlExtractionReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string extraction_id = 4;
+}
+
+message GetMarketCrawlExtractionRequest {
+  string id = 1;
+}
+
+// One page of the preview crawl as the schemas read it; address and price are unset when the schema found none.
+// error is set when the page could not be read at all.
+message MarketCrawlPreviewListing {
+  string url = 1;
+  google.protobuf.StringValue address = 2;
+  google.protobuf.StringValue price = 3;
+  google.protobuf.StringValue realtor_name = 4;
+  google.protobuf.StringValue error = 5;
+}
+
+// outcome: Found | NotFound (no extraction has the id, or it has been deleted) | Failed. success is true for
+// Found only. status: Pending | Running | Completed | Failed. The rest is set once status is Completed:
+// list_schema_json and detail_schema_json are the schemas the preview used (proposed ones for Generate),
+// and blocked says the site turned the crawler away with an anti-bot response (HTTP 403, 429 or 503), so the
+// preview is empty and the target's bot protection may have to be raised. extraction_error says why a Failed
+// extraction failed. pagination_selector is the list page's next-page link a Generate extraction proposed; unset
+// when the page has none the crawler can follow, and for PreviewOnly.
+message GetMarketCrawlExtractionReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string id = 4;
+  string mode = 5;
+  string status = 6;
+  string list_schema_json = 7;
+  string detail_schema_json = 8;
+  repeated MarketCrawlPreviewListing preview = 9;
+  bool blocked = 10;
+  google.protobuf.StringValue extraction_error = 11;
+  google.protobuf.StringValue pagination_selector = 12;
 }
