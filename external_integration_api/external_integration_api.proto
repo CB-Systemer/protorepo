@@ -1695,7 +1695,8 @@ message MarketCrawlPreviewListing {
 // list_schema_json and detail_schema_json are the schemas the preview used (proposed ones for Generate),
 // and blocked says the site turned the crawler away with an anti-bot response (HTTP 403, 429 or 503), so the
 // preview is empty and the target's bot protection may have to be raised. extraction_error says why a Failed
-// extraction failed.
+// extraction failed. pagination_selector is the list page's next-page link a Generate extraction proposed; unset
+// when the page has none the crawler can follow, and for PreviewOnly.
 message GetMarketCrawlExtractionReply {
   bool success = 1;
   string error_message = 2;
@@ -1708,4 +1709,5 @@ message GetMarketCrawlExtractionReply {
   repeated MarketCrawlPreviewListing preview = 9;
   bool blocked = 10;
   google.protobuf.StringValue extraction_error = 11;
+  google.protobuf.StringValue pagination_selector = 12;
 }
