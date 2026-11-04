@@ -53,7 +53,8 @@ service ExternalIntegrationApi {
   rpc IndexReferenceEstateData(IndexReferenceEstateDataRequest) returns (IndexReferenceEstateDataReply);
   rpc GetReferenceEstateExtendedData(GetReferenceEstateExtendedDataRequest) returns (GetReferenceEstateExtendedDataReply);
   rpc TriggerGetReferenceEstateExtendedData(TriggerGetReferenceEstateExtendedDataRequest) returns (TriggerGetReferenceEstateExtendedDataReply);
-  rpc GetExternalReferenceEstate(GetExternalReferenceEstateRequest) returns (GetExternalReferenceEstateReply);
+
+  // GetExternalReferenceEstate (single-URL Boligsiden crawl) was removed; do not reuse the name for a different call.
 
   rpc TriggerAddressIndexing(IndexAddressDataRequest) returns (IndexAddressDataReply);
 
@@ -679,21 +680,6 @@ message LoanRedemptionCalculationDto {
   repeated PhraseDto phrases = 21;
 }
 
-
-message GetExternalReferenceEstateRequest {
-   string caseId = 1;
-   string url = 2;
-   string executingActorId = 3;
-   string tenantId = 4;
-   string resourceGroupId = 5;
-}
-
-message GetExternalReferenceEstateReply {
-   bool success = 1;
-   string processId = 2;
-   string processNamespace = 3;
-   string errorMessage = 4;
-}
 
 message TriggerGetReferenceEstateExtendedDataRequest {
   repeated string postalCodes = 1;
