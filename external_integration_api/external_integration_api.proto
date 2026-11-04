@@ -71,6 +71,8 @@ service ExternalIntegrationApi {
   rpc AnalyzeMarketCrawlSite(AnalyzeMarketCrawlSiteRequest) returns (AnalyzeMarketCrawlSiteReply);
   rpc StartMarketCrawlExtraction(StartMarketCrawlExtractionRequest) returns (StartMarketCrawlExtractionReply);
   rpc GetMarketCrawlExtraction(GetMarketCrawlExtractionRequest) returns (GetMarketCrawlExtractionReply);
+  rpc GetDanboligCrawl(GetDanboligCrawlRequest) returns (GetDanboligCrawlReply);
+  rpc RunDanboligCrawlNow(RunDanboligCrawlNowRequest) returns (RunDanboligCrawlNowReply);
 
   rpc GetConsentTemplates(GetConsentTemplatesRequest) returns (GetConsentTemplatesReply);
   rpc SendRequestForConsent(SendRequestForConsentRequest) returns (SendRequestForConsentReply);
@@ -1495,7 +1497,8 @@ message MarketCrawlTarget {
 }
 
 // One crawl of a target, executed as a process. trigger: Schedule|Manual; status: Running|Succeeded|Failed.
-// The counts grow while the run is Running.
+// The counts grow while the run is Running. listings_skipped_by_type counts the listings left out for their
+// property type (an andel); listings_sold and listings_without_price are only counted by the Danbolig crawler.
 message MarketCrawlRun {
   string id = 1;
   string target_id = 2;
@@ -1508,6 +1511,9 @@ message MarketCrawlRun {
   int32 listings_found = 9;
   int32 listings_published = 10;
   google.protobuf.StringValue error_message = 11;
+  int32 listings_sold = 12;
+  int32 listings_without_price = 13;
+  int32 listings_skipped_by_type = 14;
 }
 
 message ListMarketCrawlTargetsRequest {
@@ -1592,6 +1598,8 @@ message MarketCrawledListing {
   google.protobuf.StringValue bfe_number = 10;
   google.protobuf.Timestamp first_seen_at = 11;
   google.protobuf.Timestamp last_seen_at = 12;
+  // The property type as the source names it, e.g. "Villa" or "Ejerlejlighed"; unset when it names none.
+  google.protobuf.StringValue property_type = 13;
 }
 
 // Listings still on the market, newest sighting first; a delisted listing is left out. An empty target_id
@@ -1728,6 +1736,8 @@ message MarketCrawlPreviewListing {
   google.protobuf.StringValue price = 3;
   google.protobuf.StringValue realtor_name = 4;
   google.protobuf.StringValue error = 5;
+  // Read by the detail schema's optional propertyType field. A run leaves out a listing whose type is an andel.
+  google.protobuf.StringValue property_type = 6;
 }
 
 // outcome: Found | NotFound (no extraction has the id, or it has been deleted) | Failed. success is true for
@@ -1750,4 +1760,36 @@ message GetMarketCrawlExtractionReply {
   bool blocked = 10;
   google.protobuf.StringValue extraction_error = 11;
   google.protobuf.StringValue pagination_selector = 12;
+}
+
+// The Danbolig crawler: one nightly run reads every listing in Denmark from danbolig.dk's search API. It is
+// stored as a hidden crawl target of its own, which ListMarketCrawlTargets never returns; target_id is its id,
+// by which ListMarketCrawledListings filters its listings. runs_page is 0-based; a runs_page_size of 0 takes
+// the default of 20.
+message GetDanboligCrawlRequest {
+  int32 runs_page = 1;
+  int32 runs_page_size = 2;
+}
+
+// runs is one page of the Danbolig crawler's runs, newest first.
+message GetDanboligCrawlReply {
+  bool success = 1;
+  string error_message = 2;
+  string target_id = 3;
+  repeated MarketCrawlRun runs = 4;
+  int32 total_runs = 5;
+}
+
+message RunDanboligCrawlNowRequest {
+  string executing_actor_id = 1;
+}
+
+// outcome: Started | AlreadyRunning (run_id is the run in progress, nothing new started) | NotFound (the
+// Danbolig crawler is not set up) | Refused | Failed. success is true for Started and AlreadyRunning.
+message RunDanboligCrawlNowReply {
+  bool success = 1;
+  string error_message = 2;
+  string outcome = 3;
+  string run_id = 4;
+  google.protobuf.StringValue process_id = 5;
 }
