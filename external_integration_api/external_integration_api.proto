@@ -1447,9 +1447,10 @@ message GetReferenceEstateDataCountsReply {
 }
 
 // A realtor site crawled for asking prices, one per domain. The enum-valued fields carry the member
-// name (pagination_mode: None|NextLink|LoadMoreButton|InfiniteScroll, protection: None|Stealth|
-// StealthProxy|StealthProxyCaptcha, schedule: Daily|TwiceDaily|Weekly); run_at_local_time is "HH:mm"
-// in Europe/Copenhagen.
+// name (pagination_mode: None|NextLink|LoadMoreButton|InfiniteScroll, protection: None|Stealth,
+// schedule: Daily|TwiceDaily|Weekly); run_at_local_time is "HH:mm" in Europe/Copenhagen.
+// pagination_selector is the next-page link for NextLink, the button to click for LoadMoreButton (both
+// required), and for InfiniteScroll an optional CSS selector of a list that scrolls inside its own box.
 message MarketCrawlTarget {
   string id = 1;
   string name = 2;
@@ -1691,6 +1692,8 @@ message MarketCrawlExtractionDraft {
   string listing_source = 5;
   repeated string sitemap_urls = 6;
   google.protobuf.StringValue sitemap_url_pattern = 7;
+  // The bot protection the pages are read with, as a target's protection: None|Stealth; empty is None.
+  string protection = 8;
 }
 
 // mode: Generate (the crawler proposes both schemas with an LLM, then the preview crawl runs with them) |
