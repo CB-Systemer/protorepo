@@ -5,6 +5,7 @@ option csharp_namespace = "Cbs.DataStore.Api";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
 
 service GrpcDataStoreApi {
 	rpc IndexDataNode (IndexDataNodeRequest) returns (IndexDataNodeReply);
@@ -27,6 +28,8 @@ service GrpcDataStoreApi {
 	rpc GetCaseActorRoleActorIds (GetCaseActorRolesRequest) returns (GetCaseActorRolesReply);
 
 	rpc StartGetEstateDataProcess (StartGetEstateDataProcessRequest) returns (StartGetEstateDataProcessReply);
+
+	rpc GetCasePublicProfile (GetCasePublicProfileRequest) returns (GetCasePublicProfileReply);
 }
 
 message GetOutboundEmailSenderSettingsRequest {
@@ -251,4 +254,389 @@ message StartGetEstateDataProcessReply {
 	string processId = 2;
 	string processNamespace = 3;
 	string errorMessage = 4;
+}
+
+// Like DataNode.Api's CaseApi.GetPublicProfile: the case id is all it takes, and no permission filter applies.
+message GetCasePublicProfileRequest {
+	string caseId = 1;
+}
+
+// publicProfile is unset when the case is missing or deleted.
+// The nested messages are copies, field for field, of datanode_api/case.proto and common/common.proto. PartnerHub
+// stores CasePublicProfile as JSON keyed on the generated C# property names, so a field name must not change here.
+// They are nested because these protos declare no package: top level, they would clash with case.proto's in every
+// project that compiles both files.
+message GetCasePublicProfileReply {
+	CasePublicProfile publicProfile = 1;
+
+	message CasePublicProfile {
+		string id = 1;
+		string namespace = 2;
+		string displayName = 3;
+		string parentId = 4;
+		string parentNamespace = 5;
+		string rootId = 6;
+		string rootNamespace = 7;
+		repeated string scopeNamespaces = 8;
+		string scopeId = 9;
+		string scopeNamespace = 10;
+		string description = 11;
+		string imageUrl = 12;
+		string dataStoreId = 13;
+		string resourceGroupId = 14;
+		google.protobuf.Timestamp createdAt = 15;
+		google.protobuf.Timestamp lastUpdatedAt = 16;
+		google.protobuf.Timestamp executedAt = 17;
+		google.protobuf.Timestamp scopeUpdatedAt = 18;
+		string createdById = 19;
+		string lastUpdatedById = 20;
+		string executedById = 21;
+		string scopeUpdatedById = 22;
+		bool isDeleted = 23;
+		repeated string namespaces = 24;
+		string stateFlowNamespace = 25;
+		string stateNamespace = 26;
+		string stateCategoryNamespace = 27;
+		string createdFromSource = 28;
+		string agentId = 29;
+		string agentDataStoreId = 30;
+		int32 version = 31;
+		int32 minorVersion = 32;
+		string tenantId = 33;
+		bool isPrimary = 34;
+		bool hidden = 35;
+		string verificationStateNamespace = 36;
+		google.protobuf.Timestamp verificationExecutedAt = 37;
+		bool isVerified = 38;
+		string primaryResourceGroupId = 39;
+		string stateReasonNamespace = 40;
+		int32 price = 41;
+		string priceNamespace = 42;
+		string priceCurrency = 43;
+		repeated Estate estates = 44;
+		reserved 45;
+		repeated Label labels = 46;
+		string caseNumber = 47;
+		PriceData priceData = 48;
+		string externalId = 49;
+		repeated ActorRoleReference actorRoleReferences = 50;
+		string caseId = 51;
+		string caseNamespace = 52;
+		bool isExternal = 53;
+		string agentDisplayName = 54;
+		string agentPhone = 55;
+		string agentEmail = 56;
+		string agentImageUrl = 57;
+		string externalPresentationUrl = 58;
+		bool concealedListing = 59;
+		bool underConstruction = 60;
+		google.protobuf.Timestamp constructionReadyDate = 61;
+		string advertisementAddress = 62;
+	    double advertisementAddressLatitude = 63;
+	    double advertisementAddressLongitude = 64;
+		repeated Registration registrations = 65;
+		PrimaryProposition PrimaryProposition = 66;
+		repeated Distribution caseDistributionChannels = 67;
+		NullableDateTimeOffset firstPublicDistributionDate = 68;
+		NullableDateTimeOffset lastPublicDistributionDeactivationDate = 69;
+		NullableDateTimeOffset totalPublicPeriodCalculationOffset = 70;
+		bool publicDistributionActive = 71;
+		bool includePublicDistributionInPublicProfile = 72;
+		repeated EntityFeatureRegistration entityFeatureRegistrations = 73;
+		repeated LawRegulation lawRegulations = 74;
+		repeated ExternalReference externalReferences = 75;
+		repeated string externalUrls = 76;
+		string advertisementZipSource = 77;
+		string advertisementZipSourceId = 78;
+		string advertisementZipCountryCode = 79;
+		string advertisementMunicipalitySource = 80;
+		string advertisementMunicipalitySourceId = 81;
+		string advertisementMunicipalityCountryCode = 82;
+		AdvertisementZip advertisementZip = 83;
+		AdvertisementMunicipality advertisementMunicipality = 84;
+		repeated Appointment appointments = 85;
+		google.protobuf.StringValue primaryPropositionEconomyNamespace = 86;
+		repeated MediaItem mediaItems = 87;
+		repeated TaxonPublicProfile taxons = 88;
+	    repeated PublicDocument public_documents = 89;
+	}
+
+	message PublicDocument {
+	    string id = 1;
+		string namespace = 2;
+	    string parent_id = 3;
+	    string parent_namespace = 4;
+	    string display_name = 5;
+		string url = 6;
+	 	google.protobuf.Timestamp last_updated_at = 7;
+		google.protobuf.Timestamp created_at = 8;
+	}
+
+	message TaxonPublicProfile{
+		bool value = 1;
+		google.protobuf.StringValue taxon_namespace = 2;
+		google.protobuf.StringValue taxonomy_namespace = 3;
+		google.protobuf.StringValue note = 4;
+	}
+
+	message MediaItem{
+		string displayName = 1;
+		google.protobuf.StringValue description = 2;
+		int32 priority = 3;
+		google.protobuf.StringValue lg_url = 4;
+		google.protobuf.StringValue md_url = 5;
+		google.protobuf.StringValue xl_url = 6;
+		google.protobuf.StringValue sm_url = 7;
+		google.protobuf.StringValue xs_url = 8;
+		string namespace = 9;
+	}
+
+	message ExternalReference{
+		string externalId = 1;
+		string externalSystemNamespace = 2;
+	}
+
+	message AdvertisementZip {
+		string name = 1;
+		string code = 2;
+		string countryCode = 3;
+		string source = 4;
+		repeated AdvertisementMunicipality municipalities = 5;
+	}
+
+	message AdvertisementMunicipality {
+		string name = 1;
+		string code = 2;
+		string countryCode = 3;
+		string source = 4;
+		string regionCode = 5;
+		string regionName = 6;
+	}
+
+	message Distribution {
+		string id = 1;
+		string namespace = 2;
+		string caseId = 3;
+		bool active = 4;
+		bool distributeWhenDisabled = 5;
+		bool manuallyControlled = 6;
+		bool public = 7;
+		bool includeInPublicProfile = 8;
+		NullableDateTimeOffset firstDistributionDate = 9;
+		NullableDateTimeOffset totalPeriodCalculationOffset = 10;
+		NullableDateTimeOffset lastDeactivationDate = 11;
+		int32 totalDistributionDays = 12;
+		repeated DistributionStateActivity stateHistory = 13;
+		repeated DistributionPriceActivity priceHistory = 14;
+	}
+
+	message DistributionStateActivity {
+		string id = 1;
+		google.protobuf.Timestamp occurredAt = 2;
+		NullableDateTimeOffset activeFrom = 3;
+		NullableDateTimeOffset activeTo = 4;
+	}
+
+	message DistributionPriceActivity {
+		string id = 1;
+		google.protobuf.Timestamp occurredAt = 2;
+		int32 price = 3;
+		string priceCurrency = 4;
+	}
+
+	message PriceData {
+		string id = 1;
+		int32 version = 2;
+		repeated PriceValue values = 3;
+
+		message PriceValue {
+			string namespace = 1;
+			string currency = 2;
+			int32 price = 3;
+		}
+	}
+
+	message Label{
+		string displayName = 1;
+		string namespace = 2;
+		string labelTitle = 3;
+		string labelSubtitle = 4;
+		string description = 5;
+		google.protobuf.Timestamp eventStart = 6;
+		google.protobuf.Timestamp eventEnd = 7;
+		google.protobuf.Timestamp activeStart = 8;
+		google.protobuf.Timestamp activeEnd = 9;
+		bool setSpecificContent = 10;
+		bool IsEvent = 11;
+	}
+
+	message Estate{
+		string displayName = 1;
+		string namespace = 2;
+		string rootId = 3;
+		bool isPrimary = 4;
+		Address address = 5;
+		repeated PropertyFactCollection propertyFacts = 6;
+		repeated EnergyLabel energyLabels = 7;
+		repeated string supplementalLegalEstateTypes = 8;
+		repeated string alternativeEstateTypes = 9;
+		bool isFlexProperty = 10;
+		repeated Registration registrations = 11;
+		repeated EntityFeatureRegistration entityFeatureRegistrations = 12;
+		string id = 13;
+		repeated TaxonPublicProfile taxons = 14;
+		string typeDisplayName = 15;
+	}
+
+	message EntityFeatureRegistration {
+		string displayName = 1;
+		string namespace = 2;
+		repeated EntityFeature entityFeatures = 3;
+	}
+
+	message EntityFeature {
+		string displayName = 1;
+		string namespace = 2;
+		string comment = 3;
+	}
+
+	message Address {
+		string sourceId = 1;
+		string countryCode = 2;
+		string displayName = 3;
+		string streetNumber = 4;
+		string floor = 5;
+		string door = 6;
+		string postalCode = 7;
+		string city = 8;
+		string propertyNumber = 9;
+		string matrikelNumber = 10;
+		string districtCode = 11;
+		string districtName = 12;
+		bool isVerified = 13;
+		double latitude = 14;
+		double longitude = 15;
+		string street = 16;
+		Municipality municipality = 17;
+		string kvhx = 18;
+		string source = 19;
+		SupplementaryCityName supplementaryCity = 20;
+	}
+
+	message Municipality {
+		string name = 1;
+		string code = 2;
+		string source = 3;
+		string countryCode = 4;
+	}
+
+	message PropertyFactCollection {
+		string id = 1;
+		string namespace = 2;
+		repeated PropertyFactsValue propertyFactsValues = 3;
+
+		message PropertyFactsValue{
+			string key = 1;
+			string value = 2;
+		}
+	}
+
+	message PrimaryProposition {
+		string id = 1;
+		string namespace = 2;
+		repeated Registration registrations = 3;
+	}
+
+	message Registration {
+		string id = 1;
+		string namespace = 2;
+		repeated FieldFragment fields = 3;
+	}
+
+	message FieldFragment {
+		string fieldNamespace = 1;
+		string fragmentNamespace = 2;
+		string selectedSourceNamespace = 3;
+		string fieldDataTypeNamespace = 4;
+		string uomNamespace = 5;
+		bool isCalculated = 6;
+		string selectedValue = 7;
+		repeated FieldFragmentValue values = 8;
+	}
+
+	message FieldFragmentValue {
+		string sourceNamespace = 1;
+		bool SelectedSource = 2;
+		string value= 3;
+	}
+
+	message EnergyLabel {
+		string id = 1;
+		int32 version = 2;
+		string namespace = 3;
+		string displayName = 5;
+		EnergyLabelData data = 6;
+
+		message EnergyLabelData {
+			string energyLabelSerialIdentifier = 1;
+			string energyLabelClassification = 2;
+			string submitterCompanyIdentifier = 3;
+			string submitterConsultantName = 4;
+			string submitterCompanyName = 5;
+			google.protobuf.Timestamp validFrom = 6;
+			google.protobuf.Timestamp validTo = 7;
+			string demoLink = 8;
+			string additionalHeat = 9;
+			int32 calculatedConsumption = 10;
+			string totalProfitableInvestment = 11;
+			int32 extraCostPrYear = 12;
+			string possibleEnergyLabelForAllProfitableProposals = 13;
+			string heatSupply = 14;
+			string id = 15;
+			int32 version = 16;
+			bool notRelevant = 17;
+		}
+	}
+
+	message Appointment {
+		string id = 1;
+		string namespace = 2;
+		string display_name = 3;
+		NullableDateTimeOffset start = 4;
+		NullableDateTimeOffset end = 5;
+		ResponsibleAgent responsible_agent = 6;
+	}
+
+	message ResponsibleAgent {
+		string id = 1;
+		string display_name = 2;
+	}
+
+	message ActorRoleReference {
+		string roleId = 1;
+		string roleNamespace = 2;
+		string referenceActorId = 3;
+		string scopeId = 4;
+		bool allowToViewInCustomerPortal = 5;
+	}
+
+	message NullableDateTimeOffset {
+		oneof kind {
+	    google.protobuf.NullValue null = 1;
+	    google.protobuf.Timestamp value = 2;
+	  }
+	}
+
+	message LawRegulation {
+		string id = 1;
+		string namespace = 2;
+		repeated string activeLawRegulations = 3;
+	}
+
+	message SupplementaryCityName {
+		string displayName = 1;
+		string code = 2;
+		string countryCode = 3;
+		string source = 4;
+	}
 }
