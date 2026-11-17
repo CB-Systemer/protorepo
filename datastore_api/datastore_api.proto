@@ -20,6 +20,7 @@ service GrpcDataStoreApi {
 
 	rpc GetDataSharings (GetDataSharingsRequest) returns (GetDataSharingsReply);
     rpc GetSharedResourceGroups (GetSharedResourceGroupsRequest) returns (GetSharedResourceGroupsReply);
+    rpc GetResourceGroupIdsByClaimIdentifiers (GetResourceGroupIdsByClaimIdentifiersRequest) returns (GetResourceGroupIdsByClaimIdentifiersReply);
 
 	rpc ArchiveEmail (ArchiveEmailRequest) returns (ArchiveEmailReply);
 	rpc ArchiveSms (ArchiveSmsRequest) returns (ArchiveSmsReply);
@@ -169,6 +170,17 @@ message GetSharedResourceGroupsRequest {
 }
 
 message GetSharedResourceGroupsReply{
+	repeated string resourceGroupIds = 1;
+}
+
+// Like DataNode.Api's ResourceGroupClaimService: the resource groups whose claim identifier is one of these, at most
+// 100, with no permission filter. Blank identifiers are ignored. Named apart from that service's messages, which
+// DataNode.Api still compiles.
+message GetResourceGroupIdsByClaimIdentifiersRequest {
+	repeated string claimIdentifiers = 1;
+}
+
+message GetResourceGroupIdsByClaimIdentifiersReply {
 	repeated string resourceGroupIds = 1;
 }
 
