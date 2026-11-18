@@ -31,6 +31,154 @@ service GrpcDataStoreApi {
 	rpc StartGetEstateDataProcess (StartGetEstateDataProcessRequest) returns (StartGetEstateDataProcessReply);
 
 	rpc GetCasePublicProfile (GetCasePublicProfileRequest) returns (GetCasePublicProfileReply);
+
+	rpc GetActorById (GetActorByIdRequest) returns (GetActorByIdReply);
+	rpc GetActorsByIds (GetActorsByIdsRequest) returns (GetActorsByIdsReply);
+	rpc GetPrimaryEmailAccount (GetPrimaryEmailAccountRequest) returns (GetPrimaryEmailAccountReply);
+	rpc GetBasicDataNode (GetBasicDataNodeRequest) returns (GetBasicDataNodeReply);
+	rpc GetDataNodeContactInfo (GetDataNodeContactInfoRequest) returns (GetDataNodeContactInfoReply);
+}
+
+// Like DataNode.Api's ActorApi.GetActor: the actor's search document, not deleted. An empty permissions list applies
+// no permission filter. Any datanode type matches, not only actors.
+message GetActorByIdRequest {
+	string actorId = 1;
+	repeated string permissions = 2;
+}
+
+// actor is unset when nothing matches.
+message GetActorByIdReply {
+	IndexedActor actor = 1;
+}
+
+// Like DataNode.Api's ActorApi.GetActorsById: at most 1000 actors. An id that matches nothing is left out, and the
+// order is not the order of actorIds.
+message GetActorsByIdsRequest {
+	repeated string actorIds = 1;
+	repeated string permissions = 2;
+}
+
+message GetActorsByIdsReply {
+	repeated IndexedActor actors = 1;
+}
+
+// An actor as the search index holds it. Strings are "" when the document has no value.
+message IndexedActor {
+	string id = 1;
+	string namespace = 2;
+	string displayName = 3;
+	string firstName = 4;
+	string lastName = 5;
+	string resourceGroupId = 6;
+	string tenantId = 7;
+	// Unset unless the actor is archived.
+	google.protobuf.Timestamp dataNodeArchivedAt = 8;
+	repeated Email emails = 9;
+	repeated Phone phones = 10;
+	repeated Address addresses = 11;
+
+	message Email {
+		string address = 1;
+		bool primary = 2;
+	}
+
+	// prefix, number and internationalNumber are normalised as DataNode.Api's were.
+	message Phone {
+		string prefix = 1;
+		string number = 2;
+		string internationalNumber = 3;
+		bool primary = 4;
+	}
+
+	message Address {
+		string displayName = 1;
+		string streetName = 2;
+		string streetNumber = 3;
+		string floor = 4;
+		string door = 5;
+		string postalCode = 6;
+		string city = 7;
+		string countryCode = 8;
+	}
+}
+
+// Like DataNode.Api's JsonApi.GetPersonalSettings, reduced to the one setting it returned.
+message GetPrimaryEmailAccountRequest {
+	string actorId = 1;
+}
+
+// found is false when the actor has no personal settings or no primary email account in them.
+message GetPrimaryEmailAccountReply {
+	bool found = 1;
+	string primaryEmailAccountId = 2;
+}
+
+// Like DataNode.Api's DatanodeReferenceApi.GetDataNode: any datanode's search document, deleted ones included. An
+// empty permissions list applies no permission filter. Fails with InvalidArgument for an invalid id and NotFound when
+// nothing matches.
+message GetBasicDataNodeRequest {
+	string id = 1;
+	repeated string permissions = 2;
+}
+
+message GetBasicDataNodeReply {
+	BasicDataNode dataNode = 1;
+}
+
+message BasicDataNode {
+	string id = 1;
+	string namespace = 2;
+	string displayName = 3;
+	string externalId = 4;
+	string resourceGroupId = 5;
+	bool isDeleted = 6;
+	repeated ExternalReference externalReferences = 7;
+	repeated Taxon taxons = 8;
+
+	message ExternalReference {
+		string externalId = 1;
+		string externalSystemNamespace = 2;
+	}
+
+	message Taxon {
+		bool value = 1;
+		google.protobuf.StringValue taxonNamespace = 2;
+		google.protobuf.StringValue taxonomyNamespace = 3;
+	}
+}
+
+// Like DataNode.Api's DatanodeReferenceApi.GetDataNodeContactInfo, with the same errors as GetBasicDataNode.
+message GetDataNodeContactInfoRequest {
+	string id = 1;
+	repeated string permissions = 2;
+}
+
+// The datanode's email, address and phone, each picked as primary first, then verified, then the greatest address,
+// display name or number. All three are always set; one the datanode does not have holds only empty strings.
+message GetDataNodeContactInfoReply {
+	Email email = 1;
+	Address primaryAddress = 2;
+	Phone primaryPhone = 3;
+
+	message Email {
+		string address = 1;
+	}
+
+	message Address {
+		string displayName = 1;
+		string streetName = 2;
+		string streetNumber = 3;
+		string floor = 4;
+		string door = 5;
+		string postalCode = 6;
+		string city = 7;
+		string countryCode = 8;
+	}
+
+	message Phone {
+		string prefix = 1;
+		string number = 2;
+	}
 }
 
 message GetOutboundEmailSenderSettingsRequest {
